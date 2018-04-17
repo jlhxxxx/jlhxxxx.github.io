@@ -79,61 +79,6 @@
                         <article>
                             <header>
                                 <h1 class="entry-title">
-                                    <a href="/postman-start.html" rel="bookmark" title="Permalink to postman入门第一坑：提取返回值">
-                                       postman入门第一坑：提取返回值
-                                    </a>
-                                </h1>
-                            </header>
-                            <div class="entry-content">
-<footer class="post-info">
-    <address class="vcard author">
-        by <a class="url fn" href="/author/aman.html">Aman</a>
-    </address>
-
-    in <a href="/category/test-tools.html">Test Tools</a>
-
-    on 2018-04-13
-
-        |
-        tags:         <a href="/tag/postman.html">postman</a>
-        <a href="/tag/interface.html">interface</a>
-        <a href="/tag/test.html">test</a>
-
-
-
-    
-</footer><!-- /.post-info -->                                <p>postman是做接口测试的，但是很多接口并不是直接就能测，有的需要一些预处理。比如说身份认证，需要传递一个<a href="https://zh.wikipedia.org/wiki/%E5%AE%89%E5%85%A8%E4%BB%A4%E7%89%8C">token</a>。如果做网页测试，一般打开登陆界面的时候就会生成一个token，如果返回值是json格式，用postman从中提取值是很简单的，在Tests中输入：</p>
-<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">jsonData</span> <span class="o">=</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">responseBody</span><span class="p">);</span><span class="c1">//获取body中返回的所有参数</span>
-<span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;appKey&quot;</span><span class="p">,</span><span class="nx">jsonData</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">keys</span><span class="p">);</span><span class="c1">//把返回参数中的keys设置为环境变量</span>
-</pre></div>
-
-
-<p><img alt="postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-01.png?raw=true"></p>
-<p>如果token在返回的header里，也很简单：</p>
-<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">postman</span><span class="p">.</span><span class="nx">gerResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
-<span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">,</span><span class="nx">value</span><span class="p">);</span>
-</pre></div>
-
-
-<p><img alt="postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-02.png?raw=true"></p>
-<p>如果token在返回值的body中，呵呵，网上并没有适合小白看的清晰的解决方法。我花了<strong>好长好长好长</strong>时间才找到这么两行小字：</p>
-<div class="highlight"><pre><span></span><span class="c1">//转换XML body为JSON对象</span>
-<span class="kd">var</span> <span class="nx">jsonObject</span> <span class="o">=</span> <span class="nx">xml2Json</span><span class="p">(</span><span class="nx">responseBody</span><span class="p">);</span>
-</pre></div>
-
-
-<p>那我的思路就有了 …</p>
-                                <p class="readmore">
-                                    <a class="btn btn-small btn-info" href="/postman-start.html">Read more...</a>
-                                </p>
-                            </div><!-- /.entry-content -->
-                            <hr/>
-                        </article>
-                    </li>
-                    <li>
-                        <article>
-                            <header>
-                                <h1 class="entry-title">
                                     <a href="/pelican-github.html" rel="bookmark" title="Permalink to windows下用Pelican+Github搭建静态博客">
                                        windows下用Pelican+Github搭建静态博客
                                     </a>
@@ -147,7 +92,7 @@
 
     in <a href="/category/programming.html">Programming</a>
 
-    on 2018-04-09
+    on 2018-04-16
 
         |
         tags:         <a href="/tag/github.html">github</a>
@@ -155,6 +100,8 @@
         <a href="/tag/blog.html">blog</a>
 
 
+        |
+        <a href="/pelican-github.html#disqus_thread">comments</a>
 
     
 </footer><!-- /.post-info -->                                <h2>一、使用Github Pages创建个人博客页面</h2>
@@ -197,6 +144,63 @@
                         <article>
                             <header>
                                 <h1 class="entry-title">
+                                    <a href="/postman-start.html" rel="bookmark" title="Permalink to postman入门第一坑：提取返回值">
+                                       postman入门第一坑：提取返回值
+                                    </a>
+                                </h1>
+                            </header>
+                            <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="/category/test-tools.html">Test Tools</a>
+
+    on 2018-04-13
+
+        |
+        tags:         <a href="/tag/postman.html">postman</a>
+        <a href="/tag/interface.html">interface</a>
+        <a href="/tag/test.html">test</a>
+
+
+        |
+        <a href="/postman-start.html#disqus_thread">comments</a>
+
+    
+</footer><!-- /.post-info -->                                <p>postman是做接口测试的，但是很多接口并不是直接就能测，有的需要一些预处理。比如说身份认证，需要传递一个<a href="https://zh.wikipedia.org/wiki/%E5%AE%89%E5%85%A8%E4%BB%A4%E7%89%8C">token</a>。如果做网页测试，一般打开登陆界面的时候就会生成一个token，如果返回值是json格式，用postman从中提取值是很简单的，在Tests中输入：</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">jsonData</span> <span class="o">=</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">responseBody</span><span class="p">);</span><span class="c1">//获取body中返回的所有参数</span>
+<span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;appKey&quot;</span><span class="p">,</span><span class="nx">jsonData</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">keys</span><span class="p">);</span><span class="c1">//把返回参数中的keys设置为环境变量</span>
+</pre></div>
+
+
+<p><img alt="postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-01.png?raw=true"></p>
+<p>如果token在返回的header里，也很简单：</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">postman</span><span class="p">.</span><span class="nx">gerResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
+<span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">,</span><span class="nx">value</span><span class="p">);</span>
+</pre></div>
+
+
+<p><img alt="postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-02.png?raw=true"></p>
+<p>如果token在返回值的body中，呵呵，网上并没有适合小白看的清晰的解决方法。我花了<strong>好长好长好长</strong>时间才找到这么两行小字：</p>
+<div class="highlight"><pre><span></span><span class="c1">//转换XML body为JSON对象</span>
+<span class="kd">var</span> <span class="nx">jsonObject</span> <span class="o">=</span> <span class="nx">xml2Json</span><span class="p">(</span><span class="nx">responseBody</span><span class="p">);</span>
+</pre></div>
+
+
+<p>那我的思路就有了 …</p>
+                                <p class="readmore">
+                                    <a class="btn btn-small btn-info" href="/postman-start.html">Read more...</a>
+                                </p>
+                            </div><!-- /.entry-content -->
+                            <hr/>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <header>
+                                <h1 class="entry-title">
                                     <a href="/oracle-skills.html" rel="bookmark" title="Permalink to oracle奇技淫巧">
                                        oracle奇技淫巧
                                     </a>
@@ -217,6 +221,8 @@
         <a href="/tag/programming.html">Programming</a>
 
 
+        |
+        <a href="/oracle-skills.html#disqus_thread">comments</a>
 
     
 </footer><!-- /.post-info -->                                <h2>select 1 from dual</h2>
@@ -312,6 +318,15 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
     </script>
+<script type="text/javascript">
+    var disqus_shortname = 'jlhxxxx';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 </body>

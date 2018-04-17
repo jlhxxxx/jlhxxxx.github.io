@@ -88,7 +88,7 @@
 
     in <a href="/category/programming.html">Programming</a>
 
-    on 2018-04-09
+    on 2018-04-16
 
         |
         tags:         <a href="/tag/github.html">github</a>
@@ -96,6 +96,8 @@
         <a href="/tag/blog.html">blog</a>
 
 
+        |
+        <a href="/pelican-github.html#disqus_thread">comments</a>
 
     
 </footer><!-- /.post-info -->
@@ -269,11 +271,46 @@ pip list
 
 <p>推荐主题：<a href="https://github.com/talha131/pelican-elegant/tree/44c8fbcfe631784f84c8b92b7273280b3c956182">elegant</a>，<a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3">pelican-bootstrap3</a> ，<a href="https://github.com/jsliang/pelican-fresh/tree/ce1afc067931bb571a0f5970366a2e7d733d0d6a">fresh</a></p>
 <h2>六、安装第三方评论系统</h2>
-<p>由于Disqus需要翻墙，而国内又没有什么比较好的第三方评论系统，网上搜了一堆，最后决定用github issues来实现，searching。。。</p>
-<div class="highlight"><pre><span></span><span class="nv">DISQUS_SITENAME</span> <span class="o">=</span> Shortname
+<p>由于Disqus需要翻墙，而国内又没有什么比较好的第三方评论系统，网上搜了一堆，最后决定用github issues来实现。本来想用<a href="https://github.com/imsun/gitment">gitment</a>的，但是不知道哪里配置问题，无法初始化issue，然后用的是<a href="https://github.com/gitalk/gitalk">gitalk</a>，界面也比gitment好看。</p>
+<ul>
+<li>
+<p>gitalk</p>
+<p>直接到theme--tempaltes下，参考gitalk配置，修改article.html，简单粗暴。</p>
+<p>​</p>
+<p>这里我<code>repo</code>没有选择博客文件所在仓库，而是另外建了一个仓库，注意<code>createIssueManually</code>最好设置为<code>true</code>，这样文章发表之后在评论处点击初始化就可以自动生成一个issue，当然每篇文章都要点一下。</p>
+</li>
+<li>
+<p>disqus</p>
+<p>这个配置相对简单，从零开始也很容易。首先去<a href="https://disqus.com/">disqus</a>注册个账号，<strong>create a new site</strong>，记住你填的<code>shortname</code>：</p>
+<p><img alt="pelican-github-04.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-04.png?raw=true"></p>
+<p>然后选择新建的<strong>site</strong>，选择<strong>Installing Disqus</strong>：</p>
+<p><img alt="pelican-github-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-01.png?raw=true"></p>
+<p>不知道自己平台选择最下面的<strong>I don't see my platform...</strong>：</p>
+<p><img alt="pelican-github-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-01.png?raw=true"></p>
+<p>再到下一步复制代码出来：</p>
+<p><img alt="pelican-github-03.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-03.png?raw=true"></p>
+<p>在theme--tempaltes下，新建disqus.html，把刚才代码粘贴进去去掉注释，增加头部<code>{% if DISQUS_SITENAME %}</code>尾部<code>{% endif %}</code>和<code>DISQUS_SITENAME</code>变量：</p>
+<div class="highlight"><pre><span></span>{% if DISQUS_SITENAME %}
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;disqus_thread&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
+    <span class="kd">var</span> <span class="nx">disqus_shortname</span> <span class="o">=</span> <span class="s1">&#39;{{ DISQUS_SITENAME }}&#39;</span><span class="p">;</span>
+
+    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// DON&#39;T EDIT BELOW THIS LINE</span>
+    <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nb">document</span><span class="p">,</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span>
+    <span class="nx">s</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="nx">disqus_shortname</span> <span class="o">+</span> <span class="s1">&#39;.disqus.com/embed.js&#39;</span><span class="p">;;</span>
+    <span class="nx">s</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;data-timestamp&#39;</span><span class="p">,</span> <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
+    <span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">head</span> <span class="o">||</span> <span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+    <span class="p">})();</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">noscript</span><span class="p">&gt;</span>Please enable JavaScript to view the <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;http://disqus.com/?ref_noscript&quot;</span><span class="p">&gt;</span>comments powered by Disqus.<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">noscript</span><span class="p">&gt;</span>
+{% endif %}
 </pre></div>
 
 
+<p>然后修改article.html，同gitalk一样，在<code>&lt;h2&gt;Comments&lt;/h2&gt;</code>后加上一行<code>{% include 'disqus.html' %}</code>。最后只需在pelicanconf.py文件中配置<code>DISQUS_SITENAME = 'shortname'</code>即可启用disqus。</p>
+</li>
+</ul>
+<h2>七、</h2>
 <p><strong>参考资料：</strong></p>
 <ol>
 <li><a href="http://www.cnblogs.com/suke99/p/5355894.html">windows下安装Python虚拟环境virtualenvwrapper-win</a></li>
@@ -290,23 +327,25 @@ pip list
       </div><!-- /.entry-content -->
       <div class="comments">
         <h2>Comments</h2>
-			<div id="gitalk-container"></div>
-			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-			<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-			<script>
-				var gitalk = new Gitalk({
-				  clientID: 'a616e9a93853f37e454b',
-				  clientSecret: '38c3bbfaa4dd71957b8824ec071a705ea6fffdfe',
-				  repo: 'comments',
-				  owner: 'jlhxxxx',
-				  admin: ['jlhxxxx'],
-				  distractionFreeMode: false,  // Facebook-like distraction free mode
-				  createIssueManually: true
-				})
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script>
+	var gitalk_owner = 'jlhxxxx';
+	
+	var gitalk = new Gitalk({
+	  clientID: 'a616e9a93853f37e454b',
+	  clientSecret: '38c3bbfaa4dd71957b8824ec071a705ea6fffdfe',
+	  repo: 'comments',
+	  owner: gitalk_owner,
+	  admin: [gitalk_owner],
+	  distractionFreeMode: false,  // Facebook-like distraction free mode
+	  createIssueManually: true
+	})
 
-				gitalk.render('gitalk-container')
-			</script>
-      </div>
+	gitalk.render('gitalk-container')
+</script>
+       </div>
 
     </article>
   </section>
@@ -341,6 +380,15 @@ pip list
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
     </script>
+<script type="text/javascript">
+    var disqus_shortname = 'jlhxxxx';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 </body>

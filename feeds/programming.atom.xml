@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Programming</title><link href="/" rel="alternate"></link><link href="/feeds/programming.atom.xml" rel="self"></link><id>/</id><updated>2018-04-09T00:00:00+08:00</updated><entry><title>windows下用Pelican+Github搭建静态博客</title><link href="/pelican-github.html" rel="alternate"></link><published>2018-04-09T00:00:00+08:00</published><updated>2018-04-09T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:None,2018-04-09:/pelican-github.html</id><summary type="html">&lt;h2&gt;一、使用Github Pages创建个人博客页面&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Programming</title><link href="/" rel="alternate"></link><link href="/feeds/programming.atom.xml" rel="self"></link><id>/</id><updated>2018-04-16T00:00:00+08:00</updated><entry><title>windows下用Pelican+Github搭建静态博客</title><link href="/pelican-github.html" rel="alternate"></link><published>2018-04-16T00:00:00+08:00</published><updated>2018-04-16T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:None,2018-04-16:/pelican-github.html</id><summary type="html">&lt;h2&gt;一、使用Github Pages创建个人博客页面&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;首先到Github进行账号注册：&lt;a href="https://github.com/"&gt;https://github.com/&lt;/a&gt;。&lt;/li&gt;
 &lt;li&gt;创建新仓库，不用新建readme.md，注意仓库名使用&lt;em&gt;username.github.io&lt;/em&gt;的格式，这里&lt;em&gt;username&lt;/em&gt;改成自己的用户名。&lt;/li&gt;
@@ -190,11 +190,46 @@ pip list
 
 &lt;p&gt;推荐主题：&lt;a href="https://github.com/talha131/pelican-elegant/tree/44c8fbcfe631784f84c8b92b7273280b3c956182"&gt;elegant&lt;/a&gt;，&lt;a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3"&gt;pelican-bootstrap3&lt;/a&gt; ，&lt;a href="https://github.com/jsliang/pelican-fresh/tree/ce1afc067931bb571a0f5970366a2e7d733d0d6a"&gt;fresh&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;六、安装第三方评论系统&lt;/h2&gt;
-&lt;p&gt;由于Disqus需要翻墙，而国内又没有什么比较好的第三方评论系统，网上搜了一堆，最后决定用github issues来实现，searching。。。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;DISQUS_SITENAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Shortname
+&lt;p&gt;由于Disqus需要翻墙，而国内又没有什么比较好的第三方评论系统，网上搜了一堆，最后决定用github issues来实现。本来想用&lt;a href="https://github.com/imsun/gitment"&gt;gitment&lt;/a&gt;的，但是不知道哪里配置问题，无法初始化issue，然后用的是&lt;a href="https://github.com/gitalk/gitalk"&gt;gitalk&lt;/a&gt;，界面也比gitment好看。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;gitalk&lt;/p&gt;
+&lt;p&gt;直接到theme--tempaltes下，参考gitalk配置，修改article.html，简单粗暴。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;这里我&lt;code&gt;repo&lt;/code&gt;没有选择博客文件所在仓库，而是另外建了一个仓库，注意&lt;code&gt;createIssueManually&lt;/code&gt;最好设置为&lt;code&gt;true&lt;/code&gt;，这样文章发表之后在评论处点击初始化就可以自动生成一个issue，当然每篇文章都要点一下。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;disqus&lt;/p&gt;
+&lt;p&gt;这个配置相对简单，从零开始也很容易。首先去&lt;a href="https://disqus.com/"&gt;disqus&lt;/a&gt;注册个账号，&lt;strong&gt;create a new site&lt;/strong&gt;，记住你填的&lt;code&gt;shortname&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pelican-github-04.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-04.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;然后选择新建的&lt;strong&gt;site&lt;/strong&gt;，选择&lt;strong&gt;Installing Disqus&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pelican-github-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-01.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;不知道自己平台选择最下面的&lt;strong&gt;I don't see my platform...&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pelican-github-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-01.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;再到下一步复制代码出来：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pelican-github-03.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-03.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;在theme--tempaltes下，新建disqus.html，把刚才代码粘贴进去去掉注释，增加头部&lt;code&gt;{% if DISQUS_SITENAME %}&lt;/code&gt;尾部&lt;code&gt;{% endif %}&lt;/code&gt;和&lt;code&gt;DISQUS_SITENAME&lt;/code&gt;变量：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% if DISQUS_SITENAME %}
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;disqus_thread&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;disqus_shortname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{{ DISQUS_SITENAME }}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="c1"&gt;// DON&amp;#39;T EDIT BELOW THIS LINE&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;createElement&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;script&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;src&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;http://&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;disqus_shortname&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.disqus.com/embed.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;;&lt;/span&gt;
+    &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setAttribute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data-timestamp&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;head&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nx"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;appendChild&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;})();&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;noscript&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://disqus.com/?ref_noscript&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;noscript&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+{% endif %}
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;p&gt;然后修改article.html，同gitalk一样，在&lt;code&gt;&amp;lt;h2&amp;gt;Comments&amp;lt;/h2&amp;gt;&lt;/code&gt;后加上一行&lt;code&gt;{% include 'disqus.html' %}&lt;/code&gt;。最后只需在pelicanconf.py文件中配置&lt;code&gt;DISQUS_SITENAME = 'shortname'&lt;/code&gt;即可启用disqus。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;七、&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;参考资料：&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="http://www.cnblogs.com/suke99/p/5355894.html"&gt;windows下安装Python虚拟环境virtualenvwrapper-win&lt;/a&gt;&lt;/li&gt;
