@@ -194,20 +194,52 @@ pip list
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;gitalk&lt;/p&gt;
-&lt;p&gt;直接到theme--tempaltes下，参考gitalk配置，修改article.html，简单粗暴。&lt;/p&gt;
-&lt;p&gt;​&lt;/p&gt;
-&lt;p&gt;这里我&lt;code&gt;repo&lt;/code&gt;没有选择博客文件所在仓库，而是另外建了一个仓库，注意&lt;code&gt;createIssueManually&lt;/code&gt;最好设置为&lt;code&gt;true&lt;/code&gt;，这样文章发表之后在评论处点击初始化就可以自动生成一个issue，当然每篇文章都要点一下。&lt;/p&gt;
+&lt;p&gt;直接到theme--tempaltes下，参考gitalk配置，新建gitalk.html，这里我稍微配置了个环境变量&lt;code&gt;GITALK_OWNER&lt;/code&gt;。而且我的&lt;code&gt;repo&lt;/code&gt;没有选择博客文件所在仓库，而是另外建了一个仓库，注意&lt;code&gt;createIssueManually&lt;/code&gt;最好设置为&lt;code&gt;true&lt;/code&gt;，这样文章发表之后在评论处点击初始化就可以自动生成一个issue，当然每篇文章都要点一下。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% if GITALK_OWNER %}
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;gitalk-container&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;gitalk_owner&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{{ GITALK_OWNER }}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;gitalk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Gitalk&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+      &lt;span class="nx"&gt;clientID&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;a61......&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nx"&gt;clientSecret&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;38c......&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nx"&gt;repo&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;comments&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nx"&gt;owner&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;gitalk_owner&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nx"&gt;admin&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;gitalk_owner&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+      &lt;span class="nx"&gt;distractionFreeMode&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="c1"&gt;// Facebook-like distraction free mode&lt;/span&gt;
+      &lt;span class="nx"&gt;createIssueManually&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+    &lt;span class="p"&gt;})&lt;/span&gt;
+
+    &lt;span class="nx"&gt;gitalk&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;gitalk-container&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+{% endif %}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后打开article.html，找到&lt;code&gt;{% if DISQUS_SITENAME %}&lt;/code&gt;这行，从这之后开始修改&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% if COMMENT %}
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h2&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Comments&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h2&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    {% include &amp;#39;gitalk.html&amp;#39; %}
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+{% endif %}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;第一行这里不用disqus，所以改成&lt;code&gt;{% if COMMENT %}&lt;/code&gt;，主要就是加了这么一行&lt;code&gt;{% include 'gitalk.html' %}&lt;/code&gt;。记得在pelicanconf.py文件中要配置&lt;code&gt;COMMENT = True&lt;/code&gt;和&lt;code&gt;GITALK_OWNER&lt;/code&gt;。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;disqus&lt;/p&gt;
 &lt;p&gt;这个配置相对简单，从零开始也很容易。首先去&lt;a href="https://disqus.com/"&gt;disqus&lt;/a&gt;注册个账号，&lt;strong&gt;create a new site&lt;/strong&gt;，记住你填的&lt;code&gt;shortname&lt;/code&gt;：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="pelican-github-04.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-04.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pelican-github-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-01.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;然后选择新建的&lt;strong&gt;site&lt;/strong&gt;，选择&lt;strong&gt;Installing Disqus&lt;/strong&gt;：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="pelican-github-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-01.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pelican-github-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-02.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;不知道自己平台选择最下面的&lt;strong&gt;I don't see my platform...&lt;/strong&gt;：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="pelican-github-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-01.png?raw=true"&gt;&lt;/p&gt;
-&lt;p&gt;再到下一步复制代码出来：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="pelican-github-03.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-03.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;再到下一步复制代码出来：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pelican-github-04.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-04.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;在theme--tempaltes下，新建disqus.html，把刚才代码粘贴进去去掉注释，增加头部&lt;code&gt;{% if DISQUS_SITENAME %}&lt;/code&gt;尾部&lt;code&gt;{% endif %}&lt;/code&gt;和&lt;code&gt;DISQUS_SITENAME&lt;/code&gt;变量：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% if DISQUS_SITENAME %}
 &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;disqus_thread&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
