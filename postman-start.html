@@ -96,8 +96,6 @@
         <a href="/tag/test.html">test</a>
 
 
-        |
-        <a href="/postman-start.html#disqus_thread">comments</a>
 
     
 </footer><!-- /.post-info -->
@@ -116,7 +114,7 @@
 
 <p><img alt="postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-01.png?raw=true"></p>
 <p>如果token在返回的header里，也很简单：</p>
-<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">postman</span><span class="p">.</span><span class="nx">gerResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">postman</span><span class="p">.</span><span class="nx">getResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
 <span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">,</span><span class="nx">value</span><span class="p">);</span>
 </pre></div>
 
@@ -189,7 +187,7 @@
 </li>
 <li>
 <p>从html的Header中提取</p>
-<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">postman</span><span class="p">.</span><span class="nx">gerResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">postman</span><span class="p">.</span><span class="nx">getResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
 <span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">,</span><span class="nx">value</span><span class="p">);</span>
 </pre></div>
 
@@ -236,19 +234,7 @@
 
 	gitalk.render('gitalk-container')
 </script>
- <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'jlhxxxx'; 
-	
-	(function() { // DON'T EDIT BELOW THIS LINE
-	var d = document, s = d.createElement('script');
-	s.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';;
-	s.setAttribute('data-timestamp', +new Date());
-	(d.head || d.body).appendChild(s);
-	})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                                 </div>
+                                  </div>
 
     </article>
   </section>
@@ -283,15 +269,6 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
     </script>
-<script type="text/javascript">
-    var disqus_shortname = 'jlhxxxx';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 </body>
