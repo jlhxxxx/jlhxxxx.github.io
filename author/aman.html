@@ -68,6 +68,66 @@
                         <article>
                             <header>
                                 <h1 class="entry-title">
+                                    <a href="/oracle-get-systime.html" rel="bookmark" title="Permalink to oracle取系统时间">
+                                       oracle取系统时间
+                                    </a>
+                                </h1>
+                            </header>
+                            <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="/category/programming.html">Programming</a>
+
+    on 2018-04-23
+
+        |
+        tags:         <a href="/tag/oracle.html">oracle</a>
+        <a href="/tag/programming.html">Programming</a>
+
+
+
+    
+</footer><!-- /.post-info -->                                <h3>取今天</h3>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">from</span> <span class="n">dual</span>
+</pre></div>
+
+
+<h3>取上个月今天的前一天</h3>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">ADD_MONTHS</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">from</span> <span class="n">dual</span>
+</pre></div>
+
+
+<h3>取本月第一天</h3>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;MM&#39;</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">from</span> <span class="n">dual</span>
+</pre></div>
+
+
+<h3>取本季度第一天</h3>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">from</span> <span class="n">dual</span>
+</pre></div>
+
+
+<h3>取上季度第一天</h3>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">ADD_MONTHS</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">),</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">from</span> <span class="n">dual</span>
+</pre></div>
+
+
+<h3>取今年第一天</h3>
+<div class="highlight"><pre><span></span><span class="k">select …</span></pre></div>
+                                <p class="readmore">
+                                    <a class="btn btn-small btn-info" href="/oracle-get-systime.html">Read more...</a>
+                                </p>
+                            </div><!-- /.entry-content -->
+                            <hr/>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <header>
+                                <h1 class="entry-title">
                                     <a href="/pelican-github.html" rel="bookmark" title="Permalink to windows下用Pelican+Github搭建静态博客">
                                        windows下用Pelican+Github搭建静态博客
                                     </a>
