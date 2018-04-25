@@ -172,8 +172,8 @@ img.left, figure.left {
   #google-custom-search .gsc-control-cse {
     padding: 0 !important;
     border: 0 !important;
-    background-color: transparent !important; }
-
+    background-color: transparent !important; }   
+    
 #custom-search {
   width: 300px;
   float: right;
