@@ -119,12 +119,12 @@
 
 
 <ul>
-<li><code>INCREMENT BY</code> 用于定义序列的步长，如果省略，则默认为<code>1</code>，如果出现负值，则代表序列的值是按照此步长递减的。</li>
-<li><code>START WITH</code> 定义序列的初始值(即产生的第一个值)，默认为<code>1</code>。</li>
-<li><code>MAXVALUE</code> 定义序列生成器能产生的最大值。选项<code>NOMAXVALUE</code>是默认选项，代表没有最大值定义，这时对于递增序列，系统能够产生的最大值是10的27次方；对于递减序列，最大值是<code>-1</code>。</li>
-<li><code>MINVALUE</code>定义序列生成器能产生的最小值。选项<code>NOMINVALUE</code>是默认选项，代表没有最小值定义，这时对于递减序列，系统能够产生的最小值是？10的26次方；对于递增序列，最小值是<code>1</code>。</li>
-<li><code>CYCLE</code>和<code>NOCYCLE</code>表示当序列生成器的值达到限制值后是否循环。<code>CYCLE</code>代表循环，<code>NOCYCLE</code>代表不循环。如果循环，则当递增序列达到最大值时，循环到最小值；对于递减序列达到最小值时，循环到最大值。如果不循环，达到限制值后，继续产生新值就会发生错误。</li>
-<li><code>CACHE</code>(缓冲)定义存放序列的内存块的大小，默认为20。<code>NOCACHE</code>表示不对序列进行内存缓冲。<strong>对序列进行内存缓冲，可以改善序列的性能。</strong>（高级操作，一般人用不到）</li>
+<li><code>INCREMENT BY</code>：用于定义序列的步长，如果省略，则默认为<code>1</code>，如果出现负值，则代表序列的值是按照此步长递减的。</li>
+<li><code>START WITH</code> ：定义序列的初始值(即产生的第一个值)，默认为<code>1</code>。</li>
+<li><code>MAXVALUE</code> ：定义序列生成器能产生的最大值。选项<code>NOMAXVALUE</code>是默认选项，代表没有最大值定义，这时对于递增序列，系统能够产生的最大值是10的27次方；对于递减序列，最大值是<code>-1</code>。</li>
+<li><code>MINVALUE</code>：定义序列生成器能产生的最小值。选项<code>NOMINVALUE</code>是默认选项，代表没有最小值定义，这时对于递减序列，系统能够产生的最小值是？10的26次方；对于递增序列，最小值是<code>1</code>。</li>
+<li><code>CYCLE</code>和<code>NOCYCLE</code>：表示当序列生成器的值达到限制值后是否循环。<code>CYCLE</code>代表循环，<code>NOCYCLE</code>代表不循环。如果循环，则当递增序列达到最大值时，循环到最小值；对于递减序列达到最小值时，循环到最大值。如果不循环，达到限制值后，继续产生新值就会发生错误。</li>
+<li><code>CACHE</code>：(缓冲)定义存放序列的内存块的大小，默认为20。<code>NOCACHE</code>表示不对序列进行内存缓冲。<strong>对序列进行内存缓冲，可以改善序列的性能。</strong>（高级操作，一般人用不到）</li>
 </ul>
 <h2>使用序列</h2>
 <ul>
