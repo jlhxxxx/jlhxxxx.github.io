@@ -55,33 +55,45 @@
 &lt;p&gt;注意如果是未注册用户，不要先注册再购买，因为新注册的时候需要输入验证码，而验证码是需要翻墙才能看到的，直接购买就能顺便注册。除了邮箱和密码，其他信息随便填就好了。&lt;/p&gt;
 &lt;p&gt;购买之后邮箱里会收到几封邮件，告诉你IP address，SSH Port，和初始密码，不过都不需要记，IP和Port进入服务器控制面板就能看到，密码可以随时重新生成。&lt;/p&gt;
 &lt;h2&gt;二、安装Shadowsocks&lt;/h2&gt;
-&lt;p&gt;参考教程：&lt;a href="https://www.cnlinode.com/ban_wa_gong_qu_xiao_le_yi_jian_an_zhuang_shadowsocks_zui_xin_ban_wa_gong_ss_jiao_cheng/"&gt;搬瓦工取消了一键安装Shadowsocks，最新搬瓦工SS教程&lt;/a&gt;第二步方法二 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Wed, 25 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-25:/banwagong-ss.html</guid><category>Shadowsocks</category><category>Bandwagon</category></item><item><title>Oracle取系统时间</title><link>https://jlhxxxx.github.io/oracle-get-sysdate.html</link><description>&lt;h4&gt;取今天&lt;/h4&gt;
+&lt;p&gt;参考教程：&lt;a href="https://www.cnlinode.com/ban_wa_gong_qu_xiao_le_yi_jian_an_zhuang_shadowsocks_zui_xin_ban_wa_gong_ss_jiao_cheng/"&gt;搬瓦工取消了一键安装Shadowsocks，最新搬瓦工SS教程&lt;/a&gt;第二步方法二 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Wed, 25 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-25:/banwagong-ss.html</guid><category>Shadowsocks</category><category>Bandwagon</category></item><item><title>Oracle取系统时间</title><link>https://jlhxxxx.github.io/oracle-get-sysdate.html</link><description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;取今天&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h4&gt;取上个月今天的前一天&lt;/h4&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取上个月今天的前一天&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ADD_MONTHS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h4&gt;取本月第一天&lt;/h4&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取本月第一天&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;MM&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h4&gt;取本季度第一天&lt;/h4&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取本季度第一天&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Q&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h4&gt;取上季度第一天&lt;/h4&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取上季度第一天&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ADD_MONTHS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Q&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h4&gt;取今年第一天&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 23 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-23:/oracle-get-sysdate.html</guid><category>Oracle</category></item><item><title>windows下用Pelican+GitHub搭建静态博客</title><link>https://jlhxxxx.github.io/pelican-github.html</link><description>&lt;h2&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取今年第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 23 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-23:/oracle-get-sysdate.html</guid><category>Oracle</category></item><item><title>windows下用Pelican+GitHub搭建静态博客</title><link>https://jlhxxxx.github.io/pelican-github.html</link><description>&lt;h2&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;首先到GitHub进行账号注册：&lt;a href="https://github.com/"&gt;https://github.com/&lt;/a&gt;。&lt;/li&gt;
 &lt;li&gt;创建新仓库，不用新建readme.md，注意仓库名使用&lt;em&gt;username.github.io&lt;/em&gt;的格式，这里&lt;em&gt;username&lt;/em&gt;改成自己的用户名。&lt;/li&gt;

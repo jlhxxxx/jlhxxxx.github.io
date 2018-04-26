@@ -260,33 +260,45 @@
 
 
     
-</footer><!-- /.post-info -->                                <h4>取今天</h4>
+</footer><!-- /.post-info -->                                <ul>
+<li>
+<p>取今天</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取上个月今天的前一天</h4>
+</li>
+<li>
+<p>取上个月今天的前一天</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">ADD_MONTHS</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取本月第一天</h4>
+</li>
+<li>
+<p>取本月第一天</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;MM&#39;</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取本季度第一天</h4>
+</li>
+<li>
+<p>取本季度第一天</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取上季度第一天</h4>
+</li>
+<li>
+<p>取上季度第一天</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">ADD_MONTHS</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">),</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取今年第一天</h4>
-<div class="highlight"><pre><span></span><span class="k">SELECT …</span></pre></div>
+</li>
+<li>
+<p>取今年第一天</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT …</span></pre></div></li></ul>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/oracle-get-sysdate.html">Read more...</a>
                                 </p>

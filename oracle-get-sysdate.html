@@ -106,74 +106,106 @@
           <span class='st_email_hcount' displayText='Email'></span>
         </div>
 
-        <h4>取今天</h4>
+        <ul>
+<li>
+<p>取今天</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取上个月今天的前一天</h4>
+</li>
+<li>
+<p>取上个月今天的前一天</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">ADD_MONTHS</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取本月第一天</h4>
+</li>
+<li>
+<p>取本月第一天</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;MM&#39;</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取本季度第一天</h4>
+</li>
+<li>
+<p>取本季度第一天</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取上季度第一天</h4>
+</li>
+<li>
+<p>取上季度第一天</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">ADD_MONTHS</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">),</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取今年第一天</h4>
+</li>
+<li>
+<p>取今年第一天</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;YYYY&#39;</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取去年第一天</h4>
+</li>
+<li>
+<p>取去年第一天</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">ADD_MONTHS</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;YYYY&#39;</span><span class="p">),</span><span class="o">-</span><span class="mi">12</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取上周第一天（周日）</h4>
+</li>
+<li>
+<p>取上周第一天（周日）</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">)</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取当前时间（24h）</h4>
+</li>
+<li>
+<p>取当前时间（24h）</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;HH24&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取当前时间</h4>
+</li>
+<li>
+<p>取当前时间</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;HH&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取当前时间前1s</h4>
+</li>
+<li>
+<p>取当前时间前1s</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">SYSDATE</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">24</span><span class="o">/</span><span class="mi">60</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span><span class="s1">&#39;YYYY-MM-DD HH24:MI:SS&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取当前时间前1min</h4>
+</li>
+<li>
+<p>取当前时间前1min</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">SYSDATE</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">24</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span><span class="s1">&#39;YYYY-MM-DD HH24:MI:SS&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取当前时间前1h</h4>
+</li>
+<li>
+<p>取当前时间前1h</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">SYSDATE</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">24</span><span class="p">,</span><span class="s1">&#39;YYYY-MM-DD HH24:MI:SS&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
 
 
-<h4>取今天凌晨1点半</h4>
+</li>
+<li>
+<p>取今天凌晨1点半</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="mi">24</span><span class="o">+</span><span class="mi">30</span><span class="o">/</span><span class="mi">24</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span><span class="s1">&#39;YYYY-MM-DD HH24:MI:SS&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
 </pre></div>
+
+
+</li>
+</ul>
 
         <div class="sharethis-bottom">
           <span class='st_fblike_hcount' displayText='Facebook Like'></span>
