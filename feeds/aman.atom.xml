@@ -30,7 +30,7 @@
 &lt;li&gt;&lt;code&gt;MAXVALUE&lt;/code&gt; 定义序列生成器能产生的最大值。选项&lt;code&gt;NOMAXVALUE&lt;/code&gt;是默认选项，代表没有最大值定义，这时对于递增序列，系统能够产生的最大值是10的27次方；对于递减序列，最大值是&lt;code&gt;-1&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;MINVALUE&lt;/code&gt;定义序列生成器能产生的最小值。选项&lt;code&gt;NOMINVALUE&lt;/code&gt;是默认选项，代表没有最小值定义，这时对于递减序列，系统能够产生的最小值是？10的26次方；对于递增序列，最小值是&lt;code&gt;1&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;CYCLE&lt;/code&gt;和&lt;code&gt;NOCYCLE&lt;/code&gt;表示当序列生成器的值达到限制值后是否循环。&lt;code&gt;CYCLE&lt;/code&gt;代表循环，&lt;code&gt;NOCYCLE&lt;/code&gt;代表不循环。如果循环，则当递增序列达到最大值时，循环到最小值；对于递减序列达到最小值时，循环到最大值。如果不循环，达到限制值后，继续产生新值就会发生错误。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;CACHE&lt;/code&gt;(缓冲)定义存放序列的内存块的大小，默认为20。&lt;code&gt;NOCACHE&lt;/code&gt;表示不对序列进行内存缓冲。&lt;strong&gt;对序列进行内存缓冲，可以改善序列的性能。&lt;/strong&gt; 缓存选项会造成数据丢失，当实例异常关闭时。（暂时用不到）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CACHE&lt;/code&gt;(缓冲)定义存放序列的内存块的大小，默认为20。&lt;code&gt;NOCACHE&lt;/code&gt;表示不对序列进行内存缓冲。&lt;strong&gt;对序列进行内存缓冲，可以改善序列的性能。&lt;/strong&gt;（高级操作，一般人用不到）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;使用序列&lt;/h2&gt;
 &lt;ul&gt;
@@ -123,7 +123,7 @@
 &lt;li&gt;
 &lt;p&gt;&lt;a href="http://www.cnblogs.com/huangzhen/archive/2011/09/19/2181257.html"&gt;Oracle重置序列(不删除重建方式)&lt;/a&gt; &lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="oracle"></category><category term="sequence"></category></entry><entry><title>搬瓦工SS教程</title><link href="https://jlhxxxx.github.io/banwagong-ss.html" rel="alternate"></link><published>2018-04-25T00:00:00+08:00</published><updated>2018-04-25T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-25:/banwagong-ss.html</id><summary type="html">&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，我现在更注重效率，在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，折合人名币每个月￥10，因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
+&lt;/ul&gt;</content><category term="oracle"></category><category term="sequence"></category></entry><entry><title>搬瓦工SS教程</title><link href="https://jlhxxxx.github.io/banwagong-ss.html" rel="alternate"></link><published>2018-04-25T00:00:00+08:00</published><updated>2018-04-25T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-25:/banwagong-ss.html</id><summary type="html">&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，现在我更注重效率，尽量在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，加上优惠码，折合人民币每个月10块钱，十块钱，买不了吃亏买不了上当，还因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
 &lt;h2&gt;一、套餐选购&lt;/h2&gt;
 &lt;p&gt;搬瓦工主页：&lt;a href="https://bwh1.net/"&gt;地址1&lt;/a&gt;、&lt;a href="https://bandwagonhost.com/"&gt;地址2&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -140,8 +140,7 @@
 &lt;p&gt;注意如果是未注册用户，不要先注册再购买，因为新注册的时候需要输入验证码，而验证码是需要翻墙才能看到的，直接购买就能顺便注册。除了邮箱和密码，其他信息随便填就好了。&lt;/p&gt;
 &lt;p&gt;购买之后邮箱里会收到几封邮件，告诉你IP address，SSH Port，和初始密码，不过都不需要记，IP和Port进入服务器控制面板就能看到，密码可以随时重新生成。&lt;/p&gt;
 &lt;h2&gt;二、安装Shadowsocks&lt;/h2&gt;
-&lt;p&gt;参考教程：&lt;a href="https://www.cnlinode.com/ban_wa_gong_qu_xiao_le_yi_jian_an_zhuang_shadowsocks_zui_xin_ban_wa_gong_ss_jiao_cheng/"&gt;搬瓦工取消了一键安装Shadowsocks，最新搬瓦工SS教程&lt;/a&gt;第二步方法二。&lt;/p&gt;
-&lt;p&gt;登录网站后，地址栏输入 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，我现在更注重效率，在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，折合人名币每个月￥10，因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
+&lt;p&gt;参考教程：&lt;a href="https://www.cnlinode.com/ban_wa_gong_qu_xiao_le_yi_jian_an_zhuang_shadowsocks_zui_xin_ban_wa_gong_ss_jiao_cheng/"&gt;搬瓦工取消了一键安装Shadowsocks，最新搬瓦工SS教程&lt;/a&gt;第二步方法二 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，现在我更注重效率，尽量在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，加上优惠码，折合人民币每个月10块钱，十块钱，买不了吃亏买不了上当，还因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
 &lt;h2&gt;一、套餐选购&lt;/h2&gt;
 &lt;p&gt;搬瓦工主页：&lt;a href="https://bwh1.net/"&gt;地址1&lt;/a&gt;、&lt;a href="https://bandwagonhost.com/"&gt;地址2&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -160,8 +159,8 @@
 &lt;h2&gt;二、安装Shadowsocks&lt;/h2&gt;
 &lt;p&gt;参考教程：&lt;a href="https://www.cnlinode.com/ban_wa_gong_qu_xiao_le_yi_jian_an_zhuang_shadowsocks_zui_xin_ban_wa_gong_ss_jiao_cheng/"&gt;搬瓦工取消了一键安装Shadowsocks，最新搬瓦工SS教程&lt;/a&gt;第二步方法二。&lt;/p&gt;
 &lt;p&gt;登录网站后，地址栏输入&lt;code&gt;https://kiwivm.64clouds.com/preloader.php?load=/main-exec.php?mode=extras_shadowsocks&lt;/code&gt;进入隐藏的Shadowsocks Server，傻瓜式一键安装，安装好之后页面会显示Shadowsocks的参数及软件下载地址。&lt;/p&gt;
-&lt;p&gt;下载对应系统的Shadowsocks，配置好相应服务器参数，启用系统代理，系统代理选择pac模式。如果想更专业一点，还可以配合SwitchyOmega使用，具体教程参考&lt;a href="https://blog.csdn.net/shouldnotappearcalm/article/details/77900399"&gt;shadowsocks配合chrome插件SwitchyOmega&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;这里要注意如果你已经安装了SwitchyOmega并且有相应配置，一定不要直接导入配置（会覆盖），手动配置也很简单，主要就是一个规则列表网址：https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt。&lt;/p&gt;
+&lt;p&gt;下载对应系统的Shadowsocks，配置好相应服务器参数，&lt;strong&gt;启用系统代理&lt;/strong&gt;，系统代理选择&lt;strong&gt;pac模式&lt;/strong&gt;。如果想更专业一点，还可以配合SwitchyOmega使用，具体教程参考&lt;a href="https://blog.csdn.net/shouldnotappearcalm/article/details/77900399"&gt;shadowsocks配合chrome插件SwitchyOmega&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;这里要注意如果你已经安装了SwitchyOmega并且有相应配置，一定不要直接导入配置（会覆盖），手动配置也很简单，主要就是配一个规则列表地址：&lt;code&gt;https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt&lt;/code&gt;。&lt;/p&gt;
 &lt;h2&gt;三、优化&lt;/h2&gt;
 &lt;p&gt;到第二步已经可以访问外网了，如果觉得访问速度比较慢，还有一些优化办法。&lt;/p&gt;
 &lt;ul&gt;
