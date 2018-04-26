@@ -6,14 +6,14 @@
     <meta name="robots" content="index, follow"/>
 	<meta name="baidu-site-verification" content="maDdvat0eq" />
 
-    <meta property="og:title" content="windows下用Pelican+Github搭建静态博客"/>
+    <meta property="og:title" content="windows下用Pelican+GitHub搭建静态博客"/>
     <meta property="og:url" content="https://jlhxxxx.github.io/pelican-github.html"/>
     <meta property="og:site_name" content="AMAN's BLOG"/>
     <meta property="og:type" content="article"/>
 
     <link rel="canonical" href="https://jlhxxxx.github.io/pelican-github.html" />
 
-    <title>windows下用Pelican+Github搭建静态博客 | AMAN's BLOG</title>
+    <title>windows下用Pelican+GitHub搭建静态博客 | AMAN's BLOG</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
@@ -48,8 +48,8 @@
                     <div class="navbar-inner">
                         <ul class="nav">
                             <li ><a href="https://jlhxxxx.github.io/archives.html">Archives</a></li>
-                            <li class="active"><a href="https://jlhxxxx.github.io/category/programming.html">Programming</a></li>
-                            <li ><a href="https://jlhxxxx.github.io/category/software.html">software</a></li>
+                            <li class="active"><a href="https://jlhxxxx.github.io/category/software.html">Software</a></li>
+                            <li ><a href="https://jlhxxxx.github.io/category/sql.html">SQL</a></li>
                             <li ><a href="https://jlhxxxx.github.io/category/test-tools.html">Test Tools</a></li>
                         </ul>
                         <div id="google-custom-search" class="nav">
@@ -80,7 +80,7 @@
       <header>
         <h1 class="entry-title">
           <a href="https://jlhxxxx.github.io/pelican-github.html" rel="bookmark"
-             title="Permalink to windows下用Pelican+Github搭建静态博客">windows下用Pelican+Github搭建静态博客</a></h1>
+             title="Permalink to windows下用Pelican+GitHub搭建静态博客">windows下用Pelican+GitHub搭建静态博客</a></h1>
       </header>
       <div class="entry-content">
 <footer class="post-info">
@@ -88,14 +88,14 @@
         by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
     </address>
 
-    in <a href="https://jlhxxxx.github.io/category/programming.html">Programming</a>
+    in <a href="https://jlhxxxx.github.io/category/software.html">Software</a>
 
     on 2018-04-16
 
         |
-        tags:         <a href="https://jlhxxxx.github.io/tag/github.html">github</a>
-        <a href="https://jlhxxxx.github.io/tag/pelican.html">pelican</a>
-        <a href="https://jlhxxxx.github.io/tag/blog.html">blog</a>
+        tags:         <a href="https://jlhxxxx.github.io/tag/github.html">GitHub</a>
+        <a href="https://jlhxxxx.github.io/tag/pelican.html">Pelican</a>
+        <a href="https://jlhxxxx.github.io/tag/blog.html">Blog</a>
 
 
 
@@ -108,11 +108,11 @@
           <span class='st_email_hcount' displayText='Email'></span>
         </div>
 
-        <h2>一、使用Github Pages创建个人博客页面</h2>
+        <h2>一、使用GitHub Pages创建个人博客页面</h2>
 <ol>
-<li>首先到Github进行账号注册：<a href="https://github.com/">https://github.com/</a>。</li>
+<li>首先到GitHub进行账号注册：<a href="https://github.com/">https://github.com/</a>。</li>
 <li>创建新仓库，不用新建readme.md，注意仓库名使用<em>username.github.io</em>的格式，这里<em>username</em>改成自己的用户名。</li>
-<li>创建SSH密钥并上传到Github。</li>
+<li>创建SSH密钥并上传到GitHub。</li>
 </ol>
 <h2>二、安装Python、Pelican、Markdown和make</h2>
 <ol>
@@ -135,8 +135,8 @@
 </pre></div>
 
 
-<p>配置虚拟环境目录，默认创建的虚拟环境位于C:\Users\username\下，可以通过环境变量 <code>WORKON_HOME</code> 来定制。</p>
-<p>通过计算机--&gt;属性--&gt;高级系统设置--&gt;环境变量--&gt;在系统变量中新建“变量名”：<code>WORKON_HOME</code>，变量值：<code>你自定义的路径</code>。</p>
+<p>配置虚拟环境目录，默认创建的虚拟环境位于<strong>C:\Users\username\</strong>下，可以通过环境变量 <code>WORKON_HOME</code> 来定制。</p>
+<p>通过<strong>计算机--&gt;属性--&gt;高级系统设置--&gt;环境变量--&gt;系统变量</strong>中新建“<strong>变量名</strong>”：<code>WORKON_HOME</code>，<strong>变量值</strong>：<code>你自定义的路径</code>。</p>
 </li>
 <li>
 <p>创建并激活虚拟环境（可选）</p>
@@ -208,7 +208,7 @@ pip list
 
 </li>
 <li>
-<p>进入output文件夹，把自己刚刚建好的username.github.io版本库clone下来，注意使用SSH方式，这里以及后文中的username要替换成自己的Github用户名</p>
+<p>进入output文件夹，把自己刚刚建好的username.github.io版本库clone下来，注意使用SSH方式，这里以及后文中的username要替换成自己的GitHub用户名</p>
 <div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">output</span>
 <span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nv">@github</span><span class="p">.</span><span class="n">com</span><span class="err">:</span><span class="n">username</span><span class="p">/</span><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">git</span>
 </pre></div>
@@ -216,7 +216,7 @@ pip list
 
 </li>
 <li>
-<p>设置一键上传部署到Github。打开根目录下的Makefile文件，修改以下三个地方，设置完后，以后写完文章就可以通过在blog根目录下执行<code>make github</code>进行<strong>一键部署</strong>了。</p>
+<p>设置一键上传部署到GitHub。打开根目录下的Makefile文件，修改以下三个地方，设置完后，以后写完文章就可以通过在blog根目录下执行<code>make github</code>进行<strong>一键部署</strong>了。</p>
 <div class="highlight"><pre><span></span><span class="nv">OUTPUTDIR</span><span class="o">=</span><span class="k">$(</span>BASEDIR<span class="k">)</span>/output/username.github.io    
 <span class="nf">publish</span><span class="o">:</span>    
     <span class="k">$(</span>PELICAN<span class="k">)</span> <span class="k">$(</span>INPUTDIR<span class="k">)</span> -o <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> -s <span class="k">$(</span>CONFFILE<span class="k">)</span> <span class="k">$(</span>PELICANOPTS<span class="k">)</span>    
@@ -227,7 +227,7 @@ pip list
 
 </li>
 </ol>
-<h2>四、通过Markdown试写博文并上传Github发布</h2>
+<h2>四、通过Markdown试写博文并上传GitHub发布</h2>
 <ol>
 <li>
 <p>创建一个页面：这里以创建 About页面为例。在content目录创建pages子目录：</p>
@@ -343,12 +343,12 @@ pip list
 </li>
 </ul>
 <h2>七、</h2>
-<p><strong>参考资料：</strong></p>
-<ol>
+<h3>参考文章</h3>
+<ul>
 <li><a href="http://www.cnblogs.com/suke99/p/5355894.html">windows下安装Python虚拟环境virtualenvwrapper-win</a></li>
-<li><a href="http://www.cnblogs.com/cciejh/p/blog_building.html">Pelican＋Github博客搭建详细教程</a> </li>
+<li><a href="http://www.cnblogs.com/cciejh/p/blog_building.html">Pelican＋GitHub博客搭建详细教程</a> </li>
 <li><a href="http://doc.okbase.net/WJ5888/archive/45851.html">pelican创建博客常见问题汇总</a></li>
-</ol>
+</ul>
 
         <div class="sharethis-bottom">
           <span class='st_fblike_hcount' displayText='Facebook Like'></span>

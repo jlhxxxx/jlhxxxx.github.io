@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Test Tools</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/test-tools.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-04-13T00:00:00+08:00</updated><entry><title>postman入门第一坑：提取返回值</title><link href="https://jlhxxxx.github.io/postman-start.html" rel="alternate"></link><published>2018-04-13T00:00:00+08:00</published><updated>2018-04-13T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-13:/postman-start.html</id><summary type="html">&lt;p&gt;postman是做接口测试的，但是很多接口并不是直接就能测，有的需要一些预处理。比如说身份认证，需要传递一个&lt;a href="https://zh.wikipedia.org/wiki/%E5%AE%89%E5%85%A8%E4%BB%A4%E7%89%8C"&gt;token&lt;/a&gt;。如果做网页测试，一般打开登陆界面的时候就会生成一个token，如果返回值是json格式，用postman从中提取值是很简单的，在Tests中输入：&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Test Tools</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/test-tools.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-04-13T00:00:00+08:00</updated><entry><title>Postman入门第一坑：提取返回值</title><link href="https://jlhxxxx.github.io/Postman-start.html" rel="alternate"></link><published>2018-04-13T00:00:00+08:00</published><updated>2018-04-13T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-13:/Postman-start.html</id><summary type="html">&lt;p&gt;Postman是做接口测试的，但是很多接口并不是直接就能测，有的需要一些预处理。比如说身份认证，需要传递一个&lt;a href="https://zh.wikipedia.org/wiki/%E5%AE%89%E5%85%A8%E4%BB%A4%E7%89%8C"&gt;token&lt;/a&gt;。如果做网页测试，一般打开登陆界面的时候就会生成一个token，如果返回值是json格式，用Postman从中提取值是很简单的，在Tests中输入：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;jsonData&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nx"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;responseBody&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="c1"&gt;//获取body中返回的所有参数&lt;/span&gt;
 &lt;span class="nx"&gt;pm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;environment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;appKey&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;jsonData&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="c1"&gt;//把返回参数中的keys设置为环境变量&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-01.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-01.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;如果token在返回的header里，也很简单：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;postman&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getResponseHeader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Postman&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getResponseHeader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="nx"&gt;pm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;environment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-02.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-02.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;如果token在返回值的body中，呵呵，网上并没有适合小白看的清晰的解决方法。我花了&lt;strong&gt;好长好长好长&lt;/strong&gt;时间才找到这么两行小字：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;//转换XML body为JSON对象&lt;/span&gt;
 &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;jsonObject&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;xml2Json&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;responseBody&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;那我的思路就有了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;postman是做接口测试的，但是很多接口并不是直接就能测，有的需要一些预处理。比如说身份认证，需要传递一个&lt;a href="https://zh.wikipedia.org/wiki/%E5%AE%89%E5%85%A8%E4%BB%A4%E7%89%8C"&gt;token&lt;/a&gt;。如果做网页测试，一般打开登陆界面的时候就会生成一个token，如果返回值是json格式，用postman从中提取值是很简单的，在Tests中输入：&lt;/p&gt;
+&lt;p&gt;那我的思路就有了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Postman是做接口测试的，但是很多接口并不是直接就能测，有的需要一些预处理。比如说身份认证，需要传递一个&lt;a href="https://zh.wikipedia.org/wiki/%E5%AE%89%E5%85%A8%E4%BB%A4%E7%89%8C"&gt;token&lt;/a&gt;。如果做网页测试，一般打开登陆界面的时候就会生成一个token，如果返回值是json格式，用Postman从中提取值是很简单的，在Tests中输入：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;jsonData&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nx"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;responseBody&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="c1"&gt;//获取body中返回的所有参数&lt;/span&gt;
 &lt;span class="nx"&gt;pm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;environment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;appKey&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;jsonData&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="c1"&gt;//把返回参数中的keys设置为环境变量&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-01.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-01.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;如果token在返回的header里，也很简单：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;postman&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getResponseHeader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Postman&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getResponseHeader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="nx"&gt;pm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;environment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-02.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-02.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;如果token在返回值的body中，呵呵，网上并没有适合小白看的清晰的解决方法。我花了&lt;strong&gt;好长好长好长&lt;/strong&gt;时间才找到这么两行小字：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;//转换XML body为JSON对象&lt;/span&gt;
 &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;jsonObject&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;xml2Json&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;responseBody&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -63,7 +63,7 @@
 &lt;p&gt;&lt;em&gt;为了调试方便，我们这里取全局（globals）变量，因为环境（environment）变量只有在测试执行过程中才存在，测试执行完就释放了。&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;send&lt;/code&gt;之后点右上角小眼睛，如果全局变量取到值的话这里会有显示的：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="postman-start-03.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-03.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Postman-start-03.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-03.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;然而并没有，排查原因，把最后的&lt;code&gt;content&lt;/code&gt;去掉试试（为了看的更清楚，把&lt;code&gt;[4]&lt;/code&gt;也去掉）：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;jsonObject&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;xml2Json&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;responseBody&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="nx"&gt;pm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;globals&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;jsonObject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;head&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;meta&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -71,25 +71,25 @@
 
 
 &lt;p&gt;这时候取到全局变量了，不过&lt;code&gt;[object Object],[object Object]...&lt;/code&gt;需要翻译啊，很明显取到&lt;code&gt;meta&lt;/code&gt;这一层是没错的：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="postman-start-04.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-04.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Postman-start-04.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-04.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;这时候需要一个将json转换成字符串的工具，方便我分析，然后就找到了&lt;code&gt;JSON.stringify()&lt;/code&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;pm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;globals&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;getstring&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;stringify&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;jsonObject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;head&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;meta&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="postman-start-05.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-05.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Postman-start-05.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-05.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;将json复制出来美化一下：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="postman-start-06.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-06.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Postman-start-06.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-06.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;原来&lt;code&gt;meta&lt;/code&gt;下一层是个&lt;code&gt;$&lt;/code&gt;。事后才醒悟过来，&lt;code&gt;name&lt;/code&gt;和&lt;code&gt;content&lt;/code&gt;并不是&lt;code&gt;meta&lt;/code&gt;的下层，而是&lt;code&gt;meta&lt;/code&gt;的属性，&lt;code&gt;xml2Json()&lt;/code&gt;方法将属性转换成&lt;code&gt;$&lt;/code&gt;标记的下层。&lt;/p&gt;
 &lt;p&gt;修改之后再次测试：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;pm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;globals&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;jsonObject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;head&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;meta&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;content&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="postman-start-07.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-07.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Postman-start-07.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-07.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;完美解决。&lt;/p&gt;
 &lt;h3&gt;总结&lt;/h3&gt;
-&lt;p&gt;postman从响应中提取值的方法：&lt;/p&gt;
+&lt;p&gt;Postman从响应中提取值的方法：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;从json中提取&lt;/p&gt;
@@ -100,7 +100,7 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;从html的Header中提取&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;postman&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getResponseHeader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Postman&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getResponseHeader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="nx"&gt;pm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;environment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -117,5 +117,5 @@
 &lt;p&gt;将json object转换成字符串的函数&lt;code&gt;JSON.stringify(jsonObject)&lt;/code&gt;。&lt;/p&gt;
 &lt;h3&gt;参考文章&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="http://www.cnblogs.com/JHblogs/p/6418802.html"&gt;postman接口自动化，环境变量的用法详解（附postman常用的方法）&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="postman"></category><category term="interface"></category><category term="test"></category></entry></feed>
+&lt;li&gt;&lt;a href="http://www.cnblogs.com/JHblogs/p/6418802.html"&gt;Postman接口自动化，环境变量的用法详解（附Postman常用的方法）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Postman"></category><category term="Interface"></category><category term="Test"></category></entry></feed>

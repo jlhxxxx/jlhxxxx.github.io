@@ -5,30 +5,37 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jlhxxxx.github.io/</loc>
-<lastmod>2018-04-26T21:01:22-00:00</lastmod>
+<lastmod>2018-04-26T22:44:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jlhxxxx.github.io/archives.html</loc>
-<lastmod>2018-04-26T21:01:22-00:00</lastmod>
+<lastmod>2018-04-26T22:44:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jlhxxxx.github.io/tags.html</loc>
-<lastmod>2018-04-26T21:01:22-00:00</lastmod>
+<lastmod>2018-04-26T22:44:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jlhxxxx.github.io/categories.html</loc>
-<lastmod>2018-04-26T21:01:22-00:00</lastmod>
+<lastmod>2018-04-26T22:44:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/oracle-loop.html</loc>
+<lastmod>2018-04-26T00:00:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
 </url>
 
 <url>
@@ -46,7 +53,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jlhxxxx.github.io/oracle-get-systime.html</loc>
+<loc>https://jlhxxxx.github.io/oracle-get-sysdate.html</loc>
 <lastmod>2018-04-23T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
@@ -60,7 +67,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jlhxxxx.github.io/postman-start.html</loc>
+<loc>https://jlhxxxx.github.io/Postman-start.html</loc>
 <lastmod>2018-04-13T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
@@ -74,15 +81,15 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jlhxxxx.github.io/category/programming.html</loc>
-<lastmod>2018-04-26T00:00:00+08:06</lastmod>
+<loc>https://jlhxxxx.github.io/category/software.html</loc>
+<lastmod>2018-04-25T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jlhxxxx.github.io/category/software.html</loc>
-<lastmod>2018-04-25T00:00:00+08:06</lastmod>
+<loc>https://jlhxxxx.github.io/category/sql.html</loc>
+<lastmod>2018-04-26T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -96,6 +103,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jlhxxxx.github.io/tag/oracle.html</loc>
+<lastmod>2018-04-26T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/tag/loop.html</loc>
 <lastmod>2018-04-26T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
@@ -118,13 +132,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jlhxxxx.github.io/tag/bandwagon.html</loc>
 <lastmod>2018-04-25T00:00:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://jlhxxxx.github.io/tag/programming.html</loc>
-<lastmod>2018-04-23T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -167,6 +174,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jlhxxxx.github.io/tag/test.html</loc>
 <lastmod>2018-04-13T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/tag/case.html</loc>
+<lastmod>2018-04-02T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/tag/decode.html</loc>
+<lastmod>2018-04-02T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

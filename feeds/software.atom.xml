@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - software</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/software.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-04-25T00:00:00+08:00</updated><entry><title>搬瓦工SS教程</title><link href="https://jlhxxxx.github.io/banwagong-ss.html" rel="alternate"></link><published>2018-04-25T00:00:00+08:00</published><updated>2018-04-25T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-25:/banwagong-ss.html</id><summary type="html">&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，现在我更注重效率，尽量在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，加上优惠码，折合人民币每个月10块钱，十块钱，买不了吃亏买不了上当，还因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Software</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/software.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-04-25T00:00:00+08:00</updated><entry><title>搬瓦工SS教程</title><link href="https://jlhxxxx.github.io/banwagong-ss.html" rel="alternate"></link><published>2018-04-25T00:00:00+08:00</published><updated>2018-04-25T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-25:/banwagong-ss.html</id><summary type="html">&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，现在我更注重效率，尽量在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，加上优惠码，折合人民币每个月10块钱，十块钱，买不了吃亏买不了上当，还因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
 &lt;h2&gt;一、套餐选购&lt;/h2&gt;
 &lt;p&gt;搬瓦工主页：&lt;a href="https://bwh1.net/"&gt;地址1&lt;/a&gt;、&lt;a href="https://bandwagonhost.com/"&gt;地址2&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -46,4 +46,272 @@
 &lt;ul&gt;
 &lt;li&gt;安装BBR&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;a href="https://www.bandwagonhost.net/268.html"&gt;搬瓦工 VPS 安装并开启 Google BBR 教程（KVM / OpenVZ）&lt;/a&gt;&lt;/p&gt;</content><category term="Shadowsocks"></category><category term="Bandwagon"></category></entry></feed>
+&lt;p&gt;&lt;a href="https://www.bandwagonhost.net/268.html"&gt;搬瓦工 VPS 安装并开启 Google BBR 教程（KVM / OpenVZ）&lt;/a&gt;&lt;/p&gt;</content><category term="Shadowsocks"></category><category term="Bandwagon"></category></entry><entry><title>windows下用Pelican+GitHub搭建静态博客</title><link href="https://jlhxxxx.github.io/pelican-github.html" rel="alternate"></link><published>2018-04-16T00:00:00+08:00</published><updated>2018-04-16T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-16:/pelican-github.html</id><summary type="html">&lt;h2&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;首先到GitHub进行账号注册：&lt;a href="https://github.com/"&gt;https://github.com/&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;创建新仓库，不用新建readme.md，注意仓库名使用&lt;em&gt;username.github.io&lt;/em&gt;的格式，这里&lt;em&gt;username&lt;/em&gt;改成自己的用户名。&lt;/li&gt;
+&lt;li&gt;创建SSH密钥并上传到GitHub。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;二、安装Python、Pelican、Markdown和make&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装Python。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装Pelican。建议在虚拟环境virtualenv下使用。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装virtualenv（可选）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install virtualenv
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为了使用virtualenv更方便，可以借助 virtualenvwrapper（可选）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install virtualenvwrapper-win
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;配置虚拟环境目录，默认创建的虚拟环境位于&lt;strong&gt;C:\Users\username\&lt;/strong&gt;下，可以通过环境变量 &lt;code&gt;WORKON_HOME&lt;/code&gt; 来定制。&lt;/p&gt;
+&lt;p&gt;通过&lt;strong&gt;计算机--&amp;gt;属性-- …&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;首先到GitHub进行账号注册：&lt;a href="https://github.com/"&gt;https://github.com/&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;创建新仓库，不用新建readme.md，注意仓库名使用&lt;em&gt;username.github.io&lt;/em&gt;的格式，这里&lt;em&gt;username&lt;/em&gt;改成自己的用户名。&lt;/li&gt;
+&lt;li&gt;创建SSH密钥并上传到GitHub。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;二、安装Python、Pelican、Markdown和make&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装Python。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装Pelican。建议在虚拟环境virtualenv下使用。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装virtualenv（可选）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install virtualenv
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为了使用virtualenv更方便，可以借助 virtualenvwrapper（可选）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install virtualenvwrapper-win
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;配置虚拟环境目录，默认创建的虚拟环境位于&lt;strong&gt;C:\Users\username\&lt;/strong&gt;下，可以通过环境变量 &lt;code&gt;WORKON_HOME&lt;/code&gt; 来定制。&lt;/p&gt;
+&lt;p&gt;通过&lt;strong&gt;计算机--&amp;gt;属性--&amp;gt;高级系统设置--&amp;gt;环境变量--&amp;gt;系统变量&lt;/strong&gt;中新建“&lt;strong&gt;变量名&lt;/strong&gt;”：&lt;code&gt;WORKON_HOME&lt;/code&gt;，&lt;strong&gt;变量值&lt;/strong&gt;：&lt;code&gt;你自定义的路径&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建并激活虚拟环境（可选）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkvirtualenv pelican
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;常用命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 激活虚拟环境
+workon {虚拟环境目录}
+# 停止虚拟环境
+deactivate
+# 进入虚拟环境目录
+cdvirtualenv
+# 列出所有虚拟环境
+lsvirtualenv
+# 检查虚拟环境是否激活（其他方法也可）
+pip list
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装pelican&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install pelican
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装markdown&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install markdown
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装make并设置好环境变量&lt;a href="http://gnuwin32.sourceforge.net/packages/make.htm"&gt;下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;三、创建博客骨架&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;搭建博客目录（若使用虚拟环境必须在激活虚拟环境前提下执行下列命令，blog文件夹不需要在虚拟环境文件夹下）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="n"&gt;blog&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;blog&lt;/span&gt;
+&lt;span class="n"&gt;pelican-quickstart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;quickstart并非必须，如果想要使用非默认主题，可以下载对应主题的demo，解压至博客目录，然后按照下面的步骤修改相应的Makefile和pelicanconf.py即可，主题和插件下载建议使用&lt;code&gt;git clone&lt;/code&gt;命令，方便以后更新。
+2. 根据提示一步步输入相应的配置项，不知道如何设置的接受默认即可，后续可以通过编辑pelicanconf.py文件更改配置。完成后将会在根目录生成以下文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+&lt;span class="o"&gt;|--&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;                &lt;span class="c1"&gt;# 所有文章放于此目录&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pages&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;            &lt;span class="c1"&gt;# 存放手工创建的静态页面&lt;/span&gt;
+&lt;span class="o"&gt;|--&lt;/span&gt; &lt;span class="n"&gt;develop_server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;      &lt;span class="c1"&gt;# 用于开启测试服务器&lt;/span&gt;
+&lt;span class="o"&gt;|--&lt;/span&gt; &lt;span class="n"&gt;Makefile&lt;/span&gt;               &lt;span class="c1"&gt;# 方便管理博客的Makefile&lt;/span&gt;
+&lt;span class="o"&gt;|--&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;                 &lt;span class="c1"&gt;# 静态生成文件&lt;/span&gt;
+&lt;span class="o"&gt;|--&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;                &lt;span class="c1"&gt;# 插件（自己另外下载）&lt;/span&gt;
+&lt;span class="o"&gt;|--&lt;/span&gt; &lt;span class="n"&gt;themes&lt;/span&gt;                 &lt;span class="c1"&gt;# 主题（自己另外下载）&lt;/span&gt;
+&lt;span class="o"&gt;|--&lt;/span&gt; &lt;span class="n"&gt;pelicanconf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;         &lt;span class="c1"&gt;# 配置文件&lt;/span&gt;
+&lt;span class="o"&gt;|--&lt;/span&gt; &lt;span class="n"&gt;publishconf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;         &lt;span class="c1"&gt;# 配置文件&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;进入output文件夹，把自己刚刚建好的username.github.io版本库clone下来，注意使用SSH方式，这里以及后文中的username要替换成自己的GitHub用户名&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="nv"&gt;@github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置一键上传部署到GitHub。打开根目录下的Makefile文件，修改以下三个地方，设置完后，以后写完文章就可以通过在blog根目录下执行&lt;code&gt;make github&lt;/code&gt;进行&lt;strong&gt;一键部署&lt;/strong&gt;了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;OUTPUTDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;BASEDIR&lt;span class="k"&gt;)&lt;/span&gt;/output/username.github.io    
+&lt;span class="nf"&gt;publish&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;    
+    &lt;span class="k"&gt;$(&lt;/span&gt;PELICAN&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;INPUTDIR&lt;span class="k"&gt;)&lt;/span&gt; -o &lt;span class="k"&gt;$(&lt;/span&gt;OUTPUTDIR&lt;span class="k"&gt;)&lt;/span&gt; -s &lt;span class="k"&gt;$(&lt;/span&gt;CONFFILE&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;PELICANOPTS&lt;span class="k"&gt;)&lt;/span&gt;    
+&lt;span class="nf"&gt;github&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;publish&lt;/span&gt;    
+    &lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;OUTPUTDIR&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; git add . &lt;span class="p"&gt;;&lt;/span&gt; git commit -am &lt;span class="s1"&gt;&amp;#39;your comments&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; git push
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;四、通过Markdown试写博文并上传GitHub发布&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;创建一个页面：这里以创建 About页面为例。在content目录创建pages子目录：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pages&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后创建About.md并填入下面内容（一定要有title）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;About&lt;/span&gt; &lt;span class="n"&gt;Me&lt;/span&gt;        
+&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2013&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;04&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;18&lt;/span&gt;
+
+&lt;span class="n"&gt;About&lt;/span&gt; &lt;span class="n"&gt;me&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;相关介绍请参见&lt;a href="http://pelican-zh.readthedocs.org/en/latest/zh-cn/"&gt;官方文档&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建导航目录项：Menu Item设置。在你的博客中，可设置相应的菜单项，菜单项是通过pelicanconf.py设置的，具体如下所示：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;MENUITEMS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;((&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ITEM1&amp;quot;&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;http://github.com&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;,
+             &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ITEM2&amp;quot;&lt;/span&gt;,URL&lt;span class="o"&gt;)&lt;/span&gt;,
+            ......&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在Makefile目录下执行以下命令，即可在本机http://127.0.0.1:8000看到效果。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;make&lt;/span&gt; &lt;span class="err"&gt;publish&lt;/span&gt;
+&lt;span class="err"&gt;make&lt;/span&gt; &lt;span class="err"&gt;serve&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;五、安装主题&lt;/h2&gt;
+&lt;p&gt;主题下载好后，对应在在pelicanconf.py中添加主题选择条目，&lt;a href="https://github.com/getpelican/pelican-themes"&gt;主题下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;主题目录（相对或绝对路径）&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;推荐主题：&lt;a href="https://github.com/talha131/pelican-elegant/tree/44c8fbcfe631784f84c8b92b7273280b3c956182"&gt;elegant&lt;/a&gt;，&lt;a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3"&gt;pelican-bootstrap3&lt;/a&gt; ，&lt;a href="https://github.com/jsliang/pelican-fresh/tree/ce1afc067931bb571a0f5970366a2e7d733d0d6a"&gt;fresh&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;六、安装第三方评论系统&lt;/h2&gt;
+&lt;p&gt;由于Disqus需要翻墙，而国内又没有什么比较好的第三方评论系统，网上搜了一堆，最后决定用github issues来实现。本来想用&lt;a href="https://github.com/imsun/gitment"&gt;gitment&lt;/a&gt;的，但是不知道哪里配置问题，无法初始化issue，然后用的是&lt;a href="https://github.com/gitalk/gitalk"&gt;gitalk&lt;/a&gt;，界面也比gitment好看。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;gitalk&lt;/p&gt;
+&lt;p&gt;直接到theme--tempaltes下，参考gitalk配置，新建gitalk.html，这里我稍微配置了个环境变量&lt;code&gt;GITALK_OWNER&lt;/code&gt;。而且我的&lt;code&gt;repo&lt;/code&gt;没有选择博客文件所在仓库，而是另外建了一个仓库，注意&lt;code&gt;createIssueManually&lt;/code&gt;最好设置为&lt;code&gt;true&lt;/code&gt;，这样文章发表之后在评论处点击初始化就可以自动生成一个issue，当然每篇文章都要点一下。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% if GITALK_OWNER %}
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;gitalk-container&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;gitalk_owner&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{{ GITALK_OWNER }}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;gitalk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Gitalk&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+      &lt;span class="nx"&gt;clientID&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;a61......&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nx"&gt;clientSecret&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;38c......&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nx"&gt;repo&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;comments&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nx"&gt;owner&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;gitalk_owner&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nx"&gt;admin&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;gitalk_owner&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+      &lt;span class="nx"&gt;distractionFreeMode&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="c1"&gt;// Facebook-like distraction free mode&lt;/span&gt;
+      &lt;span class="nx"&gt;createIssueManually&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+    &lt;span class="p"&gt;})&lt;/span&gt;
+
+    &lt;span class="nx"&gt;gitalk&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;gitalk-container&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+{% endif %}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后打开article.html，找到&lt;code&gt;{% if DISQUS_SITENAME %}&lt;/code&gt;这行，从这之后开始修改&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% if COMMENT %}
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h2&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Comments&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h2&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    {% include &amp;#39;gitalk.html&amp;#39; %}
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+{% endif %}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;第一行这里不用disqus，所以改成&lt;code&gt;{% if COMMENT %}&lt;/code&gt;，主要就是加了这么一行&lt;code&gt;{% include 'gitalk.html' %}&lt;/code&gt;。记得在pelicanconf.py文件中要配置&lt;code&gt;COMMENT = True&lt;/code&gt;和&lt;code&gt;GITALK_OWNER&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;disqus&lt;/p&gt;
+&lt;p&gt;这个配置相对简单，从零开始也很容易。首先去&lt;a href="https://disqus.com/"&gt;disqus&lt;/a&gt;注册个账号，&lt;strong&gt;create a new site&lt;/strong&gt;，记住你填的&lt;code&gt;shortname&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pelican-github-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-01.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;然后选择新建的&lt;strong&gt;site&lt;/strong&gt;，选择&lt;strong&gt;Installing Disqus&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pelican-github-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-02.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;不知道自己平台选择最下面的&lt;strong&gt;I don't see my platform...&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pelican-github-03.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-03.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;再到下一步复制代码出来：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pelican-github-04.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-04.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;在theme--tempaltes下，新建disqus.html，把刚才代码粘贴进去去掉注释，增加头部&lt;code&gt;{% if DISQUS_SITENAME %}&lt;/code&gt;尾部&lt;code&gt;{% endif %}&lt;/code&gt;和&lt;code&gt;DISQUS_SITENAME&lt;/code&gt;变量：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% if DISQUS_SITENAME %}
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;disqus_thread&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;disqus_shortname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{{ DISQUS_SITENAME }}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="c1"&gt;// DON&amp;#39;T EDIT BELOW THIS LINE&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;createElement&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;script&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;src&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;http://&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;disqus_shortname&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.disqus.com/embed.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;;&lt;/span&gt;
+    &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setAttribute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data-timestamp&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;head&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nx"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;appendChild&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;})();&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;noscript&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://disqus.com/?ref_noscript&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;noscript&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+{% endif %}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后修改article.html，同gitalk一样，在&lt;code&gt;&amp;lt;h2&amp;gt;Comments&amp;lt;/h2&amp;gt;&lt;/code&gt;后加上一行&lt;code&gt;{% include 'disqus.html' %}&lt;/code&gt;。最后只需在pelicanconf.py文件中配置&lt;code&gt;DISQUS_SITENAME = 'shortname'&lt;/code&gt;即可启用disqus。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;七、&lt;/h2&gt;
+&lt;h3&gt;参考文章&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.cnblogs.com/suke99/p/5355894.html"&gt;windows下安装Python虚拟环境virtualenvwrapper-win&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cnblogs.com/cciejh/p/blog_building.html"&gt;Pelican＋GitHub博客搭建详细教程&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href="http://doc.okbase.net/WJ5888/archive/45851.html"&gt;pelican创建博客常见问题汇总&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="GitHub"></category><category term="Pelican"></category><category term="Blog"></category></entry></feed>
