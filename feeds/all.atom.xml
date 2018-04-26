@@ -1,5 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-04-23T00:00:00+08:00</updated><entry><title>oracle取系统时间</title><link href="https://jlhxxxx.github.io/oracle-get-systime.html" rel="alternate"></link><published>2018-04-23T00:00:00+08:00</published><updated>2018-04-23T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-23:/oracle-get-systime.html</id><summary type="html">&lt;h3&gt;取今天&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-04-26T00:00:00+08:00</updated><entry><title>oracle sequence使用</title><link href="https://jlhxxxx.github.io/oracle-sequence.html" rel="alternate"></link><published>2018-04-26T00:00:00+08:00</published><updated>2018-04-26T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-26:/oracle-sequence.html</id><summary type="html">&lt;p&gt;序列(SEQUENCE)是序列号生成器，可以为表中的行自动生成序列号，产生一组等间隔的数值(类型为数字)。序列主要用于生成主键。&lt;/p&gt;
+&lt;h2&gt;建立序列&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;SEQUENCE&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;INCREMENT&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;START&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;MAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;MINVALUE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOMAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;NOMINVALUE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CYCLE&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCYCLE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CACHE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCACHE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;INCREMENT BY&lt;/code&gt; 用于定义序列的步长，如果省略，则默认为&lt;code&gt;1&lt;/code&gt;，如果出现负值，则代表序列的值是按照此步长递减的。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;START WITH&lt;/code&gt; 定义序列的初始值(即产生的第一个值)，默认为&lt;code&gt;1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MAXVALUE&lt;/code&gt; 定义序列生成器能产生的最大值。选项&lt;code&gt;NOMAXVALUE&lt;/code&gt;是默认选项，代表没有最大值定义，这时对于递增序列，系统能够产生的最大值是10的27次方；对于递减序列 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;序列(SEQUENCE)是序列号生成器，可以为表中的行自动生成序列号，产生一组等间隔的数值(类型为数字)。序列主要用于生成主键。&lt;/p&gt;
+&lt;h2&gt;建立序列&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;SEQUENCE&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;INCREMENT&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;START&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;MAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;MINVALUE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOMAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;NOMINVALUE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CYCLE&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCYCLE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CACHE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCACHE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;INCREMENT BY&lt;/code&gt; 用于定义序列的步长，如果省略，则默认为&lt;code&gt;1&lt;/code&gt;，如果出现负值，则代表序列的值是按照此步长递减的。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;START WITH&lt;/code&gt; 定义序列的初始值(即产生的第一个值)，默认为&lt;code&gt;1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MAXVALUE&lt;/code&gt; 定义序列生成器能产生的最大值。选项&lt;code&gt;NOMAXVALUE&lt;/code&gt;是默认选项，代表没有最大值定义，这时对于递增序列，系统能够产生的最大值是10的27次方；对于递减序列，最大值是&lt;code&gt;-1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MINVALUE&lt;/code&gt;定义序列生成器能产生的最小值。选项&lt;code&gt;NOMINVALUE&lt;/code&gt;是默认选项，代表没有最小值定义，这时对于递减序列，系统能够产生的最小值是？10的26次方；对于递增序列，最小值是&lt;code&gt;1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CYCLE&lt;/code&gt;和&lt;code&gt;NOCYCLE&lt;/code&gt;表示当序列生成器的值达到限制值后是否循环。&lt;code&gt;CYCLE&lt;/code&gt;代表循环，&lt;code&gt;NOCYCLE&lt;/code&gt;代表不循环。如果循环，则当递增序列达到最大值时，循环到最小值；对于递减序列达到最小值时，循环到最大值。如果不循环，达到限制值后，继续产生新值就会发生错误。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CACHE&lt;/code&gt;(缓冲)定义存放序列的内存块的大小，默认为20。&lt;code&gt;NOCACHE&lt;/code&gt;表示不对序列进行内存缓冲。&lt;strong&gt;对序列进行内存缓冲，可以改善序列的性能。&lt;/strong&gt; 缓存选项会造成数据丢失，当实例异常关闭时。（暂时用不到）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;使用序列&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;取序列的下一值（首次取初值）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nextval&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取序列当前值&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;currval&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看所有序列&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;user_sequences&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;更新序列&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;ALTER&lt;/span&gt; &lt;span class="n"&gt;SEQUENCE&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;INCREMENT&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;MAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;MINVALUE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOMAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;NOMINVALUE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CYCLE&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCYCLE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CACHE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCACHE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;注意：&lt;code&gt;ALTER&lt;/code&gt;不能修改&lt;code&gt;START WITH&lt;/code&gt;，如果要修改，只能删除后重建。&lt;/p&gt;
+&lt;h2&gt;删除序列&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;DROP&lt;/span&gt; &lt;span class="n"&gt;SEQUENCE&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;举例&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;create&lt;/span&gt; &lt;span class="n"&gt;sequence&lt;/span&gt; &lt;span class="n"&gt;seq_cci554&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;increment&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;maxvalue&lt;/span&gt; &lt;span class="mi"&gt;9999&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;declare&lt;/span&gt;
+  &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;begin&lt;/span&gt;
+  &lt;span class="n"&gt;loop&lt;/span&gt;
+    &lt;span class="k"&gt;insert&lt;/span&gt; &lt;span class="k"&gt;into&lt;/span&gt; &lt;span class="n"&gt;ci54&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cci554&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;aac001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;aab001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ccd001&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+     &lt;span class="s1"&gt;&amp;#39;80&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;030005&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;lpad&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;to_char&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seq_cci554&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nextval&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;622925199012056023&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;0205000027&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;170010602898&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;exit&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;=&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;其中&lt;code&gt;||&lt;/code&gt;用于字符串拼接，&lt;code&gt;lpad()&lt;/code&gt;用于固定位数字符串补齐。&lt;/p&gt;
+&lt;p&gt;需要注意的是，首句&lt;code&gt;create sequence&lt;/code&gt;只能执行一次，序列创建后除非&lt;code&gt;drop&lt;/code&gt;，否则不会自动消失。我在使用&lt;code&gt;JDBC&lt;/code&gt;连接的时候就犯了这个错误。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;小技巧：重置序列&lt;/h2&gt;
+&lt;p&gt;重置序列的方法一般有两个。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;第一种方法是&lt;code&gt;DROP&lt;/code&gt;之后重新&lt;code&gt;CREATE&lt;/code&gt;，这种方式有很多弊端，&lt;code&gt;DROP&lt;/code&gt;之后&lt;code&gt;CREATE&lt;/code&gt;之前依赖它的函数和存储过程将失效，需要重新编译。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第二种方法比较巧妙，利用递增参数：先查出&lt;code&gt;sequence&lt;/code&gt;的&lt;code&gt;currval&lt;/code&gt;，记为&lt;code&gt;value&lt;/code&gt;，然后将递增参数改为&lt;code&gt;-value&lt;/code&gt;，取它的&lt;code&gt;nextval&lt;/code&gt;，再将递增参数改回来。奉上大佬写的存储过程。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;create&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="k"&gt;replace&lt;/span&gt; &lt;span class="k"&gt;procedure&lt;/span&gt; &lt;span class="n"&gt;seq_reset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sequence_name&lt;/span&gt; &lt;span class="n"&gt;varchar2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;tsql&lt;/span&gt; &lt;span class="n"&gt;varchar2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+ &lt;span class="k"&gt;begin&lt;/span&gt;
+ &lt;span class="k"&gt;execute&lt;/span&gt; &lt;span class="k"&gt;immediate&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;select &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.nextval from dual&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;into&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="n"&gt;tsql&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;alter sequence &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; increment by &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;execute&lt;/span&gt; &lt;span class="k"&gt;immediate&lt;/span&gt; &lt;span class="n"&gt;tsql&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;execute&lt;/span&gt; &lt;span class="k"&gt;immediate&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;select &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.nextval from dual&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;into&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;tsql&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;alter sequence &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; increment by 1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;execute&lt;/span&gt; &lt;span class="k"&gt;immediate&lt;/span&gt; &lt;span class="n"&gt;tsql&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="n"&gt;seq_reset&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;参考文章&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://lehsyh.iteye.com/blog/473210"&gt;ORACLE序列的使用(oracle sequence)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.cnblogs.com/huangzhen/archive/2011/09/19/2181257.html"&gt;Oracle重置序列(不删除重建方式)&lt;/a&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="oracle"></category><category term="sequence"></category></entry><entry><title>搬瓦工SS教程</title><link href="https://jlhxxxx.github.io/banwagong-ss.html" rel="alternate"></link><published>2018-04-25T00:00:00+08:00</published><updated>2018-04-25T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-25:/banwagong-ss.html</id><summary type="html">&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，我现在更注重效率，在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，折合人名币每个月￥10，因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
+&lt;h2&gt;一、套餐选购&lt;/h2&gt;
+&lt;p&gt;搬瓦工主页：&lt;a href="https://bwh1.net/"&gt;地址1&lt;/a&gt;、&lt;a href="https://bandwagonhost.com/"&gt;地址2&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://zhuanlan.zhihu.com/p/32811900"&gt;搬瓦工2018年新手选购指南&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.bandwagonhost.net/"&gt;搬瓦工中文网&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://banwagong.cn/"&gt;搬瓦工VPS中文网&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意如果是未注册用户，不要先注册再购买，因为新注册的时候需要输入验证码，而验证码是需要翻墙才能看到的，直接购买就能顺便注册。除了邮箱和密码，其他信息随便填就好了。&lt;/p&gt;
+&lt;p&gt;购买之后邮箱里会收到几封邮件，告诉你IP address，SSH Port，和初始密码，不过都不需要记，IP和Port进入服务器控制面板就能看到，密码可以随时重新生成。&lt;/p&gt;
+&lt;h2&gt;二、安装Shadowsocks&lt;/h2&gt;
+&lt;p&gt;参考教程：&lt;a href="https://www.cnlinode.com/ban_wa_gong_qu_xiao_le_yi_jian_an_zhuang_shadowsocks_zui_xin_ban_wa_gong_ss_jiao_cheng/"&gt;搬瓦工取消了一键安装Shadowsocks，最新搬瓦工SS教程&lt;/a&gt;第二步方法二。&lt;/p&gt;
+&lt;p&gt;登录网站后，地址栏输入 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，我现在更注重效率，在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，折合人名币每个月￥10，因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
+&lt;h2&gt;一、套餐选购&lt;/h2&gt;
+&lt;p&gt;搬瓦工主页：&lt;a href="https://bwh1.net/"&gt;地址1&lt;/a&gt;、&lt;a href="https://bandwagonhost.com/"&gt;地址2&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://zhuanlan.zhihu.com/p/32811900"&gt;搬瓦工2018年新手选购指南&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.bandwagonhost.net/"&gt;搬瓦工中文网&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://banwagong.cn/"&gt;搬瓦工VPS中文网&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意如果是未注册用户，不要先注册再购买，因为新注册的时候需要输入验证码，而验证码是需要翻墙才能看到的，直接购买就能顺便注册。除了邮箱和密码，其他信息随便填就好了。&lt;/p&gt;
+&lt;p&gt;购买之后邮箱里会收到几封邮件，告诉你IP address，SSH Port，和初始密码，不过都不需要记，IP和Port进入服务器控制面板就能看到，密码可以随时重新生成。&lt;/p&gt;
+&lt;h2&gt;二、安装Shadowsocks&lt;/h2&gt;
+&lt;p&gt;参考教程：&lt;a href="https://www.cnlinode.com/ban_wa_gong_qu_xiao_le_yi_jian_an_zhuang_shadowsocks_zui_xin_ban_wa_gong_ss_jiao_cheng/"&gt;搬瓦工取消了一键安装Shadowsocks，最新搬瓦工SS教程&lt;/a&gt;第二步方法二。&lt;/p&gt;
+&lt;p&gt;登录网站后，地址栏输入&lt;code&gt;https://kiwivm.64clouds.com/preloader.php?load=/main-exec.php?mode=extras_shadowsocks&lt;/code&gt;进入隐藏的Shadowsocks Server，傻瓜式一键安装，安装好之后页面会显示Shadowsocks的参数及软件下载地址。&lt;/p&gt;
+&lt;p&gt;下载对应系统的Shadowsocks，配置好相应服务器参数，启用系统代理，系统代理选择pac模式。如果想更专业一点，还可以配合SwitchyOmega使用，具体教程参考&lt;a href="https://blog.csdn.net/shouldnotappearcalm/article/details/77900399"&gt;shadowsocks配合chrome插件SwitchyOmega&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;这里要注意如果你已经安装了SwitchyOmega并且有相应配置，一定不要直接导入配置（会覆盖），手动配置也很简单，主要就是一个规则列表网址：https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt。&lt;/p&gt;
+&lt;h2&gt;三、优化&lt;/h2&gt;
+&lt;p&gt;到第二步已经可以访问外网了，如果觉得访问速度比较慢，还有一些优化办法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;切换机房（注意购买的套餐必须是可以切换机房的）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://www.bandwagonhost.net/1314.html"&gt;切换到CN2&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;安装BBR&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://www.bandwagonhost.net/268.html"&gt;搬瓦工 VPS 安装并开启 Google BBR 教程（KVM / OpenVZ）&lt;/a&gt;&lt;/p&gt;</content><category term="Shadowsocks"></category><category term="Bandwagon"></category></entry><entry><title>oracle取系统时间</title><link href="https://jlhxxxx.github.io/oracle-get-systime.html" rel="alternate"></link><published>2018-04-23T00:00:00+08:00</published><updated>2018-04-23T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-23:/oracle-get-systime.html</id><summary type="html">&lt;h3&gt;取今天&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 

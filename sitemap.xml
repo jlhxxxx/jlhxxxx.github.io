@@ -5,30 +5,44 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jlhxxxx.github.io/</loc>
-<lastmod>2018-04-25T17:01:53-00:00</lastmod>
+<lastmod>2018-04-26T17:32:23-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jlhxxxx.github.io/archives.html</loc>
-<lastmod>2018-04-25T17:01:53-00:00</lastmod>
+<lastmod>2018-04-26T17:32:23-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jlhxxxx.github.io/tags.html</loc>
-<lastmod>2018-04-25T17:01:53-00:00</lastmod>
+<lastmod>2018-04-26T17:32:23-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jlhxxxx.github.io/categories.html</loc>
-<lastmod>2018-04-25T17:01:53-00:00</lastmod>
+<lastmod>2018-04-26T17:32:23-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/oracle-sequence.html</loc>
+<lastmod>2018-04-26T00:00:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/banwagong-ss.html</loc>
+<lastmod>2018-04-25T00:00:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
 </url>
 
 <url>
@@ -61,7 +75,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jlhxxxx.github.io/category/programming.html</loc>
-<lastmod>2018-04-23T00:00:00+08:06</lastmod>
+<lastmod>2018-04-26T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/category/software.html</loc>
+<lastmod>2018-04-25T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -75,7 +96,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jlhxxxx.github.io/tag/oracle.html</loc>
-<lastmod>2018-04-23T00:00:00+08:06</lastmod>
+<lastmod>2018-04-26T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/tag/sequence.html</loc>
+<lastmod>2018-04-26T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/tag/shadowsocks.html</loc>
+<lastmod>2018-04-25T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/tag/bandwagon.html</loc>
+<lastmod>2018-04-25T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -131,7 +173,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jlhxxxx.github.io/author/aman.html</loc>
-<lastmod>2018-04-23T00:00:00+08:06</lastmod>
+<lastmod>2018-04-26T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
