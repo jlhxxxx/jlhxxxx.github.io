@@ -330,7 +330,7 @@ pip list
 </ul>
 <h2>七、添加Webmaster</h2>
 <p>为了让博客能在网上被搜索到，需要搜索引擎将网站收录，所以要添加Webmaster。这里我添加了Google和Bing收录，因为GitHub屏蔽了百度网站爬虫，所以除非你搭建在自己的服务器上，否则是没办法添加百度收录的。</p>
-<p>下面以Bing收录为例，首先打开<a href="https://www.bing.com/toolbox/webmaster/">Bing网站管理员工具</a>(https://www.bing.com/webmaster/WebmasterManageSitesPage.aspx)，用Microsoft账号登录，都是中文界面，按照说明添加网站并验证通过。</p>
+<p>下面以Bing收录为例，首先打开<a href="https://www.bing.com/toolbox/webmaster/">Bing网站管理员工具</a>，用Microsoft账号登录，都是中文界面，按照说明添加网站并验证通过。</p>
 <p>然后准备sitemap，到博客主目录下，执行：</p>
 <div class="highlight"><pre><span></span>git clone git://github.com/getpelican/pelican-plugins.git
 </pre></div>
@@ -365,7 +365,7 @@ pip list
 <li>第四步<strong>Hosted UI</strong>下选择搜索框的样式，填入第三步的key。保存之后将下面的代码复制出来，粘贴到任意你想添加搜索框的地方。因为fresh主题自带Google站内搜索，所以这里我取了个巧，直接套用Google的CSS。</li>
 </ul>
 <p>添加Google站内搜索就更简单，到<a href="https://cse.google.com/">Google站内搜索</a>网站上申请一个ID，调整好样式后将ID添加到pelicanconf.py即可：</p>
-<div class="highlight"><pre><span></span>
+<div class="highlight"><pre><span></span><span class="n">GOOGLE_CUSTOM_SEARCH_SIDEBAR</span> <span class="o">=</span> <span class="s2">&quot;your ID&quot;</span>
 </pre></div>
 
 
