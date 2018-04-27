@@ -589,7 +589,7 @@ pip list
 &lt;h2&gt;三、创建博客骨架&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;搭建博客目录（若使用虚拟环境必须在激活虚拟环境前提下执行下列命令，blog文件夹不需要在虚拟环境文件夹下）&lt;/p&gt;
+&lt;p&gt;搭建博客目录（若使用虚拟环境必须在激活虚拟环境前提下执行下列命令，blog文件夹不需要在虚拟环境文件夹下）：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="n"&gt;blog&lt;/span&gt;
 &lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;blog&lt;/span&gt;
 &lt;span class="n"&gt;pelican-quickstart&lt;/span&gt;
@@ -598,7 +598,7 @@ pip list
 
 &lt;blockquote&gt;
 &lt;p&gt;quickstart并非必须，如果想要使用非默认主题，可以下载对应主题的demo，解压至博客目录，然后按照下面的步骤修改相应的Makefile和pelicanconf.py即可，主题和插件下载建议使用&lt;code&gt;git clone&lt;/code&gt;命令，方便以后更新。
-2. 根据提示一步步输入相应的配置项，不知道如何设置的接受默认即可，后续可以通过编辑pelicanconf.py文件更改配置。完成后将会在根目录生成以下文件&lt;/p&gt;
+2. 根据提示一步步输入相应的配置项，不知道如何设置的接受默认即可，后续可以通过编辑pelicanconf.py文件更改配置。完成后将会在根目录生成以下文件：&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
 &lt;span class="o"&gt;|--&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;                &lt;span class="c1"&gt;# 所有文章放于此目录&lt;/span&gt;
@@ -615,7 +615,7 @@ pip list
 
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;进入output文件夹，把自己刚刚建好的username.github.io版本库clone下来，注意使用SSH方式，这里以及后文中的username要替换成自己的GitHub用户名&lt;/p&gt;
+&lt;p&gt;进入output文件夹，把自己刚刚建好的username.github.io版本库clone下来，注意使用SSH方式，这里以及后文中的username要替换成自己的GitHub用户名：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;
 &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="nv"&gt;@github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -650,7 +650,7 @@ pip list
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;相关介绍请参见&lt;a href="http://pelican-zh.readthedocs.org/en/latest/zh-cn/"&gt;官方文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;相关介绍请参见&lt;a href="http://pelican-zh.readthedocs.org/en/latest/zh-cn/"&gt;官方文档。&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;创建导航目录项：Menu Item设置。在你的博客中，可设置相应的菜单项，菜单项是通过pelicanconf.py设置的，具体如下所示：&lt;/p&gt;
@@ -671,13 +671,13 @@ pip list
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;五、安装主题&lt;/h2&gt;
-&lt;p&gt;主题下载好后，对应在在pelicanconf.py中添加主题选择条目，&lt;a href="https://github.com/getpelican/pelican-themes"&gt;主题下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;主题下载好后，对应在在pelicanconf.py中添加主题选择条目，&lt;a href="https://github.com/getpelican/pelican-themes"&gt;主题下载地址&lt;/a&gt;，这里我选用的是&lt;a href="https://github.com/jsliang/pelican-fresh/tree/ce1afc067931bb571a0f5970366a2e7d733d0d6a"&gt;fresh&lt;/a&gt;主题。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;主题目录（相对或绝对路径）&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;推荐主题：&lt;a href="https://github.com/talha131/pelican-elegant/tree/44c8fbcfe631784f84c8b92b7273280b3c956182"&gt;elegant&lt;/a&gt;，&lt;a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3"&gt;pelican-bootstrap3&lt;/a&gt; ，&lt;a href="https://github.com/jsliang/pelican-fresh/tree/ce1afc067931bb571a0f5970366a2e7d733d0d6a"&gt;fresh&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;六、安装第三方评论系统&lt;/h2&gt;
+&lt;h2&gt;六、添加第三方评论系统&lt;/h2&gt;
 &lt;p&gt;由于Disqus需要翻墙，而国内又没有什么比较好的第三方评论系统，网上搜了一堆，最后决定用github issues来实现。本来想用&lt;a href="https://github.com/imsun/gitment"&gt;gitment&lt;/a&gt;的，但是不知道哪里配置问题，无法初始化issue，然后用的是&lt;a href="https://github.com/gitalk/gitalk"&gt;gitalk&lt;/a&gt;，界面也比gitment好看。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -706,7 +706,7 @@ pip list
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;然后打开article.html，找到&lt;code&gt;{% if DISQUS_SITENAME %}&lt;/code&gt;这行，从这之后开始修改&lt;/p&gt;
+&lt;p&gt;然后打开article.html，找到&lt;code&gt;{% if DISQUS_SITENAME %}&lt;/code&gt;这行，从这之后开始修改：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% if COMMENT %}
 &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
   &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h2&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Comments&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h2&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -720,15 +720,7 @@ pip list
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;disqus&lt;/p&gt;
-&lt;p&gt;这个配置相对简单，从零开始也很容易。首先去&lt;a href="https://disqus.com/"&gt;disqus&lt;/a&gt;注册个账号，&lt;strong&gt;create a new site&lt;/strong&gt;，记住你填的&lt;code&gt;shortname&lt;/code&gt;：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="pelican-github-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-01.png?raw=true"&gt;&lt;/p&gt;
-&lt;p&gt;然后选择新建的&lt;strong&gt;site&lt;/strong&gt;，选择&lt;strong&gt;Installing Disqus&lt;/strong&gt;：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="pelican-github-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-02.png?raw=true"&gt;&lt;/p&gt;
-&lt;p&gt;不知道自己平台选择最下面的&lt;strong&gt;I don't see my platform...&lt;/strong&gt;：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="pelican-github-03.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-03.png?raw=true"&gt;&lt;/p&gt;
-&lt;p&gt;再到下一步复制代码出来：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="pelican-github-04.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pelican-github-04.png?raw=true"&gt;&lt;/p&gt;
-&lt;p&gt;在theme--tempaltes下，新建disqus.html，把刚才代码粘贴进去去掉注释，增加头部&lt;code&gt;{% if DISQUS_SITENAME %}&lt;/code&gt;尾部&lt;code&gt;{% endif %}&lt;/code&gt;和&lt;code&gt;DISQUS_SITENAME&lt;/code&gt;变量：&lt;/p&gt;
+&lt;p&gt;这个配置相对简单。首先到&lt;a href="https://disqus.com/"&gt;disqus&lt;/a&gt;注册账号；&lt;strong&gt;create a new site&lt;/strong&gt;，记住你填的&lt;code&gt;shortname&lt;/code&gt;；然后选择新建的&lt;strong&gt;site&lt;/strong&gt;，&lt;strong&gt;Installing Disqus&lt;/strong&gt;，下一步下一步把代码复制出来；然后在theme--tempaltes下，新建disqus.html，把刚才代码粘贴进去去掉注释，增加头部&lt;code&gt;{% if DISQUS_SITENAME %}&lt;/code&gt;尾部&lt;code&gt;{% endif %}&lt;/code&gt;和&lt;code&gt;DISQUS_SITENAME&lt;/code&gt;变量，最后就变成这样：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% if DISQUS_SITENAME %}
 &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;disqus_thread&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -749,7 +741,56 @@ pip list
 &lt;p&gt;然后修改article.html，同gitalk一样，在&lt;code&gt;&amp;lt;h2&amp;gt;Comments&amp;lt;/h2&amp;gt;&lt;/code&gt;后加上一行&lt;code&gt;{% include 'disqus.html' %}&lt;/code&gt;。最后只需在pelicanconf.py文件中配置&lt;code&gt;DISQUS_SITENAME = 'shortname'&lt;/code&gt;即可启用disqus。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;七、&lt;/h2&gt;
+&lt;h2&gt;七、添加Webmaster&lt;/h2&gt;
+&lt;p&gt;为了让博客能在网上被搜索到，需要搜索引擎将网站收录，所以要添加Webmaster。这里我添加了Google和Bing收录，因为GitHub屏蔽了百度网站爬虫，所以除非你搭建在自己的服务器上，否则是没办法添加百度收录的。&lt;/p&gt;
+&lt;p&gt;下面以Bing收录为例，首先打开&lt;a href="https://www.bing.com/toolbox/webmaster/"&gt;Bing网站管理员工具&lt;/a&gt;(https://www.bing.com/webmaster/WebmasterManageSitesPage.aspx)，用Microsoft账号登录，都是中文界面，按照说明添加网站并验证通过。&lt;/p&gt;
+&lt;p&gt;然后准备sitemap，到博客主目录下，执行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone git://github.com/getpelican/pelican-plugins.git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在pelicanconf.py里配置如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;PLUGIN_PATHS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;pelican-plugins&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,]&lt;/span&gt;
+&lt;span class="n"&gt;PLUGINS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sitemap&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;SITEMAP&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;format&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;xml&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;priorities&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;articles&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;indexes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;pages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;changefreqs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;articles&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;monthly&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;indexes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;daily&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;pages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;monthly&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后&lt;code&gt;make html&lt;/code&gt;在output目录下可以看到已经生成了网站的sitemap；&lt;code&gt;make github&lt;/code&gt;后，提交网站sitemap地址到到Bing Webmaster：&lt;code&gt;https://username.github.io/sitemap.xml&lt;/code&gt;。&lt;/p&gt;
+&lt;h2&gt;八、添加站内搜索&lt;/h2&gt;
+&lt;p&gt;这一步必须建立在第七步前提下，否则是搜不到东西的。以添加Bing站内搜索为例：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;打开&lt;a href="https://www.customsearch.ai/"&gt;Bing Custom Search&lt;/a&gt;，选择&lt;strong&gt;New Instance；&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;然后在&lt;strong&gt;Definition Editor&lt;/strong&gt;下添加自己的网站，添加好后，可以在右侧尝试搜索一下（前提是第七步，不知道为什么我在Bing上已经能搜索到自己的网站了，然而站内搜索始终搜不到内容，换成Google就没有问题，但是Google要fq，流程上都差不多，所以这里以Bing为例）；&lt;/li&gt;
+&lt;li&gt;第三步&lt;strong&gt;API EndPoint&lt;/strong&gt;，&lt;strong&gt;Query&lt;/strong&gt;为自定义API名称可以任意，&lt;strong&gt;Subscription Key&lt;/strong&gt;可以选择申请一个免费的&lt;strong&gt;Issue free trial key&lt;/strong&gt;，注意要申请Custom Search API，填完之后记得&lt;strong&gt;Call&lt;/strong&gt;一下，看看返回值是否正确，有问题检查你的key；&lt;/li&gt;
+&lt;li&gt;第四步&lt;strong&gt;Hosted UI&lt;/strong&gt;下选择搜索框的样式，填入第三步的key。保存之后将下面的代码复制出来，粘贴到任意你想添加搜索框的地方。因为fresh主题自带Google站内搜索，所以这里我取了个巧，直接套用Google的CSS。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;添加Google站内搜索就更简单，到&lt;a href="https://cse.google.com/"&gt;Google站内搜索&lt;/a&gt;网站上申请一个ID，调整好样式后将ID添加到pelicanconf.py即可：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;九、添加分享按钮&lt;/h2&gt;
+&lt;p&gt;fresh主题自带&lt;a href="http://www.sharethis.com/"&gt;ShareThis&lt;/a&gt;分享功能，申请账号并将ShareThis Pub Key添加到pelicanconf.py中就可以使用，具体参考&lt;a href="https://github.com/jsliang/pelican-fresh/tree/ce1afc067931bb571a0f5970366a2e7d733d0d6a"&gt;官方文档&lt;/a&gt;。添加第三方的跟添加其他插件类似。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;SHARETHIS_PUB_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;your ShareThis Pub Key&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;添加了分享按钮之后，网站加载速度变得很慢，所以最后我把这个功能关掉了，本来也用不上。对我来说，必要的功能有，其他越简单越好。&lt;/p&gt;
+&lt;h2&gt;十、最重要的事&lt;/h2&gt;
+&lt;p&gt;为了看起来完美，所以加了第十条。不过这确实也是最重要的，我觉得应该关心博客的内容而不是样式。&lt;/p&gt;
 &lt;h3&gt;参考文章&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://www.cnblogs.com/suke99/p/5355894.html"&gt;windows下安装Python虚拟环境virtualenvwrapper-win&lt;/a&gt;&lt;/li&gt;
