@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Thu, 26 Apr 2018 00:00:00 +0800</lastBuildDate><item><title>Oracle LOOP循环</title><link>https://jlhxxxx.github.io/oracle-loop.html</link><description>&lt;p&gt;本文基本全文转载，原文链接：&lt;a href="http://www.cnblogs.com/Richardzhu/p/3455806.html"&gt;Oracle PL/SQL之LOOP循环控制语句&lt;/a&gt;。作者写的看着很舒服，所以收藏起来自己用。主要是一些语法格式，适合新手对照练习。&lt;/p&gt;
+<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Wed, 02 May 2018 00:00:00 +0800</lastBuildDate><item><title>win10下安装CentOS双系统</title><link>https://jlhxxxx.github.io/win10-install-centos.html</link><description>&lt;p&gt;用惯了Windows，但是要学Linux，所以决定装个双系统。一开始装的是Ubuntu，傻瓜式安装，界面也漂亮，但是装软件时出现了依赖性问题，网上搜的方法大部分就一个&lt;code&gt;sudo apt-get -f install&lt;/code&gt;解决，但是我输完命令又出现校验和不符无法安装的问题，没有找到很好的解决办法（虽然我觉得可能是服务器的问题，当然我也没有很用力去找，只尝试了一晚上就放弃了）。一怒之下决定换个系统，Liunx系统那么多，总有一个适合自己的。&lt;/p&gt;
+&lt;p&gt;百度了下，Linux系统大致分两类：一类是RedHat系列，包括RedHat、CentOS、Fedora等，包管理工具yum；另一类是Debian系列，包括Debian、Ubuntu等，包管理工具apt-get 。由于公司服务器用的是RedHat的，所以不想浪费时间，我决定找个RedHat系列的，其中CentOS稳定性最好，是大部分服务器的配置，那就尝试下吧。下面进入正题：&lt;/p&gt;
+&lt;h2&gt;第一步：下载镜像文件&lt;/h2&gt;
+&lt;p&gt;CentOS官方下载地址：https://www.centos.org/download/&lt;/p&gt;
+&lt;p&gt;CentOS官网上，提供了三种ISO镜像文件的下载：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DVD …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Wed, 02 May 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-05-02:/win10-install-centos.html</guid><category>Linux</category><category>CentOS</category></item><item><title>Oracle LOOP循环</title><link>https://jlhxxxx.github.io/oracle-loop.html</link><description>&lt;p&gt;本文基本全文转载，原文链接：&lt;a href="http://www.cnblogs.com/Richardzhu/p/3455806.html"&gt;Oracle PL/SQL之LOOP循环控制语句&lt;/a&gt;。作者写的看着很舒服，所以收藏起来自己用。主要是一些语法格式，适合新手对照练习。&lt;/p&gt;
 &lt;h2&gt;一、基本的LOOP语句&lt;/h2&gt;
 &lt;p&gt;LOOP语句的基本语法结构如下：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
