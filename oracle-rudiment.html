@@ -126,25 +126,25 @@
 <p><strong>Linux下卸载</strong>：todo</p>
 <h2>常用目录结构</h2>
 <p>了解Oracle常用目录结构，将大大提高数据库管理与维护的工作效率 。这里以oracle 11g为例。</p>
-<div class="highlight"><pre><span></span>.                                       # 主目录
-|─ cfgtoollogs                          # 存放当运行dbca，dbua，emca，netca等图形化配置程序时的log
-|─ flash_recovery_area                  # 存储并管理与备份和恢复有关的文件
-|─ oradata                              # 数据库文件缺省存储目录
-│   │─ dbf文件                          # 对应数据库中每个表空间
-│   │─ ctl文件                          # 控制文件
-│   └─ log文件                          # 对应重做日志文件组及其成员
-└─ product                              # 客户端主目录
-    └─ 11.2.0\dbhome_1
-              │─ bin                    # 主要包含用于数据库管理的各种命令
-              │─ css                    # 与Oracle Cluster Synchronization服务有关的文件
-              │─ database
-              │   └─ SPFILEORCL.ORA     # 服务器参数文件
-              │─ dbs                    # 存放数据库服务器端的参数文件Spfile
-              │─ demo                   # 存放数据库实例模式的脚本等
-              │─ install                # 用于存储ORACLE安装后的端口号,iSQL*Plus以及Enterprise Manager Database Control启动并登录的方式等,如该路径下的portlist.ini
-              │─ network/admin          # 有关监听器listener.ora和sqlnet.ora以及tnsnames.ora等
-              └─ sysman/config          # 用于与Oracle Enterprise Management有关的端口管理等
-                  └─emkey.ora           # 加密密钥
+<div class="highlight"><pre><span></span>.                                   # 主目录
+|-- cfgtoollogs                      # 存放当运行dbca，dbua，emca，netca等图形化配置程序时的log
+|-- flash_recovery_area                 # 存储并管理与备份和恢复有关的文件
+|-- oradata                             # 数据库文件缺省存储目录
+|   |-- dbf文件                       # 对应数据库中每个表空间
+|   |-- ctl文件                          # 控制文件
+|   └-- log文件                          # 对应重做日志文件组及其成员
+└-- product                              # 客户端主目录
+    └-- 11.2.0\dbhome_1
+            |-- bin                 # 主要包含用于数据库管理的各种命令
+            |-- css                 # 与Oracle Cluster Synchronization服务有关的文件
+            |-- database
+            |   └-- SPFILEORCL.ORA  # 服务器参数文件
+            |-- dbs                    # 存放数据库服务器端的参数文件Spfile
+            |-- demo                   # 存放数据库实例模式的脚本等
+            |-- install             # 用于存储ORACLE安装后的端口号,iSQL*Plus以及Enterprise Manager Database Control启动并登录的方式等,如该路径下的portlist.ini
+            |-- network/admin           # 有关监听器listener.ora和sqlnet.ora以及tnsnames.ora等
+            └-- sysman/config           # 用于与Oracle Enterprise Management有关的端口管理等
+                └--emkey.ora            # 加密密钥
 </pre></div>
 
 
