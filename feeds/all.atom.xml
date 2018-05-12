@@ -15,9 +15,7 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;先决条件检查有失败内容&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;查看失败内容，如果是“预期值：N/A，实际值 …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;安装卸载&lt;/h2&gt;
+&lt;p&gt;查看失败内容，如果是“预期值：N/A，实际值 …&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h2&gt;安装卸载&lt;/h2&gt;
 &lt;h4&gt;安装&lt;/h4&gt;
 &lt;p&gt;新手不建议安装发布不久的最新版本，一来新版本可能有一些新特性，但是网上相关的文章较少，入坑概率很大，老手尚需时间来适应，新手肯定更觉得难以上手了；二来旧版本相对比较稳定，各种文档丰富，常见BUG都有比较成熟的应对方法；三是要看使用环境了，兼容性是考虑重点，客户端和服务器端版本要尽量一致，这里的问题实在太多，几百M都讲不完，说多了都是眼泪。&lt;/p&gt;
 &lt;p&gt;Oracle下载地址：&lt;a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html"&gt;【英文地址】&lt;/a&gt;、&lt;a href="http://www.oracle.com/technetwork/cn/database/enterprise-edition/downloads/index.html"&gt;【中文地址】&lt;/a&gt;&lt;/p&gt;
@@ -33,34 +31,34 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;先决条件检查有失败内容&lt;/p&gt;
+&lt;p&gt;查看失败内容，如果是“预期值：N/A，实际值：N/A”这样的，是因为操作系统未开启默认共享，导致Oracle无法检查环境的可用性 ，这种情况直接点击右上角的全部忽略，就可以进行下一步安装了；如果确实某方面配置不达标，就不建议继续安装了，装个PL/SQL连服务器上的库玩就好了。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;查看失败内容，如果是“预期值：N/A，实际值：N/A”这样的，是因为操作系统未开启默认共享，导致Oracle无法检查环境的可用性 ，这种情况直接点击右上角的全部忽略，就可以进行下一步安装了；如果确实某方面配置不达标，就不建议继续安装了，装个PL/SQL连服务器上的库玩就好了。&lt;/p&gt;
 &lt;h4&gt;卸载&lt;/h4&gt;
 &lt;p&gt;新手导错库或者初始化配置错误不知道还原的方法怎么办，简单，卸载重装。^_^ 装装卸卸多了，就变成熟手了。这个有现成的教程，亲测好用：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Windows下卸载&lt;/strong&gt;：&lt;a href="https://blog.csdn.net/Devin_LiuYM/article/details/59539020"&gt;彻底的卸载干净oracle 11g&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Linux下卸载&lt;/strong&gt;：todo&lt;/p&gt;
 &lt;h2&gt;常用目录结构&lt;/h2&gt;
 &lt;p&gt;了解Oracle常用目录结构，将大大提高数据库管理与维护的工作效率 。这里以oracle 11g为例。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; .                                       # 主目录
- |── cfgtoollogs                         # 存放当运行dbca，dbua，emca，netca等图形化配置程序时的log
- |── flash_recovery_area                 # 存储并管理与备份和恢复有关的文件
- |── oradata                             # 数据库文件缺省存储目录
- │   │──dbf文件                          # 对应数据库中每个表空间
- │   │──ctl文件                          # 控制文件
- │   └──log文件                          # 对应重做日志文件组及其成员
- └── product                             # 客户端主目录
-     └──11.2.0\dbhome_1
-               │──bin                    # 主要包含用于数据库管理的各种命令
-               │──css                    # 与Oracle Cluster Synchronization服务有关的文件
-               │──database
-               │  └──SPFILEORCL.ORA：服务器参数文件
-               │──dbs                    # 存放数据库服务器端的参数文件Spfile
-               │──demo                   # 存放数据库实例模式的脚本等
-               │──install                # 用于存储ORACLE安装后的端口号,iSQL*Plus以及Enterprise Manager Database Control启动并登录的方式等,如该路径下的portlist.ini
-               │──network/admin          # 有关监听器listener.ora和sqlnet.ora以及tnsnames.ora等
-               └──sysman/config          # 用于与Oracle Enterprise Management有关的端口管理等
-                  └──emkey.ora           # 加密密钥
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.                                       # 主目录
+|─ cfgtoollogs                          # 存放当运行dbca，dbua，emca，netca等图形化配置程序时的log
+|─ flash_recovery_area                  # 存储并管理与备份和恢复有关的文件
+|─ oradata                              # 数据库文件缺省存储目录
+│   │─ dbf文件                          # 对应数据库中每个表空间
+│   │─ ctl文件                          # 控制文件
+│   └─ log文件                          # 对应重做日志文件组及其成员
+└─ product                              # 客户端主目录
+    └─ 11.2.0\dbhome_1
+              │─ bin                    # 主要包含用于数据库管理的各种命令
+              │─ css                    # 与Oracle Cluster Synchronization服务有关的文件
+              │─ database
+              │   └─ SPFILEORCL.ORA     # 服务器参数文件
+              │─ dbs                    # 存放数据库服务器端的参数文件Spfile
+              │─ demo                   # 存放数据库实例模式的脚本等
+              │─ install                # 用于存储ORACLE安装后的端口号,iSQL*Plus以及Enterprise Manager Database Control启动并登录的方式等,如该路径下的portlist.ini
+              │─ network/admin          # 有关监听器listener.ora和sqlnet.ora以及tnsnames.ora等
+              └─ sysman/config          # 用于与Oracle Enterprise Management有关的端口管理等
+                  └─emkey.ora           # 加密密钥
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -87,7 +85,7 @@
 
 
 &lt;h2&gt;cmd命令&lt;/h2&gt;
-&lt;p&gt;前提是本地安装了Oracle客户端，打开cmd，输入命令。由于有帮助文档是中文的，所以不展开。&lt;/p&gt;
+&lt;p&gt;前提是本地安装了Oracle客户端，打开cmd，输入命令。由于帮助文档是中文的，所以不展开。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;tnsping&lt;/code&gt;：诊断连接，查看帮助&lt;code&gt;tnsping&lt;/code&gt;，地址可以使用别名。&lt;/p&gt;
@@ -331,7 +329,7 @@
 &lt;/ul&gt;
 &lt;p&gt;数据库链接指的就是dblink，这个问题只发生在EXP下，一般是导出客户端版本低于服务器端，解决方法一是在服务器本地导出避开兼容性问题；二是另外备份好dblink，删除后再导出，导出后记得恢复。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;错误使用&lt;code&gt;full=y&lt;/code&gt;导出：导入时报各种错&lt;/li&gt;
+&lt;li&gt;错误使用&lt;code&gt;full=y&lt;/code&gt;导出：导入时各种报错&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;这个只有新手才会犯的错误，搞清楚概念就不会发生了。&lt;/p&gt;
 &lt;h2&gt;OEM创建&lt;/h2&gt;
