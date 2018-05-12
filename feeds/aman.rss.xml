@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Wed, 02 May 2018 00:00:00 +0800</lastBuildDate><item><title>win10下安装CentOS双系统</title><link>https://jlhxxxx.github.io/win-install-centos.html</link><description>&lt;p&gt;用惯了Windows，但是要学Linux，所以决定装个双系统。一开始装的是Ubuntu，傻瓜式安装，界面也漂亮，但是装软件时出现了依赖性问题，网上搜的方法大部分就一个&lt;code&gt;sudo apt-get -f install&lt;/code&gt;解决，但是我输完命令又出现校验和不符无法安装的问题，没有找到很好的解决办法（虽然我觉得可能是服务器的问题，当然我也没有很用力去找，只尝试了一晚上就放弃了）。一怒之下决定换个系统，Liunx系统那么多，总有一个适合自己的。&lt;/p&gt;
+<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Sat, 12 May 2018 00:00:00 +0800</lastBuildDate><item><title>Oracle 十全大补汤</title><link>https://jlhxxxx.github.io/oracle-rudiment.html</link><description>&lt;h2&gt;安装卸载&lt;/h2&gt;
+&lt;h4&gt;安装&lt;/h4&gt;
+&lt;p&gt;新手不建议安装发布不久的最新版本，一来新版本可能有一些新特性，但是网上相关的文章较少，入坑概率很大，老手尚需时间来适应，新手肯定更觉得难以上手了；二来旧版本相对比较稳定，各种文档丰富，常见BUG都有比较成熟的应对方法；三是要看使用环境了，兼容性是考虑重点，客户端和服务器端版本要尽量一致，这里的问题实在太多，几百M都讲不完，说多了都是眼泪。&lt;/p&gt;
+&lt;p&gt;Oracle下载地址：&lt;a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html"&gt;【英文地址】&lt;/a&gt;、&lt;a href="http://www.oracle.com/technetwork/cn/database/enterprise-edition/downloads/index.html"&gt;【中文地址】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Windows下安装教程&lt;/strong&gt;：&lt;a href="https://blog.csdn.net/anxpp/article/details/51345074"&gt; Oracle 12c Windows安装、介绍及简单使用(图文) &lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;网上这个教程以Oracle 12c为例，其他版本安装过程都差不多，注意&lt;strong&gt;安装位置&lt;/strong&gt;自己设置一下（只要设置Oracle基目录即可，其他目录会相应改变），&lt;strong&gt;字符集选UTF-8&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Linux下安装教程&lt;/strong&gt;：todo&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安装过程中出现的问题&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://blog.csdn.net/qq_33530388/article/details/56669466"&gt;win10 下安装Oracle 11g(问题：环境不满足最低要求) &lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;先决条件检查有失败内容&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;查看失败内容，如果是“预期值：N/A，实际值 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Sat, 12 May 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-05-12:/oracle-rudiment.html</guid><category>Oracle</category><category>Rudiment</category></item><item><title>win10下安装CentOS双系统</title><link>https://jlhxxxx.github.io/win-install-centos.html</link><description>&lt;p&gt;用惯了Windows，但是要学Linux，所以决定装个双系统。一开始装的是Ubuntu，傻瓜式安装，界面也漂亮，但是装软件时出现了依赖性问题，网上搜的方法大部分就一个&lt;code&gt;sudo apt-get -f install&lt;/code&gt;解决，但是我输完命令又出现校验和不符无法安装的问题，没有找到很好的解决办法（虽然我觉得可能是服务器的问题，当然我也没有很用力去找，只尝试了一晚上就放弃了）。一怒之下决定换个系统，Liunx系统那么多，总有一个适合自己的。&lt;/p&gt;
 &lt;p&gt;百度了下，Linux系统大致分两类：一类是RedHat系列，包括RedHat、CentOS、Fedora等，包管理工具yum；另一类是Debian系列，包括Debian、Ubuntu等，包管理工具apt-get 。由于公司服务器用的是RedHat的，所以不想浪费时间，我决定找个RedHat系列的，其中CentOS稳定性最好，是大部分服务器的配置，那就尝试下吧。下面进入正题：&lt;/p&gt;
 &lt;h2&gt;第一步：下载镜像文件&lt;/h2&gt;
 &lt;p&gt;CentOS官方下载地址：&lt;a href="https://www.centos.org/download/"&gt;https://www.centos.org/download/&lt;/a&gt;&lt;/p&gt;
