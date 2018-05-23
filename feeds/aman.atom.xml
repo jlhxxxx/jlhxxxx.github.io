@@ -151,11 +151,13 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;h2&gt;部署项目注意事项&lt;/h2&gt;
 &lt;p&gt;部署项目参考&lt;strong&gt;教程1-6. 部署应用进行测试&lt;/strong&gt;，具体的应用各不相同，配置也不尽相同。可能遇到各种各样的问题，需要注意的是：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;和开发沟通好，确保编译和部署的JDK环境一致或尽量一致；以及其他一些部署时需要单独配置的东西。修改JAVA_HOME等环境变量在&lt;code&gt;%DOMAIN_HOME%\bin\setDomainEnv.cmd&lt;/code&gt;，修改完后重启WebLogic即可。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;
+&lt;p&gt;和开发沟通好，确保编译和部署的JDK环境一致或尽量一致；以及其他一些部署时需要单独配置的东西。修改JAVA_HOME等环境变量在&lt;code&gt;%DOMAIN_HOME%\bin\setDomainEnv.cmd&lt;/code&gt;，修改完后重启WebLogic即可。&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.bkjia.com/Javabc/1130171.html"&gt;应用部署weblogic 报错Unsupported major.minor version 51.0的解决过程&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;遇到报错多查看日志，帮助文档，百度谷歌，同事前辈亲朋好友。。。头发掉光都解决不了就算了。&lt;/li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;遇到报错多查看日志，帮助文档，百度谷歌，同事前辈亲朋好友。。。头发掉光都解决不了就算了。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;</content><category term="WebLogic"></category><category term="Cluster"></category></entry><entry><title>Oracle 十全大补汤</title><link href="https://jlhxxxx.github.io/oracle-rudiment.html" rel="alternate"></link><published>2018-05-12T00:00:00+08:00</published><updated>2018-05-12T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-12:/oracle-rudiment.html</id><summary type="html">&lt;h2&gt;安装卸载&lt;/h2&gt;
 &lt;h4&gt;安装&lt;/h4&gt;
 &lt;p&gt;新手不建议安装发布不久的最新版本，一来新版本可能有一些新特性，但是网上相关的文章较少，入坑概率很大，老手尚需时间来适应，新手肯定更觉得难以上手了；二来旧版本相对比较稳定，各种文档丰富，常见BUG都有比较成熟的应对方法；三是要看使用环境了，兼容性是考虑重点，客户端和服务器端版本要尽量一致，这里的问题实在太多，几百M都讲不完，说多了都是眼泪。&lt;/p&gt;
