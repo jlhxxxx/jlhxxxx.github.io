@@ -1,5 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-05-12T00:00:00+08:00</updated><entry><title>Oracle 十全大补汤</title><link href="https://jlhxxxx.github.io/oracle-rudiment.html" rel="alternate"></link><published>2018-05-12T00:00:00+08:00</published><updated>2018-05-12T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-12:/oracle-rudiment.html</id><summary type="html">&lt;h2&gt;安装卸载&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-05-22T00:00:00+08:00</updated><entry><title>Windows下WebLogic安装及集群配置</title><link href="https://jlhxxxx.github.io/webLogic-cluster.html" rel="alternate"></link><published>2018-05-22T00:00:00+08:00</published><updated>2018-05-22T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-22:/webLogic-cluster.html</id><summary type="html">&lt;h2&gt;基本概念&lt;/h2&gt;
+&lt;p&gt;在正式部署项目之前，还是先了解下基本概念吧。最基本要掌握域（Domain）、集群（Cluster）、服务器（Server）（区分管理服务器和受管理服务器）、计算机（Machine）、节点管理器（Node Manager）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参考文章&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://langgufu.iteye.com/blog/1700388"&gt;weblogic 域，管理服务器，受管服务器，集群和机器的基本知识&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cnblogs.com/cocowool/archive/2012/04/01/2428861.html"&gt;WebLogic中的一些基本概念&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;常用目录结构&lt;/h2&gt;
+&lt;p&gt;了解WebLogic常用目录结构，将大大提高管理与维护的工作效率 。这里以WebLogic 11g为例。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.                                      # 主目录
+│─ coherence_3.7                        # coherence集群相关
+│─ logs                                 # 日志文件，包括安装和运行%WL_HOME%\common\bin\下程序的日志
+│─ modules                             # 模块和插件目录
+│─ user_projects                         # 用户工程目录
+│  └─ domains                            # 域主目录
+│      └─ base_domain                     # DOMAIN_HOME，用户自建域主目录，默认名称为base_domain，以此为例
+│         │─ bin …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;基本概念&lt;/h2&gt;
+&lt;p&gt;在正式部署项目之前，还是先了解下基本概念吧。最基本要掌握域（Domain）、集群（Cluster）、服务器（Server）（区分管理服务器和受管理服务器）、计算机（Machine）、节点管理器（Node Manager）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参考文章&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://langgufu.iteye.com/blog/1700388"&gt;weblogic 域，管理服务器，受管服务器，集群和机器的基本知识&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cnblogs.com/cocowool/archive/2012/04/01/2428861.html"&gt;WebLogic中的一些基本概念&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;常用目录结构&lt;/h2&gt;
+&lt;p&gt;了解WebLogic常用目录结构，将大大提高管理与维护的工作效率 。这里以WebLogic 11g为例。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.                                      # 主目录
+│─ coherence_3.7                        # coherence集群相关
+│─ logs                                 # 日志文件，包括安装和运行%WL_HOME%\common\bin\下程序的日志
+│─ modules                             # 模块和插件目录
+│─ user_projects                         # 用户工程目录
+│  └─ domains                            # 域主目录
+│      └─ base_domain                     # DOMAIN_HOME，用户自建域主目录，默认名称为base_domain，以此为例
+│         │─ bin                          # 启动和停止域服务、设置域环境变量的相关命令文件
+│         │  └─ nodemanager               # 可以设置成当前域节点管理器配置目录，默认不使用
+│         │─ config                       # 配置文件
+│         │─ security                     # 用户口令验证相关文件
+│         └─ servers                      # 服务器相关文件
+│            └─ AdminServer               # 管理服务器，以此为例
+│               │─ logs                   # 日志文件
+│               │─ security
+│               │  └─ boot.properties     # 当前域登录信息文件，保存用户名和密码后可以免验证登录
+│               │─ stage                  # 存放当前域所部署项目部署包文件
+│               └─ tmp                    # 当前域所部署项目相关临时文件
+└─ wlserver_10.3                          # WL_HOME，WebLogic应用主目录
+   │─ common                              # 
+   │  │─ bin                              # WebLogic应用程序可执行命令目录
+   │  └─ nodemanager                      # 默认的节点管理器配置目录
+   │─ server
+   │  └─ bin                              # WebLogic服务器可执行命令目录
+   │     └─ startNodeManager.cmd          # 默认的启动节点管理器服务
+   └─ uninstall                           # 卸载相关命令文件目录
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;注：本文档所有&lt;code&gt;%WL_HOME%&lt;/code&gt;，均指上面的wlserver_10.3目录；&lt;code&gt;%DOMAIN_HOME%&lt;/code&gt;指自建域的主目录，例如上面的base_domain目录，对应域的环境变量可以查看&lt;code&gt;%DOMAIN_HOME%\bin\setDomainEnv.cmd&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;集群的安装及配置&lt;/h2&gt;
+&lt;p&gt;安装WebLogic之前，先要安装Java环境。本人电脑上安装了几套Java环境，WebLogic用到的有两个&lt;a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-jrockit-2192437.html?ssSourceSiteId=otncn"&gt;JRockit 6 - R28.2.7&lt;/a&gt;和&lt;a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html"&gt;Java7u80&lt;/a&gt;，JRockit是原BEA公司的产品，现已被Oracle收购，是传说中最快的JVM，理论上来说使用JRockit性能会有明显的提升。不过JRockit最高只有1.6版本的，而目前WebLogic12c最低支持Java8，所以要想使用JRockit要安装WebLogic11g以下的版本。而我们通常所说的Java环境指的都是Sun公司JDK（也被Oracle收购了^_^）即Oracle Java（为什么要说这些，因为手动配置Java环境的时候需要知道Sun和BEA区别）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;教程1&lt;/strong&gt;：&lt;a href="http://blog.itpub.net/28536251/viewspace-1718232/"&gt;Windows下Weblogic 11G集群安装与配置&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;教程2&lt;/strong&gt;：&lt;a href="https://blog.csdn.net/blvyoucan/article/details/78507100"&gt;Weblogic12c (12.2.1.3)集群环境搭建 两台物理机&lt;/a&gt;&lt;/p&gt;
+&lt;h4&gt;安装WebLogic&lt;/h4&gt;
+&lt;p&gt;教程1很详细了，如果已经安装了Java环境，可以跳过第2步，直接到&lt;strong&gt;3.1 安装Weblogic软件&lt;/strong&gt;。&lt;/p&gt;
+&lt;h4&gt;创建WebLogic域及集群&lt;/h4&gt;
+&lt;p&gt;创建域使用QuickStart即可，配置集群有两种方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;创建域时配置集群&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果要配置集群且&lt;strong&gt;使用代理&lt;/strong&gt;，请按&lt;strong&gt;教程1-3.3 创建Weblogic域及集群&lt;/strong&gt;步骤来（因为我找不到从控制台添加代理的方法）；如果要配置集群但&lt;strong&gt;不使用代理&lt;/strong&gt;，可以按3.3步骤在创建域时配置好集群，也可以只创建域然后到控制台配置集群。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;控制台配置集群&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;参考&lt;strong&gt;教程2-4.4. 配置集群服务器，&lt;/strong&gt;主要就是新增服务器（注意&lt;strong&gt;同一计算机上的服务器监听端口不能相同&lt;/strong&gt;）、计算机（&lt;strong&gt;不同计算机节点管理器端口可以相同&lt;/strong&gt;）、集群，这三个没有顺序要求，计算机中添加服务器，集群中添加服务器。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;默认&lt;strong&gt;计算机&lt;/strong&gt;的&lt;strong&gt;节点管理器&lt;/strong&gt;类型为&lt;strong&gt;SSL&lt;/strong&gt;，如果修改成其他，通过节点管理器启动服务器的配置要相应修改，见下文。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;受管理服务器域的配置&lt;/h4&gt;
+&lt;p&gt;如果受管理服务器和管理服务器都在同一台计算机上，不需要此步骤。这里配置的是另一台计算机上的受管理服务器。也有两种方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;使用QuickStart&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;参考&lt;strong&gt;教程1第4步&lt;/strong&gt;，注意域名应和管理服务器上的一致，只需配置受管理服务器即可，因为当前域只有一台计算机，所以可以不用配置计算机。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;使用镜像方法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;参考&lt;strong&gt;教程2-4.5. 复制域到另一台物理机&lt;/strong&gt;，管理服务器配置好后，打包域然后解压到受管理服务器上。如果部署了项目之后再打包会连项目一起打包，建议打包之后再部署项目。参考命令如下，注意是在两台计算机&lt;code&gt;%WL_HOME%\common\bin\&lt;/code&gt;目录下运行命令提示符，分别输入：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pack -managed&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt; -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt;/span&gt;eblogic&lt;span class="se"&gt;\u&lt;/span&gt;ser_projects&lt;span class="se"&gt;\d&lt;/span&gt;omains&lt;span class="se"&gt;\b&lt;/span&gt;ase_domain -template&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\b&lt;/span&gt;ase_domain.jar -template_name&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;base_domain&amp;quot;&lt;/span&gt;
+unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt;/span&gt;eblogic&lt;span class="se"&gt;\u&lt;/span&gt;ser_projects&lt;span class="se"&gt;\d&lt;/span&gt;omains&lt;span class="se"&gt;\b&lt;/span&gt;ase_domain -template&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\b&lt;/span&gt;ase_domain.jar
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意&lt;strong&gt;多台计算机WebLogic版本应一致，JDK根据部署的项目可以不一致&lt;/strong&gt;。简单的集群使用第一种方法更便捷，复杂的集群推荐使用第二种方法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;启动管理服务器和受管理服务器&lt;/h4&gt;
+&lt;p&gt;首先&lt;strong&gt;启动管理服务器&lt;/strong&gt;，参考&lt;strong&gt;教程1-5.1 启动节点1的管理服务器&lt;/strong&gt;或&lt;strong&gt;教程2-4.7.1。&lt;/strong&gt;为了不在每次启动时输入用户名和密码，可以在&lt;code&gt;%DOMAIN_HOME%\servers\AdminServer\security\&lt;/code&gt;下新建&lt;strong&gt;boot.properties&lt;/strong&gt;文件，内容为：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;username&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;域登录名
+&lt;span class="nv"&gt;password&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;对应密码
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;启动受管理服务器&lt;/strong&gt;也有两种方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;直接启动&lt;/p&gt;
+&lt;p&gt;参考&lt;strong&gt;教程1-5.2、5.3和5.4&lt;/strong&gt;，参考命令如下，注意是在两台计算机&lt;code&gt;%DOMAIN_HOME%\bin\&lt;/code&gt;目录下运行命令提示符，&lt;strong&gt;地址都用管理服务器的地址&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;startManagedWebLogic.cmd Server-1 http://192.168.1.103:7001
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;第一次启动时会提示输入用户名或密码，之后会在&lt;code&gt;%DOMAIN_HOME%\servers\Server-1\security\&lt;/code&gt;下生成登录信息文件&lt;strong&gt;boot.properties&lt;/strong&gt;，如果没有的话自己建一个。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意如果要通过节点管理器启动一定要配置boot.properties&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过节点管理器启动&lt;/p&gt;
+&lt;p&gt;默认节点管理器通过&lt;code&gt;%WL_HOME%\server\bin\&lt;/code&gt;目录下&lt;strong&gt;startNodeManager.cmd&lt;/strong&gt;启动，为全局管理器，默认配置文件目录为&lt;code&gt;%WL_HOME%\common\nodemanager\&lt;/code&gt;，记为&lt;strong&gt;目录A&lt;/strong&gt;。为了给不同域配置不同的节点管理器属性，具体配置如下（两台受管理服务器都要配置）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;复制&lt;strong&gt;startNodeManager.cmd&lt;/strong&gt;到&lt;code&gt;%DOMAIN_HOME%&lt;/code&gt;目录下，修改&lt;code&gt;NODEMGR_HOME&lt;/code&gt;为&lt;code&gt;%DOMAIN_HOME%\bin\nodemanager\&lt;/code&gt;（这里&lt;code&gt;%DOMAIN_HOME%&lt;/code&gt;要替换成实际的地址），记为&lt;strong&gt;目录B&lt;/strong&gt;。以管理员权限运行&lt;strong&gt;startNodeManager.cmd&lt;/strong&gt;，首次运行会在&lt;strong&gt;目录B&lt;/strong&gt;下生成相应的配置文件，观察控制台会报缺少&lt;strong&gt;nodemanager.domains&lt;/strong&gt;文件，关闭&lt;strong&gt;startNodeManager.cmd&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;复制&lt;strong&gt;目录A&lt;/strong&gt;中&lt;strong&gt;nodemanager.domains&lt;/strong&gt;到&lt;strong&gt;目录B&lt;/strong&gt;，打开修改，只留当前域的那一行即可，或者直接自己新建一个，注意Windows下目录&lt;code&gt;:&lt;/code&gt;和&lt;code&gt;\&lt;/code&gt;要记得转义。示例如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;base_domain&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;D&lt;span class="se"&gt;\:\\&lt;/span&gt;weblogic&lt;span class="se"&gt;\\&lt;/span&gt;user_projects&lt;span class="se"&gt;\\&lt;/span&gt;domains&lt;span class="se"&gt;\\&lt;/span&gt;base_domain
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改&lt;strong&gt;目录B&lt;/strong&gt;中&lt;strong&gt;nodemanager.properties&lt;/strong&gt;文件，配置&lt;code&gt;StartScriptEnabled=false&lt;/code&gt;，如果不修改，通过节点管理器启动不会加载你的登录信息文件，会报错。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果新建&lt;strong&gt;计算机&lt;/strong&gt;时配置的&lt;strong&gt;节点管理器&lt;/strong&gt;类型为&lt;strong&gt;SSL&lt;/strong&gt;，确保&lt;code&gt;SecureListener=true&lt;/code&gt;；如果&lt;strong&gt;节点管理器&lt;/strong&gt;类型为&lt;strong&gt;普通&lt;/strong&gt;，要修改&lt;code&gt;SecureListener=false&lt;/code&gt;，否则从控制台启动服务器会报找不到节点管理器的错误。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;监听地址&lt;code&gt;ListenAddress&lt;/code&gt;可以置空。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;配置好后重新启动节点管理器，在控制台【环境】-&amp;gt;【计算机】，选择相应计算机【监视】-&amp;gt;【节点管理器状态】，状态为【可访问】，此时可以通过【服务器】-&amp;gt;【控制】通过节点管理器启动相应服务器。如果节点管理器状态为【非活动】，检查上面步骤，排查问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;总结&lt;/strong&gt;：&lt;strong&gt;直接启动&lt;/strong&gt;受管理服务器是没有办法通过控制台重启服务器的（可以关闭），所以建议&lt;strong&gt;通过节点管理器启动&lt;/strong&gt;。整体流程就是：启动管理服务器--启动受管理服务器的节点管理器-通过控制台启动受管理服务器。&lt;/p&gt;
+&lt;h4&gt;节点管理器随Windows启动&lt;/h4&gt;
+&lt;p&gt;参考&lt;strong&gt;教程2-5&lt;/strong&gt;，修改&lt;code&gt;%WL_HOME%\server\bin\&lt;/code&gt;目录下&lt;strong&gt;installNodeMgrSvc.cmd&lt;/strong&gt;的相应配置，执行即可。取消执行&lt;strong&gt;uninstallNodeMgrSvc.cmd&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2&gt;部署项目注意事项&lt;/h2&gt;
+&lt;p&gt;部署项目参考&lt;strong&gt;教程1-6. 部署应用进行测试&lt;/strong&gt;，具体的应用各不相同，配置也不尽相同。可能遇到各种各样的问题，需要注意的是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;和开发沟通好，确保编译和部署的JDK环境一致或尽量一致；以及其他一些部署时需要单独配置的东西。修改JAVA_HOME等环境变量在&lt;code&gt;%DOMAIN_HOME%\bin\setDomainEnv.cmd&lt;/code&gt;，修改完后重启WebLogic即可。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="http://www.bkjia.com/Javabc/1130171.html"&gt;应用部署weblogic 报错Unsupported major.minor version 51.0的解决过程&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;遇到报错多查看日志，帮助文档，百度谷歌，同事前辈亲朋好友。。。头发掉光都解决不了就算了。&lt;/li&gt;
+&lt;/ul&gt;</content><category term="WebLogic"></category><category term="Cluster"></category></entry><entry><title>Oracle 十全大补汤</title><link href="https://jlhxxxx.github.io/oracle-rudiment.html" rel="alternate"></link><published>2018-05-12T00:00:00+08:00</published><updated>2018-05-12T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-12:/oracle-rudiment.html</id><summary type="html">&lt;h2&gt;安装卸载&lt;/h2&gt;
 &lt;h4&gt;安装&lt;/h4&gt;
 &lt;p&gt;新手不建议安装发布不久的最新版本，一来新版本可能有一些新特性，但是网上相关的文章较少，入坑概率很大，老手尚需时间来适应，新手肯定更觉得难以上手了；二来旧版本相对比较稳定，各种文档丰富，常见BUG都有比较成熟的应对方法；三是要看使用环境了，兼容性是考虑重点，客户端和服务器端版本要尽量一致，这里的问题实在太多，几百M都讲不完，说多了都是眼泪。&lt;/p&gt;
 &lt;p&gt;Oracle下载地址：&lt;a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html"&gt;【英文地址】&lt;/a&gt;、&lt;a href="http://www.oracle.com/technetwork/cn/database/enterprise-edition/downloads/index.html"&gt;【中文地址】&lt;/a&gt;&lt;/p&gt;
