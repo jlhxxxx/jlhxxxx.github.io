@@ -103,7 +103,7 @@
 
 
     
-</footer><!-- /.post-info -->                                <h3>确定Red Hat Enterprise和CentOS对应版本</h3>
+</footer><!-- /.post-info -->                                <h2>确定Red Hat Enterprise和CentOS对应版本</h2>
 <p>查看当前系统版本</p>
 <div class="highlight"><pre><span></span>cat /etc/issue     <span class="c1"># 查看系统版本</span>
 cat /proc/version  <span class="c1"># 查看内核版本</span>
@@ -114,14 +114,14 @@ cat /proc/version  <span class="c1"># 查看内核版本</span>
 <li><a href="https://zh.wikipedia.org/zh-cn/CentOS">CentOS</a></li>
 <li><a href="https://www.linuxidc.com/Linux/2016-07/133000.htm">CentOS和RedHat发行版与Linux内核版本的对应关系</a></li>
 </ul>
-<h3>备份和卸载本地yum源</h3>
+<h2>备份和卸载本地yum源</h2>
 <div class="highlight"><pre><span></span>rpm -qa<span class="p">|</span>grep yum　　                                          <span class="c1"># 查看本地yum</span>
 mv /etc/yum.repos.d/your.repo  /etc/yum.repos.d/your.repo.bak   <span class="c1"># your替换成本地repo名称</span>
 rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --nodeps　　                    <span class="c1"># 不检查依赖性，卸载yum程序</span>
 </pre></div>
 
 
-<h3>下载新的yum安装包</h3>
+<h2>下载新的yum安装包</h2>
 <p>这里采用163的镜像，我们要下的是这几个包：<code>python-iniparse-xxx.noarch …</code></p>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/rhe-change-yum.html">Read more...</a>

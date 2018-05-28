@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Mon, 28 May 2018 00:00:00 +0800</lastBuildDate><item><title>Red Hat Enterprise更换CentOS Yum源</title><link>https://jlhxxxx.github.io/rhe-change-yum.html</link><description>&lt;h3&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h3&gt;
+<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Mon, 28 May 2018 00:00:00 +0800</lastBuildDate><item><title>Red Hat Enterprise更换CentOS Yum源</title><link>https://jlhxxxx.github.io/rhe-change-yum.html</link><description>&lt;h2&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h2&gt;
 &lt;p&gt;查看当前系统版本&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat /etc/issue     &lt;span class="c1"&gt;# 查看系统版本&lt;/span&gt;
 cat /proc/version  &lt;span class="c1"&gt;# 查看内核版本&lt;/span&gt;
@@ -10,14 +10,14 @@ cat /proc/version  &lt;span class="c1"&gt;# 查看内核版本&lt;/span&gt;
 &lt;li&gt;&lt;a href="https://zh.wikipedia.org/zh-cn/CentOS"&gt;CentOS&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.linuxidc.com/Linux/2016-07/133000.htm"&gt;CentOS和RedHat发行版与Linux内核版本的对应关系&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;备份和卸载本地yum源&lt;/h3&gt;
+&lt;h2&gt;备份和卸载本地yum源&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rpm -qa&lt;span class="p"&gt;|&lt;/span&gt;grep yum　　                                          &lt;span class="c1"&gt;# 查看本地yum&lt;/span&gt;
 mv /etc/yum.repos.d/your.repo  /etc/yum.repos.d/your.repo.bak   &lt;span class="c1"&gt;# your替换成本地repo名称&lt;/span&gt;
 rpm -qa&lt;span class="p"&gt;|&lt;/span&gt;grep yum&lt;span class="p"&gt;|&lt;/span&gt;xargs rpm -e --nodeps　　                    &lt;span class="c1"&gt;# 不检查依赖性，卸载yum程序&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;下载新的yum安装包&lt;/h3&gt;
+&lt;h2&gt;下载新的yum安装包&lt;/h2&gt;
 &lt;p&gt;这里采用163的镜像，我们要下的是这几个包：&lt;code&gt;python-iniparse-xxx.noarch …&lt;/code&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 28 May 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-05-28:/rhe-change-yum.html</guid><category>Linux</category><category>yum</category></item><item><title>Windows下WebLogic安装及集群配置</title><link>https://jlhxxxx.github.io/webLogic-cluster.html</link><description>&lt;h2&gt;基本概念&lt;/h2&gt;
 &lt;p&gt;在正式部署项目之前，还是先了解下基本概念吧。最基本要掌握域（Domain）、集群（Cluster）、服务器（Server）（区分管理服务器和受管理服务器）、计算机（Machine）、节点管理器（Node Manager）。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参考文章&lt;/strong&gt;：&lt;/p&gt;
