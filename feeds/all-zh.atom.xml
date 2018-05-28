@@ -59,6 +59,7 @@ rpm -qa&lt;span class="p"&gt;|&lt;/span&gt;grep python-urlgrabber
 &lt;span class="c1"&gt;# 卸载低版本&lt;/span&gt;
  rpm -e python-urlgrabber-3.9.1-9.el6.noarch
 &lt;span class="c1"&gt;# 下载新版本后安装&lt;/span&gt;
+wget http://mirrors.163.com/centos/6/os/x86_64/Packages/python-urlgrabber-3.9.1-11.el6.noarch.rpm
 rpm -ivh python-urlgrabber-3.9.1-11.el6.noarch.rpm
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -72,7 +73,7 @@ wget http://mirrors.163.com/.help/CentOS6-Base-163.repo　　&lt;span class="c1"
 
 
 &lt;p&gt;把文件里面的&lt;code&gt;$releasever&lt;/code&gt;全部替换为版本号，这里是&lt;code&gt;6&lt;/code&gt;，然后保存 。&lt;/p&gt;
-&lt;h3&gt;清理yum缓存&lt;/h3&gt;
+&lt;h3&gt;清理并重建yum缓存&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum clean all
 yum makecache
 &lt;/pre&gt;&lt;/div&gt;
