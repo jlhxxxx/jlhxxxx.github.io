@@ -66,14 +66,14 @@ rpm -ivh python-urlgrabber-3.9.1-11.el6.noarch.rpm
 
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;配置CentOS yum源&lt;/h2&gt;
+&lt;h2&gt;配置并使用CentOS yum源&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/yum.repos.d/　　&lt;span class="c1"&gt;#进入到yum配置文件目录&lt;/span&gt;
 wget http://mirrors.163.com/.help/CentOS6-Base-163.repo　　&lt;span class="c1"&gt;#下载CentOS配置文件&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;把文件里面的&lt;code&gt;$releasever&lt;/code&gt;全部替换为版本号，这里是&lt;code&gt;6&lt;/code&gt;，然后保存 。&lt;/p&gt;
-&lt;h3&gt;清理并重建yum缓存&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;清理并重建yum缓存：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum clean all
 yum makecache
 &lt;/pre&gt;&lt;/div&gt;
