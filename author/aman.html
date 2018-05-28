@@ -81,6 +81,59 @@
                         <article>
                             <header>
                                 <h1 class="entry-title">
+                                    <a href="https://jlhxxxx.github.io/rhe-change-yum.html" rel="bookmark" title="Permalink to Red Hat Enterprise更换CentOS Yum源">
+                                       Red Hat Enterprise更换CentOS Yum源
+                                    </a>
+                                </h1>
+                            </header>
+                            <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="https://jlhxxxx.github.io/category/software.html">Software</a>
+
+    on 2018-05-28
+
+        |
+        tags:         <a href="https://jlhxxxx.github.io/tag/linux.html">Linux</a>
+        <a href="https://jlhxxxx.github.io/tag/yum.html">yum</a>
+
+
+
+    
+</footer><!-- /.post-info -->                                <h3>确定Red Hat Enterprise和CentOS对应版本</h3>
+<p>查看当前系统版本</p>
+<div class="highlight"><pre><span></span>cat /etc/issue     <span class="c1"># 查看系统版本</span>
+cat /proc/version  <span class="c1"># 查看内核版本</span>
+</pre></div>
+
+
+<ul>
+<li><a href="https://zh.wikipedia.org/zh-cn/CentOS">CentOS</a></li>
+<li><a href="https://www.linuxidc.com/Linux/2016-07/133000.htm">CentOS和RedHat发行版与Linux内核版本的对应关系</a></li>
+</ul>
+<h3>备份和卸载本地yum源</h3>
+<div class="highlight"><pre><span></span>rpm -qa<span class="p">|</span>grep yum　　                                          <span class="c1"># 查看本地yum</span>
+mv /etc/yum.repos.d/your.repo  /etc/yum.repos.d/your.repo.bak   <span class="c1"># your替换成本地repo名称</span>
+rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --nodeps　　                    <span class="c1"># 不检查依赖性，卸载yum程序</span>
+</pre></div>
+
+
+<h3>下载新的yum安装包</h3>
+<p>这里采用163的镜像，我们要下的是这几个包：<code>python-iniparse-xxx.noarch …</code></p>
+                                <p class="readmore">
+                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/rhe-change-yum.html">Read more...</a>
+                                </p>
+                            </div><!-- /.entry-content -->
+                            <hr/>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <header>
+                                <h1 class="entry-title">
                                     <a href="https://jlhxxxx.github.io/webLogic-cluster.html" rel="bookmark" title="Permalink to Windows下WebLogic安装及集群配置">
                                        Windows下WebLogic安装及集群配置
                                     </a>
@@ -564,60 +617,10 @@
                             <hr/>
                         </article>
                     </li>
-                    <li>
-                        <article>
-                            <header>
-                                <h1 class="entry-title">
-                                    <a href="https://jlhxxxx.github.io/oracle-skills.html" rel="bookmark" title="Permalink to Oracle奇技淫巧">
-                                       Oracle奇技淫巧
-                                    </a>
-                                </h1>
-                            </header>
-                            <div class="entry-content">
-<footer class="post-info">
-    <address class="vcard author">
-        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
-    </address>
-
-    in <a href="https://jlhxxxx.github.io/category/sql.html">SQL</a>
-
-    on 2018-04-02
-
-        |
-        tags:         <a href="https://jlhxxxx.github.io/tag/oracle.html">Oracle</a>
-        <a href="https://jlhxxxx.github.io/tag/case.html">CASE</a>
-        <a href="https://jlhxxxx.github.io/tag/decode.html">DECODE</a>
-
-
-
-    
-</footer><!-- /.post-info -->                                <h2>SELECT 1 FROM DUAL</h2>
-<p>用PLSQL执行数据查询的时候，FROM子句是必须的，当不想查具体的表时，可以使用虚拟表dual。</p>
-<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="mi">1</span><span class="o">+</span><span class="mi">1</span> <span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
-<span class="k">SELECT</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="n">dual</span> <span class="k">WHERE</span> <span class="k">NULL</span> <span class="k">IS</span> <span class="k">NULL</span><span class="p">;</span>
-<span class="k">SELECT</span> <span class="s1">&#39;SUCCESS&#39;</span> <span class="k">AS</span> <span class="k">RESULT</span> <span class="k">FROM</span> <span class="n">dual</span> <span class="k">WHERE</span> <span class="mi">50</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">;</span>
-<span class="k">SELECT</span> <span class="n">SYSDATE</span> <span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
-</pre></div>
-
-
-<h2>CASE语句</h2>
-<p>CASE表达式有两种形式：</p>
-<div class="highlight"><pre><span></span><span class="k">CASE</span> <span class="n">AAC004</span>  
-<span class="k">WHEN</span> <span class="s1">&#39;1&#39;</span> <span class="k">THEN</span> <span class="s1">&#39;MALE&#39;</span>  
-<span class="k">WHEN</span> <span class="s1">&#39;2&#39;</span> <span class="k">THEN</span> <span class="s1">&#39;FEMALE&#39;</span>  
-<span class="k">ELSE</span> <span class="k">NULL</span> <span class="k">END</span><span class="p">;</span>
-
-<span class="c1">--CASE搜索函数 …</span></pre></div>
-                                <p class="readmore">
-                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/oracle-skills.html">Read more...</a>
-                                </p>
-                            </div><!-- /.entry-content -->
-                            <hr/>
-                        </article>
-                    </li>
                     </ol><!-- /#posts-list -->
 <p class="paginator">
-    Page 1 / 1
+    Page 1 / 2
+        <a href="https://jlhxxxx.github.io/author/aman2.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->
 </div>
