@@ -1,5 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Aman</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/aman.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-05-28T00:00:00+08:00</updated><entry><title>Red Hat Enterprise更换CentOS Yum源</title><link href="https://jlhxxxx.github.io/rhe-change-yum.html" rel="alternate"></link><published>2018-05-28T00:00:00+08:00</published><updated>2018-05-28T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-28:/rhe-change-yum.html</id><summary type="html">&lt;h2&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Aman</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/aman.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-06-20T00:00:00+08:00</updated><entry><title>Oracle报错排查：ORA-00020:maximum number of processes (500) exceeded</title><link href="https://jlhxxxx.github.io/oracle-troubleshooting.html" rel="alternate"></link><published>2018-06-20T00:00:00+08:00</published><updated>2018-06-20T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-06-20:/oracle-troubleshooting.html</id><summary type="html">&lt;p&gt;看到这个报错的时候，已经连不上数据库了。所以思路是：先结束掉部分进程，再增大连接数。&lt;/p&gt;
+&lt;p&gt;先查找进程：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep oracle&lt;/span&gt;
+oracle    &lt;span class="m"&gt;4801&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; Apr28 ?        &lt;span class="m"&gt;00&lt;/span&gt;:02:24 tnslsnr LISTENER -inherit
+oracle   &lt;span class="m"&gt;16284&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;11&lt;/span&gt;:41 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:06 ora_pmon_orcl
+......
+oracle   &lt;span class="m"&gt;22021&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;看到这个报错的时候，已经连不上数据库了。所以思路是：先结束掉部分进程，再增大连接数。&lt;/p&gt;
+&lt;p&gt;先查找进程：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep oracle&lt;/span&gt;
+oracle    &lt;span class="m"&gt;4801&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; Apr28 ?        &lt;span class="m"&gt;00&lt;/span&gt;:02:24 tnslsnr LISTENER -inherit
+oracle   &lt;span class="m"&gt;16284&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;11&lt;/span&gt;:41 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:06 ora_pmon_orcl
+......
+oracle   &lt;span class="m"&gt;22021&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+oracle   &lt;span class="m"&gt;22029&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:02:53 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+......
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;发现非本地连接都带有&lt;code&gt;LOCAL=NO&lt;/code&gt;，这样就简单了，验证一下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep LOCAL=NO|grep -v grep&lt;/span&gt;
+oracle   &lt;span class="m"&gt;22021&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+......
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;确实都是Oracle的进程，结束掉几个就好了，只要让能连上数据库：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# 两种写法都可以，结束掉前10个进程&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep LOCAL=NO|grep -v grep|awk &amp;#39;{print $2}&amp;#39;|head|xargs kill -9&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep LOCAL=NO|grep -v grep|cut -c 9-15|head|xargs kill -9&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;连接数据库：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;sqlplus&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nolog&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;connect&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;sysdba&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;修改连接数，重启Oracle：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;alter&lt;/span&gt; &lt;span class="k"&gt;system&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;processes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt; &lt;span class="k"&gt;scope&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;spfile&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;SHUTDOWN&lt;/span&gt; &lt;span class="k"&gt;IMMEDIATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;STARTUP&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;验证一下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;show&lt;/span&gt; &lt;span class="k"&gt;parameter&lt;/span&gt; &lt;span class="n"&gt;processes&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="n"&gt;NAME&lt;/span&gt;                     &lt;span class="k"&gt;TYPE&lt;/span&gt;    &lt;span class="n"&gt;VALUE&lt;/span&gt;
+&lt;span class="c1"&gt;------------------------------------ ----------- ------------------------------&lt;/span&gt;
+&lt;span class="n"&gt;aq_tm_processes&lt;/span&gt;              &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;db_writer_processes&lt;/span&gt;          &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;gcs_server_processes&lt;/span&gt;             &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;global_txn_processes&lt;/span&gt;             &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;job_queue_processes&lt;/span&gt;          &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;1000&lt;/span&gt;
+&lt;span class="n"&gt;log_archive_max_processes&lt;/span&gt;        &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;4&lt;/span&gt;
+&lt;span class="n"&gt;processes&lt;/span&gt;                &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;1000&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;连接数已修改。但是没过一会连接又满了：&lt;code&gt;ORA-00020:maximum number of processes (1000) exceeded&lt;/code&gt;，这时候就要排查问题了。&lt;/p&gt;
+&lt;p&gt;再次连上数据库，观察会话使用情况：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;v$session&lt;/span&gt; &lt;span class="k"&gt;group&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt; &lt;span class="k"&gt;order&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;......&lt;/span&gt;
+&lt;span class="n"&gt;EVENT&lt;/span&gt;                                   &lt;span class="n"&gt;PROGRAM&lt;/span&gt;                             &lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;------------------------------------------------------------------------------ ----------&lt;/span&gt;
+&lt;span class="n"&gt;rdbms&lt;/span&gt; &lt;span class="n"&gt;ipc&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;                       &lt;span class="n"&gt;oracle&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;oramod&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;GEN0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;                      &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;Net&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;             &lt;span class="n"&gt;plsqldev&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exe&lt;/span&gt;                              &lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;Net&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;             &lt;span class="n"&gt;JDBC&lt;/span&gt; &lt;span class="n"&gt;Thin&lt;/span&gt; &lt;span class="n"&gt;Client&lt;/span&gt;                          &lt;span class="mi"&gt;78&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;可以看到JDBC连接数过多。&lt;/p&gt;
+&lt;p&gt;下面排查下是哪个项目的问题，首先查看每个oracle帐户的连接总数 ：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;v$session&lt;/span&gt; &lt;span class="k"&gt;where&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt; &lt;span class="k"&gt;group&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="n"&gt;USERNAME&lt;/span&gt;               &lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;USERNAME&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;------------------------------ ---------------&lt;/span&gt;
+&lt;span class="n"&gt;TEST_ROGCHEN&lt;/span&gt;                    &lt;span class="mi"&gt;11&lt;/span&gt;
+&lt;span class="n"&gt;DEPT_USERCENTER&lt;/span&gt;                 &lt;span class="mi"&gt;11&lt;/span&gt;
+&lt;span class="n"&gt;MMSW&lt;/span&gt;                        &lt;span class="mi"&gt;68&lt;/span&gt;
+&lt;span class="n"&gt;BYS&lt;/span&gt;                      &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;RSBGGFWWTADMIN&lt;/span&gt;                   &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;NW_SYBX&lt;/span&gt;                     &lt;span class="mi"&gt;12&lt;/span&gt;
+&lt;span class="n"&gt;APP_LZF&lt;/span&gt;                      &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;FZDKRH&lt;/span&gt;                       &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;SYS&lt;/span&gt;                      &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;FZGGFWWT&lt;/span&gt;                     &lt;span class="mi"&gt;4&lt;/span&gt;
+
+&lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="k"&gt;rows&lt;/span&gt; &lt;span class="n"&gt;selected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;可以看到连接最多的是MMSW账户。&lt;/p&gt;
+&lt;p&gt;查看所有链接Oracle的客户端的IP等信息： &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;由于缺省从 v$session 中不能直接获得客户端 IP，可以在数据库中创建一个追踪客户端IP地址的触发器： &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;create&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="k"&gt;replace&lt;/span&gt; &lt;span class="k"&gt;trigger&lt;/span&gt; &lt;span class="n"&gt;on_logon_trigger&lt;/span&gt; &lt;span class="k"&gt;after&lt;/span&gt; &lt;span class="n"&gt;logon&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="k"&gt;database&lt;/span&gt;
+  &lt;span class="mi"&gt;2&lt;/span&gt;  &lt;span class="k"&gt;begin&lt;/span&gt;
+  &lt;span class="mi"&gt;3&lt;/span&gt;      &lt;span class="n"&gt;dbms_application_info&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_client_info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys_context&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;userenv&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ip_address&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; 
+  &lt;span class="mi"&gt;4&lt;/span&gt;  &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="mi"&gt;5&lt;/span&gt;  &lt;span class="o"&gt;/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;显示客户端信息：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;sid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;serial&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;client_info&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;v$session&lt;/span&gt; &lt;span class="k"&gt;where&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt; &lt;span class="k"&gt;order&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="p"&gt;......&lt;/span&gt;
+    &lt;span class="n"&gt;SID&lt;/span&gt;    &lt;span class="nb"&gt;SERIAL&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;USERNAME&lt;/span&gt;    &lt;span class="n"&gt;PROGRAM&lt;/span&gt;             &lt;span class="n"&gt;MACHINE&lt;/span&gt;   &lt;span class="n"&gt;CLIENT_INFO&lt;/span&gt;
+&lt;span class="c1"&gt;----------------------------------------------------------------------------------------&lt;/span&gt;
+    &lt;span class="mi"&gt;12&lt;/span&gt;    &lt;span class="mi"&gt;505&lt;/span&gt; &lt;span class="n"&gt;TEST_ROGCHEN&lt;/span&gt;    &lt;span class="n"&gt;JDBC&lt;/span&gt; &lt;span class="n"&gt;Thin&lt;/span&gt; &lt;span class="n"&gt;Client&lt;/span&gt;     &lt;span class="n"&gt;rhel7&lt;/span&gt;     &lt;span class="mi"&gt;192&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;168&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;44&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;81&lt;/span&gt;
+&lt;span class="p"&gt;......&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以看到链接最多的来自192.168.44.81这台主机。&lt;/p&gt;
+&lt;p&gt;所以初步判断为192.168.44.81主机上使用MMSW账户的项目有问题。然后就没有然后了。&lt;/p&gt;
+&lt;h3&gt;参考文章&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://blog.itpub.net/12798004/viewspace-1742938/"&gt;ORA-00020:maximum number of processes (500) exceeded 错误解决方法&lt;/a&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://blog.csdn.net/keaihuilang/article/details/54910573"&gt;ORA-00020: maximum number of processes (1000) exceeded 故障一列&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://blog.csdn.net/sunny05296/article/details/79171018"&gt;查看Oracle链接客户端的IP等信息&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Oracle"></category><category term="Troubleshooting"></category></entry><entry><title>Red Hat Enterprise更换CentOS Yum源</title><link href="https://jlhxxxx.github.io/rhe-change-yum.html" rel="alternate"></link><published>2018-05-28T00:00:00+08:00</published><updated>2018-05-28T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-28:/rhe-change-yum.html</id><summary type="html">&lt;h2&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h2&gt;
 &lt;p&gt;查看当前系统版本&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat /etc/issue     &lt;span class="c1"&gt;# 查看系统版本&lt;/span&gt;
 cat /proc/version  &lt;span class="c1"&gt;# 查看内核版本&lt;/span&gt;

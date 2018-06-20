@@ -81,6 +81,61 @@
                         <article>
                             <header>
                                 <h1 class="entry-title">
+                                    <a href="https://jlhxxxx.github.io/postman-start.html" rel="bookmark" title="Permalink to Postman入门第一坑：提取返回值">
+                                       Postman入门第一坑：提取返回值
+                                    </a>
+                                </h1>
+                            </header>
+                            <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="https://jlhxxxx.github.io/category/test-tools.html">Test Tools</a>
+
+    on 2018-04-13
+
+        |
+        tags:         <a href="https://jlhxxxx.github.io/tag/postman.html">Postman</a>
+        <a href="https://jlhxxxx.github.io/tag/interface.html">Interface</a>
+        <a href="https://jlhxxxx.github.io/tag/test.html">Test</a>
+
+
+
+    
+</footer><!-- /.post-info -->                                <p>Postman是做接口测试的，但是很多接口并不是直接就能测，有的需要一些预处理。比如说身份认证，需要传递一个<a href="https://zh.wikipedia.org/wiki/%E5%AE%89%E5%85%A8%E4%BB%A4%E7%89%8C">token</a>。如果做网页测试，一般打开登陆界面的时候就会生成一个token，如果返回值是json格式，用Postman从中提取值是很简单的，在Tests中输入：</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">jsonData</span> <span class="o">=</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">responseBody</span><span class="p">);</span><span class="c1">//获取body中返回的所有参数</span>
+<span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;appKey&quot;</span><span class="p">,</span><span class="nx">jsonData</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">keys</span><span class="p">);</span><span class="c1">//把返回参数中的keys设置为环境变量</span>
+</pre></div>
+
+
+<p><img alt="Postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-01.png?raw=true"></p>
+<p>如果token在返回的header里，也很简单：</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">Postman</span><span class="p">.</span><span class="nx">getResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
+<span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">,</span><span class="nx">value</span><span class="p">);</span>
+</pre></div>
+
+
+<p><img alt="Postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-02.png?raw=true"></p>
+<p>如果token在返回值的body中，呵呵，网上并没有适合小白看的清晰的解决方法。我花了<strong>好长好长好长</strong>时间才找到这么两行小字：</p>
+<div class="highlight"><pre><span></span><span class="c1">//转换XML body为JSON对象</span>
+<span class="kd">var</span> <span class="nx">jsonObject</span> <span class="o">=</span> <span class="nx">xml2Json</span><span class="p">(</span><span class="nx">responseBody</span><span class="p">);</span>
+</pre></div>
+
+
+<p>那我的思路就有了 …</p>
+                                <p class="readmore">
+                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/postman-start.html">Read more...</a>
+                                </p>
+                            </div><!-- /.entry-content -->
+                            <hr/>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <header>
+                                <h1 class="entry-title">
                                     <a href="https://jlhxxxx.github.io/oracle-skills.html" rel="bookmark" title="Permalink to Oracle奇技淫巧">
                                        Oracle奇技淫巧
                                     </a>
