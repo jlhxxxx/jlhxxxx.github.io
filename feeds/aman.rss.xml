@@ -6,7 +6,7 @@ oracle    &lt;span class="m"&gt;4801&lt;/span&gt;     &lt;span class="m"&gt;1&lt
 oracle   &lt;span class="m"&gt;16284&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;11&lt;/span&gt;:41 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:06 ora_pmon_orcl
 ......
 oracle   &lt;span class="m"&gt;22021&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
-oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Wed, 20 Jun 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-06-20:/oracle-00020.html</guid><category>Oracle</category><category>00020</category></item><item><title>Red Hat Enterprise更换CentOS Yum源</title><link>https://jlhxxxx.github.io/rhe-change-yum.html</link><description>&lt;h2&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h2&gt;
+oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Wed, 20 Jun 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-06-20:/oracle-00020.html</guid><category>Oracle</category><category>Troubleshooting</category></item><item><title>Red Hat Enterprise更换CentOS Yum源</title><link>https://jlhxxxx.github.io/rhe-change-yum.html</link><description>&lt;h2&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h2&gt;
 &lt;p&gt;查看当前系统版本&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat /etc/issue     &lt;span class="c1"&gt;# 查看系统版本&lt;/span&gt;
 cat /proc/version  &lt;span class="c1"&gt;# 查看内核版本&lt;/span&gt;
@@ -191,14 +191,14 @@ rpm -qa&lt;span class="p"&gt;|&lt;/span&gt;grep yum&lt;span class="p"&gt;|&lt;/s
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="Postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-01.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-01.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;如果token在返回的header里，也很简单：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Postman&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getResponseHeader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;postman&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getResponseHeader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="nx"&gt;pm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;environment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="Postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-02.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-02.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;如果token在返回值的body中，呵呵，网上并没有适合小白看的清晰的解决方法。我花了&lt;strong&gt;好长好长好长&lt;/strong&gt;时间才找到这么两行小字：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;//转换XML body为JSON对象&lt;/span&gt;
 &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;jsonObject&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;xml2Json&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;responseBody&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;

@@ -108,14 +108,14 @@
 </pre></div>
 
 
-<p><img alt="Postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-01.png?raw=true"></p>
+<p><img alt="postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-01.png?raw=true"></p>
 <p>如果token在返回的header里，也很简单：</p>
-<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">Postman</span><span class="p">.</span><span class="nx">getResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">postman</span><span class="p">.</span><span class="nx">getResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
 <span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">,</span><span class="nx">value</span><span class="p">);</span>
 </pre></div>
 
 
-<p><img alt="Postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-02.png?raw=true"></p>
+<p><img alt="postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-02.png?raw=true"></p>
 <p>如果token在返回值的body中，呵呵，网上并没有适合小白看的清晰的解决方法。我花了<strong>好长好长好长</strong>时间才找到这么两行小字：</p>
 <div class="highlight"><pre><span></span><span class="c1">//转换XML body为JSON对象</span>
 <span class="kd">var</span> <span class="nx">jsonObject</span> <span class="o">=</span> <span class="nx">xml2Json</span><span class="p">(</span><span class="nx">responseBody</span><span class="p">);</span>
@@ -146,7 +146,7 @@
 <p><em>为了调试方便，我们这里取全局（globals）变量，因为环境（environment）变量只有在测试执行过程中才存在，测试执行完就释放了。</em></p>
 </blockquote>
 <p><code>send</code>之后点右上角小眼睛，如果全局变量取到值的话这里会有显示的：</p>
-<p><img alt="Postman-start-03.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-03.png?raw=true"></p>
+<p><img alt="p-start-03.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-03.png?raw=true"></p>
 <p>然而并没有，排查原因，把最后的<code>content</code>去掉试试（为了看的更清楚，把<code>[4]</code>也去掉）：</p>
 <div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">jsonObject</span> <span class="o">=</span> <span class="nx">xml2Json</span><span class="p">(</span><span class="nx">responseBody</span><span class="p">);</span>
 <span class="nx">pm</span><span class="p">.</span><span class="nx">globals</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;token&quot;</span><span class="p">,</span> <span class="nx">jsonObject</span><span class="p">.</span><span class="nx">html</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">meta</span><span class="p">);</span>
@@ -160,16 +160,16 @@
 </pre></div>
 
 
-<p><img alt="Postman-start-05.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-05.png?raw=true"></p>
+<p><img alt="postman-start-05.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-05.png?raw=true"></p>
 <p>将json复制出来美化一下：</p>
-<p><img alt="Postman-start-06.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-06.png?raw=true"></p>
+<p><img alt="postman-start-06.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-06.png?raw=true"></p>
 <p>原来<code>meta</code>下一层是个<code>$</code>。事后才醒悟过来，<code>name</code>和<code>content</code>并不是<code>meta</code>的下层，而是<code>meta</code>的属性，<code>xml2Json()</code>方法将属性转换成<code>$</code>标记的下层。</p>
 <p>修改之后再次测试：</p>
 <div class="highlight"><pre><span></span><span class="nx">pm</span><span class="p">.</span><span class="nx">globals</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;token&quot;</span><span class="p">,</span> <span class="nx">jsonObject</span><span class="p">.</span><span class="nx">html</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">meta</span><span class="p">[</span><span class="mi">4</span><span class="p">].</span><span class="nx">$</span><span class="p">.</span><span class="nx">content</span><span class="p">);</span>
 </pre></div>
 
 
-<p><img alt="Postman-start-07.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-07.png?raw=true"></p>
+<p><img alt="postman-start-07.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-07.png?raw=true"></p>
 <p>完美解决。</p>
 <h3>总结</h3>
 <p>Postman从响应中提取值的方法：</p>
@@ -183,7 +183,7 @@
 </li>
 <li>
 <p>从html的Header中提取</p>
-<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">Postman</span><span class="p">.</span><span class="nx">getResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">postman</span><span class="p">.</span><span class="nx">getResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
 <span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">,</span><span class="nx">value</span><span class="p">);</span>
 </pre></div>
 

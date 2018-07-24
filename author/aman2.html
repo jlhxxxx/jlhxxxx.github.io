@@ -110,14 +110,14 @@
 </pre></div>
 
 
-<p><img alt="Postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-01.png?raw=true"></p>
+<p><img alt="postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-01.png?raw=true"></p>
 <p>如果token在返回的header里，也很简单：</p>
-<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">Postman</span><span class="p">.</span><span class="nx">getResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">postman</span><span class="p">.</span><span class="nx">getResponseHeader</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">);</span>
 <span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;Access-Token&quot;</span><span class="p">,</span><span class="nx">value</span><span class="p">);</span>
 </pre></div>
 
 
-<p><img alt="Postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-02.png?raw=true"></p>
+<p><img alt="postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-02.png?raw=true"></p>
 <p>如果token在返回值的body中，呵呵，网上并没有适合小白看的清晰的解决方法。我花了<strong>好长好长好长</strong>时间才找到这么两行小字：</p>
 <div class="highlight"><pre><span></span><span class="c1">//转换XML body为JSON对象</span>
 <span class="kd">var</span> <span class="nx">jsonObject</span> <span class="o">=</span> <span class="nx">xml2Json</span><span class="p">(</span><span class="nx">responseBody</span><span class="p">);</span>
