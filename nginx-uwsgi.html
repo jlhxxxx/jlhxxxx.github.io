@@ -124,23 +124,24 @@ WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛�
 <p>Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。其特点是占有内存少，并发能力强。</p>
 <p>它具有反向代理服务器的所有特点，并且配置简单，支持对大于1kb的文件进行压缩，静态文件缓存，可以大大提高访问效率。Nginx接受来自客户端的Http请求发送给uWSGI，uWSGI处理请求并将关键信息传递给web应用(django，flask等)，应用返回Response经由uWSGI发送给Nginx，Nginx再发送给客户端。 </p>
 <h2>实践</h2>
+<p><strong>本文实践部分基于Python3</strong></p>
 <h3>安装uWSGI</h3>
-<div class="highlight"><pre><span></span>pip3 install uwsgi
+<div class="highlight"><pre><span></span>$ pip install uwsgi
 </pre></div>
 
 
 <p>如果无法安装有报错，请先尝试：</p>
-<div class="highlight"><pre><span></span>yum install python34-devel
+<div class="highlight"><pre><span></span>$ yum install python34-devel
 </pre></div>
 
 
 <p>运行服务时如果报错<code>!!! no internal routing support, rebuild with pcre support !!!</code>：</p>
 <div class="highlight"><pre><span></span># 先卸载
-pip uninstall uwsgi
+$ pip uninstall uwsgi
 # 安装pcre支持库
-yum install pcre pcre-devel pcre-static
+$ yum install pcre pcre-devel pcre-static
 # 重新安装uwsgi，不走pip缓存
-pip install uwsgi -I --no-cache-dir
+$ pip install uwsgi -I --no-cache-dir
 </pre></div>
 
 
@@ -196,7 +197,7 @@ root     <span class="m">16964</span>     <span class="m">1</span>  <span class=
 </pre></div>
 
 
-<p>我们要修改的是<code>location</code>选项，打开<code>/etc/nginx/nginx.conf</code>，没有找到<code>location</code>，但是有一行<code>include /etc/nginx/conf.d/*.conf</code>，转到“include /etc/nginx/conf.d/”下，打开“default.conf”，找到了<code>location</code>，修改为：</p>
+<p>我们要修改的是<code>location</code>选项，打开<code>/etc/nginx/nginx.conf</code>，没有找到<code>location</code>，但是有一行<code>include /etc/nginx/conf.d/*.conf</code>，转到“include /etc/nginx/conf.d/”下，打开“default.conf”，找到<code>location</code>，修改为：</p>
 <div class="highlight"><pre><span></span><span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
     <span class="err">include</span> <span class="err">uwsgi_params</span><span class="p">;</span>
     <span class="err">uwsgi_pass</span> <span class="err">127.0.0.1:3031</span><span class="p">;</span>
@@ -284,15 +285,35 @@ $ uwsgi myapp.ini
 
 
 <p><code>mount</code>参数表示将<code>/myapp</code>地址路由到”server.py”中，<code>manage-script-name</code>参数表示启用之前在Nginx里配置的”SCRIPT_NAME”参数。再次重启Nginx和uWSGI，你就可以通过”http://localhost/myapp”来访问应用了。</p>
+<h3>端口优化</h3>
+<p>上面例子中，我们是通过”127.0.0.1:3031″Socket端口来连接Nginx和uWSGI的，其实我们也可以采用socket文件的方式，这样可以不用写死端口。在uWSGI的启动配置中，我们要修改”socket”项：</p>
+<div class="highlight"><pre><span></span><span class="k">[uwsgi]</span>
+<span class="na">socket</span><span class="o">=</span><span class="s">/tmp/uwsgi.sock</span>
+<span class="na">...</span>
+</pre></div>
+
+
+<p>启动uWSGI服务器后，它会自动创建一个”/tmp/uwsgi.sock”文件。然后让我们修改Nginx配置文件，将”uwsgi_pass”配置项改为文件：</p>
+<div class="highlight"><pre><span></span><span class="nt">location</span> <span class="o">/</span><span class="nt">myapp</span> <span class="p">{</span>
+    <span class="err">include</span> <span class="err">uwsgi_params</span><span class="p">;</span>
+    <span class="err">uwsgi_param</span> <span class="err">SCRIPT_NAME</span> <span class="err">/myapp</span><span class="p">;</span>
+    <span class="err">uwsgi_pass</span> <span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">uwsgi</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>重启Nginx服务器即可。这里要注意Nginx的用户必须要有“uwsgi.sock”文件的读写的权限。</p>
 <h3>参考文章：</h3>
 <ul>
 <li>本文原理部分来自：<a href="https://blog.csdn.net/shu_8708/article/details/79068581">浅谈uWSGI和Nginx</a></li>
 <li>实践部分来自：<a href="http://www.bjhee.com/nginx-uwsgi.html">思诚之道——使用Nginx和uWSGI来运行Python应用</a> </li>
-<li>其他参考</li>
+<li>其他参考<ul>
 <li><a href="https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/index.html">uWSGI中文文档</a></li>
 <li><a href="https://www.jb51.net/article/137856.htm">django启动uwsgi报错的解决方法</a></li>
 <li><a href="https://www.cnblogs.com/already/p/4680259.html">解决nginx下connect() to 127.0.0.1:3000 failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: 错误信息</a></li>
 <li><a href="https://www.cnblogs.com/asmer-stone/p/5470144.html">virtualenvwrapper 的安装和使用</a></li>
+</ul>
+</li>
 </ul>
 
       </div><!-- /.entry-content -->
