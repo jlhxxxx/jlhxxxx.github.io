@@ -28,7 +28,7 @@ WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛�
 &lt;p&gt;Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。其特点是占有内存少，并发能力强。&lt;/p&gt;
 &lt;p&gt;它具有反向代理服务器的所有特点，并且配置简单，支持对大于1kb的文件进行压缩，静态文件缓存，可以大大提高访问效率。Nginx接受来自客户端的Http请求发送给uWSGI，uWSGI处理请求并将关键信息传递给web应用(django，flask等)，应用返回Response经由uWSGI发送给Nginx，Nginx再发送给客户端。 &lt;/p&gt;
 &lt;h2&gt;实践&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;本文实践部分基于Python3&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;本文实践部分基于CentOS6和Python3&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;安装uWSGI&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip install uwsgi
 &lt;/pre&gt;&lt;/div&gt;
@@ -91,7 +91,7 @@ $ pip install uwsgi -I --no-cache-dir
 
 &lt;h3&gt;安装及配置Nginx&lt;/h3&gt;
 &lt;p&gt;安装：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;nginx&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;nginx&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 

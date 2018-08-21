@@ -124,7 +124,7 @@ WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛�
 <p>Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。其特点是占有内存少，并发能力强。</p>
 <p>它具有反向代理服务器的所有特点，并且配置简单，支持对大于1kb的文件进行压缩，静态文件缓存，可以大大提高访问效率。Nginx接受来自客户端的Http请求发送给uWSGI，uWSGI处理请求并将关键信息传递给web应用(django，flask等)，应用返回Response经由uWSGI发送给Nginx，Nginx再发送给客户端。 </p>
 <h2>实践</h2>
-<p><strong>本文实践部分基于Python3</strong></p>
+<p><strong>本文实践部分基于CentOS6和Python3</strong></p>
 <h3>安装uWSGI</h3>
 <div class="highlight"><pre><span></span>$ pip install uwsgi
 </pre></div>
@@ -187,7 +187,7 @@ $ pip install uwsgi -I --no-cache-dir
 
 <h3>安装及配置Nginx</h3>
 <p>安装：</p>
-<div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">nginx</span>
+<div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">nginx</span>
 </pre></div>
 
 
