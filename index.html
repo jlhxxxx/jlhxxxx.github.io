@@ -81,6 +81,48 @@
                         <article>
                             <header>
                                 <h1 class="entry-title">
+                                    <a href="https://jlhxxxx.github.io/nginx-uwsgi.html" rel="bookmark" title="Permalink to 使用Nginx+uWSGI+Flask部署应用">
+                                       使用Nginx+uWSGI+Flask部署应用
+                                    </a>
+                                </h1>
+                            </header>
+                            <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="https://jlhxxxx.github.io/category/software.html">Software</a>
+
+    on 2018-08-21
+
+        |
+        tags:         <a href="https://jlhxxxx.github.io/tag/nginx.html">Nginx</a>
+        <a href="https://jlhxxxx.github.io/tag/uwsgi.html">uWSGI</a>
+        <a href="https://jlhxxxx.github.io/tag/flask.html">Flask</a>
+
+
+
+    
+</footer><!-- /.post-info -->                                <h2>原理</h2>
+<h3>WIGS(Web Server Gateway Interface)服务器网关接口</h3>
+<p>是Python应用程序或框架和Web服务器之间的一种接口，已经被广泛接受, 它已基本达成它的可移植性方面的目标。 
+WSGI 没有官方的实现，因为WSGI更像一个协议。只要遵照这些协议，WSGI应用(Application)都可以在任何服务器(Server)上运行，反之亦然。 
+WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛使用的django框架。</p>
+<p><strong>所以说WIGS是一种标准</strong></p>
+<h3>uWIGS</h3>
+<p>可以看作是一个应用程序，帮助我们实现WSGI协议，Http协议，这样我们可以不再关注网络通信的底层实现，将精力更多放在处理HTTP请求数据，返回HTML。利用uWIGS可以使我们的web应用得到更强的并发能力，uWIGS也可以返回静态文件(css，js，img…)，但是很笨拙，一般静态文件都交由Nginx进行传输，所以配置中一般不配置static-map，如果直接由uWIGS接受HTTP请求则需要设置http:xxxx，如果只需要与反向代理服务器进行交互则只需要接受socket，uWIGS与Nginx交互相当于两个进程间交互，一般使用的是.sock文件或者指定端口接受socket。指定端口时再使用浏览器访问相应端口，uWIGS会提示skip，跳过该HTTP请求 …</p>
+                                <p class="readmore">
+                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/nginx-uwsgi.html">Read more...</a>
+                                </p>
+                            </div><!-- /.entry-content -->
+                            <hr/>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <header>
+                                <h1 class="entry-title">
                                     <a href="https://jlhxxxx.github.io/oracle-00020.html" rel="bookmark" title="Permalink to Oracle报错排查：ORA-00020:maximum number of processes (500) exceeded">
                                        Oracle报错排查：ORA-00020:maximum number of processes (500) exceeded
                                     </a>
@@ -535,69 +577,6 @@ rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --no
 <div class="highlight"><pre><span></span><span class="k">SELECT …</span></pre></div></li></ul>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/oracle-get-sysdate.html">Read more...</a>
-                                </p>
-                            </div><!-- /.entry-content -->
-                            <hr/>
-                        </article>
-                    </li>
-                    <li>
-                        <article>
-                            <header>
-                                <h1 class="entry-title">
-                                    <a href="https://jlhxxxx.github.io/pelican-github.html" rel="bookmark" title="Permalink to windows下用Pelican+GitHub搭建静态博客">
-                                       windows下用Pelican+GitHub搭建静态博客
-                                    </a>
-                                </h1>
-                            </header>
-                            <div class="entry-content">
-<footer class="post-info">
-    <address class="vcard author">
-        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
-    </address>
-
-    in <a href="https://jlhxxxx.github.io/category/software.html">Software</a>
-
-    on 2018-04-16
-
-        |
-        tags:         <a href="https://jlhxxxx.github.io/tag/github.html">GitHub</a>
-        <a href="https://jlhxxxx.github.io/tag/pelican.html">Pelican</a>
-        <a href="https://jlhxxxx.github.io/tag/blog.html">Blog</a>
-
-
-
-    
-</footer><!-- /.post-info -->                                <h2>一、使用GitHub Pages创建个人博客页面</h2>
-<ol>
-<li>首先到GitHub进行账号注册：<a href="https://github.com/">https://github.com/</a>。</li>
-<li>创建新仓库，不用新建readme.md，注意仓库名使用<em>username.github.io</em>的格式，这里<em>username</em>改成自己的用户名。</li>
-<li>创建SSH密钥并上传到GitHub。</li>
-</ol>
-<h2>二、安装Python、Pelican、Markdown和make</h2>
-<ol>
-<li>
-<p>安装Python。</p>
-</li>
-<li>
-<p>安装Pelican。建议在虚拟环境virtualenv下使用。</p>
-<ul>
-<li>
-<p>安装virtualenv（可选）</p>
-<div class="highlight"><pre><span></span>pip install virtualenv
-</pre></div>
-
-
-</li>
-<li>
-<p>为了使用virtualenv更方便，可以借助 virtualenvwrapper（可选）</p>
-<div class="highlight"><pre><span></span>pip install virtualenvwrapper-win
-</pre></div>
-
-
-<p>配置虚拟环境目录，默认创建的虚拟环境位于<strong>C:\Users\username\</strong>下，可以通过环境变量 <code>WORKON_HOME</code> 来定制。</p>
-<p>通过<strong>计算机--&gt;属性-- …</strong></p></li></ul></li></ol>
-                                <p class="readmore">
-                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/pelican-github.html">Read more...</a>
                                 </p>
                             </div><!-- /.entry-content -->
                             <hr/>

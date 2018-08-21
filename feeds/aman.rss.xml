@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Wed, 20 Jun 2018 00:00:00 +0800</lastBuildDate><item><title>Oracle报错排查：ORA-00020:maximum number of processes (500) exceeded</title><link>https://jlhxxxx.github.io/oracle-00020.html</link><description>&lt;p&gt;看到这个报错的时候，已经连不上数据库了。所以思路是：先结束掉部分进程，再增大连接数。&lt;/p&gt;
+<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Tue, 21 Aug 2018 00:00:00 +0800</lastBuildDate><item><title>使用Nginx+uWSGI+Flask部署应用</title><link>https://jlhxxxx.github.io/nginx-uwsgi.html</link><description>&lt;h2&gt;原理&lt;/h2&gt;
+&lt;h3&gt;WIGS(Web Server Gateway Interface)服务器网关接口&lt;/h3&gt;
+&lt;p&gt;是Python应用程序或框架和Web服务器之间的一种接口，已经被广泛接受, 它已基本达成它的可移植性方面的目标。 
+WSGI 没有官方的实现，因为WSGI更像一个协议。只要遵照这些协议，WSGI应用(Application)都可以在任何服务器(Server)上运行，反之亦然。 
+WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛使用的django框架。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所以说WIGS是一种标准&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;uWIGS&lt;/h3&gt;
+&lt;p&gt;可以看作是一个应用程序，帮助我们实现WSGI协议，Http协议，这样我们可以不再关注网络通信的底层实现，将精力更多放在处理HTTP请求数据，返回HTML。利用uWIGS可以使我们的web应用得到更强的并发能力，uWIGS也可以返回静态文件(css，js，img…)，但是很笨拙，一般静态文件都交由Nginx进行传输，所以配置中一般不配置static-map，如果直接由uWIGS接受HTTP请求则需要设置http:xxxx，如果只需要与反向代理服务器进行交互则只需要接受socket，uWIGS与Nginx交互相当于两个进程间交互，一般使用的是.sock文件或者指定端口接受socket。指定端口时再使用浏览器访问相应端口，uWIGS会提示skip，跳过该HTTP请求 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Tue, 21 Aug 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-08-21:/nginx-uwsgi.html</guid><category>Nginx</category><category>uWSGI</category><category>Flask</category></item><item><title>Oracle报错排查：ORA-00020:maximum number of processes (500) exceeded</title><link>https://jlhxxxx.github.io/oracle-00020.html</link><description>&lt;p&gt;看到这个报错的时候，已经连不上数据库了。所以思路是：先结束掉部分进程，再增大连接数。&lt;/p&gt;
 &lt;p&gt;先查找进程：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep oracle&lt;/span&gt;
 oracle    &lt;span class="m"&gt;4801&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; Apr28 ?        &lt;span class="m"&gt;00&lt;/span&gt;:02:24 tnslsnr LISTENER -inherit

@@ -1,5 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all-zh.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-06-20T00:00:00+08:00</updated><entry><title>Oracle报错排查：ORA-00020:maximum number of processes (500) exceeded</title><link href="https://jlhxxxx.github.io/oracle-00020.html" rel="alternate"></link><published>2018-06-20T00:00:00+08:00</published><updated>2018-06-20T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-06-20:/oracle-00020.html</id><summary type="html">&lt;p&gt;看到这个报错的时候，已经连不上数据库了。所以思路是：先结束掉部分进程，再增大连接数。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all-zh.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-08-21T00:00:00+08:00</updated><entry><title>使用Nginx+uWSGI+Flask部署应用</title><link href="https://jlhxxxx.github.io/nginx-uwsgi.html" rel="alternate"></link><published>2018-08-21T00:00:00+08:00</published><updated>2018-08-21T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-08-21:/nginx-uwsgi.html</id><summary type="html">&lt;h2&gt;原理&lt;/h2&gt;
+&lt;h3&gt;WIGS(Web Server Gateway Interface)服务器网关接口&lt;/h3&gt;
+&lt;p&gt;是Python应用程序或框架和Web服务器之间的一种接口，已经被广泛接受, 它已基本达成它的可移植性方面的目标。 
+WSGI 没有官方的实现，因为WSGI更像一个协议。只要遵照这些协议，WSGI应用(Application)都可以在任何服务器(Server)上运行，反之亦然。 
+WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛使用的django框架。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所以说WIGS是一种标准&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;uWIGS&lt;/h3&gt;
+&lt;p&gt;可以看作是一个应用程序，帮助我们实现WSGI协议，Http协议，这样我们可以不再关注网络通信的底层实现，将精力更多放在处理HTTP请求数据，返回HTML。利用uWIGS可以使我们的web应用得到更强的并发能力，uWIGS也可以返回静态文件(css，js，img…)，但是很笨拙，一般静态文件都交由Nginx进行传输，所以配置中一般不配置static-map，如果直接由uWIGS接受HTTP请求则需要设置http:xxxx，如果只需要与反向代理服务器进行交互则只需要接受socket，uWIGS与Nginx交互相当于两个进程间交互，一般使用的是.sock文件或者指定端口接受socket。指定端口时再使用浏览器访问相应端口，uWIGS会提示skip，跳过该HTTP请求 …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;原理&lt;/h2&gt;
+&lt;h3&gt;WIGS(Web Server Gateway Interface)服务器网关接口&lt;/h3&gt;
+&lt;p&gt;是Python应用程序或框架和Web服务器之间的一种接口，已经被广泛接受, 它已基本达成它的可移植性方面的目标。 
+WSGI 没有官方的实现，因为WSGI更像一个协议。只要遵照这些协议，WSGI应用(Application)都可以在任何服务器(Server)上运行，反之亦然。 
+WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛使用的django框架。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所以说WIGS是一种标准&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;uWIGS&lt;/h3&gt;
+&lt;p&gt;可以看作是一个应用程序，帮助我们实现WSGI协议，Http协议，这样我们可以不再关注网络通信的底层实现，将精力更多放在处理HTTP请求数据，返回HTML。利用uWIGS可以使我们的web应用得到更强的并发能力，uWIGS也可以返回静态文件(css，js，img…)，但是很笨拙，一般静态文件都交由Nginx进行传输，所以配置中一般不配置static-map，如果直接由uWIGS接受HTTP请求则需要设置http:xxxx，如果只需要与反向代理服务器进行交互则只需要接受socket，uWIGS与Nginx交互相当于两个进程间交互，一般使用的是.sock文件或者指定端口接受socket。指定端口时再使用浏览器访问相应端口，uWIGS会提示skip，跳过该HTTP请求。&lt;/p&gt;
+&lt;h3&gt;代理服务器(Proxy Server)&lt;/h3&gt;
+&lt;p&gt;是一种特殊的网络服务，允许一个网络终端（一般为客户端）通过这个服务与另一个网络终端（一般为服务器）进行非直接的连接。一些网关、路由器等网络设备具备网络代理功能。一般认为代理服务有利于保障网络终端的隐私或安全，防止攻击。 &lt;/p&gt;
+&lt;h3&gt;反向代理服务器(Reverse Proxy)&lt;/h3&gt;
+&lt;p&gt;反向代理，故名思意就是将代理服务器做出逆转，它主要的功能是代理服务器接收客户端发来的Http请求，转发到内部网络服务器，并返回Response给客户端。 
+反向代理的作用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;保证内网安全，可以使用反向代理服务器提供的WAF功能，阻止web攻击。&lt;/li&gt;
+&lt;li&gt;负载均衡，通过反向代理服务器来优化网站的负载&lt;/li&gt;
+&lt;li&gt;缓存静态资源，加快访问速度&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Nginx(engine x)&lt;/h3&gt;
+&lt;p&gt;Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。其特点是占有内存少，并发能力强。&lt;/p&gt;
+&lt;p&gt;它具有反向代理服务器的所有特点，并且配置简单，支持对大于1kb的文件进行压缩，静态文件缓存，可以大大提高访问效率。Nginx接受来自客户端的Http请求发送给uWSGI，uWSGI处理请求并将关键信息传递给web应用(django，flask等)，应用返回Response经由uWSGI发送给Nginx，Nginx再发送给客户端。 &lt;/p&gt;
+&lt;h2&gt;实践&lt;/h2&gt;
+&lt;h3&gt;安装uWSGI&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip3 install uwsgi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果无法安装有报错，请先尝试：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install python34-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;运行服务时如果报错&lt;code&gt;!!! no internal routing support, rebuild with pcre support !!!&lt;/code&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 先卸载
+pip uninstall uwsgi
+# 安装pcre支持库
+yum install pcre pcre-devel pcre-static
+# 重新安装uwsgi，不走pip缓存
+pip install uwsgi -I --no-cache-dir
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;测试代码”server.py” ：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;200 OK&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;   &lt;span class="c1"&gt;# python2可不用byte，python3必须要&lt;/span&gt;
+
+    &lt;span class="n"&gt;response_headers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Content-type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Content-Length&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;)))]&lt;/span&gt;
+    &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;response_headers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;执行命令，&lt;code&gt;--http&lt;/code&gt;参数指定了HTTP监听地址和端口，&lt;code&gt;- -wsgi-file&lt;/code&gt;参数指定了WSGI应用程序入口，uWSGI会自动搜寻名为&lt;code&gt;application&lt;/code&gt;的应用对象并调用它 ：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;uwsgi&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;9090&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;wsgi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;打开浏览器，访问”http://localhost:9090″，你就可以看到”Hello World!”。&lt;/p&gt;
+&lt;p&gt;uWSGI可以支持多进程和多线程的方式启动应用，也可以监控应用的运行状态。我们将启动的命令改为：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ uwsgi --http :9090 --wsgi-file server.py --master --processes &lt;span class="m"&gt;4&lt;/span&gt; --threads &lt;span class="m"&gt;2&lt;/span&gt; --stats &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:9191
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;执行它后，uWSGI将启动4个应用进程，每个进程有2个线程，和一个master主进程（监控其他进程状态，如果有进程死了，则重启）。可以把这些都写进一个配置文件”myapp.ini”：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[uwsgi]&lt;/span&gt;
+&lt;span class="na"&gt;http&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;:9090&lt;/span&gt;
+&lt;span class="na"&gt;wsgi-file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;server.py&lt;/span&gt;
+&lt;span class="na"&gt;master&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="na"&gt;processes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;4&lt;/span&gt;
+&lt;span class="na"&gt;threads&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;2&lt;/span&gt;
+&lt;span class="na"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;127.0.0.1:9191&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后就可以将启动命令简化为：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ uwsgi myapp.ini
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;安装及配置Nginx&lt;/h3&gt;
+&lt;p&gt;安装：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;nginx&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;查看配置文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ps -ef&lt;span class="p"&gt;|&lt;/span&gt;grep nginx
+root     &lt;span class="m"&gt;16964&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;16&lt;/span&gt;:23 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我们要修改的是&lt;code&gt;location&lt;/code&gt;选项，打开&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;，没有找到&lt;code&gt;location&lt;/code&gt;，但是有一行&lt;code&gt;include /etc/nginx/conf.d/*.conf&lt;/code&gt;，转到“include /etc/nginx/conf.d/”下，打开“default.conf”，找到了&lt;code&gt;location&lt;/code&gt;，修改为：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:3031&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这段配置表明Nginx会将收到的所有请求都转发到”127.0.0.1:3031″端口上 。&lt;/p&gt;
+&lt;p&gt;然后将uWSGI的HTTP端口监听改为socket端口监听，即将配置文件中的&lt;code&gt;http&lt;/code&gt;项去掉，改为&lt;code&gt;socket&lt;/code&gt;项：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[uwsgi]&lt;/span&gt;
+&lt;span class="na"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;127.0.0.1:3031&lt;/span&gt;
+&lt;span class="na"&gt;wsgi-file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;server.py&lt;/span&gt;
+&lt;span class="na"&gt;master&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="na"&gt;processes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;4&lt;/span&gt;
+&lt;span class="na"&gt;threads&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;2&lt;/span&gt;
+&lt;span class="na"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;127.0.0.1:9191&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;重启Nginx，并启动uWSGI服务器： &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo service nginx restart
+$ uwsgi myapp.ini
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;访问”http://localhost”（Nginx默认使用&lt;code&gt;80&lt;/code&gt;端口，可以在“default.conf”修改），顺利的话我们会再次看到”Hello World!”。 &lt;/p&gt;
+&lt;p&gt;不顺利的话，继续往下看。如果打开网站什么都看不到，不要急，从“nginx.conf”找到日志文件目录“/var/log/nginx/”，打开“error.log”，先找到报错信息“connect() to 127.0.0.1:3031 failed (13: Permission denied) while connecting to upstream”，百度解决问题：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:3031&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;重启Nginx，并启动uWSGI服务器，终于可以看到”Hello World!”。&lt;/p&gt;
+&lt;h3&gt;运行Flask应用&lt;/h3&gt;
+&lt;p&gt;其实很简单，只要将上例中"server.py"的内容改为Flask应用即可，当然你需要先把Flask包安装好。 &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;
+&lt;span class="n"&gt;application&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nd"&gt;@application.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;index&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;很多人习惯将Flask应用对象取名为”app”，但是WSGI标准是”application”。uWSGI提供了一个功能，可以指定应用对象，方法就是在配置文件中加上”callable”项：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[uwsgi]&lt;/span&gt;
+&lt;span class="na"&gt;...&lt;/span&gt;
+&lt;span class="na"&gt;callable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;app&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;现在，我们的Flask应用就可以使用”app”作为对象名了 ：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:3031&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;使用Python虚拟环境&lt;/h3&gt;
+&lt;p&gt;虚拟环境的安装见文末参考文章。采用虚拟环境来避免应用间冲突，uWSGI可以非常容易做到这点，就是在配置文件中加上”virtualenv”项：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[uwsgi]&lt;/span&gt;
+&lt;span class="na"&gt;...&lt;/span&gt;
+&lt;span class="na"&gt;virtualenv＝/home/bjhee/virtualenv&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;一个Nginx中，可以同时运行多个应用，不一定是Python的应用。我们期望通过不同的路径来路由不同的应用，因此就不能像上例那样直接修改根目录的配置。假设我们希望通过”http://localhost/myapp”来访问我们的应用，首先要在Nginx的配置文件中，加入下面的内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myapp&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;uwsgi_param&lt;/span&gt; &lt;span class="err"&gt;SCRIPT_NAME&lt;/span&gt; &lt;span class="err"&gt;/myapp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:3031&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这里我们定义了一个uWSGI参数&lt;code&gt;SCRIPT_NAME&lt;/code&gt;，值为应用的路径&lt;code&gt;/myapp&lt;/code&gt;。接下来，在uWSGI的启动配置中，去掉&lt;code&gt;wsgi-file&lt;/code&gt;项，并加上：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[uwsgi]&lt;/span&gt;
+&lt;span class="na"&gt;...&lt;/span&gt;
+&lt;span class="na"&gt;mount&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/myapp=server.py&lt;/span&gt;
+&lt;span class="na"&gt;manage-script-name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;mount&lt;/code&gt;参数表示将&lt;code&gt;/myapp&lt;/code&gt;地址路由到”server.py”中，&lt;code&gt;manage-script-name&lt;/code&gt;参数表示启用之前在Nginx里配置的”SCRIPT_NAME”参数。再次重启Nginx和uWSGI，你就可以通过”http://localhost/myapp”来访问应用了。&lt;/p&gt;
+&lt;h3&gt;参考文章：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;本文原理部分来自：&lt;a href="https://blog.csdn.net/shu_8708/article/details/79068581"&gt;浅谈uWSGI和Nginx&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;实践部分来自：&lt;a href="http://www.bjhee.com/nginx-uwsgi.html"&gt;思诚之道——使用Nginx和uWSGI来运行Python应用&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;其他参考&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/index.html"&gt;uWSGI中文文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.jb51.net/article/137856.htm"&gt;django启动uwsgi报错的解决方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.cnblogs.com/already/p/4680259.html"&gt;解决nginx下connect() to 127.0.0.1:3000 failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: 错误信息&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.cnblogs.com/asmer-stone/p/5470144.html"&gt;virtualenvwrapper 的安装和使用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Nginx"></category><category term="uWSGI"></category><category term="Flask"></category></entry><entry><title>Oracle报错排查：ORA-00020:maximum number of processes (500) exceeded</title><link href="https://jlhxxxx.github.io/oracle-00020.html" rel="alternate"></link><published>2018-06-20T00:00:00+08:00</published><updated>2018-06-20T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-06-20:/oracle-00020.html</id><summary type="html">&lt;p&gt;看到这个报错的时候，已经连不上数据库了。所以思路是：先结束掉部分进程，再增大连接数。&lt;/p&gt;
 &lt;p&gt;先查找进程：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep oracle&lt;/span&gt;
 oracle    &lt;span class="m"&gt;4801&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; Apr28 ?        &lt;span class="m"&gt;00&lt;/span&gt;:02:24 tnslsnr LISTENER -inherit

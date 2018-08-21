@@ -5,30 +5,37 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jlhxxxx.github.io/</loc>
-<lastmod>2018-07-24T13:29:52-00:00</lastmod>
+<lastmod>2018-08-21T13:53:49-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jlhxxxx.github.io/archives.html</loc>
-<lastmod>2018-07-24T13:29:52-00:00</lastmod>
+<lastmod>2018-08-21T13:53:49-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jlhxxxx.github.io/tags.html</loc>
-<lastmod>2018-07-24T13:29:52-00:00</lastmod>
+<lastmod>2018-08-21T13:53:49-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jlhxxxx.github.io/categories.html</loc>
-<lastmod>2018-07-24T13:29:52-00:00</lastmod>
+<lastmod>2018-08-21T13:53:49-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/nginx-uwsgi.html</loc>
+<lastmod>2018-08-21T00:00:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
 </url>
 
 <url>
@@ -117,7 +124,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jlhxxxx.github.io/category/software.html</loc>
-<lastmod>2018-05-28T00:00:00+08:06</lastmod>
+<lastmod>2018-08-21T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -132,6 +139,27 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jlhxxxx.github.io/category/test-tools.html</loc>
 <lastmod>2018-04-13T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/tag/nginx.html</loc>
+<lastmod>2018-08-21T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/tag/uwsgi.html</loc>
+<lastmod>2018-08-21T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jlhxxxx.github.io/tag/flask.html</loc>
+<lastmod>2018-08-21T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -278,7 +306,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jlhxxxx.github.io/author/aman.html</loc>
-<lastmod>2018-06-20T00:00:00+08:06</lastmod>
+<lastmod>2018-08-21T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
