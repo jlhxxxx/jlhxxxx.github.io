@@ -81,6 +81,77 @@
                         <article>
                             <header>
                                 <h1 class="entry-title">
+                                    <a href="https://jlhxxxx.github.io/oracle-get-sysdate.html" rel="bookmark" title="Permalink to Oracle取系统时间">
+                                       Oracle取系统时间
+                                    </a>
+                                </h1>
+                            </header>
+                            <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="https://jlhxxxx.github.io/category/sql.html">SQL</a>
+
+    on 2018-04-23
+
+        |
+        tags:         <a href="https://jlhxxxx.github.io/tag/oracle.html">Oracle</a>
+
+
+
+    
+</footer><!-- /.post-info -->                                <ul>
+<li>
+<p>取今天</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>取上个月今天的前一天</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">ADD_MONTHS</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>取本月第一天</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;MM&#39;</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>取本季度第一天</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>取上季度第一天</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">ADD_MONTHS</span><span class="p">(</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">SYSDATE</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">),</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span><span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>取今年第一天</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT …</span></pre></div></li></ul>
+                                <p class="readmore">
+                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/oracle-get-sysdate.html">Read more...</a>
+                                </p>
+                            </div><!-- /.entry-content -->
+                            <hr/>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <header>
+                                <h1 class="entry-title">
                                     <a href="https://jlhxxxx.github.io/pelican-github.html" rel="bookmark" title="Permalink to windows下用Pelican+GitHub搭建静态博客">
                                        windows下用Pelican+GitHub搭建静态博客
                                     </a>

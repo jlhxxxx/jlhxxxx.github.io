@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Tue, 21 Aug 2018 00:00:00 +0800</lastBuildDate><item><title>使用Nginx+uWSGI+Flask部署应用</title><link>https://jlhxxxx.github.io/nginx-uwsgi.html</link><description>&lt;h2&gt;原理&lt;/h2&gt;
+<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Wed, 22 Aug 2018 00:00:00 +0800</lastBuildDate><item><title>Python pytesseract识别验证码</title><link>https://jlhxxxx.github.io/pytesseract.html</link><description>&lt;h2&gt;安装&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;安装库&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip install Pillow
+$ pip install pytesseract
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;安装&lt;a href="https://github.com/tesseract-ocr/tesseract/wiki"&gt;tesseract-ocr&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Windows下直接下载安装包，安装后添加到环境变量Path。&lt;/p&gt;
+&lt;p&gt;CentOS6下（前提是各种常用源都已安装，参考&lt;a href="https://blog.csdn.net/u010048823/article/details/51298183"&gt;centos7下添加常用YUM源(EPEL/Remi/RPMforge/php/Nginx)&lt;/a&gt;）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ yum install tesseract
+$ yum install tesseract-langpack-deu
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;验证码识别&lt;/h2&gt;
+&lt;p&gt;核心只有一个函数&lt;code&gt;pytesseract.image_to_string&lt;/code&gt;。&lt;/p&gt;
+&lt;h3&gt;简单的验证码识别&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="pytesseract-code1.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code1.jpg?raw=true"&gt;  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="pytesseract-code2.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code2.jpg?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;图片不需要任何处理：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;PIL&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Image&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pytesseract&lt;/span&gt;
+
+&lt;span class="n"&gt;img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;code.png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;vcode&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;pytesseract&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image_to_string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;eng …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Wed, 22 Aug 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-08-22:/pytesseract.html</guid><category>pytesseract</category></item><item><title>使用Nginx+uWSGI+Flask部署应用</title><link>https://jlhxxxx.github.io/nginx-uwsgi.html</link><description>&lt;h2&gt;原理&lt;/h2&gt;
 &lt;h3&gt;WIGS(Web Server Gateway Interface)服务器网关接口&lt;/h3&gt;
 &lt;p&gt;是Python应用程序或框架和Web服务器之间的一种接口，已经被广泛接受, 它已基本达成它的可移植性方面的目标。 
 WSGI 没有官方的实现，因为WSGI更像一个协议。只要遵照这些协议，WSGI应用(Application)都可以在任何服务器(Server)上运行，反之亦然。 
