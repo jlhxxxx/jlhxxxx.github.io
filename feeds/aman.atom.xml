@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Aman</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/aman.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-05-05T00:00:00+08:00</updated><entry><title>JMeter提取HTTP响应常用方法</title><link href="https://jlhxxxx.github.io/jmeter-extractor.html" rel="alternate"></link><published>2019-05-05T00:00:00+08:00</published><updated>2019-05-05T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-05:/jmeter-extractor.html</id><summary type="html">&lt;h2&gt;JMeter后置处理器之常用提取器介绍&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Aman</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/aman.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-05-05T00:00:00+08:00</updated><entry><title>JMeter后置处理器之常用提取器介绍</title><link href="https://jlhxxxx.github.io/jmeter-extractor.html" rel="alternate"></link><published>2019-05-05T00:00:00+08:00</published><updated>2019-05-05T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-05:/jmeter-extractor.html</id><summary type="html">&lt;h2&gt;JMeter后置处理器之常用提取器介绍&lt;/h2&gt;
 &lt;h3&gt;正则表达式提取器&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Name of created variable&lt;/strong&gt;：用于存储结果的变量名称&lt;/li&gt;
@@ -9,7 +9,7 @@
 &lt;li&gt;&lt;strong&gt;Default Value&lt;/strong&gt;：默认值，可为空&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;练习网址：&lt;a href="http://www.bejson.com/knownjson/webInterface/"&gt;JSON API免费接口&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;这里以响应结果为JSON字符串的查询快递信息为例，返回的JSON数据如下（已美化且掐头去尾）：&lt;/p&gt;
+&lt;p&gt;这里以JSON响应的查询快递信息为例，返回值如下（已美化且掐头去尾）：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;quot;message&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ok&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;quot;nu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;11111111111&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -23,7 +23,7 @@
 &lt;li&gt;&lt;strong&gt;Default Value&lt;/strong&gt;：默认值，可为空&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;练习网址：&lt;a href="http://www.bejson.com/knownjson/webInterface/"&gt;JSON API免费接口&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;这里以响应结果为JSON字符串的查询快递信息为例，返回的JSON数据如下（已美化且掐头去尾）：&lt;/p&gt;
+&lt;p&gt;这里以JSON响应的查询快递信息为例，返回值如下（已美化且掐头去尾）：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;quot;message&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ok&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;quot;nu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;11111111111&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -193,13 +193,13 @@ city_matchNr=4
 
 &lt;p&gt;说明：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;勾选&lt;strong&gt;Return entire XPath fragment instead of text content?&lt;/strong&gt;后，变量值是包含命名空间内容的：&lt;code&gt;city=&amp;lt;string xmlns="http://WebXml.com.cn/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&amp;gt;北京 (54511)&amp;lt;/string&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;勾选&lt;strong&gt;Return entire XPath fragment instead of text content?&lt;/strong&gt;后，变量值是包含命名空间内容的： &lt;code&gt;city=&amp;lt;string xmlns="http://WebXml.com.cn/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&amp;gt;北京 (54511)&amp;lt;/string&amp;gt;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Chrome浏览器同样可以直接Copy XPath。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;XPATH2 提取器&lt;/h3&gt;
 &lt;p&gt;虽然JMeter官方文档说可以使用XPath2查询语言从结构化响应（XML或（X）HTML）中提取值，但目前测试&lt;strong&gt;只支持从XML响应中提取值&lt;/strong&gt;；从HTML中提取会报错，这个可以通过查看结果树中选择XPath2 Tester来验证。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Namespaces aliases list&lt;/strong&gt;：命名空间别名列表。就是这个选项，使得使用命名空间比使用旧的XPath提取器更方便。关于命名空间含义，可以看官方文档：&lt;a href="http://www.w3school.com.cn/xml/xml_namespaces.asp"&gt;XML 命名空间&lt;/a&gt;，但是写的不够详细，详细的参考这里：&lt;a href="https://blog.csdn.net/yi412/article/details/70158876"&gt;XML 命名空间（XML Namespaces）介绍以及节点读取方法&lt;/a&gt;。由于XPath2对于表达式的要求比较严格，对于带命名空间的XML（包括默认的命名空间），使用不带命名空间前缀的表达式是查询不到结果的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Namespaces aliases list&lt;/strong&gt;：命名空间别名列表。就是这个功能，能让使用命名空间比使用旧的XPath提取器更方便。关于命名空间含义，可以看官方文档：&lt;a href="http://www.w3school.com.cn/xml/xml_namespaces.asp"&gt;XML 命名空间&lt;/a&gt;，但是写的不够详细，详细的参考这里：&lt;a href="https://blog.csdn.net/yi412/article/details/70158876"&gt;XML 命名空间（XML Namespaces）介绍以及节点读取方法&lt;/a&gt;。由于XPath2对于表达式的要求比较严格，对于带命名空间的XML（包括默认的命名空间），使用不带命名空间前缀的表达式是查询不到结果的。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;下面看具体实例，提取器填写如下：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Name&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="n"&gt;created&lt;/span&gt; &lt;span class="n"&gt;variables&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;city&lt;/span&gt;

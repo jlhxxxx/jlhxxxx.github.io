@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Sun, 05 May 2019 00:00:00 +0800</lastBuildDate><item><title>JMeter提取HTTP响应常用方法</title><link>https://jlhxxxx.github.io/jmeter-extractor.html</link><description>&lt;h2&gt;JMeter后置处理器之常用提取器介绍&lt;/h2&gt;
+<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Sun, 05 May 2019 00:00:00 +0800</lastBuildDate><item><title>JMeter后置处理器之常用提取器介绍</title><link>https://jlhxxxx.github.io/jmeter-extractor.html</link><description>&lt;h2&gt;JMeter后置处理器之常用提取器介绍&lt;/h2&gt;
 &lt;h3&gt;正则表达式提取器&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Name of created variable&lt;/strong&gt;：用于存储结果的变量名称&lt;/li&gt;
@@ -9,7 +9,7 @@
 &lt;li&gt;&lt;strong&gt;Default Value&lt;/strong&gt;：默认值，可为空&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;练习网址：&lt;a href="http://www.bejson.com/knownjson/webInterface/"&gt;JSON API免费接口&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;这里以响应结果为JSON字符串的查询快递信息为例，返回的JSON数据如下（已美化且掐头去尾）：&lt;/p&gt;
+&lt;p&gt;这里以JSON响应的查询快递信息为例，返回值如下（已美化且掐头去尾）：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;quot;message&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ok&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;quot;nu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;11111111111&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
