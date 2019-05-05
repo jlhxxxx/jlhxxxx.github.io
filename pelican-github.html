@@ -378,6 +378,13 @@ pip list
 <p>添加了分享按钮之后，网站加载速度变得很慢，所以最后我把这个功能关掉了，本来也用不上。对我来说，必要的功能有，其他越简单越好。</p>
 <h2>十、最重要的事</h2>
 <p>为了看起来完美，所以加了第十条。不过这确实也是最重要的，我觉得应该关心博客的内容而不是样式。</p>
+<h2>PS：更新补丁</h2>
+<ul>
+<li>
+<p>【20190505】由于主题年久失修，已经跟不上Pelican的更新了，在执行构建时报错：<code>CRITICAL: TypeError: not all arguments converted during string formatting</code>，解决方法如下：</p>
+<p>从<a href="https://github.com/getpelican/pelican/issues/2487">On fresh install: "simple" theme build error using publishconf.py</a>跳转到<a href="https://github.com/getpelican/pelican/pull/2494">Fall back to the old feed settings if using an older theme #2494</a>，再跳转到<a href="https://github.com/getpelican/pelican/pull/2494/commits/f995e6d3b9bd2e4bfebfa184c310f96a6c1cc850">Fall back to the old feed settings for older theme</a>，修改<a href="https://github.com/getpelican/pelican/pull/2494/commits/f995e6d3b9bd2e4bfebfa184c310f96a6c1cc850#diff-7695706f16562cf5ca9c5f3354c146d1">pelican/writers.py</a>解决问题。</p>
+</li>
+</ul>
 <h3>参考文章</h3>
 <ul>
 <li><a href="http://www.cnblogs.com/suke99/p/5355894.html">windows下安装Python虚拟环境virtualenvwrapper-win</a></li>

@@ -2141,6 +2141,13 @@ pip list
 &lt;p&gt;添加了分享按钮之后，网站加载速度变得很慢，所以最后我把这个功能关掉了，本来也用不上。对我来说，必要的功能有，其他越简单越好。&lt;/p&gt;
 &lt;h2&gt;十、最重要的事&lt;/h2&gt;
 &lt;p&gt;为了看起来完美，所以加了第十条。不过这确实也是最重要的，我觉得应该关心博客的内容而不是样式。&lt;/p&gt;
+&lt;h2&gt;PS：更新补丁&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;【20190505】由于主题年久失修，已经跟不上Pelican的更新了，在执行构建时报错：&lt;code&gt;CRITICAL: TypeError: not all arguments converted during string formatting&lt;/code&gt;，解决方法如下：&lt;/p&gt;
+&lt;p&gt;从&lt;a href="https://github.com/getpelican/pelican/issues/2487"&gt;On fresh install: "simple" theme build error using publishconf.py&lt;/a&gt;跳转到&lt;a href="https://github.com/getpelican/pelican/pull/2494"&gt;Fall back to the old feed settings if using an older theme #2494&lt;/a&gt;，再跳转到&lt;a href="https://github.com/getpelican/pelican/pull/2494/commits/f995e6d3b9bd2e4bfebfa184c310f96a6c1cc850"&gt;Fall back to the old feed settings for older theme&lt;/a&gt;，修改&lt;a href="https://github.com/getpelican/pelican/pull/2494/commits/f995e6d3b9bd2e4bfebfa184c310f96a6c1cc850#diff-7695706f16562cf5ca9c5f3354c146d1"&gt;pelican/writers.py&lt;/a&gt;解决问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3&gt;参考文章&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://www.cnblogs.com/suke99/p/5355894.html"&gt;windows下安装Python虚拟环境virtualenvwrapper-win&lt;/a&gt;&lt;/li&gt;
