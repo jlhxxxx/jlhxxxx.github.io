@@ -81,6 +81,54 @@
                         <article>
                             <header>
                                 <h1 class="entry-title">
+                                    <a href="https://jlhxxxx.github.io/jmeter-extractor.html" rel="bookmark" title="Permalink to JMeter提取HTTP响应常用方法">
+                                       JMeter提取HTTP响应常用方法
+                                    </a>
+                                </h1>
+                            </header>
+                            <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="https://jlhxxxx.github.io/category/test-tools.html">Test Tools</a>
+
+    on 2019-05-05
+
+        |
+        tags:         <a href="https://jlhxxxx.github.io/tag/jmeter.html">JMeter</a>
+        <a href="https://jlhxxxx.github.io/tag/extractor.html">Extractor</a>
+
+
+
+    
+</footer><!-- /.post-info -->                                <h2>JMeter后置处理器之常用提取器介绍</h2>
+<h3>正则表达式提取器</h3>
+<ul>
+<li><strong>Name of created variable</strong>：用于存储结果的变量名称</li>
+<li><strong>Regular Expression</strong>：正则表达式</li>
+<li><strong>Template</strong>：模板，用于从找到的匹配项创建字符串的模板。<code>$1$</code>表示组<strong>1</strong>，<code>$2$</code>表示组<strong>2</strong>，<code>$0$</code>表示整个表达式匹配的内容，模板创建的字符串即为上面<strong>变量名称</strong>对应的值。</li>
+<li><strong>Match No.</strong>：指示要使用的匹配项。<code>0</code>为随机，正数<code>n</code>表示第n个匹配项，<code>-1</code>表示匹配所有。</li>
+<li><strong>Default Value</strong>：默认值，可为空</li>
+</ul>
+<p>练习网址：<a href="http://www.bejson.com/knownjson/webInterface/">JSON API免费接口</a></p>
+<p>这里以响应结果为JSON字符串的查询快递信息为例，返回的JSON数据如下（已美化且掐头去尾）：</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;nu&quot;</span><span class="p">:</span> <span class="s2">&quot;11111111111&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;ischeck&quot;</span><span class="p">:</span> <span class="s2">&quot;1 …</span></pre></div>
+                                <p class="readmore">
+                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/jmeter-extractor.html">Read more...</a>
+                                </p>
+                            </div><!-- /.entry-content -->
+                            <hr/>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <header>
+                                <h1 class="entry-title">
                                     <a href="https://jlhxxxx.github.io/pytesseract.html" rel="bookmark" title="Permalink to Python pytesseract识别验证码">
                                        Python pytesseract识别验证码
                                     </a>
@@ -275,7 +323,7 @@ rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --no
                         <article>
                             <header>
                                 <h1 class="entry-title">
-                                    <a href="https://jlhxxxx.github.io/webLogic-cluster.html" rel="bookmark" title="Permalink to Windows下WebLogic安装及集群配置">
+                                    <a href="https://jlhxxxx.github.io/weblogic-cluster.html" rel="bookmark" title="Permalink to Windows下WebLogic安装及集群配置">
                                        Windows下WebLogic安装及集群配置
                                     </a>
                                 </h1>
@@ -315,7 +363,7 @@ rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --no
 │      └─ base_domain                     # DOMAIN_HOME，用户自建域主目录，默认名称为base_domain，以此为例
 │         │─ bin …</pre></div>
                                 <p class="readmore">
-                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/webLogic-cluster.html">Read more...</a>
+                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/weblogic-cluster.html">Read more...</a>
                                 </p>
                             </div><!-- /.entry-content -->
                             <hr/>
@@ -440,7 +488,7 @@ rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --no
 </footer><!-- /.post-info -->                                <p>本文基本全文转载，原文链接：<a href="http://www.cnblogs.com/Richardzhu/p/3455806.html">Oracle PL/SQL之LOOP循环控制语句</a>。作者写的看着很舒服，所以收藏起来自己用。主要是一些语法格式，适合新手对照练习。</p>
 <h2>一、基本的LOOP语句</h2>
 <p>LOOP语句的基本语法结构如下：</p>
-<div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;&lt;</span><span class="n">label_name</span><span class="o">&gt;&gt;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">label_name</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;]</span>
 <span class="n">LOOP</span>
  <span class="k">statement</span><span class="p">...</span>
 <span class="k">END</span> <span class="n">LOOP</span> <span class="p">[</span><span class="n">label_name</span><span class="p">]</span>
@@ -455,14 +503,10 @@ rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --no
 <li><code>END LOOP</code>：LOOP循环结束标志，可以添加LOOP结构的标签。</li>
 </ul>
 <h4>实例一： 利用EXIT...WHEN结束循环操作</h4>
-<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&gt;</span> <span class="k">set</span> <span class="n">serveroutput</span> <span class="k">on</span><span class="p">;</span>
-<span class="k">SQL</span><span class="o">&gt;</span> <span class="c1">--exit when</span>
-<span class="k">SQL</span><span class="o">&gt;</span> <span class="k">declare</span>
-   <span class="n">v_rlt</span> <span class="nb">number</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span><span class="o">=-</span><span class="mi">3</span><span class="p">;</span>
- <span class="k">begin</span>
-    <span class="o">&lt;&lt;</span><span class="n">fst_loop</span><span class="o">&gt;&gt;</span>
-    <span class="n">loop</span>
-      <span class="n">dbms_output …</span></pre></div>
+<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">set</span> <span class="n">serveroutput</span> <span class="k">on</span><span class="p">;</span>
+<span class="k">SQL</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="c1">--exit when</span>
+<span class="k">SQL</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">declare</span>
+   <span class="n">v_rlt …</span></pre></div>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/oracle-loop.html">Read more...</a>
                                 </p>
@@ -513,57 +557,6 @@ rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --no
 <li><code>MAXVALUE</code> ：定义序列生成器能产生的最大值。选项<code>NOMAXVALUE</code>是默认选项，代表没有最大值定义，这时对于递增序列，系统能够产生的最大值是10的27次方；对于递减序列 …</li></ul>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/oracle-sequence.html">Read more...</a>
-                                </p>
-                            </div><!-- /.entry-content -->
-                            <hr/>
-                        </article>
-                    </li>
-                    <li>
-                        <article>
-                            <header>
-                                <h1 class="entry-title">
-                                    <a href="https://jlhxxxx.github.io/banwagong-ss.html" rel="bookmark" title="Permalink to 搬瓦工SS教程">
-                                       搬瓦工SS教程
-                                    </a>
-                                </h1>
-                            </header>
-                            <div class="entry-content">
-<footer class="post-info">
-    <address class="vcard author">
-        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
-    </address>
-
-    in <a href="https://jlhxxxx.github.io/category/software.html">Software</a>
-
-    on 2018-04-25
-
-        |
-        tags:         <a href="https://jlhxxxx.github.io/tag/shadowsocks.html">Shadowsocks</a>
-        <a href="https://jlhxxxx.github.io/tag/bandwagon.html">Bandwagon</a>
-
-
-
-    
-</footer><!-- /.post-info -->                                <p>之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，现在我更注重效率，尽量在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，加上优惠码，折合人民币每个月10块钱，十块钱，买不了吃亏买不了上当，还因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。</p>
-<h2>一、套餐选购</h2>
-<p>搬瓦工主页：<a href="https://bwh1.net/">地址1</a>、<a href="https://bandwagonhost.com/">地址2</a></p>
-<ul>
-<li>
-<p><a href="https://zhuanlan.zhihu.com/p/32811900">搬瓦工2018年新手选购指南</a></p>
-</li>
-<li>
-<p><a href="https://www.bandwagonhost.net/">搬瓦工中文网</a></p>
-</li>
-<li>
-<p><a href="http://banwagong.cn/">搬瓦工VPS中文网</a></p>
-</li>
-</ul>
-<p>注意如果是未注册用户，不要先注册再购买，因为新注册的时候需要输入验证码，而验证码是需要翻墙才能看到的，直接购买就能顺便注册。除了邮箱和密码，其他信息随便填就好了。</p>
-<p>购买之后邮箱里会收到几封邮件，告诉你IP address，SSH Port，和初始密码，不过都不需要记，IP和Port进入服务器控制面板就能看到，密码可以随时重新生成。</p>
-<h2>二、安装Shadowsocks</h2>
-<p>参考教程：<a href="https://www.cnlinode.com/ban_wa_gong_qu_xiao_le_yi_jian_an_zhuang_shadowsocks_zui_xin_ban_wa_gong_ss_jiao_cheng/">搬瓦工取消了一键安装Shadowsocks，最新搬瓦工SS教程</a>第二步方法二 …</p>
-                                <p class="readmore">
-                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/banwagong-ss.html">Read more...</a>
                                 </p>
                             </div><!-- /.entry-content -->
                             <hr/>

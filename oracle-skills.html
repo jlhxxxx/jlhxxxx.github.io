@@ -106,7 +106,7 @@
 <p>用PLSQL执行数据查询的时候，FROM子句是必须的，当不想查具体的表时，可以使用虚拟表dual。</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="mi">1</span><span class="o">+</span><span class="mi">1</span> <span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
 <span class="k">SELECT</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="n">dual</span> <span class="k">WHERE</span> <span class="k">NULL</span> <span class="k">IS</span> <span class="k">NULL</span><span class="p">;</span>
-<span class="k">SELECT</span> <span class="s1">&#39;SUCCESS&#39;</span> <span class="k">AS</span> <span class="k">RESULT</span> <span class="k">FROM</span> <span class="n">dual</span> <span class="k">WHERE</span> <span class="mi">50</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="s1">&#39;SUCCESS&#39;</span> <span class="k">AS</span> <span class="k">RESULT</span> <span class="k">FROM</span> <span class="n">dual</span> <span class="k">WHERE</span> <span class="mi">50</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">60</span><span class="p">;</span>
 <span class="k">SELECT</span> <span class="n">SYSDATE</span> <span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
 </pre></div>
 
@@ -190,7 +190,7 @@
 </li>
 <li>
 <p>举例</p>
-<div class="highlight"><pre><span></span><span class="c1">--SALARY&gt;8000,加薪15%；SALARY&lt;8000,加薪20%;SALARY=8000,加薪15%</span>
+<div class="highlight"><pre><span></span><span class="c1">--SALARY&amp;gt;8000,加薪15%；SALARY&amp;lt;8000,加薪20%;SALARY=8000,加薪15%</span>
 <span class="k">SELECT</span> <span class="n">DECODE</span><span class="p">(</span><span class="n">SIGN</span><span class="p">(</span><span class="n">SALARY</span> <span class="o">-</span> <span class="mi">8000</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">SALARY</span><span class="o">*</span><span class="mi">1</span><span class="p">.</span><span class="mi">15</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">SALARY</span><span class="o">*</span><span class="mi">1</span><span class="p">.</span><span class="mi">2</span><span class="p">,</span><span class="n">SALARY</span><span class="o">*</span><span class="mi">1</span><span class="p">.</span><span class="mi">15</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">EMPLOYEE</span><span class="err">；</span>
 
 <span class="c1">--统计AC01表中19940911出生的男女数</span>

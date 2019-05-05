@@ -131,19 +131,19 @@ oracle   <span class="m">22025</span>     <span class="m">1</span>  <span class=
 
 <p>连接数据库：</p>
 <div class="highlight"><pre><span></span><span class="n">bash</span><span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">1</span><span class="err">$</span> <span class="n">sqlplus</span> <span class="o">/</span><span class="n">nolog</span>
-<span class="k">SQL</span><span class="o">&gt;</span> <span class="k">connect</span> <span class="o">/</span><span class="k">as</span> <span class="n">sysdba</span>
+<span class="k">SQL</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">connect</span> <span class="o">/</span><span class="k">as</span> <span class="n">sysdba</span>
 </pre></div>
 
 
 <p>修改连接数，重启Oracle：</p>
-<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">system</span> <span class="k">set</span> <span class="n">processes</span><span class="o">=</span><span class="mi">1000</span> <span class="k">scope</span><span class="o">=</span><span class="n">spfile</span><span class="p">;</span>
-<span class="k">SQL</span><span class="o">&gt;</span> <span class="n">SHUTDOWN</span> <span class="k">IMMEDIATE</span><span class="p">;</span>
-<span class="k">SQL</span><span class="o">&gt;</span> <span class="n">STARTUP</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">alter</span> <span class="k">system</span> <span class="k">set</span> <span class="n">processes</span><span class="o">=</span><span class="mi">1000</span> <span class="k">scope</span><span class="o">=</span><span class="n">spfile</span><span class="p">;</span>
+<span class="k">SQL</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">SHUTDOWN</span> <span class="k">IMMEDIATE</span><span class="p">;</span>
+<span class="k">SQL</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">STARTUP</span><span class="p">;</span>
 </pre></div>
 
 
 <p>验证一下：</p>
-<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&gt;</span> <span class="k">show</span> <span class="k">parameter</span> <span class="n">processes</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">show</span> <span class="k">parameter</span> <span class="n">processes</span><span class="p">;</span>
 
 <span class="n">NAME</span>                     <span class="k">TYPE</span>    <span class="n">VALUE</span>
 <span class="c1">------------------------------------ ----------- ------------------------------</span>
@@ -159,7 +159,7 @@ oracle   <span class="m">22025</span>     <span class="m">1</span>  <span class=
 
 <p>连接数已修改。但是没过一会连接又满了：<code>ORA-00020:maximum number of processes (1000) exceeded</code>，这时候就要排查问题了。</p>
 <p>再次连上数据库，观察会话使用情况：</p>
-<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">event</span><span class="p">,</span><span class="n">program</span><span class="p">,</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">v$session</span> <span class="k">group</span> <span class="k">by</span> <span class="n">event</span><span class="p">,</span><span class="n">program</span> <span class="k">order</span> <span class="k">by</span> <span class="mi">3</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">select</span> <span class="n">event</span><span class="p">,</span><span class="n">program</span><span class="p">,</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">v$session</span> <span class="k">group</span> <span class="k">by</span> <span class="n">event</span><span class="p">,</span><span class="n">program</span> <span class="k">order</span> <span class="k">by</span> <span class="mi">3</span><span class="p">;</span>
 <span class="p">......</span>
 <span class="n">EVENT</span>                                   <span class="n">PROGRAM</span>                             <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
 <span class="c1">------------------------------------------------------------------------------ ----------</span>
@@ -171,7 +171,7 @@ oracle   <span class="m">22025</span>     <span class="m">1</span>  <span class=
 
 <p>可以看到JDBC连接数过多。</p>
 <p>下面排查下是哪个项目的问题，首先查看每个oracle帐户的连接总数 ：</p>
-<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">username</span><span class="p">,</span><span class="k">count</span><span class="p">(</span><span class="n">username</span><span class="p">)</span> <span class="k">from</span> <span class="n">v$session</span> <span class="k">where</span> <span class="n">username</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span> <span class="k">group</span> <span class="k">by</span> <span class="n">username</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">select</span> <span class="n">username</span><span class="p">,</span><span class="k">count</span><span class="p">(</span><span class="n">username</span><span class="p">)</span> <span class="k">from</span> <span class="n">v$session</span> <span class="k">where</span> <span class="n">username</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span> <span class="k">group</span> <span class="k">by</span> <span class="n">username</span><span class="p">;</span>
 
 <span class="n">USERNAME</span>               <span class="k">COUNT</span><span class="p">(</span><span class="n">USERNAME</span><span class="p">)</span>
 <span class="c1">------------------------------ ---------------</span>
@@ -195,7 +195,7 @@ oracle   <span class="m">22025</span>     <span class="m">1</span>  <span class=
 <ul>
 <li>
 <p>由于缺省从 v$session 中不能直接获得客户端 IP，可以在数据库中创建一个追踪客户端IP地址的触发器： </p>
-<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&gt;</span> <span class="k">create</span> <span class="k">or</span> <span class="k">replace</span> <span class="k">trigger</span> <span class="n">on_logon_trigger</span> <span class="k">after</span> <span class="n">logon</span> <span class="k">on</span> <span class="k">database</span>
+<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">create</span> <span class="k">or</span> <span class="k">replace</span> <span class="k">trigger</span> <span class="n">on_logon_trigger</span> <span class="k">after</span> <span class="n">logon</span> <span class="k">on</span> <span class="k">database</span>
   <span class="mi">2</span>  <span class="k">begin</span>
   <span class="mi">3</span>      <span class="n">dbms_application_info</span><span class="p">.</span><span class="n">set_client_info</span><span class="p">(</span><span class="n">sys_context</span><span class="p">(</span><span class="s1">&#39;userenv&#39;</span><span class="p">,</span> <span class="s1">&#39;ip_address&#39;</span><span class="p">));</span> 
   <span class="mi">4</span>  <span class="k">end</span><span class="p">;</span>
@@ -206,7 +206,7 @@ oracle   <span class="m">22025</span>     <span class="m">1</span>  <span class=
 </li>
 <li>
 <p>显示客户端信息：</p>
-<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">sid</span><span class="p">,</span><span class="nb">serial</span><span class="o">#</span><span class="p">,</span><span class="n">username</span><span class="p">,</span><span class="n">program</span><span class="p">,</span><span class="n">machine</span><span class="p">,</span><span class="n">client_info</span> <span class="k">from</span> <span class="n">v$session</span> <span class="k">where</span> <span class="n">username</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span> <span class="k">order</span> <span class="k">by</span> <span class="n">username</span><span class="p">,</span><span class="n">program</span><span class="p">,</span><span class="n">machine</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">select</span> <span class="n">sid</span><span class="p">,</span><span class="nb">serial</span><span class="o">#</span><span class="p">,</span><span class="n">username</span><span class="p">,</span><span class="n">program</span><span class="p">,</span><span class="n">machine</span><span class="p">,</span><span class="n">client_info</span> <span class="k">from</span> <span class="n">v$session</span> <span class="k">where</span> <span class="n">username</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span> <span class="k">order</span> <span class="k">by</span> <span class="n">username</span><span class="p">,</span><span class="n">program</span><span class="p">,</span><span class="n">machine</span><span class="p">;</span>
 
 <span class="p">......</span>
     <span class="n">SID</span>    <span class="nb">SERIAL</span><span class="o">#</span> <span class="n">USERNAME</span>    <span class="n">PROGRAM</span>             <span class="n">MACHINE</span>   <span class="n">CLIENT_INFO</span>
