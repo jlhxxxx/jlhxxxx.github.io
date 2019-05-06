@@ -1,5 +1,2275 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-05-06T00:00:00+08:00</updated><entry><title>JMeter文档翻译之21-正则表达式</title><link href="https://jlhxxxx.github.io/jmeter-doc-cn-21.html" rel="alternate"></link><published>2019-05-06T00:00:00+08:00</published><updated>2019-05-06T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-cn-21.html</id><summary type="html">&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/regular_expressions.html"&gt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-05-06T00:00:00+08:00</updated><entry><title>JMeter文档翻译之20-函数和变量</title><link href="https://jlhxxxx.github.io/jmeter-doc-cn-20.html" rel="alternate"></link><published>2019-05-06T00:00:00+08:00</published><updated>2019-05-06T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-cn-20.html</id><summary type="html">&lt;p&gt;英文文档地址：&amp;lt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/p&gt;
+&lt;p&gt;JMeter 的函数是一些特殊值，它们可以填充在测试树的任何采样器或其他元件中。函数调用的语法如下：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;${__functionName(var1,var2,var3)}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其中“__functionName”匹配函数的名称。
+圆括号内为函数参数，不同函数的参数也不同，例如 &lt;code&gt;${__time(YMD)}&lt;/code&gt;。没有参数的函数可以不需要圆括号，例如 &lt;code&gt;${__threadNum}&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果函数的参数包含逗号，需要加上“&lt;code&gt;\&lt;/code&gt;”来转义，否则 JMeter 会把逗号当做参数的分隔符。例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EEE&lt;/span&gt;\&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;MMM&lt;/span&gt; &lt;span class="n"&gt;yyyy&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果逗号没有被转义——例如 &lt;code&gt;${__javaScript(Math.max(2,5))}&lt;/code&gt; ——你会得到像这样的错误信息：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ERROR - jmeter.functions …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;英文文档地址：&amp;lt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/p&gt;
+&lt;p&gt;JMeter 的函数是一些特殊值，它们可以填充在测试树的任何采样器或其他元件中。函数调用的语法如下：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;${__functionName(var1,var2,var3)}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其中“__functionName”匹配函数的名称。
+圆括号内为函数参数，不同函数的参数也不同，例如 &lt;code&gt;${__time(YMD)}&lt;/code&gt;。没有参数的函数可以不需要圆括号，例如 &lt;code&gt;${__threadNum}&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果函数的参数包含逗号，需要加上“&lt;code&gt;\&lt;/code&gt;”来转义，否则 JMeter 会把逗号当做参数的分隔符。例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EEE&lt;/span&gt;\&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;MMM&lt;/span&gt; &lt;span class="n"&gt;yyyy&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果逗号没有被转义——例如 &lt;code&gt;${__javaScript(Math.max(2,5))}&lt;/code&gt; ——你会得到像这样的错误信息：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ERROR - jmeter.functions.JavaScript: Error processing Javascript: [Math.max(2] org.mozilla.javascript.EvaluatorException: missing ) after argument list (&amp;lt;cmd&amp;gt;#1)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这是因为字符串“&lt;code&gt;Math.max(2,5)&lt;/code&gt;”被当做&lt;code&gt;__javascript&lt;/code&gt; 函数的两个参数： 
+&lt;code&gt;Math.max(2&lt;/code&gt; 和 &lt;code&gt;5)&lt;/code&gt; 
+其他错误信息也是有可能的。&lt;/p&gt;
+&lt;p&gt;变量的引用如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;VARIABLE&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;如果引用了未定义的变量或函数，那么 JMeter 并不会报告或者记录错误信息——引用返回值就是引用自身。例如，如果 &lt;code&gt;UNDEF&lt;/code&gt; 没有被定义为变量，&lt;code&gt;${UNDEF}&lt;/code&gt; 的返回值就是 &lt;code&gt;${UNDEF}&lt;/code&gt;。&lt;/strong&gt; 变量和函数（包括属性）都是区分大小写的。&lt;strong&gt;JMeter 会剔除变量名称中的空格，例如 &lt;code&gt;${__Random(1,63, LOTTERY )}&lt;/code&gt; 中的变量‘ &lt;code&gt;LOTTERY&lt;/code&gt; ’会被‘&lt;code&gt;LOTTERY&lt;/code&gt;’取代。&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;属性与变量不一样。变量对线程而言是局部的；属性是针对所有线程的，属性需要使用 &lt;code&gt;__P&lt;/code&gt; 或 &lt;code&gt;__property&lt;/code&gt; 函数来引用。&lt;/p&gt;
+&lt;p&gt;在 Windows 路径变量（例如 &lt;code&gt;C:\test\${test}&lt;/code&gt;）前使用 &lt;code&gt;\&lt;/code&gt; 时，要确保加上 &lt;code&gt;\&lt;/code&gt; 来转义，否则 JMeter 将不能解释变量，所以要这样写：&lt;code&gt;C:\\test\\${test}&lt;/code&gt;。&lt;br&gt;
+还有一种方法，就是使用 &lt;code&gt;/&lt;/code&gt; 作为路径分隔符，例如 &lt;code&gt;C:/test/${test}&lt;/code&gt;——Windows 的 JVMs 在必要时会将它转换成路径分隔符。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p id="functions_list"&gt;函数列表，不严格的按类型划分：&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;函数类型&lt;/th&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;注释&lt;/th&gt;
+&lt;th align="left"&gt;开始使用版本&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;信息&lt;/td&gt;
+&lt;td&gt;&lt;a href="#threadNum"&gt;threadNum&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;获得线程编号&lt;/td&gt;
+&lt;td align="left"&gt;1.X&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;信息&lt;/td&gt;
+&lt;td&gt;&lt;a href="#threadGroupName"&gt;threadGroupName&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;获得线程组名称&lt;/td&gt;
+&lt;td align="left"&gt;4.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;信息&lt;/td&gt;
+&lt;td&gt;&lt;a href="#samplerName"&gt;samplerName&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;获得采样器名称（标签）&lt;/td&gt;
+&lt;td align="left"&gt;2.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;信息&lt;/td&gt;
+&lt;td&gt;&lt;a href="#machineIP"&gt;machineIP&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;获得本地 IP 地址&lt;/td&gt;
+&lt;td align="left"&gt;2.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;信息&lt;/td&gt;
+&lt;td&gt;&lt;a href="#machineName"&gt;machineName&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;获得本地主机名称&lt;/td&gt;
+&lt;td align="left"&gt;1.X&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;信息&lt;/td&gt;
+&lt;td&gt;&lt;a href="#time"&gt;time&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;以各种格式返回当前时间&lt;/td&gt;
+&lt;td align="left"&gt;2.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;信息&lt;/td&gt;
+&lt;td&gt;&lt;a href="#timeShift"&gt;timeShift&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;返回各种格式的日期加上指定的秒数/分钟数/小时数/天数或月数&lt;/td&gt;
+&lt;td align="left"&gt;3.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;信息&lt;/td&gt;
+&lt;td&gt;&lt;a href="#log"&gt;log&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;记录（或显示）一条日志（并返回其值）&lt;/td&gt;
+&lt;td align="left"&gt;2.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;信息&lt;/td&gt;
+&lt;td&gt;&lt;a href="#logn"&gt;logn&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;记录（或显示）一条日志（并返回空值）&lt;/td&gt;
+&lt;td align="left"&gt;2.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;输入&lt;/td&gt;
+&lt;td&gt;&lt;a href="#StringFromFile"&gt;StringFromFile&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;从文件中读取一行&lt;/td&gt;
+&lt;td align="left"&gt;1.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;输入&lt;/td&gt;
+&lt;td&gt;&lt;a href="#FileToString"&gt;FileToString&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;读取整个文件&lt;/td&gt;
+&lt;td align="left"&gt;2.4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;输入&lt;/td&gt;
+&lt;td&gt;&lt;a href="#CSVRead"&gt;CSVRead&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;从 CSV 分隔文件中读取&lt;/td&gt;
+&lt;td align="left"&gt;1.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;输入&lt;/td&gt;
+&lt;td&gt;&lt;a href="#XPath"&gt;XPath&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;使用 XPath 表达式从文件中读取&lt;/td&gt;
+&lt;td align="left"&gt;2.0.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;计算&lt;/td&gt;
+&lt;td&gt;&lt;a href="#counter"&gt;counter&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;生成递增的数字&lt;/td&gt;
+&lt;td align="left"&gt;1.X&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;格式化&lt;/td&gt;
+&lt;td&gt;&lt;a href="#dateTimeConvert"&gt;dateTimeConvert&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;将日期或时间从源格式转换为目标格式&lt;/td&gt;
+&lt;td align="left"&gt;4.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;计算&lt;/td&gt;
+&lt;td&gt;&lt;a href="#digest"&gt;digest&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;生成摘要（SHA-1, SHA-256, MD5...）&lt;/td&gt;
+&lt;td align="left"&gt;4.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;计算&lt;/td&gt;
+&lt;td&gt;&lt;a href="#intSum"&gt;intSum&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;计算整形数（int）的和&lt;/td&gt;
+&lt;td align="left"&gt;1.8.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;计算&lt;/td&gt;
+&lt;td&gt;&lt;a href="#longSum"&gt;longSum&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;计算长整形数（long）的和&lt;/td&gt;
+&lt;td align="left"&gt;2.3.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;计算&lt;/td&gt;
+&lt;td&gt;&lt;a href="#Random"&gt;Random&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;生成随机数&lt;/td&gt;
+&lt;td align="left"&gt;1.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;计算&lt;/td&gt;
+&lt;td&gt;&lt;a href="#RandomDate"&gt;RandomDate&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;在指定日期范围内生成随机日期&lt;/td&gt;
+&lt;td align="left"&gt;3.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;计算&lt;/td&gt;
+&lt;td&gt;&lt;a href="#RandomFromMultipleVars"&gt;RandomFromMultipleVars&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;从由 &lt;code&gt;|&lt;/code&gt; 分隔的一组变量值中随机提取一个元素&lt;/td&gt;
+&lt;td align="left"&gt;3.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;计算&lt;/td&gt;
+&lt;td&gt;&lt;a href="#RandomString"&gt;RandomString&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;生成随机字符串&lt;/td&gt;
+&lt;td align="left"&gt;2.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;计算&lt;/td&gt;
+&lt;td&gt;&lt;a href="#UUID"&gt;UUID&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;生成随机的类型为 4 的通用唯一标识符（UUID）&lt;/td&gt;
+&lt;td align="left"&gt;2.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;脚本&lt;/td&gt;
+&lt;td&gt;&lt;a href="#groovy"&gt;groovy&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;执行 Groovy 脚本&lt;/td&gt;
+&lt;td align="left"&gt;3.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;脚本&lt;/td&gt;
+&lt;td&gt;&lt;a href="#BeanShell"&gt;BeanShell&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;执行 BeanShell 脚本&lt;/td&gt;
+&lt;td align="left"&gt;1.X&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;脚本&lt;/td&gt;
+&lt;td&gt;&lt;a href="#javaScript"&gt;javaScript&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;处理 JavaScript (Nashorn)&lt;/td&gt;
+&lt;td align="left"&gt;1.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;脚本&lt;/td&gt;
+&lt;td&gt;&lt;a href="#jexl2"&gt;jexl2&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;执行通用 Jexl2 表达式&lt;/td&gt;
+&lt;td align="left"&gt;jexl2(2.1.1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;脚本&lt;/td&gt;
+&lt;td&gt;&lt;a href="#jexl3"&gt;jexl3&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;执行通用 Jexl3 表达式&lt;/td&gt;
+&lt;td align="left"&gt;jexl3 (3.0)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;属性&lt;/td&gt;
+&lt;td&gt;&lt;a href="#isPropDefined"&gt;isPropDefined&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;测试属性是否存在&lt;/td&gt;
+&lt;td align="left"&gt;4.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;属性&lt;/td&gt;
+&lt;td&gt;&lt;a href="#property"&gt;property&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;读取属性&lt;/td&gt;
+&lt;td align="left"&gt;2.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;属性&lt;/td&gt;
+&lt;td&gt;&lt;a href="#P"&gt;P&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;读取属性（速记方式）&lt;/td&gt;
+&lt;td align="left"&gt;2.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;属性&lt;/td&gt;
+&lt;td&gt;&lt;a href="#setProperty"&gt;setProperty&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;设置 JMeter 属性&lt;/td&gt;
+&lt;td align="left"&gt;2.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量&lt;/td&gt;
+&lt;td&gt;&lt;a href="#split"&gt;split&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;将字符串拆分为变量&lt;/td&gt;
+&lt;td align="left"&gt;2.0.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量&lt;/td&gt;
+&lt;td&gt;&lt;a href="#eval"&gt;eval&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;执行变量表达式&lt;/td&gt;
+&lt;td align="left"&gt;2.3.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量&lt;/td&gt;
+&lt;td&gt;&lt;a href="#evalVar"&gt;evalVar&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;存储在变量中的表达式&lt;/td&gt;
+&lt;td align="left"&gt;2.3.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;属性&lt;/td&gt;
+&lt;td&gt;&lt;a href="#isVarDefined"&gt;isVarDefined&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;测试变量是否存在&lt;/td&gt;
+&lt;td align="left"&gt;4.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量&lt;/td&gt;
+&lt;td&gt;&lt;a href="#V"&gt;V&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;执行变量名称&lt;/td&gt;
+&lt;td align="left"&gt;2.3RC3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;字符串&lt;/td&gt;
+&lt;td&gt;&lt;a href="#char"&gt;char&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;将相应的编码转换成 Unicode 字符值&lt;/td&gt;
+&lt;td align="left"&gt;2.3.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;字符串&lt;/td&gt;
+&lt;td&gt;&lt;a href="#changeCase"&gt;changeCase&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;改变大小写模式&lt;/td&gt;
+&lt;td align="left"&gt;2.3.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;字符串&lt;/td&gt;
+&lt;td&gt;&lt;a href="#escapeHtml"&gt;escapeHtml&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;使用 HTML 编码对字符串进行编码&lt;/td&gt;
+&lt;td align="left"&gt;2.3.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;字符串&lt;/td&gt;
+&lt;td&gt;&lt;a href="#escapeOroRegexpChars"&gt;escapeOroRegexpChars&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;引用 ORO 正则表达式使用的元字符&lt;/td&gt;
+&lt;td align="left"&gt;2.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;字符串&lt;/td&gt;
+&lt;td&gt;&lt;a href="#escapeXml"&gt;escapeXml&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;使用 XMl 编码对字符串进行编码&lt;/td&gt;
+&lt;td align="left"&gt;3.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;字符串&lt;/td&gt;
+&lt;td&gt;&lt;a href="#regexFunction"&gt;regexFunction&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;使用正则表达式解析之前的响应&lt;/td&gt;
+&lt;td align="left"&gt;1.X&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;字符串&lt;/td&gt;
+&lt;td&gt;&lt;a href="#unescape"&gt;unescape&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;将 Java 转义过的字符串（例如 \n &amp;amp; \t）反转义&lt;/td&gt;
+&lt;td align="left"&gt;2.3.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;字符串&lt;/td&gt;
+&lt;td&gt;&lt;a href="#unescapeHtml"&gt;unescapeHtml&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;将 HTML 编码的字符串解码&lt;/td&gt;
+&lt;td align="left"&gt;2.3.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;字符串&lt;/td&gt;
+&lt;td&gt;&lt;a href="#urldecode"&gt;urldecode&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;对 application/x-www-form-urlencoded 字符串解码&lt;/td&gt;
+&lt;td align="left"&gt;2.10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;字符串&lt;/td&gt;
+&lt;td&gt;&lt;a href="#urlencode"&gt;urlencode&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;将字符串编码成 application/x-www-form-urlencoded 字符串&lt;/td&gt;
+&lt;td align="left"&gt;2.10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;字符串&lt;/td&gt;
+&lt;td&gt;&lt;a href="#TestPlanName"&gt;TestPlanName&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;返回当前测试计划的名称&lt;/td&gt;
+&lt;td align="left"&gt;2.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;20.1 函数可以做什么&lt;/h2&gt;
+&lt;p&gt;JMeter 有两种函数：用户定义的静态值（或变量）和内建函数。&lt;br&gt;
+用户定义的静态值允许用户在编译或者运行测试树时，使用自定义变量来替换静态值。这种替换只在测试运行的开始阶段执行一次。例如，可以用自定义变量来替换所有 HTTP 请求的 DOMAIN 域，这样就使得在不同服务器下执行相同测试的测试变更成为一件简单的事情。&lt;/p&gt;
+&lt;p&gt;注意，目前变量不支持嵌套，例如 &lt;code&gt;${Var${N}}&lt;/code&gt; 是无效的，但是可以使用函数 &lt;code&gt;__V(variable)&lt;/code&gt; 来实现嵌套变量的目的：&lt;code&gt;${__V(Var${N})}&lt;/code&gt;。同样可以用 &lt;code&gt;${__BeanShell(vars.get("Var${N}")}&lt;/code&gt; 来实现。&lt;/p&gt;
+&lt;p&gt;这种类型的替换可以不用函数来实现，但是这样就没有那么方便和直观了。用户可以创建默认配置元件来填充采样器中的空值。变量可以替换任何给定值的一部分，而不只是填充空值。&lt;/p&gt;
+&lt;p&gt;用户可以通过使用内建函数在运行时根据之前的响应数据、函数所在线程、当前时间和其他资源计算出新的变量值。这些变量值在测试过程中会根据每个请求动态刷新。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;函数被线程共享。在测试计划中每次函数的调用，都由一个单独的函数实例来处理。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;20.2 函数和变量可以用在哪？&lt;/h2&gt;
+&lt;p&gt;函数和变量可以用在任何测试元件的任何输入域中（除了测试计划——见下文）。有些输入域只接受数字而不支持字符串，因此它们也不支持函数。然而，大多数输入域还是支持函数的。&lt;/p&gt;
+&lt;p&gt;在测试计划中使用函数是有限制的。当函数被调用时，JMeter 线程变量并没有完全初始化，因此变量名称作为参数传递时也没有初始化，变量会引用失败，所以 &lt;code&gt;split()&lt;/code&gt; 和 &lt;code&gt;regex()&lt;/code&gt; 和变量赋值函数都不能正常工作。&lt;code&gt;threadNum()&lt;/code&gt; 函数也不会工作（它在测试计划层也没有意义）。下面是可以在测试计划中使用的的函数：
+* intSum
+* longSum
+* machineName
+* BeanShell
+* groovy
+* javaScript
+* jexl2/jexl3
+* random
+* time
+* property functions
+* log functions&lt;/p&gt;
+&lt;p&gt;配置元件是由独立线程处理的。因此像 &lt;code&gt;__threadNum&lt;/code&gt; 这样的函数在一些测试元件（例如用户定义的变量）中不能正常地工作。同样要注意在用户定义的变量（UDV）中定义的变量，在（UDV）元件被处理前是不能使用的。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;当在 SQL 代码（或其他）中引用变量/函数时，要记得给文本字符串添加必要的引号，即使用：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  SELECT item from table where name=&amp;#39;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;VAR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;#39;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;而不是：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  SELECT item from table where name=&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;VAR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;（除非 &lt;code&gt;VAR&lt;/code&gt; 本身包含引号）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;20.3 如何引用变量和函数&lt;/h2&gt;
+&lt;p&gt;在测试元件中引用一个变量可以通过使用 &lt;code&gt;${&lt;/code&gt; 和 &lt;code&gt;}&lt;/code&gt; 将变量名称括起来实现。&lt;/p&gt;
+&lt;p&gt;函数引用的方法相同，但是按照惯例，函数名称以“&lt;code&gt;__&lt;/code&gt;”开头来和变量名称区分开。一些函数带参数，参数放在圆括号中，用逗号分隔。如果函数不带参数，可以省略圆括号。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果参数本身带逗号，必须将其转义。可以使用‘&lt;code&gt;\,&lt;/code&gt;’来转义。&lt;/strong&gt; 这适用于例如脚本函数 - Javascript，Beanshell，Jexl，groovy - 有必要对所有脚本函数调用中的逗号加以转义，例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__BeanShell&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;\&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;value&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;换一种方法，你也可以将你的脚本定义为一个变量，例如在测试计划中定义：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;SCRIPT          vars.put(&amp;quot;name&amp;quot;,&amp;quot;value&amp;quot;)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;定义过的脚本可以像下面这样被引用：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__BeanShell&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;SCRIPT&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;)}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在 &lt;code&gt;SCRIPT&lt;/code&gt; 变量中就没有必要对逗号进行转义了，因为函数的调用在变量用其值替换之前被解析。该方法适用于 JSR223 或者 BeanShell 采样器，这两种采样器可用来测试 Javascript，Jexl 和 BeanShell 脚本。&lt;/p&gt;
+&lt;p&gt;函数可以引用参数和其他函数，例如 &lt;code&gt;${__XPath(${__P(xpath.file),${XPATH})}&lt;/code&gt; 使用“&lt;code&gt;xpath.file&lt;/code&gt;”的值作为文件名，使用变量 &lt;code&gt;XPATH&lt;/code&gt; 的内容作为搜索表达式。&lt;/p&gt;
+&lt;p&gt;JMeter 提供一个工具来帮助建立各种内置函数的函数调用，只需使用复制-粘贴就可以实现。它不会自动为你转义，因为函数可以作为其他函数的参数，应该只对文本内容进行转义。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果一个字符串既包含反斜杠（‘&lt;code&gt;\&lt;/code&gt;’）又包含函数或者变量引用，出现在‘&lt;code&gt;$&lt;/code&gt;’或‘&lt;code&gt;,&lt;/code&gt;’或‘&lt;code&gt;\&lt;/code&gt;’之前的反斜杠会被移除。这种操作对于包含逗号或者 &lt;code&gt;${&lt;/code&gt; 的嵌套函数是有必要的。如果一个字符串不包含函数或者变量引用，那么在‘&lt;code&gt;$&lt;/code&gt;’或‘&lt;code&gt;,&lt;/code&gt;’或‘&lt;code&gt;\&lt;/code&gt;’之前的反斜杠不会被移除。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;变量或函数的值可以用 &lt;a href="#logn"&gt;&lt;code&gt;__logn()&lt;/code&gt;&lt;/a&gt; 函数来报告&lt;/strong&gt;，&lt;code&gt;__logn()&lt;/code&gt; 函数在要报告的变量被定义之后可以在测试计划的任何地方被引用。除此之外，Java 请求采样器可以用来生成一个包含变量引用的采样；其输出能在合适的监听器中显示。注意也可以通过在查看结果树中使用 &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#Debug_Sampler"&gt;Debug Sampler&lt;/a&gt; 来显示变量的值。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果用和内建函数同样的名称定义一个用户静态变量，那么定义的静态变量将覆盖同名内建函数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;20.4 函数助手对话框&lt;/h2&gt;
+&lt;p&gt;函数助手对话框可以在 JMeter 的工具菜单中找到。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="../pic/2017-11-19-14-42-41.png"&gt;&lt;br&gt;
+&lt;em&gt;函数助手对话框&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;使用函数助手，可以从下拉列表中选择一个函数，并给它的参数赋值。表格左列是参数的简要说明，表格的右列填入相应参数的值。不同的函数有不同的参数。&lt;/p&gt;
+&lt;p&gt;上述操作完成之后，点击“生成（Generate）”按钮，相应调用函数的字符串就生成了，你可以复制-粘贴到测试计划中的任何地方。&lt;/p&gt;
+&lt;h2&gt;20.5 函数&lt;/h2&gt;
+&lt;h3 id="regexFunction"&gt;__regexFunction&lt;/h3&gt;
+
+&lt;p&gt;regexFunction 函数可以使用任意正则表达式（用户提供的）来解析之前的服务器响应（或变量值）。函数返回填充了变量值的模版字符串。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;__regexFunction&lt;/code&gt; 也可以存储值供以后使用。你可以在它的第六个参数中设定一个引用名称。在函数执行之后，可以使用用户定义的值的语法在稍后时间检索相同的值。例如，如果输入 “&lt;code&gt;refName&lt;/code&gt;” 作为第六个参数，那么可以使用：
+* &lt;code&gt;${refName}&lt;/code&gt; 来引用该函数解析的第二个参数（“替换字符串的模版”）的计算结果
+* &lt;code&gt;${refName_g0}&lt;/code&gt; 来引用该函数解析的整个匹配
+* &lt;code&gt;${refName_g1}&lt;/code&gt; 来引用该函数解析的第一个匹配组合
+* &lt;code&gt;${refName_g#}&lt;/code&gt; 来引用该函数解析的第 N 个匹配组合
+* &lt;code&gt;${refName_matchNr}&lt;/code&gt; 来引用该函数解析的匹配组合数量&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果是分布式测试，要切换模式（见 &lt;code&gt;jmeter.properties&lt;/code&gt;）确保它不在剥离模式下，参见 &lt;a href="https://bz.apache.org/bugzilla/show_bug.cgi?id=56376"&gt;&lt;code&gt;Bug 56376&lt;/code&gt;&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;第一个参数&lt;/td&gt;
+&lt;td&gt;第一个参数是解析响应数据的正则表达式。它会抓取所有匹配。请在模版字符串中给该表达式中想要使用的部分加上括号。例如：&lt;code&gt;&amp;lt;a href="(.*)"&amp;gt;&lt;/code&gt;。它将抓取链接值并储存在第一个匹配组合中（这里只有一个匹配组合）。另一个例子：&lt;code&gt;&amp;lt;input type="hidden" name="(.*)" value="(.*)"&amp;gt;&lt;/code&gt;。它将抓取 name 的值作为第一个匹配组合，value 的值作为第二个匹配组合。这些匹配的值可以用在模版字符串中。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;第二个参数&lt;/td&gt;
+&lt;td&gt;这是一个运行时会替换函数的模版字符串。要引用正则表达式中捕获的匹配组合，使用下面的句法：&lt;code&gt;$[group_number]$&lt;/code&gt;。例如 &lt;code&gt;$1$&lt;/code&gt; 或者 &lt;code&gt;$2$&lt;/code&gt;。你的模版可以是任意字符串。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;第三个参数&lt;/td&gt;
+&lt;td&gt;第三个参数告诉 JMeter 使用第几个匹配。你的正则表达式可能找到多个匹配。对此有四个选项：&lt;br/&gt;&lt;ul&gt;&lt;li&gt; 整数——直接告诉 JMeter 使用第几个匹配。‘&lt;code&gt;1&lt;/code&gt;’对应第一个，‘&lt;code&gt;2&lt;/code&gt;’对应第二个，以此类推。 &lt;/li&gt;&lt;li&gt; &lt;code&gt;RAND&lt;/code&gt;——告诉 JMeter 使用随机匹配。&lt;/li&gt;&lt;li&gt; &lt;code&gt;ALL&lt;/code&gt;——告诉 JMeter 使用所有匹配，对应每个匹配生成一个模版字符串并将它们组合到一起。这个选项很少用到。&lt;/li&gt;&lt;li&gt; 0 到 1 之间的浮点数——告诉 JMeter 根据公式（总的匹配个数*浮点值）计算使用第几个匹配项，计算值向最近的整数取整&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;
+&lt;td&gt;否，默认值 = 1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;第四个参数&lt;/td&gt;
+&lt;td&gt;如果上一个参数选择 &lt;code&gt;ALL&lt;/code&gt;，这个参数会被插入到每个附加的模版值副本之间&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;第五个参数&lt;/td&gt;
+&lt;td&gt;如果没有匹配项返回的默认值&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;第六个参数&lt;/td&gt;
+&lt;td&gt;重用此函数解析的值的引用名称,储存的值包括 &lt;code&gt;${refName}&lt;/code&gt;（替换的模版字符串）和 &lt;code&gt;${refName_g#}&lt;/code&gt; ,其中“&lt;code&gt;#&lt;/code&gt;”代表正则表达式匹配分组的序号（“&lt;code&gt;0&lt;/code&gt;”可以用来引用整个匹配）&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;第七个参数&lt;/td&gt;
+&lt;td&gt;输入变量名称。如果指定了这个参数，那么将使用变量的值作为输入，而不是使用之前的采样结果。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="counter"&gt;__counter&lt;/h3&gt;
+
+&lt;p&gt;计数器每次调用会生成一个新值，从 1 开始，每次加 1。计数器可以配置成对每个虚拟用户独立的，也可以配置成对所有用户公用的。如果每个用户的值分开计数，通常用于计算测试计划的执行次数。全局计数器通常用于计算请求的次数。&lt;/p&gt;
+&lt;p&gt;计数器使用一个整型变量来保存计数，允许的最大值为 2,147,483,647。&lt;/p&gt;
+&lt;p&gt;计数器函数实例是完全独立的。全局计数器 - “&lt;code&gt;FALSE&lt;/code&gt;” - 的每个实例都是独立维护的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;__counter&lt;/code&gt; 函数在同一个迭代中的多次调用不会进一步增加值。&lt;/strong&gt; 
+如果您想对每个采样器计数，请使用前置处理器（例如&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#User_Parameters"&gt;用户参数&lt;/a&gt;）中的功能。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;第一个参数&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;TRUE&lt;/code&gt; 如果您希望每个虚拟用户的计数器保持独立并与其他用户分开。 &lt;code&gt;FLASE&lt;/code&gt; 全局计数器。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;第二个参数&lt;/td&gt;
+&lt;td&gt;重用此函数创建的值的引用名称。&lt;br/&gt;存储的值的格式为 &lt;code&gt;${refName}&lt;/code&gt;。这允许你保留一个计数器，并在多个地方引用它的值。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="threadNum"&gt;__threadNum&lt;/h3&gt;
+
+&lt;p&gt;threadNum 函数只是返回当前正在执行的线程编号。线程编号独立于线程组，这意味着从该函数的角度来看，一个线程组中的线程 #1 与另一个线程组中的线程 #1 是没有区别的。&lt;/p&gt;
+&lt;p&gt;这个函数没有参数。&lt;/p&gt;
+&lt;p&gt;用法示例：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__threadNum&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回 1 到线程组中配置的运行线程的最大值之间的数字。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这个函数在任何配置元件（例如用户定义的变量）中都不起作用，因为它们是在一个单独的线程中运行的。在测试计划中也不能使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="threadGroupName"&gt;__threadGroupName&lt;/h3&gt;
+
+&lt;p&gt;threadGroupName 函数只返回正在执行的线程组的名称。 &lt;/p&gt;
+&lt;p&gt;这个函数没有参数。&lt;/p&gt;
+&lt;p&gt;用法示例：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__threadGroupName&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;这个函数在任何配置元件（例如用户定义的变量）中都不起作用，因为它们是在一个单独的线程中运行的。在测试计划中也不能使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="intSum"&gt;__intSum&lt;/h3&gt;
+
+&lt;p&gt;intSum 函数可用于计算两个或更多个整数值之和。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;引用名称是可选的，但不能是有效的整数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;第一个参数&lt;/td&gt;
+&lt;td&gt;第一个整数值&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;第二个参数&lt;/td&gt;
+&lt;td&gt;第二个整数值&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;第 n 个参数&lt;/td&gt;
+&lt;td&gt;第 n 个整数值&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;最后一个参数&lt;/td&gt;
+&lt;td&gt;重用此函数计算值的引用名称。如果该参数被指定，引用名称必须包含至少一个非数字字符，否则将被视为另一个要添加的整数值&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__intSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;MYVAR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回 7（2 + 5）并将结果存储在 MYVAR 变量中。所以 &lt;code&gt;${MYVAR}&lt;/code&gt; 将等于 7。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__intSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回 14（2 + 5 + 7）并将结果存储在 MYVAR 变量中。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__intSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;MYVAR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;)}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果 MYVAR 值等于 8，1 + 2 + 5 + ${MYVAR}，返回 16。&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="longSum"&gt;__longSum&lt;/h3&gt;
+
+&lt;p&gt;longSum 函数可用于计算两个或更多个长整型值之和，当计算值不在 -2147483648 到 2147483647 之间，使用此函数而不是 __intSum。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;第一个参数&lt;/td&gt;
+&lt;td&gt;第一个长整型值&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;第二个参数&lt;/td&gt;
+&lt;td&gt;第二个长整型值&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;第 n 个参数&lt;/td&gt;
+&lt;td&gt;第 n 个长整型值&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;最后一个参数&lt;/td&gt;
+&lt;td&gt;重用此函数计算值的引用名称。如果该参数被指定，引用名称必须包含至少一个非数字字符，否则将被视为另一个要添加的长整型值&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__longSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;MYVAR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回 7（2 + 5）并将结果存储在 MYVAR 变量中。所以 &lt;code&gt;${MYVAR}&lt;/code&gt; 将等于 7。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__longSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回 14（2 + 5 + 7）并将结果存储在 MYVAR 变量中。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__longSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;MYVAR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;)}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果 MYVAR 值等于 8，1 + 2 + 5 + ${MYVAR}，返回 16。 &lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="StringFromFile"&gt;__StringFromFile&lt;/h3&gt;
+
+&lt;p&gt;StringFromFile 函数可以用来从文本文件中读取字符串。这对于运行需要大量可变数据的测试非常有用。例如，在测试银行应用程序时，可能需要 100 或 1000 个不同的帐号。&lt;/p&gt;
+&lt;p&gt;另请参阅可能更易于使用的 &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#CSV_Data_Set_Config"&gt;CSV Data Set Config 测试元件&lt;/a&gt;。但是，目前不支持多个输入文件。&lt;/p&gt;
+&lt;p&gt;每次调用该函数都会从文件中读取下一行。所有的线程共享相同的实例，所以不同的线程会读取不同的行。到达文件末尾时，除非达到最大循环次数，否则将从头开始重新读取。如果在一个测试脚本中引用该函数多次，每此引用都将独立打开文件，即使文件名相同。（如果要在其他地方再次使用该值，请为每个函数调用使用不同的变量名称。）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;函数实例在线程之间共享，并且无论线程​​是否需要下一行输入，该文件都会（重新）打开，因此使用 &lt;code&gt;threadNumber&lt;/code&gt; 作为文件名的一部分将导致不可预知的行为。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果打开或读取文件时发生错误，函数会返回字符串“&lt;code&gt;**ERR**&lt;/code&gt;”。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;文件名称&lt;/td&gt;
+&lt;td&gt;文件名称的路径。（可以使用相对于 JMeter 启动目录的相对路径）如果要使用可选的序列号，路径名称应该适合转换成十进制格式。看下面的例子。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;引用名称 - &lt;code&gt;refName&lt;/code&gt; - 用于重用由此函数创建的值。存储该值的格式为 &lt;code&gt;${refName}&lt;/code&gt;。默认值是“&lt;code&gt;StringFromFile_&lt;/code&gt;”。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;开始序列号&lt;/td&gt;
+&lt;td&gt;初始序列号（如果省略，结束序列号将被视为循环计数）&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;结束序列号&lt;/td&gt;
+&lt;td&gt;终止序列号（如果省略，序列号可以不受限制地增加下去）&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;文件名称参数在文件打开或重新打开时被解析。&lt;/p&gt;
+&lt;p&gt;引用名称参数（如果支持）在每次执行函数时被解析。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用序列号：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用可选的序列号时，路径名称将使用 &lt;code&gt;java.text.DecimalFormat&lt;/code&gt; 的格式字符串。当前的序列号将作为唯一的参数传入。如果没有指定可选的开始序列号，就使用路径名称作为起始值。有用的格式序列如下：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;#&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;插入不带前导零或空格的数字&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;000&lt;/code&gt; &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;插入带有前导零的三位数字，如果需要的话&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;h4&gt;格式字符串的使用&lt;/h4&gt;&lt;/p&gt;
+&lt;p&gt;以下是几个格式字符串以及它们将生成的对应序列。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pin#'.'dat&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;生成不带前导零的序列，&lt;code&gt;.&lt;/code&gt; 还是 &lt;code&gt;.&lt;/code&gt;：&lt;code&gt;pin1.dat&lt;/code&gt;，...，&lt;code&gt;pin9.dat&lt;/code&gt;，&lt;code&gt;pin10.dat&lt;/code&gt;，...，&lt;code&gt;pin9999.dat&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;pin000'.'dat&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;生成带前导零的序列，同时保持 &lt;code&gt;.&lt;/code&gt;。当数字位数超过三位时，序列将使用更多位数的数字：&lt;code&gt;pin001.dat&lt;/code&gt;，... &lt;code&gt;pin099.dat&lt;/code&gt;，...，&lt;code&gt;pin999.dat&lt;/code&gt;，...，&lt;code&gt;pin9999.dat&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;pin'.'dat#&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;生成不带前导零的附加数字，同时保持 &lt;code&gt;.&lt;/code&gt;：&lt;code&gt;pin.dat1&lt;/code&gt;，...，&lt;code&gt;pin.dat9&lt;/code&gt;，...，&lt;code&gt;pin.dat999&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果需要的位数多于格式字符数，数字将根据需要进行扩展。
+&lt;strong&gt;要防止格式字符被解释，请将其包含在单引号中。请注意，“&lt;code&gt;.&lt;/code&gt;”是一个格式字符，必须用单引号引起来&lt;/strong&gt; （尽管 &lt;code&gt;#.&lt;/code&gt; 和 &lt;code&gt;000.&lt;/code&gt; 在工作区能按预期的方式工作，因为它被视为小数点，而小数点也是“&lt;code&gt;.&lt;/code&gt;”）。
+在其他语言环境（例如 &lt;code&gt;fr&lt;/code&gt;）中，小数点是“&lt;code&gt;,&lt;/code&gt;” - 这意味着“&lt;code&gt;#.&lt;/code&gt;”会变成“&lt;code&gt;nnn,&lt;/code&gt;”。
+有关完整的细节，请参阅 DecimalFormat （十进制格式）的文档。
+如果路径名称不包含任何特殊的格式字符，则将当前的序号直接附加到名称上，否则将根据格式化指令插入数字。 
+如果起始序列号被忽略，并且指定了结束序列号，则结束序列号将被解释为循环计数，并且该文件将被使用循环计数的最大次数。在这种情况下，文件名不是格式化的。
+&lt;code&gt;${__StringFromFile(PIN#'.'DAT,,1,2)}&lt;/code&gt; 读取 &lt;code&gt;PIN1.DAT&lt;/code&gt;, &lt;code&gt;PIN2.DAT&lt;/code&gt; 
+&lt;code&gt;${__StringFromFile(PIN.DAT,,,2)}&lt;/code&gt; 读取 &lt;code&gt;PIN.DAT&lt;/code&gt; 两次 
+注意上面 &lt;code&gt;PIN.DAT&lt;/code&gt; 中的“&lt;code&gt;.&lt;/code&gt;”不应被引号包含。在这种起始序列号被省略的情况下，文件名完全按原样使用。&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="machineName"&gt;__machineName&lt;/h3&gt;
+
+&lt;p&gt;machineName 函数返回本地主机名称。它使用 Java 方法 &lt;code&gt;InetAddress.getLocalHost()&lt;/code&gt; 并将值传递给 &lt;code&gt;getHostName()&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__machineName&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回机器的主机名称&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__machineName&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回机器的主机名称&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="machineIP"&gt;__machineIP&lt;/h3&gt;
+
+&lt;p&gt;machineIP 函数返回本地 IP 地址。它使用 Java 方法&lt;code&gt;InetAddress.getLocalHost()&lt;/code&gt; 并将其值传递给 &lt;code&gt;getHostAddress()&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__machineIP&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回机器的 IP 地址&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__machineIP&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回机器的 IP 地址&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="javaScript"&gt;__javaScript&lt;/h3&gt;
+
+&lt;p&gt;javaScript 函数执行一段 JavaScript（不是 Java！）代码并返回它的值。&lt;/p&gt;
+&lt;p&gt;JMeter Javascrip t函数调用独立的 JavaScript 解释器。Javascript 被当作脚本语言使用，所以可以做相应的计算等。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在 JMeter 中，javaScript 并不是最好的脚本语言。如果你的测试计划需要大量的线程，建议使用&lt;code&gt;__jexl3&lt;/code&gt; 或&lt;code&gt;__groovy&lt;/code&gt; 函数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对于 Nashorn 引擎，请参阅&lt;a href="https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/"&gt; Java 平台标准版 Nashorn 用户指南&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;对于 Rhino 引擎，请参阅&lt;a href="http://www.mozilla.org/rhino/overview.html"&gt;Mozilla Rhino 概述&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;以下变量可用于脚本：
+  * &lt;code&gt;log&lt;/code&gt; - 函数的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录&lt;/a&gt;
+  * &lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象
+  * &lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象
+  * &lt;code&gt;threadName&lt;/code&gt; - 包含当前线程名称的字符串
+  * &lt;code&gt;sampler&lt;/code&gt; - 当前&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;对象（如果有的话）
+  * &lt;code&gt;samplerResult&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt; 对象（如果有的话）
+  * &lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象&lt;/p&gt;
+&lt;p&gt;Rhinoscript 允许通过其 Packages 对象访问静态方法。请参阅 &lt;a href="https://wiki.openjdk.java.net/display/Nashorn/Rhino+Migration+Guide"&gt;Java 脚本&lt;/a&gt; 文档。例如，可以像这样访问 JMeterContextService 静态方法：&lt;code&gt;Java.type("org.apache.jmeter.threads.JMeterContextService").getTotalThreads()&lt;/code&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;JMeter 不是浏览器，不能解释下载页面中的 JavaScript。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;表达式&lt;/td&gt;
+&lt;td&gt;要执行的JavaScript表达式。例如：&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;code&gt;new Date()&lt;/code&gt; - 返回当前日期和时间&lt;/li&gt;&lt;li&gt;&lt;code&gt;Math.floor(Math.random()*(${maxRandom}+1))&lt;/code&gt; - 一个介于 &lt;code&gt;0&lt;/code&gt; 和变量 &lt;code&gt;maxRandom&lt;/code&gt; 之间的随机数&lt;/li&gt;&lt;li&gt;&lt;code&gt;${minRandom}+Math.floor(Math.random()*(${maxRandom}-${minRandom}+1))&lt;/code&gt; - 介于变量 &lt;code&gt;minRandom&lt;/code&gt; 和 &lt;code&gt;maxRandom&lt;/code&gt; 之间的随机数&lt;/li&gt;&lt;li&gt;&lt;code&gt;"${VAR}"=="abcd"&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;请记住为文本字符串和 JMeter 变量添加必要的引号。另外，如果表达式有逗号，请确保将其转义。例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__javaScript&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;${sp&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;#39;.slice(7\,99999))}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;7&lt;/code&gt; 之后的逗号被转义了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__javaScript&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回 &lt;code&gt;Sat Jan 09 2016 16:22:15 GMT+0100 (CET)&lt;/code&gt; &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__javaScript&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;&lt;span class="n"&gt;MYDATE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回 &lt;code&gt;Sat Jan 09 2016 16:22:15 GMT+0100 (CET)&lt;/code&gt; 并将其存储在变量 &lt;code&gt;MYDATE&lt;/code&gt; 下 &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__javaScript&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Math&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;floor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Math&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;maxRandom&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;+1)),MYRESULT)}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;使用 &lt;code&gt;maxRandom&lt;/code&gt; 变量，返回 &lt;code&gt;0&lt;/code&gt; 和 &lt;code&gt;maxRandom&lt;/code&gt; 之间的随机值并将其存储在  &lt;code&gt;MYRESULT&lt;/code&gt; 中&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__javaScript&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;minRandom&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;+Math.floor(Math.random()*(&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;maxRandom&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;-&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;minRandom&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;+1)),MYRESULT)}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;使用 &lt;code&gt;maxRandom&lt;/code&gt; 和 &lt;code&gt;minRandom&lt;/code&gt; 变量，返回 &lt;code&gt;maxRandom&lt;/code&gt; 和 &lt;code&gt;minRandom&lt;/code&gt; 之间的随机值并将其存储在 &lt;code&gt;MYRESULT&lt;/code&gt; 中&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__javaScript&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;${VAR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;==&amp;quot;abcd&amp;quot;,MYRESULT)}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将 &lt;code&gt;VAR&lt;/code&gt; 变量的值与 &lt;code&gt;abcd&lt;/code&gt; 进行比较，返回 &lt;code&gt;true&lt;/code&gt; 或 &lt;code&gt;false&lt;/code&gt; 并将结果存储在 &lt;code&gt;MYRESULT&lt;/code&gt; 中&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="Random"&gt;__Random&lt;/h3&gt;
+
+&lt;p&gt;random 函数返回一个介于给定最小值和最大值之间的随机数。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;最小值&lt;/td&gt;
+&lt;td&gt;一个数字&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;最大值&lt;/td&gt;
+&lt;td&gt;一个更大的数字&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__Random&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回一个 0 到 10 之间的随机数&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__Random&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;MYVAR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回一个 0 到 10 之间的随机数，并将其存储在 &lt;code&gt;MYVAR&lt;/code&gt;中。&lt;code&gt;${MYVAR}&lt;/code&gt;将包含此随机数。&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="RandomDate"&gt;__RandomDate&lt;/h3&gt;
+
+&lt;p&gt;RandomDate 函数返回一个位于给定开始日期和结束日期值之间的随机日期。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;时间格式&lt;/td&gt;
+&lt;td&gt;DateTimeFormatter 的格式字符串（默认为 &lt;code&gt;yyyy-MM-dd&lt;/code&gt;）&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;开始日期&lt;/td&gt;
+&lt;td&gt;开始日期，默认值是现在&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;结束日期&lt;/td&gt;
+&lt;td&gt;结束日期&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;用于格式的区域设置&lt;/td&gt;
+&lt;td&gt;语言环境的字符串格式。语言代码必须是小写。国家代码必须大写。分隔符必须是下划线，例如 &lt;code&gt;en_EN&lt;/code&gt;。请参阅 &lt;a href="http://www.oracle.com/technetwork/java/javase/javase7locales-334809.html"&gt;http://www.oracle.com/technetwork/java/javase/javase7locales-334809.html&lt;/a&gt;。如果省略，则默认情况下该函数使用 Apache JMeter 当前语言环境。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;要设置的变量名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__RandomDate&lt;/span&gt;&lt;span class="p"&gt;(,,&lt;/span&gt;&lt;span class="mi"&gt;2050&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mo"&gt;07&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;08&lt;/span&gt;&lt;span class="p"&gt;,,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回从现在到 &lt;code&gt;2050-07-08&lt;/code&gt; 之间一个随机的日期。例如 &lt;code&gt;2039-06-21&lt;/code&gt; &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__RandomDate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dd&lt;/span&gt; &lt;span class="n"&gt;MM&lt;/span&gt; &lt;span class="n"&gt;yyyy&lt;/span&gt;&lt;span class="p"&gt;,,&lt;/span&gt;&lt;span class="mi"&gt;08&lt;/span&gt; &lt;span class="mo"&gt;07&lt;/span&gt; &lt;span class="mi"&gt;2050&lt;/span&gt;&lt;span class="p"&gt;,,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回一个自定义格式的随机日期，例如 &lt;code&gt;04 03 2034&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="RandomString"&gt;__RandomString&lt;/h3&gt;
+
+&lt;p&gt;RandomString 函数返回一个 chars 长度内的随机字符串。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;长度&lt;/td&gt;
+&lt;td&gt;生成字符串的长度&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;使用的字符&lt;/td&gt;
+&lt;td&gt;用于生成字符串的字符&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__RandomString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回随机的可读或不可读的 5 个字符&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__RandomString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;abcdefg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回从 &lt;code&gt;abcdefg&lt;/code&gt; 集合中挑选的 10 个字符的随机字符串，如 &lt;code&gt;cdbgdbeebd&lt;/code&gt; 或 &lt;code&gt;adbfeggfad&lt;/code&gt;，...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__RandomString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;a12zeczclk&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;MYVAR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;从 &lt;code&gt;a12zeczclk&lt;/code&gt; 集合中返回一个由 6 个字符组成的随机字符串，并将结果存储在 &lt;code&gt;MYVAR&lt;/code&gt; 中，&lt;code&gt;MYVAR&lt;/code&gt; 将包含像 &lt;code&gt;2z22ak&lt;/code&gt; 或 &lt;code&gt;z11kce&lt;/code&gt; 这样的字符串，...&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="RandomFromMultipleVars"&gt;__RandomFromMultipleVars&lt;/h3&gt;
+
+&lt;p&gt;RandomFromMultipleVars 函数根据&lt;code&gt;源变量&lt;/code&gt;提供的变量值返回一个随机值。&lt;/p&gt;
+&lt;p&gt;变量可以是单值或多值的，它们可以由以下提取器生成：
+  * &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#Boundary_Extractor"&gt;边界提取器&lt;/a&gt;
+  * &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#Regular_Expression_Extractor"&gt;正则表达式提取器&lt;/a&gt;
+  * &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#CSS_Selector_Extractor"&gt;CSS 提取器&lt;/a&gt;
+  * &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#JSON_Extractor"&gt;JSON 提取器&lt;/a&gt;
+  * &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath_Extractor"&gt;XPath 提取器&lt;/a&gt;
+  * &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath2_Extractor"&gt;XPath2 提取器&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;多值变量就是，当你设置 &lt;code&gt;-1&lt;/code&gt; 作为&lt;code&gt;匹配数字&lt;/code&gt;所提取的值。当n = 1，2，3...时会创建相应匹配号变量 &lt;code&gt;varName_matchNr&lt;/code&gt;，并为每个值创建变量 &lt;code&gt;varName_n&lt;/code&gt;，其中n = 1，2，3 等 。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;源变量&lt;/td&gt;
+&lt;td&gt;变量名称包含的值将用作随机计算的输入，用 &lt;code&gt;|&lt;/code&gt; 分隔&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__RandomFromMultipleVars&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;根据变量 val 的内容返回一个随机的字符串，不管它们是否是多值的&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__RandomFromMultipleVars&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;val2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;根据变量 val1 和 val2 的内容返回一个随机字符串，不管它们是否为多值&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__RandomFromMultipleVars&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;val2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;MYVAR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;根据变量 val1 和 val2 的内容返回一个随机字符串，不管它们是否为多值，并将结果存储在 &lt;code&gt;MYVAR&lt;/code&gt; 中 &lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="UUID"&gt;__UUID&lt;/h3&gt;
+
+&lt;p&gt;UUID 函数返回伪随机类型为 4 的通用唯一标识符（UUID）。&lt;/p&gt;
+&lt;p&gt;没有参数。&lt;/p&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;UUID&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回具有以下格式的 UUID：&lt;code&gt;c69e0dd1-ac6b-4f2b-8d59-5d4e8743eecd&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="CSVRead"&gt;__CSVRead&lt;/h3&gt;
+
+&lt;p&gt;CSVRead 函数从 CSV 文件返回一个字符串（注意与 &lt;a href="#StringFromFile"&gt;StringFromFile&lt;/a&gt; 的区别）。&lt;/p&gt;
+&lt;p&gt;注：JMeter 支持多个文件名。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;大多数情况下，较新的 &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#CSV_Data_Set_Config"&gt;CSV Data Set Config 元件&lt;/a&gt;更容易使用。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;第一次读取某个文件名时，文件被打开并读取到内部数组。空行将被视为文件结尾——这允许使用尾部注释。&lt;/p&gt;
+&lt;p&gt;后续对同一文件名的所有引用使用相同的内部数组。注意，文件名是区分大小写的，即使操作系统不区分大小写，所以 &lt;code&gt;CSVRead(abc.txt,0)&lt;/code&gt; 和 &lt;code&gt;CSVRead(aBc.txt,0)&lt;/code&gt; 会引用不同的内部数组。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;*ALIAS&lt;/code&gt; 功能允许同一个文件被打开多次，并且允许较短的文件名。&lt;/p&gt;
+&lt;p&gt;每个线程都有自己的内部指针，指向文件数组中的当前行。当一个线程第一次引用文件时，它将被分配到数组中的下一个空闲行，所以每个线程将访问与其他所有线程不同的行（除非线程数多于数组中的行）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;该函数默认情况下以逗号分割行。如果要输入包含逗号的列，需要通过设置 &lt;code&gt;csvread.delimiter&lt;/code&gt; 属性将分隔符更改为不出现在任何列数据中的字符。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;文件名称&lt;/td&gt;
+&lt;td&gt;要读取的文件（或 &lt;code&gt;*ALIAS&lt;/code&gt;）&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;列号&lt;/td&gt;
+&lt;td&gt;文件中的列号。 &lt;code&gt;0&lt;/code&gt; 为第一列，&lt;code&gt;1&lt;/code&gt;为第二列，以此类推。"&lt;code&gt;next&lt;/code&gt;" - 转到文件的下一行。 &lt;code&gt;*ALIAS&lt;/code&gt; - 打开一个文件并指派一个别名&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例如，你可以设置一些变量如下：
+  * COL1a &lt;code&gt;${__CSVRead(random.txt,0)}&lt;/code&gt;
+  * COL2a &lt;code&gt;${__CSVRead(random.txt,1)}${__CSVRead(random.txt,next)}&lt;/code&gt;
+  * COL1b &lt;code&gt;${__CSVRead(random.txt,0)}&lt;/code&gt;
+  * COL2b &lt;code&gt;${__CSVRead(random.txt,1)}${__CSVRead(random.txt,next)}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这将从一行中读取两列，从下一行中读取两列。如果所有变量都在相同的前置处理器的用户参数上定义，那么这些行将是连续的。否则的话，另外一个线程可能会读取下一行。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;该函数不适用于大文件，因为它会将整个文件存储在内存中。对于较大的文件，请使用 &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#CSV_Data_Set_Config"&gt;CSV Data Set Config 元件&lt;/a&gt; 或 &lt;a href="#StringFromFile"&gt;StringFromFile&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="property"&gt;__property&lt;/h3&gt;
+
+&lt;p&gt;property 函数返回 JMeter 属性的值。如果找不到属性值，并且没有提供默认值，则返回属性名称。当提供默认值时，可以不需要函数名称——参数可以设置为 null，并且将被忽略。&lt;/p&gt;
+&lt;p&gt;例如：
+  * &lt;code&gt;${__property(user.dir)}&lt;/code&gt; - 返回 &lt;code&gt;user.dir&lt;/code&gt; 的值
+  * &lt;code&gt;${__property(user.dir,UDIR)}&lt;/code&gt; - 返回 &lt;code&gt;user.dir&lt;/code&gt; 的值并保存在 &lt;code&gt;UDIR&lt;/code&gt; 中
+  * &lt;code&gt;${__property(abcd,ABCD,atod)}&lt;/code&gt; - 返回属性 &lt;code&gt;abcd&lt;/code&gt; 的值（如果没有定义，则返回“&lt;code&gt;atod&lt;/code&gt;”）并保存在 &lt;code&gt;ABCD&lt;/code&gt; 中
+  * &lt;code&gt;${__property(abcd,,atod)}&lt;/code&gt; - 返回属性 &lt;code&gt;abcd&lt;/code&gt;的值（如果未定义，则返回“&lt;code&gt;atod&lt;/code&gt;”）但不保存&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;属性名称&lt;/td&gt;
+&lt;td&gt;要检索的属性名称&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;默认值&lt;/td&gt;
+&lt;td&gt;属性的默认值&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="P"&gt;__P&lt;/h3&gt;
+
+&lt;p&gt;这是一个简化的属性函数，用于在命令行中定义的属性。与&lt;code&gt;__property&lt;/code&gt; 函数不同，没有选项可将值保存在变量中，如果未提供默认值，则假定为 1。选择 1 作为假定默认值是因为它对于常见测试变量如循环次数，线程数，加速等都有效。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;p&gt;定义属性值：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;jmeter -Jgroup1.threads=7  -Jhostname1=www.realhost.edu
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;获取值：
+  * &lt;code&gt;${__P(group1.threads)}&lt;/code&gt; - 返回 &lt;code&gt;group1.threads&lt;/code&gt; 的值
+  * &lt;code&gt;${__P(group1.loops)}&lt;/code&gt; - 返回 &lt;code&gt;group1.loops&lt;/code&gt; 的值
+  * &lt;code&gt;${__P(hostname,www.dummy.org)}&lt;/code&gt; - 返回属性的值的 &lt;code&gt;hostname&lt;/code&gt;（主机名）或 &lt;code&gt;www.dummy.org&lt;/code&gt; 。如果在上面的例子中没有定义，第一个函数调用将返回&lt;code&gt;7&lt;/code&gt;，第二个返回 &lt;code&gt;1&lt;/code&gt;，最后一个将返回 &lt;code&gt;www.dummy.org&lt;/code&gt; （除非这些属性在别处有定义！）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;属性名称&lt;/td&gt;
+&lt;td&gt;要检索的属性名称&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;默认值&lt;/td&gt;
+&lt;td&gt;属性的默认值。如果省略，则默认为“&lt;code&gt;1&lt;/code&gt;”。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="log"&gt;__log&lt;/h3&gt;
+
+&lt;p&gt;log 函数记录一条日志，并返回它的输入字符串。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;要记录的字符串&lt;/td&gt;
+&lt;td&gt;一个字符串&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;日志级别&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OUT&lt;/code&gt;，&lt;code&gt;ERR&lt;/code&gt;，&lt;code&gt;DEBUG&lt;/code&gt;，&lt;code&gt;INFO&lt;/code&gt;（默认），&lt;code&gt;WARN&lt;/code&gt;或&lt;code&gt;ERROR&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;可丢弃的文本&lt;/td&gt;
+&lt;td&gt;如果非空，则创建一个可丢弃的文本传递给记录器&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;注释&lt;/td&gt;
+&lt;td&gt;如果存在，则显示在字符串中。用于标识正在记录的内容。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;code&gt;OUT&lt;/code&gt; 和 &lt;code&gt;ERR&lt;/code&gt; 日志级别会直接输出记录到 &lt;code&gt;System.out&lt;/code&gt; 和 &lt;code&gt;System.err&lt;/code&gt;。这种情况下，输出始终会被打印——它不依赖于当前的日志设置。
+  * &lt;code&gt;${__log(Message)}&lt;/code&gt; 写入日志文件,形如“&lt;code&gt;… thread Name : Message&lt;/code&gt;”
+  * &lt;code&gt;${__log(Message,OUT)}&lt;/code&gt; 写到控制台窗口
+  * &lt;code&gt;${__log(${VAR},,,VAR=)}&lt;/code&gt; 写入日志文件，形如“&lt;code&gt;… thread Name VAR=value&lt;/code&gt;”&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="logn"&gt;__logn&lt;/h3&gt;
+
+&lt;p&gt;logn 函数记录一条日志，并返回空字符串。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;要记录的字符串&lt;/td&gt;
+&lt;td&gt;一个字符串&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;日志级别&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OUT&lt;/code&gt;，&lt;code&gt;ERR&lt;/code&gt;，&lt;code&gt;DEBUG&lt;/code&gt;，&lt;code&gt;INFO&lt;/code&gt;（默认），&lt;code&gt;WARN&lt;/code&gt;或&lt;code&gt;ERROR&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;可丢弃的文本&lt;/td&gt;
+&lt;td&gt;如果非空，则创建一个可丢弃的文本传递给记录器&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;code&gt;OUT&lt;/code&gt; 和 &lt;code&gt;ERR&lt;/code&gt; 日志级别会直接输出记录到 &lt;code&gt;System.out&lt;/code&gt; 和 &lt;code&gt;System.err&lt;/code&gt;。这种情况下，输出始终会被打印——它不依赖于当前的日志设置。
+  * &lt;code&gt;${__logn(VAR1=${VAR1},OUT)}&lt;/code&gt; 将变量的值写到控制台窗口&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="BeanShell"&gt;__BeanShell&lt;/h3&gt;
+
+&lt;p&gt;BeanShell 函数执行传递给它的脚本，并返回结果。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为了更好的性能，请使用&lt;a href="#groovy"&gt;&lt;code&gt;__groovy&lt;/code&gt;&lt;/a&gt;函数 &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;有关使用 BeanShell 的完整详细信息，请参考 BeanShell 网站：&lt;a href="http://www.beanshell.org/"&gt;http://www.beanshell.org/&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意，测试脚本中每个独立的函数调用都使用不同的解释器，但是后续的调用使用相同的解释器。这意味着变量在不同的函数的调用中会持续存在。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;单个函数实例可以从多个线程中调用。但是函数 &lt;code&gt;execute()&lt;/code&gt; 的方法是同步的。&lt;/p&gt;
+&lt;p&gt;如果属性“&lt;code&gt;beanshell.function.init&lt;/code&gt;”已被定义，则将其作为源文件传递给解释器。这可以用来定义通用的方法和变量。在 bin 目录中有一个 init 示例文件：&lt;code&gt;BeanShellFunction.bshrc&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;以下变量在脚本执行之前已经被设置：
+  * &lt;code&gt;log&lt;/code&gt; - BeanShell 函数（*）的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录器&lt;/a&gt;
+  * &lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象
+  * &lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象
+  * &lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象
+  * &lt;code&gt;threadName&lt;/code&gt; - 线程名称 （字符串）
+  * &lt;code&gt;Sampler&lt;/code&gt; - 当前的&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;，如果有的话
+  * &lt;code&gt;SampleResult&lt;/code&gt; - 当前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt;，如果有的话&lt;/p&gt;
+&lt;p&gt;（*）表示这是在 init 文件（如果有的话）被处理之前设置的。其他变量因调用而异。
+&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;BeanShell 脚本&lt;/td&gt;
+&lt;td&gt;BeanShell 脚本（不是文件名）&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：
+  * &lt;code&gt;${__BeanShell(123*456)}&lt;/code&gt; 返回 &lt;code&gt;56088&lt;/code&gt;
+  * &lt;code&gt;${__BeanShell(source("function.bsh"))}&lt;/code&gt; 在 &lt;code&gt;function.bsh&lt;/code&gt; 中处理脚本&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;请记住为文本字符串和表示文本字符串的 JMeter 变量添加必要的引号。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="groovy"&gt;__groovy&lt;/h3&gt;
+
+&lt;p&gt;groovy 函数执行 &lt;a href="http://groovy-lang.org/"&gt;Apache Groovy&lt;/a&gt; 传递给它的脚本，并返回结果。&lt;/p&gt;
+&lt;p&gt;如果属性“&lt;code&gt;groovy.utilities&lt;/code&gt;”已被定义，它会被 ScriptEngine（脚本引擎）加载。这可以用来定义通用的方法和变量。在 bin 目录中有一个 init 示例文件：&lt;code&gt;utility.groovy&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;以下变量在脚本执行之前已经被设置：
+  * &lt;code&gt;log&lt;/code&gt; - groovy 函数（*）的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录器&lt;/a&gt;
+  * &lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象
+  * &lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象
+  * &lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象
+  * &lt;code&gt;threadName&lt;/code&gt; - 线程名称 （字符串）
+  * &lt;code&gt;Sampler&lt;/code&gt; - 当前的&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;，如果有的话
+  * &lt;code&gt;prev&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt;，如果有的话
+  * &lt;code&gt;OUT&lt;/code&gt; - System.out&lt;/p&gt;
+&lt;p&gt;（*）表示这是在 init 文件（如果有的话）被处理之前设置的。其他变量因调用而异。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用此函数时，请使用之前定义的变量而不是使用字符串替换来访问脚本中的变量。遵循此模式以确保缓存Groovy，从而确保您的测试具有高效性。 &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;例如&lt;strong&gt;，不要&lt;/strong&gt;执行以下操作： &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__groovy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;${myVar&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;.substring(0\,2))}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;想象一下，变量myVar随每个事务而变化，上面的Groovy无法缓存，因为脚本每次都会更改。
+但是执行下面的操作，就可以缓存：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__groovy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myVar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;substring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;\&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;要计算的表达式&lt;/td&gt;
+&lt;td&gt;一个 groovy 脚本（不是文件名）&lt;br/&gt;&lt;blockquote&gt;本身包含逗号的参数值应根据需要进行转义。如果需要在参数值中包含逗号，请像这样转义： ‘&lt;code&gt;\,&lt;/code&gt;’&lt;/blockquote&gt;&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__groovy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;123&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;456&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回 &lt;code&gt;56088&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__groovy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;${var&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;.substring(0\,2))}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果 var 的值是 &lt;code&gt;JMeter&lt;/code&gt;，它会在调用 &lt;code&gt;String.substring(0,2)&lt;/code&gt; 后返回 &lt;code&gt;JM&lt;/code&gt;。注意 &lt;code&gt;,&lt;/code&gt; 已经被 &lt;code&gt;\,&lt;/code&gt; 转义。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;请记住为文本字符串和表示文本字符串的 JMeter 变量添加必要的引号。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="split"&gt;__split&lt;/h3&gt;
+
+&lt;p&gt;split 函数根据分隔符拆分传递给它的字符串，并返回原始字符串。如果分隔符与分隔符是相邻的，则返回“&lt;code&gt;？&lt;/code&gt;”作为值。拆分出来的字符串将返回到 &lt;code&gt;${VAR_1}&lt;/code&gt;，&lt;code&gt;${VAR_2}&lt;/code&gt;……这些变量中。变量的计数将返回到 &lt;code&gt;${VAR_n}&lt;/code&gt; 中。拖尾分隔符被视为缺失变量，并返回“&lt;code&gt;？&lt;/code&gt;”。此外，为了使它在 ForEach 控制器上更好地工作， &lt;code&gt;__split&lt;/code&gt; 现在会删除第一个不使用的变量，以防它是上一次拆分所设置的。&lt;/p&gt;
+&lt;p&gt;例子：
+在测试计划中定义 &lt;code&gt;VAR&lt;/code&gt;="&lt;code&gt;a||c|&lt;/code&gt;"。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;VAR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;,VAR,|)}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这将返回 &lt;code&gt;VAR&lt;/code&gt; 的内容，即“&lt;code&gt;a||c|&lt;/code&gt;”并设置以下变量：
+&lt;code&gt;VAR_n&lt;/code&gt;=&lt;code&gt;4&lt;/code&gt;
+&lt;code&gt;VAR_1&lt;/code&gt;=&lt;code&gt;a&lt;/code&gt;
+&lt;code&gt;VAR_2&lt;/code&gt;=&lt;code&gt;?&lt;/code&gt;
+&lt;code&gt;VAR_3&lt;/code&gt;=&lt;code&gt;c&lt;/code&gt;
+&lt;code&gt;VAR_4&lt;/code&gt;=&lt;code&gt;?&lt;/code&gt;
+&lt;code&gt;VAR_5&lt;/code&gt;=&lt;code&gt;null&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;要拆分的字符串&lt;/td&gt;
+&lt;td&gt;一个要拆分的字符串，例如“&lt;code&gt;a|b|c&lt;/code&gt;”&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;分隔符&lt;/td&gt;
+&lt;td&gt;分隔符，例如&lt;code&gt;|&lt;/code&gt;。如果省略，则使用&lt;code&gt;,&lt;/code&gt;。注意 &lt;code&gt;,&lt;/code&gt; 需要 &lt;code&gt;\,&lt;/code&gt; 来转义。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="XPath"&gt;__XPath&lt;/h3&gt;
+
+&lt;p&gt;XPath 函数读取一个 XML 文件并匹配 XPath。每次调用该函数时，都会返回下一个匹配项。到达文件末尾后，会返回到开始。如果没有匹配的节点，该函数将返回空字符串，同时将一条警告消息写入 JMeter 日志文件。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意，整个 NodeList 会被保存在内存中。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__XPath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nd"&gt;@name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这将匹配 &lt;code&gt;build.xml&lt;/code&gt; 中的所有 &lt;code&gt;target&lt;/code&gt; 节点，并返回下一个 &lt;code&gt;name&lt;/code&gt; 属性的内容&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;待解析的 XML 文件&lt;/td&gt;
+&lt;td&gt;一个待解析的 XML 文件&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;XPath&lt;/td&gt;
+&lt;td&gt;一个 XPath 表达式用来匹配 XML 文件中的节点&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="setProperty"&gt;__setProperty&lt;/h3&gt;
+
+&lt;p&gt;setProperty 函数用来设置 JMeter 属性的值。函数的默认返回值是空字符串，因此在函数有效处都可以调用此函数。&lt;/p&gt;
+&lt;p&gt;可以通过设置第 3 个可选参数为“&lt;code&gt;true&lt;/code&gt;”返回原始值。&lt;/p&gt;
+&lt;p&gt;属性对 JMeter 来说是全局的，所以可以用在线程和线程组之间的通信上。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;属性名称&lt;/td&gt;
+&lt;td&gt;要设置的属性名称&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;属性值&lt;/td&gt;
+&lt;td&gt;该属性的值&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;True/False&lt;/td&gt;
+&lt;td&gt;是否返回原始值？&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="time"&gt;__time&lt;/h3&gt;
+
+&lt;p&gt;time 函数以各种格式返回当前时间。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;格式&lt;/td&gt;
+&lt;td&gt;要传递给 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html"&gt;SimpleDateFormat&lt;/a&gt; 的格式。该函数支持各种速记别名，见下文。如果省略，该函数将返回自纪元开始至今的时间（以毫秒为单位）。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;要设置的变量名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;如果省略了格式字符串，则该函数返回自纪元开始至今的时间（以毫秒为单位）。如果格式匹配“&lt;code&gt;/ddd&lt;/code&gt;”（其中 &lt;code&gt;ddd&lt;/code&gt; 是十进制数字），则该函数返回以毫秒为单位的至今的时间除以 &lt;code&gt;ddd&lt;/code&gt; 的值。例如，“&lt;code&gt;/1000&lt;/code&gt;”将返回自纪元开始至今的时间（以秒为单位）。否则，当前时间传递给 SimpleDateFormat。支持以下简写别名：
+  * &lt;code&gt;YMD&lt;/code&gt; = &lt;code&gt;yyyyMMdd&lt;/code&gt;
+  * &lt;code&gt;HMS&lt;/code&gt; = &lt;code&gt;HHmmss&lt;/code&gt;
+  * &lt;code&gt;YMDHMS&lt;/code&gt; = &lt;code&gt;yyyyMMdd-HHmmss&lt;/code&gt;
+  * &lt;code&gt;USER1&lt;/code&gt; = JMeter 属性 &lt;code&gt;time.USER1&lt;/code&gt;
+  * &lt;code&gt;USER2&lt;/code&gt; = JMeter 属性 &lt;code&gt;time.USER2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;默认值可以通过设置适当的 JMeter 属性来改变，例如 &lt;code&gt;time.YMD=yyMMdd&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dd&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;MM&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yyyy&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果在2018年1月21日运行，将返回&lt;code&gt;21/01/2018&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;YMD&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果在2018年1月21日运行，将返回&lt;code&gt;20180121&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回以毫秒表示的时间&lt;code&gt;1516540541624&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="jexl2"&gt;__jexl2&lt;/h3&gt;
+
+&lt;p&gt;jexl 函数返回执行 &lt;a href="http://commons.apache.org/proper/commons-jexl/"&gt;通用 JEXL 表达式&lt;/a&gt;的结果 。有关 JEXL 表达式的更多信息，请参阅下面的链接。&lt;/p&gt;
+&lt;p&gt;jexl2 函数使用通用 JEXL 2
+  * &lt;a href="http://commons.apache.org/proper/commons-jexl/reference/syntax.html"&gt;JEXL 语法描述&lt;/a&gt;
+  * &lt;a href="http://commons.apache.org/proper/commons-jexl/reference/examples.html#Example_Expressions"&gt;JEXL 的例子&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;表达式&lt;/td&gt;
+&lt;td&gt;待执行的表达式，例如：&lt;code&gt;6*(5+2)&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;要设置的变量名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;以下变量可用于脚本：
+  * &lt;code&gt;log&lt;/code&gt; - 函数的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录器&lt;/a&gt;
+  * &lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象
+  * &lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象
+  * &lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象
+  * &lt;code&gt;threadName&lt;/code&gt; - 包含当前线程名称的字符串
+  * &lt;code&gt;Sampler&lt;/code&gt; - 当前的&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;对象，如果有的话
+  * &lt;code&gt;sampleResult&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt;对象，如果有的话
+  * &lt;code&gt;OUT&lt;/code&gt; - System.out 例如：&lt;code&gt;OUT.println("message")&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Jexl 也可以创建类和调用其方法，例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Systemclass=log.class.forName(&amp;quot;java.lang.System&amp;quot;);
+now=Systemclass.currentTimeMillis();
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;注意，网站上的 Jexl 文档错误地建议使用“&lt;code&gt;div&lt;/code&gt;”做整数除法。实际上“&lt;code&gt;div&lt;/code&gt;”和“&lt;code&gt;/&lt;/code&gt;”都执行普通除法。下面的操作可以得到整数除法的效果：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;i= 5 / 2;
+i.intValue(); // 或使用 i.longValue()
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;JMeter 允许表达式包含多个语句。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="jexl3"&gt;__jexl3&lt;/h3&gt;
+
+&lt;p&gt;jexl 函数返回执行 &lt;a href="http://commons.apache.org/proper/commons-jexl/"&gt;通用 JEXL 表达式&lt;/a&gt;的结果 。有关 JEXL 表达式的更多信息，请参阅下面的链接。&lt;/p&gt;
+&lt;p&gt;jexl3 函数使用通用 JEXL 3
+  * &lt;a href="http://commons.apache.org/proper/commons-jexl/reference/syntax.html"&gt;JEXL 语法描述&lt;/a&gt;
+  * &lt;a href="http://commons.apache.org/proper/commons-jexl/reference/examples.html#Example_Expressions"&gt;JEXL 的例子&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;表达式&lt;/td&gt;
+&lt;td&gt;待执行的表达式，例如：&lt;code&gt;6*(5+2)&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;要设置的变量名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;以下变量可用于脚本：
+  * &lt;code&gt;log&lt;/code&gt; - 函数的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录器&lt;/a&gt;
+  * &lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象
+  * &lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象
+  * &lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象
+  * &lt;code&gt;threadName&lt;/code&gt; - 包含当前线程名称的字符串
+  * &lt;code&gt;Sampler&lt;/code&gt; - 当前的&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;对象，如果有的话
+  * &lt;code&gt;sampleResult&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt; 对象，如果有的话
+  * &lt;code&gt;OUT&lt;/code&gt; - System.out 例如：&lt;code&gt;OUT.println("message")&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Jexl 也可以创建类和调用其方法，例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Systemclass=log.class.forName(&amp;quot;java.lang.System&amp;quot;);
+now=Systemclass.currentTimeMillis();
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;注意，网站上的 Jexl 文档错误地建议使用“&lt;code&gt;div&lt;/code&gt;”做整数除法。实际上“&lt;code&gt;div&lt;/code&gt;”和“&lt;code&gt;/&lt;/code&gt;”都执行普通除法。下面的操作可以得到整数除法的效果：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;i= 5 / 2;
+i.intValue(); // 或使用 i.longValue()
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;JMeter 允许表达式包含多个语句。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="V"&gt;__V&lt;/h3&gt;
+
+&lt;p&gt;V（变量）函数返回执行变量名称表达式的结果。这可以用来执行嵌套变量引用（目前不支持）。&lt;/p&gt;
+&lt;p&gt;例如，如果有变量 &lt;code&gt;A1&lt;/code&gt;，&lt;code&gt;A2&lt;/code&gt; 和 &lt;code&gt;N&lt;/code&gt;=&lt;code&gt;1&lt;/code&gt;：
+  * &lt;code&gt;${A1}&lt;/code&gt; - 可以使用
+  * &lt;code&gt;${A${N}}&lt;/code&gt; - 不起作用（嵌套变量引用）
+  * &lt;code&gt;${__V(A${N})}&lt;/code&gt; - 可以使用。&lt;code&gt;${N}&lt;/code&gt; 变成 &lt;code&gt;A1&lt;/code&gt;，&lt;code&gt;__V&lt;/code&gt; 函数返回 &lt;code&gt;A1&lt;/code&gt; 的值&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;待执行的变量&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;默认值&lt;/td&gt;
+&lt;td&gt;未找到变量时的默认值，如果它为空且没有找到变量函数，则返回变量名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="evalVar"&gt;__evalVar&lt;/h3&gt;
+
+&lt;p&gt;evalVar 函数返回执行存储在变量中的表达式的结果。&lt;/p&gt;
+&lt;p&gt;这允许从文件读取字符串，并处理其中的任何变量引用。例如，如果变量“&lt;code&gt;query&lt;/code&gt;”包含“&lt;code&gt;select ${column} from ${table}&lt;/code&gt;”，并且“&lt;code&gt;column&lt;/code&gt;”和“&lt;code&gt;table&lt;/code&gt;”分别包含“&lt;code&gt;name&lt;/code&gt;”和“&lt;code&gt;customers&lt;/code&gt;”，那么 &lt;code&gt;${__evalVar(query)}&lt;/code&gt; 将会执行“&lt;code&gt;select name from customers&lt;/code&gt;”。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;待执行的变量&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="eval"&gt;__eval&lt;/h3&gt;
+
+&lt;p&gt;eval 函数返回执行字符串表达式的结果。&lt;/p&gt;
+&lt;p&gt;这允许往变量中存储的字符串中插入变量和函数引用。例如，给定以下变量：
+  * &lt;code&gt;name&lt;/code&gt;=&lt;code&gt;Smith&lt;/code&gt;
+  * &lt;code&gt;column&lt;/code&gt;=&lt;code&gt;age&lt;/code&gt;
+  * &lt;code&gt;table&lt;/code&gt;=&lt;code&gt;birthdays&lt;/code&gt;
+  * &lt;code&gt;SQL&lt;/code&gt;=&lt;code&gt;select ${column} from ${table} where name='${name}'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;${__eval(${SQL})}&lt;/code&gt; 将执行 “&lt;code&gt;select age from birthdays where name='Smith'&lt;/code&gt;”&lt;/p&gt;
+&lt;p&gt;这可以与 CSV 数据集结合使用，例如在数据文件中定义 SQL 语句和值。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;要执行的变量&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="char"&gt;__char&lt;/h3&gt;
+
+&lt;p&gt;char 函数将一个数字转换成 Unicode 字符。另外请参阅下面的&lt;code&gt;__unescape()&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;这允许将任意字符值添加到字段中。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Unicode字符编码（十进制或十六进制数）&lt;/td&gt;
+&lt;td&gt;十进制数（或十六进制数前缀为 &lt;code&gt;0x&lt;/code&gt;，或八进制前缀为 &lt;code&gt;0&lt;/code&gt;）将被转换为 Unicode 字符。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：
+  * &lt;code&gt;${__char(13,10)}&lt;/code&gt; = &lt;code&gt;${__char(0xD,0xA)}&lt;/code&gt; = &lt;code&gt;${__char(015,012)}&lt;/code&gt; = &lt;code&gt;CRLF&lt;/code&gt;
+  * &lt;code&gt;${__char(165)}&lt;/code&gt; = &lt;code&gt;¥&lt;/code&gt; (元)&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="unescape"&gt;__unescape&lt;/h3&gt;
+
+&lt;p&gt;unescape 函数将返回将 Java 转义过的字符串反转义的结果。另外请参阅上面的&lt;code&gt;__char()&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;这允许添加字符到字段，否则通过 GUI 定义是非常困难的（或不可能的）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;反转义的字符串&lt;/td&gt;
+&lt;td&gt;待反转义的字符串&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：
+  * &lt;code&gt;${__unescape(\r\n)}&lt;/code&gt; = &lt;code&gt;CRLF&lt;/code&gt; 
+  * &lt;code&gt;${__unescape(1\t2)}&lt;/code&gt; = &lt;code&gt;1&lt;/code&gt;[tab]&lt;code&gt;2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="unescapeHtml"&gt;__unescapeHtml&lt;/h3&gt;
+
+&lt;p&gt;函数将包含 HTML 实体的字符串反转义为包含对应于转义符的实际 Unicode 字符的字符串。支持 HTML 4.0 实体。&lt;/p&gt;
+&lt;p&gt;例如，字符串&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__unescapeHtml&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Fran&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;ccedil&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;ais&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回&lt;code&gt;&amp;lt;Français&amp;gt;&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果某个实体无法识别，则将其保留，并逐字地插入结果字符串中。例如 &lt;code&gt;${__unescapeHtml(&amp;amp;gt;&amp;amp;zzzz;x)}&lt;/code&gt; 将返回 &lt;code&gt;"&amp;gt;&amp;amp;zzzz;x"&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;使用 Commons Lang 的 &lt;code&gt;StringEscapeUtils#unescapeHtml(String)&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;反转义的字符串&lt;/td&gt;
+&lt;td&gt;待反转义的字符串&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="escapeHtml"&gt;__escapeHtml&lt;/h3&gt;
+
+&lt;p&gt;函数用于转义使用 HTML 实体的字符串。支持HTML 4.0 实体。&lt;/p&gt;
+&lt;p&gt;例如，&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__escapeHtml&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;bread&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;butter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回 &lt;code&gt;&amp;amp;quot;bread&amp;amp;quot; &amp;amp;amp; &amp;amp;quot;butter&amp;amp;quot;&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;使用 Commons Lang 的 &lt;code&gt;StringEscapeUtils#escapeHtml(String)&lt;/code&gt;。
+&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;转义的字符串&lt;/td&gt;
+&lt;td&gt;待转义的字符串&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="urldecode"&gt;__urldecode&lt;/h3&gt;
+
+&lt;p&gt;函数用来解码 &lt;code&gt;application/x-www-form-urlencoded&lt;/code&gt; 字符串，注意：使用 UTF-8 作为编码方案。&lt;/p&gt;
+&lt;p&gt;例如，字符串&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__urldecode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Word&lt;/span&gt;&lt;span class="o"&gt;+%&lt;/span&gt;&lt;span class="mi"&gt;22&lt;/span&gt;&lt;span class="n"&gt;school&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="mi"&gt;22&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="ow"&gt;is&lt;/span&gt;&lt;span class="o"&gt;+%&lt;/span&gt;&lt;span class="mi"&gt;22&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;C3&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;A9cole&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="mi"&gt;22&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;french&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回 &lt;code&gt;Word "school" is "école" in french&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;使用 Java 类 &lt;a href="https://docs.oracle.com/javase/7/docs/api/java/net/URLDecoder.html"&gt;URLDecoder&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;要解码的字符串&lt;/td&gt;
+&lt;td&gt;待解码的带有 URL 编码字符的字符串&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="urlencode"&gt;__urlencode&lt;/h3&gt;
+
+&lt;p&gt;函数用来将字符串转码成 &lt;code&gt;application/x-www-form-urlencoded&lt;/code&gt; 字符串。&lt;/p&gt;
+&lt;p&gt;例如，字符串&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__urlencode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Word&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;school&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;école&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;french&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回 &lt;code&gt;Word+%22school%22+is+%22%C3%A9cole%22+in+french&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;使用 Java 类 &lt;a href="https://docs.oracle.com/javase/7/docs/api/java/net/URLDecoder.html"&gt;URLDecoder&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;要转码的字符串&lt;/td&gt;
+&lt;td&gt;待转码的使用 URL 编码字符的字符串&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="FileToString"&gt;__FileToString&lt;/h3&gt;
+
+&lt;p&gt;FileToString 函数可以用来读取整个文件。每次调用时读取整个文件。&lt;/p&gt;
+&lt;p&gt;如果打开或读取文件时发生错误，函数会返回字符串“&lt;code&gt;**ERR**&lt;/code&gt;”&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;文件名称&lt;/td&gt;
+&lt;td&gt;文件名称的路径（路径可以是相对于 JMeter 启动目录的相对路径）&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;文件编码，如果不是平台默认的&lt;/td&gt;
+&lt;td&gt;用于读取文件的编码。如果未指定，则使用平台默认编码方式&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;引用名称&lt;/td&gt;
+&lt;td&gt;引用名称 - &lt;code&gt;refName&lt;/code&gt; - 用于重用由此函数创建的值。存储的值的格式为 &lt;code&gt;${refName}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;每次执行函数时都会解析文件名，编码和引用名称参数。&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="samplerName"&gt;__samplerName&lt;/h3&gt;
+
+&lt;p&gt;samplerName 函数返回当前采样器的名称（即标签）。&lt;/p&gt;
+&lt;p&gt;该函数在没有关联采样器的测试元件中不起作用。例如测试计划。配置元件也没有关联的采样器。但是一些配置元件会被采样器直接引用，例如 HTTP 信息头管理器和 Http Cookie 管理器，这种情况下，函数在 Http 采样器的上下文中被解析。前置处理器，后置处理器和断言总是有一个关联的采样器。&lt;/p&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__samplerName&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;引用名称 - &lt;code&gt;refName&lt;/code&gt; - 用于重用由此函数创建的值。存储的值的格式为 &lt;code&gt;${refName}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="TestPlanName"&gt;__TestPlanName&lt;/h3&gt;
+
+&lt;p&gt;TestPlanName 函数返回当前测试计划的名称（可用于内部计划以掌握调用的测试计划的名称）。&lt;/p&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__TestPlanName&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回测试计划的文件名称，例如，如果计划在一个名为 Demo.jmx 的文件中，它将返回“&lt;code&gt;Demo.jmx&lt;/code&gt;”。&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="escapeOroRegexpChars"&gt;__escapeOroRegexpChars&lt;/h3&gt;
+
+&lt;p&gt;函数用于转义 ORO 正则表达式元字符，相当于 Java 正则表达式引擎中的 &lt;code&gt;\Q&lt;/code&gt; &lt;code&gt;\E&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__escapeOroRegexpChars&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;].+?,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回 &lt;code&gt;\[\^\"\]\.\+\?&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;使用 ORO 的 &lt;code&gt;Perl5Compiler#quotemeta(String)&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;要转义的字符串&lt;/td&gt;
+&lt;td&gt;待转义的字符串&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;引用名称 - &lt;code&gt;refName&lt;/code&gt; - 用于重用由此函数创建的值。存储的值的格式为 &lt;code&gt;${refName}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="escapeXml"&gt;__escapeXml&lt;/h3&gt;
+
+&lt;p&gt;函数用来转义使用 XML 1.0 实体的字符串中的字符。&lt;/p&gt;
+&lt;p&gt;例如，&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__escapeXml&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;bread&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;butter&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回 &lt;code&gt;&amp;amp;quot;bread&amp;amp;quot; &amp;amp;amp; &amp;amp;apos;butter&amp;amp;apos;&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;使用 Commons Lang 的 &lt;code&gt;StringEscapeUtils#escapeXml10(String)&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;要转义的字符串&lt;/td&gt;
+&lt;td&gt;待转义的字符串&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="timeShift"&gt;__timeShift&lt;/h3&gt;
+
+&lt;p&gt;timeShift 函数返回指定格式的日期，并加上指定的秒数，分钟数，小时数，天数或月数。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;格式&lt;/td&gt;
+&lt;td&gt;要传递给 DateTimeFormatter 的格式。请参阅 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html"&gt;DateTimeFormatter&lt;/a&gt; 如果省略，则函数使用纪元时间格式&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;日期转换&lt;/td&gt;
+&lt;td&gt;以第一个参数“格式”设置的格式转换指定日期，如果省略，则日期默认为现在&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;值转换&lt;/td&gt;
+&lt;td&gt;根据文本表示的持续时间（如PnDTnHnMn.nS）转换成指定的秒数，分钟数，小时数或天数。请参阅&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence"&gt;https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence&lt;/a&gt;&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;code&gt;PT20.345S&lt;/code&gt; 解析为 20.345 秒&lt;/li&gt;&lt;li&gt;&lt;code&gt;PT15M&lt;/code&gt; 解析为 15 分钟&lt;/li&gt;&lt;li&gt;&lt;code&gt;PT10H&lt;/code&gt; 解析为 10 个小时&lt;/li&gt;&lt;li&gt;&lt;code&gt;P2D&lt;/code&gt; 解析为 2 天&lt;/li&gt;&lt;li&gt;&lt;code&gt;P6H3M&lt;/code&gt; 解析为 6小时3分钟&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;用于格式的区域设置&lt;/td&gt;
+&lt;td&gt;语言环境的字符串格式。语言代码必须是小写。国家代码必须大写。分隔符必须是下划线，例如 &lt;code&gt;en_EN&lt;/code&gt;。请参阅 &lt;a href="http://www.oracle.com/technetwork/java/javase/javase7locales-334809.html"&gt;http://www.oracle.com/technetwork/java/javase/javase7locales-334809.html&lt;/a&gt;。如果省略，则默认情况下该函数使用 Apache JMeter 当前语言环境。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;要设置的变量名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__timeShift&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dd&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;MM&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yyyy&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;21&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mo"&gt;01&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;2018&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;P2D&lt;/span&gt;&lt;span class="p"&gt;,,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回&lt;code&gt;23/01/2018&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__timeShift&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dd&lt;/span&gt; &lt;span class="n"&gt;MMMM&lt;/span&gt; &lt;span class="n"&gt;yyyy&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;21&lt;/span&gt; &lt;span class="n"&gt;février&lt;/span&gt; &lt;span class="mi"&gt;2018&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;P2D&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fr_FR&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回&lt;code&gt;23 février 2018&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="digest "&gt;__digest &lt;/h3&gt;
+
+&lt;p&gt;digest 函数返回特定的哈希算法的加密后的值，哈希算法有多种，名称为大写，可带 salt。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;算法&lt;/td&gt;
+&lt;td&gt;用来加密的算法。可用的算法请参阅 &lt;a href="https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html"&gt;StandardNames&lt;/a&gt; 的 MessageDigest  &lt;br/&gt;&lt;ul&gt;&lt;li&gt;MD2&lt;/li&gt;&lt;li&gt;MD5&lt;/li&gt;&lt;li&gt;SHA-1&lt;/li&gt;&lt;li&gt;SHA-224&lt;/li&gt;&lt;li&gt;SHA-256&lt;/li&gt;&lt;li&gt;SHA-384&lt;/li&gt;&lt;li&gt;SHA-512&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;blockquote&gt;&lt;code&gt;要添加的 salt&lt;/code&gt;和&lt;code&gt;要编码的字符串&lt;/code&gt;中是要考虑空格的&lt;/blockquote&gt;&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;要编码的字符串&lt;/td&gt;
+&lt;td&gt;将被加密的字符串&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;要添加的 salt&lt;/td&gt;
+&lt;td&gt;添加到字符串的 salt（加在字符串之后）&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;大写值&lt;/td&gt;
+&lt;td&gt;默认返回值为小写。当为true时返回值大写。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;要设置的变量名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__digest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MD5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Errare&lt;/span&gt; &lt;span class="n"&gt;humanum&lt;/span&gt; &lt;span class="n"&gt;est&lt;/span&gt;&lt;span class="p"&gt;,,,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回&lt;code&gt;c49f00b92667a35c63708933384dad52&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__digest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SHA&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Felix&lt;/span&gt; &lt;span class="n"&gt;qui&lt;/span&gt; &lt;span class="n"&gt;potuit&lt;/span&gt; &lt;span class="n"&gt;rerum&lt;/span&gt; &lt;span class="n"&gt;cognoscere&lt;/span&gt; &lt;span class="n"&gt;causas&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;mysalt&lt;/span&gt;&lt;span class="p"&gt;,,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回&lt;code&gt;a3bc6900fe2b2fc5fa8a601a4a84e27a079bf2c581d485009bc5c00516729ac7&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="dateTimeConvert"&gt;__dateTimeConvert&lt;/h3&gt;
+
+&lt;p&gt;dateTimeConvert 函数将日期从源格式转换成目标格式并将结果储存到变量名中。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;日期字符串&lt;/td&gt;
+&lt;td&gt;要从源格式转换到目标格式的日期字符串。如果源日期格式为空，将使用纪元时间格式的日期。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;源日期格式&lt;/td&gt;
+&lt;td&gt;原始日期格式。如果为空，则日期字符串字段必须是纪元时间格式。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;目标日期格式&lt;/td&gt;
+&lt;td&gt;新的日期格式&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;要设置的变量名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__dateTimeConvert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mo"&gt;0121201&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;MMddyyyy&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;dd&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;MM&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yyyy&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;返回&lt;code&gt;21/01/2018&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;使用纪元时间：1526574881000，&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__digest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SHA&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Felix&lt;/span&gt; &lt;span class="n"&gt;qui&lt;/span&gt; &lt;span class="n"&gt;potuit&lt;/span&gt; &lt;span class="n"&gt;rerum&lt;/span&gt; &lt;span class="n"&gt;cognoscere&lt;/span&gt; &lt;span class="n"&gt;causas&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;mysalt&lt;/span&gt;&lt;span class="p"&gt;,,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;以UTC时间（Duser.timezone=GMT）返回&lt;code&gt;17/05/2018 16:34&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="isPropDefined"&gt;__isPropDefined&lt;/h3&gt;
+
+&lt;p&gt;isPropDefined 函数当属性存在时返回 true，不存在时返回 false。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;属性名称&lt;/td&gt;
+&lt;td&gt;要检查是否定义的属性名称&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__isPropDefined&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;START&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HMS&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回&lt;code&gt;true&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="isVarDefined"&gt;__isVarDefined&lt;/h3&gt;
+
+&lt;p&gt;isVarDefined 函数当变量存在时返回 true，不存在时返回 false。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;要检查是否定义的变量名称&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__isVarDefined&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JMeterThread&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;last_sample_ok&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回&lt;code&gt;true&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="changeCase"&gt;__changeCase&lt;/h3&gt;
+
+&lt;p&gt;changeCase 函数返回大小写经过特定模式变更后的字符串值。结果储存在 JMeter 变量中。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性（Attribute）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;待变更大小写的字符串&lt;/td&gt;
+&lt;td&gt;将变更大小写模式的字符串&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;大小写变更模式&lt;/td&gt;
+&lt;td&gt;改变大小写的模式，例如对&lt;code&gt;ab-CD eF&lt;/code&gt;：&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;code&gt;UPPER&lt;/code&gt;模式返回 AB-CD EF &lt;/li&gt;&lt;li&gt;&lt;code&gt;LOWER&lt;/code&gt;模式返回 ab-cd ed &lt;/li&gt;&lt;li&gt;&lt;code&gt;CAPITALIZE&lt;/code&gt;模式返回 Ab-CD eF &lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;blockquote&gt;变更模式名称不区分大小写&lt;/blockquote&gt;&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;变量名称&lt;/td&gt;
+&lt;td&gt;要检查是否定义的变量名称&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例子：  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__changeCase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Avaro&lt;/span&gt; &lt;span class="n"&gt;omnia&lt;/span&gt; &lt;span class="n"&gt;desunt&lt;/span&gt;\&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;inopi&lt;/span&gt; &lt;span class="n"&gt;pauca&lt;/span&gt;\&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sapienti&lt;/span&gt; &lt;span class="n"&gt;nihil&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回&lt;code&gt;AVARO OMNIA DESUNT, INOPI PAUCA, SAPIENTI NIHIL&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__changeCase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;LABOR&lt;/span&gt; &lt;span class="n"&gt;OMNIA&lt;/span&gt; &lt;span class="n"&gt;VINCIT&lt;/span&gt; &lt;span class="n"&gt;IMPROBUS&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回&lt;code&gt;labor omnia vincit improbus&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__changeCase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;omnibus&lt;/span&gt; &lt;span class="n"&gt;viis&lt;/span&gt; &lt;span class="n"&gt;romam&lt;/span&gt; &lt;span class="n"&gt;pervenitur&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;CAPITALIZE&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将返回&lt;code&gt;Omnibus viis romam pervenitur&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;20.6 预定义变量&lt;/h2&gt;
+&lt;p&gt;大多数变量都是通过调用函数或者用户定义的变量等测试元件来设置的；在这种情况下，用户对所使用的变量名称有完整的控制权。但是有些变量是 JMeter 内部定义的。这些在下面列出：
+  * &lt;code&gt;COOKIE_cookiename&lt;/code&gt; - 包含 cookie 的值（请参阅 &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP_Cookie_Manager"&gt;HTTP Cookie 管理器&lt;/a&gt;）
+  * &lt;code&gt;JMeterThread.last_sample_ok&lt;/code&gt; - 不管最后一个采样是否可用 - &lt;code&gt;true/false&lt;/code&gt;。注意：它会在后置处理器和断言运行后更新。
+  * &lt;code&gt;START&lt;/code&gt; 变量（参见下一节）&lt;/p&gt;
+&lt;h2&gt;20.7 预定义属性&lt;/h2&gt;
+&lt;p&gt;JMeter 属性集是在 JMeter 启动时通过系统属性定义来初始化的；附加的 JMeter 属性在 &lt;code&gt;jmeter.properties&lt;/code&gt;，&lt;code&gt;user.properties&lt;/code&gt; 或命令行中定义。&lt;/p&gt;
+&lt;p&gt;一些内置属性由 JMeter 定义。这些在下面列出。为方便起见，&lt;code&gt;START&lt;/code&gt; 属性也被复制到具有相同名称的变量中。
+  * &lt;code&gt;START.MS&lt;/code&gt; - 以毫秒为单位的 JMeter 启动时间
+  * &lt;code&gt;START.YMD&lt;/code&gt; - 格式为 &lt;code&gt;yyyyMMdd&lt;/code&gt; 的 JMeter 启动日期
+  * &lt;code&gt;START.HMS&lt;/code&gt; - 格式为 &lt;code&gt;HHmmss&lt;/code&gt; 的 JMeter 启动时间
+  * &lt;code&gt;TESTSTART.MS&lt;/code&gt; - 以毫秒为单位的测试启动时间&lt;/p&gt;
+&lt;p&gt;请注意，&lt;code&gt;START&lt;/code&gt; 变量/属性表示的是 JMeter 启动时间，而不是测试启动时间。它们主要用于文件名等地方。 &lt;/p&gt;</content><category term="JMeter"></category><category term="Documentation"></category><category term="Translation"></category></entry><entry><title>JMeter文档翻译之21-正则表达式</title><link href="https://jlhxxxx.github.io/jmeter-doc-cn-21.html" rel="alternate"></link><published>2019-05-06T00:00:00+08:00</published><updated>2019-05-06T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-cn-21.html</id><summary type="html">&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/regular_expressions.html"&gt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;21.1 概述&lt;/h2&gt;
 &lt;p&gt;JMeter 包含模式匹配软件 &lt;a href="http://attic.apache.org/projects/jakarta-oro.html"&gt;Apache Jakarta ORO&lt;/a&gt; 。 
 在 Jakarta 网站上有一些相关文档，例如：&lt;a href="http://archimedes.fas.harvard.edu/scrapbook/jakarta-oro-2.0.6/docs/api/org/apache/oro/text/regex/package-summary.html"&gt;模式匹配字符摘要&lt;/a&gt;。  &lt;/p&gt;

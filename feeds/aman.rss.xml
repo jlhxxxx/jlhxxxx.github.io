@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Mon, 06 May 2019 00:00:00 +0800</lastBuildDate><item><title>JMeter文档翻译之21-正则表达式</title><link>https://jlhxxxx.github.io/jmeter-doc-cn-21.html</link><description>&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/regular_expressions.html"&gt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/a&gt;&lt;/p&gt;
+<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Mon, 06 May 2019 00:00:00 +0800</lastBuildDate><item><title>JMeter文档翻译之20-函数和变量</title><link>https://jlhxxxx.github.io/jmeter-doc-cn-20.html</link><description>&lt;p&gt;英文文档地址：&amp;lt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/p&gt;
+&lt;p&gt;JMeter 的函数是一些特殊值，它们可以填充在测试树的任何采样器或其他元件中。函数调用的语法如下：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;${__functionName(var1,var2,var3)}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其中“__functionName”匹配函数的名称。
+圆括号内为函数参数，不同函数的参数也不同，例如 &lt;code&gt;${__time(YMD)}&lt;/code&gt;。没有参数的函数可以不需要圆括号，例如 &lt;code&gt;${__threadNum}&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果函数的参数包含逗号，需要加上“&lt;code&gt;\&lt;/code&gt;”来转义，否则 JMeter 会把逗号当做参数的分隔符。例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EEE&lt;/span&gt;\&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;MMM&lt;/span&gt; &lt;span class="n"&gt;yyyy&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果逗号没有被转义——例如 &lt;code&gt;${__javaScript(Math.max(2,5))}&lt;/code&gt; ——你会得到像这样的错误信息：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ERROR - jmeter.functions …&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 06 May 2019 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-cn-20.html</guid><category>JMeter</category><category>Documentation</category><category>Translation</category></item><item><title>JMeter文档翻译之21-正则表达式</title><link>https://jlhxxxx.github.io/jmeter-doc-cn-21.html</link><description>&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/regular_expressions.html"&gt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;21.1 概述&lt;/h2&gt;
 &lt;p&gt;JMeter 包含模式匹配软件 &lt;a href="http://attic.apache.org/projects/jakarta-oro.html"&gt;Apache Jakarta ORO&lt;/a&gt; 。 
 在 Jakarta 网站上有一些相关文档，例如：&lt;a href="http://archimedes.fas.harvard.edu/scrapbook/jakarta-oro-2.0.6/docs/api/org/apache/oro/text/regex/package-summary.html"&gt;模式匹配字符摘要&lt;/a&gt;。  &lt;/p&gt;
