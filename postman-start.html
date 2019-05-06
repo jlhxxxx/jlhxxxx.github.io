@@ -123,15 +123,15 @@
 
 <p>那我的思路就有了：将html转换成json，再从json中提取token不就简单了。</p>
 <p>依然还是老办法，拿出我的终极武器——<strong>redmine</strong>来测试。登陆页面的返回值大概是这样的，我们要提取的是<code>csrf-token</code>：</p>
-<div class="highlight"><pre><span></span><span class="ni">&amp;lt;</span>!DOCTYPE html<span class="ni">&amp;gt;</span>
-<span class="ni">&amp;lt;</span>html lang=&quot;zh&quot;<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>head<span class="ni">&amp;gt;</span>
-        <span class="ni">&amp;lt;</span>meta charset=&quot;utf-8&quot; /<span class="ni">&amp;gt;</span>
-        <span class="ni">&amp;lt;</span>title<span class="ni">&amp;gt;</span>Redmine<span class="ni">&amp;lt;</span>/title<span class="ni">&amp;gt;</span>
-        <span class="ni">&amp;lt;</span>meta name=&quot;description&quot; content=&quot;Redmine&quot; /<span class="ni">&amp;gt;</span>
-        <span class="ni">&amp;lt;</span>meta name=&quot;keywords&quot; content=&quot;issue,bug,tracker&quot; /<span class="ni">&amp;gt;</span>
-        <span class="ni">&amp;lt;</span>meta name=&quot;csrf-param&quot; content=&quot;authenticity_token&quot; /<span class="ni">&amp;gt;</span>
-        <span class="ni">&amp;lt;</span>meta name=&quot;csrf-token&quot; content=&quot;u9XfPXNDqQ/v+/xUtQuAjESgvNXCTHxCWW4NIZ/rJBmfZjzqJBVD1fDOxHnlbza4iDreX+St9SE9XFIN4on47Q==&quot; /<span class="ni">&amp;gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;zh&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Redmine<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;description&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;Redmine&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;keywords&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;issue,bug,tracker&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;csrf-param&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;authenticity_token&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;csrf-token&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;u9XfPXNDqQ/v+/xUtQuAjESgvNXCTHxCWW4NIZ/rJBmfZjzqJBVD1fDOxHnlbza4iDreX+St9SE9XFIN4on47Q==&quot;</span> <span class="p">/&gt;</span>
         ...
 </pre></div>
 

@@ -270,34 +270,34 @@ pip list
 <p>gitalk</p>
 <p>直接到theme--tempaltes下，参考gitalk配置，新建gitalk.html，这里我稍微配置了个环境变量<code>GITALK_OWNER</code>。而且我的<code>repo</code>没有选择博客文件所在仓库，而是另外建了一个仓库，注意<code>createIssueManually</code>最好设置为<code>true</code>，这样文章发表之后在评论处点击初始化就可以自动生成一个issue，当然每篇文章都要点一下。</p>
 <div class="highlight"><pre><span></span>{% if GITALK_OWNER %}
-<span class="ni">&amp;lt;</span>link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css&quot;<span class="ni">&amp;gt;</span>
-<span class="ni">&amp;lt;</span>script src=&quot;https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js&quot;<span class="ni">&amp;gt;&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
-<span class="ni">&amp;lt;</span>div id=&quot;gitalk-container&quot;<span class="ni">&amp;gt;&amp;lt;</span>/div<span class="ni">&amp;gt;</span>
-<span class="ni">&amp;lt;</span>script<span class="ni">&amp;gt;</span>
-    var gitalk_owner = &#39;{{ GITALK_OWNER }}&#39;;
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;gitalk-container&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="kd">var</span> <span class="nx">gitalk_owner</span> <span class="o">=</span> <span class="s1">&#39;{{ GITALK_OWNER }}&#39;</span><span class="p">;</span>
 
-    var gitalk = new Gitalk({
-      clientID: &#39;a61......&#39;,
-      clientSecret: &#39;38c......&#39;,
-      repo: &#39;comments&#39;,
-      owner: gitalk_owner,
-      admin: [gitalk_owner],
-      distractionFreeMode: false,  // Facebook-like distraction free mode
-      createIssueManually: true
-    })
+    <span class="kd">var</span> <span class="nx">gitalk</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gitalk</span><span class="p">({</span>
+      <span class="nx">clientID</span><span class="o">:</span> <span class="s1">&#39;a61......&#39;</span><span class="p">,</span>
+      <span class="nx">clientSecret</span><span class="o">:</span> <span class="s1">&#39;38c......&#39;</span><span class="p">,</span>
+      <span class="nx">repo</span><span class="o">:</span> <span class="s1">&#39;comments&#39;</span><span class="p">,</span>
+      <span class="nx">owner</span><span class="o">:</span> <span class="nx">gitalk_owner</span><span class="p">,</span>
+      <span class="nx">admin</span><span class="o">:</span> <span class="p">[</span><span class="nx">gitalk_owner</span><span class="p">],</span>
+      <span class="nx">distractionFreeMode</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>  <span class="c1">// Facebook-like distraction free mode</span>
+      <span class="nx">createIssueManually</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">})</span>
 
-    gitalk.render(&#39;gitalk-container&#39;)
-<span class="ni">&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
+    <span class="nx">gitalk</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;gitalk-container&#39;</span><span class="p">)</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 {% endif %}
 </pre></div>
 
 
 <p>然后打开article.html，找到<code>{% if DISQUS_SITENAME %}</code>这行，从这之后开始修改：</p>
 <div class="highlight"><pre><span></span>{% if COMMENT %}
-<span class="ni">&amp;lt;</span>div class=&quot;comments&quot;<span class="ni">&amp;gt;</span>
-  <span class="ni">&amp;lt;</span>h2<span class="ni">&amp;gt;</span>Comments<span class="ni">&amp;lt;</span>/h2<span class="ni">&amp;gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;comments&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Comments<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
     {% include &#39;gitalk.html&#39; %}
-<span class="ni">&amp;lt;</span>/div<span class="ni">&amp;gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 {% endif %}
 </pre></div>
 
@@ -308,18 +308,18 @@ pip list
 <p>disqus</p>
 <p>这个配置相对简单。首先到<a href="https://disqus.com/">disqus</a>注册账号；<strong>create a new site</strong>，记住你填的<code>shortname</code>；然后选择新建的<strong>site</strong>，<strong>Installing Disqus</strong>，下一步下一步把代码复制出来；然后在theme--tempaltes下，新建disqus.html，把刚才代码粘贴进去去掉注释，增加头部<code>{% if DISQUS_SITENAME %}</code>尾部<code>{% endif %}</code>和<code>DISQUS_SITENAME</code>变量，最后就变成这样：</p>
 <div class="highlight"><pre><span></span>{% if DISQUS_SITENAME %}
-<span class="ni">&amp;lt;</span>div id=&quot;disqus_thread&quot;<span class="ni">&amp;gt;&amp;lt;</span>/div<span class="ni">&amp;gt;</span>
-<span class="ni">&amp;lt;</span>script type=&quot;text/javascript&quot;<span class="ni">&amp;gt;</span>
-    var disqus_shortname = &#39;{{ DISQUS_SITENAME }}&#39;;
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;disqus_thread&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
+    <span class="kd">var</span> <span class="nx">disqus_shortname</span> <span class="o">=</span> <span class="s1">&#39;{{ DISQUS_SITENAME }}&#39;</span><span class="p">;</span>
 
-    (function() { // DON&#39;T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement(&#39;script&#39;);
-    s.src = &#39;http://&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;;;
-    s.setAttribute(&#39;data-timestamp&#39;, +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-<span class="ni">&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
-<span class="ni">&amp;lt;</span>noscript<span class="ni">&amp;gt;</span>Please enable JavaScript to view the <span class="ni">&amp;lt;</span>a href=&quot;http://disqus.com/?ref_noscript&quot;<span class="ni">&amp;gt;</span>comments powered by Disqus.<span class="ni">&amp;lt;</span>/a<span class="ni">&amp;gt;&amp;lt;</span>/noscript<span class="ni">&amp;gt;</span>
+    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// DON&#39;T EDIT BELOW THIS LINE</span>
+    <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nb">document</span><span class="p">,</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span>
+    <span class="nx">s</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="nx">disqus_shortname</span> <span class="o">+</span> <span class="s1">&#39;.disqus.com/embed.js&#39;</span><span class="p">;;</span>
+    <span class="nx">s</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;data-timestamp&#39;</span><span class="p">,</span> <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
+    <span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">head</span> <span class="o">||</span> <span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+    <span class="p">})();</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">noscript</span><span class="p">&gt;</span>Please enable JavaScript to view the <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;http://disqus.com/?ref_noscript&quot;</span><span class="p">&gt;</span>comments powered by Disqus.<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">noscript</span><span class="p">&gt;</span>
 {% endif %}
 </pre></div>
 

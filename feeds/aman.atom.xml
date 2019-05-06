@@ -1,5 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Aman</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/aman.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-05-05T00:00:00+08:00</updated><entry><title>JMeter后置处理器之常用提取器介绍</title><link href="https://jlhxxxx.github.io/jmeter-extractor.html" rel="alternate"></link><published>2019-05-05T00:00:00+08:00</published><updated>2019-05-05T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-05:/jmeter-extractor.html</id><summary type="html">&lt;h2&gt;正则表达式提取器&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Aman</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/aman.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-05-06T00:00:00+08:00</updated><entry><title>JMeter文档翻译之21-正则表达式</title><link href="https://jlhxxxx.github.io/jmeter-doc-translation-21.html" rel="alternate"></link><published>2019-05-06T00:00:00+08:00</published><updated>2019-05-06T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-translation-21.html</id><summary type="html">&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/regular_expressions.html"&gt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;21.1 概述&lt;/h2&gt;
+&lt;p&gt;JMeter 包含模式匹配软件 &lt;a href="http://attic.apache.org/projects/jakarta-oro.html"&gt;Apache Jakarta ORO&lt;/a&gt; 。 
+在 Jakarta 网站上有一些相关文档，例如：&lt;a href="http://archimedes.fas.harvard.edu/scrapbook/jakarta-oro-2.0.6/docs/api/org/apache/oro/text/regex/package-summary.html"&gt;模式匹配字符摘要&lt;/a&gt;。  &lt;/p&gt;
+&lt;p&gt;在 &lt;a href="http://www.savarese.org/oro/docs/OROMatcher/index.html"&gt;OROMatcher 用户指南&lt;/a&gt;上还有关于该产品旧版本的文档 ，也许会有些用处。  &lt;/p&gt;
+&lt;p&gt;模式匹配与 Perl 中的模式匹配非常类似。Perl 的完整安装会包含大量关于正则表达式的文档——查找 &lt;code&gt;perlrequick&lt;/code&gt;， &lt;code&gt;perlretut&lt;/code&gt;， &lt;code&gt;perlre&lt;/code&gt; 和 &lt;code&gt;perlreref&lt;/code&gt;。  &lt;/p&gt;
+&lt;p&gt;有必要强调“包含（contains）”和“匹配（matches）”之间的区别，它们被用在响应断言（Response Assertion）测试元件上： &lt;/p&gt;
+&lt;p&gt;"&lt;em&gt;包含（contains …&lt;/em&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/regular_expressions.html"&gt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;21.1 概述&lt;/h2&gt;
+&lt;p&gt;JMeter 包含模式匹配软件 &lt;a href="http://attic.apache.org/projects/jakarta-oro.html"&gt;Apache Jakarta ORO&lt;/a&gt; 。 
+在 Jakarta 网站上有一些相关文档，例如：&lt;a href="http://archimedes.fas.harvard.edu/scrapbook/jakarta-oro-2.0.6/docs/api/org/apache/oro/text/regex/package-summary.html"&gt;模式匹配字符摘要&lt;/a&gt;。  &lt;/p&gt;
+&lt;p&gt;在 &lt;a href="http://www.savarese.org/oro/docs/OROMatcher/index.html"&gt;OROMatcher 用户指南&lt;/a&gt;上还有关于该产品旧版本的文档 ，也许会有些用处。  &lt;/p&gt;
+&lt;p&gt;模式匹配与 Perl 中的模式匹配非常类似。Perl 的完整安装会包含大量关于正则表达式的文档——查找 &lt;code&gt;perlrequick&lt;/code&gt;， &lt;code&gt;perlretut&lt;/code&gt;， &lt;code&gt;perlre&lt;/code&gt; 和 &lt;code&gt;perlreref&lt;/code&gt;。  &lt;/p&gt;
+&lt;p&gt;有必要强调“包含（contains）”和“匹配（matches）”之间的区别，它们被用在响应断言（Response Assertion）测试元件上： &lt;/p&gt;
+&lt;p&gt;"&lt;em&gt;包含（contains）&lt;/em&gt;" &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;意味着正则表达式至少与目标的某个部分相匹配，所以 '&lt;code&gt;alphabet&lt;/code&gt;' “包含” '&lt;code&gt;ph.b.&lt;/code&gt;'，因为正则表达式匹配子字符串 '&lt;code&gt;phabe&lt;/code&gt;'。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;"&lt;em&gt;匹配（matches）&lt;/em&gt;" &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;意味着正则表达式匹配整个目标。所以 '&lt;code&gt;alphabet&lt;/code&gt;' 和 '&lt;code&gt;al.*t&lt;/code&gt;' 是“匹配”的 。 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种情况下，它相当于将正则表达式封装在 &lt;code&gt;^&lt;/code&gt; 和 &lt;code&gt;$&lt;/code&gt; 中，即 '&lt;code&gt;^al.*t$&lt;/code&gt;'。  &lt;/p&gt;
+&lt;p&gt;然而，情况并非总是如此。例如，正则表达式 '&lt;code&gt;alp|.lp.*&lt;/code&gt;' “包含”于 '&lt;code&gt;alphabet&lt;/code&gt;'，但并不“匹配” '&lt;code&gt;alphabet&lt;/code&gt;'。  &lt;/p&gt;
+&lt;p&gt;这是为什么？原因是当模式匹配器在 '&lt;code&gt;alphabet&lt;/code&gt;' 中找到序列 '&lt;code&gt;alp&lt;/code&gt;' 时，它将停止尝试其他组合——而 '&lt;code&gt;alp&lt;/code&gt;' 与 '&lt;code&gt;alphabet&lt;/code&gt;' 不同，它不包含 '&lt;code&gt;habet&lt;/code&gt;'。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不同于 Perl，没有必要将正则表达式用 // 封装。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;那么如果没有尾部的 &lt;code&gt;/&lt;/code&gt;，该如何使用 &lt;code&gt;ismx&lt;/code&gt; 等修饰符呢？解决方法是使用扩展的正则表达式，即 &lt;code&gt;/abc/i&lt;/code&gt; 变成 &lt;code&gt;(?i)abc&lt;/code&gt;。请参阅下面的&lt;a href="#215-修饰符的放置"&gt;修饰符的放置&lt;/a&gt;。&lt;/p&gt;
+&lt;h2&gt;21.2 举例&lt;/h2&gt;
+&lt;h3&gt;提取单个字符串&lt;/h3&gt;
+&lt;p&gt;假设您想要匹配网页的以下部分： 
+&lt;code&gt;name="file" value="readme.txt"&amp;gt;&lt;/code&gt; 
+并且要提取 &lt;code&gt;readme.txt&lt;/code&gt;。 
+一个符合的正则表达式： 
+&lt;code&gt;name="file "value ="(.+?)"&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;上面的特殊字符是： &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;(&lt;/code&gt; 和 &lt;code&gt;)&lt;/code&gt; &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;这些包围匹配字符串的部分将被返回  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;.&lt;/code&gt; 
+* 匹配任何字符&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;+&lt;/code&gt;
+* 一次或多次&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;？&lt;/code&gt;
+* 不要贪婪，即在第一次匹配成功时停止 &lt;/p&gt;
+&lt;p&gt;注意：如果没有 &lt;code&gt;？&lt;/code&gt;，&lt;code&gt;.+&lt;/code&gt; 在第一个 &lt;code&gt;"&amp;gt;&lt;/code&gt; 后会继续寻找，直到最后一个 &lt;code&gt;"&amp;gt;&lt;/code&gt; ——这可能不是我们所期望的。 &lt;/p&gt;
+&lt;p&gt;注意：虽然上面的正则表达式可用，但使用下面的表达式会更有效率：&lt;br&gt;
+&lt;code&gt;name ="file" value ="([^"]+)"&amp;gt;&lt;/code&gt; &lt;br&gt;
+其中 &lt;code&gt;[^"]&lt;/code&gt; ——表示匹配任意（除了 &lt;code&gt;"&lt;/code&gt; ），在这种情况下，匹配引擎只要找到第一个 &lt;code&gt;"&lt;/code&gt; 就可以停止查找，而在之前的情况下，引擎必须检查它是否已经找到 &lt;code&gt;"&amp;gt;&lt;/code&gt; 而不是 &lt;code&gt;" &amp;gt;&lt;/code&gt;。&lt;/p&gt;
+&lt;h3&gt;提取多个字符串&lt;/h3&gt;
+&lt;p&gt;假设你想匹配一个网页的以下部分：&lt;br&gt;
+&lt;code&gt;name ="file.name" value ="readme.txt"&lt;/code&gt;，你想提取 &lt;code&gt;file.name&lt;/code&gt; 和 &lt;code&gt;readme.txt&lt;/code&gt;。&lt;br&gt;
+符合的正则表达式：&lt;br&gt;
+&lt;code&gt;name="([^"]+)" value="([^"]+)"&lt;/code&gt;&lt;br&gt;
+这将创建 2 个匹配组，可以在 JMeter 正则表达式提取器（Regular Expression Extractor）模板（Template）中用 &lt;code&gt;$1$&lt;/code&gt; 和 &lt;code&gt;$2$&lt;/code&gt; 来引用。&lt;/p&gt;
+&lt;p&gt;JMeter 正则表达式提取器将组的值保存在指定变量中。&lt;/p&gt;
+&lt;p&gt;例如，假设：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;引用名称：&lt;code&gt;MYREF&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;正则表达式：&lt;code&gt;name="(.+?)" value="(.+?)"&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;模板：&lt;code&gt;$1$$2$&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不要将正则表达式放在 / / 中&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;以下变量将被设置：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;MYREF&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;file.namereadme.txt&lt;/code&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;MYREF_g0&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name="file.name" value="readme.txt"&lt;/code&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;MYREF_g1&lt;/code&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;file.name&lt;/code&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;MYREF_g2&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;readme.txt&lt;/code&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些变量可以在 JMeter 后续的测试计划中引用，形如 &lt;code&gt;${MYREF}&lt;/code&gt;，&lt;code&gt;${MYREF_g1}&lt;/code&gt; 等。&lt;/p&gt;
+&lt;h2&gt;21.3 行模式&lt;/h2&gt;
+&lt;p&gt;模式匹配可以有不同的表现方式，这取决于多行和单行修饰符的设置。注意单行和多行操作符之间没有任何关系，它们可以单独指定。&lt;/p&gt;
+&lt;h3&gt;单行模式&lt;/h3&gt;
+&lt;p&gt;单行模式只影响元字符 '&lt;code&gt;.&lt;/code&gt;' 的解释。&lt;/p&gt;
+&lt;p&gt;默认情况下， '&lt;code&gt;.&lt;/code&gt;' 匹配除换行符之外的任何字符。在单行模式下, '&lt;code&gt;.&lt;/code&gt;' 也匹配换行符。&lt;/p&gt;
+&lt;h3&gt;多行模式&lt;/h3&gt;
+&lt;p&gt;多行模式只影响元字符 '&lt;code&gt;^&lt;/code&gt;' 和 '&lt;code&gt;$&lt;/code&gt;' 的解释。&lt;/p&gt;
+&lt;p&gt;默认情况下 '&lt;code&gt;^&lt;/code&gt;' 和 '&lt;code&gt;$&lt;/code&gt;' 只匹配字符串的开头和结尾。在多行模式下， '&lt;code&gt;^&lt;/code&gt;' 匹配每一行的开头， '&lt;code&gt;$&lt;/code&gt;' 匹配每一行的结尾。&lt;/p&gt;
+&lt;h2&gt;21.4 元字符&lt;/h2&gt;
+&lt;p&gt;正则表达式使用特定字符作为元字符——这些字符对匹配（RE）引擎有特殊的意义。这些字符必须用 &lt;code&gt;\&lt;/code&gt;（反斜杠）前缀来转义，转义之后才能将它们视为普通字符。以下是元字符及其含义的列表（如有疑问，请查阅 ORO 文档）。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;(&lt;/code&gt; 和 &lt;code&gt;）&lt;/code&gt;
+* 分组&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;[&lt;/code&gt; 和 &lt;code&gt;]&lt;/code&gt;
+* 字符集合&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;{&lt;/code&gt; 和 &lt;code&gt;}&lt;/code&gt;
+* 重复&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;*&lt;/code&gt;，&lt;code&gt;+&lt;/code&gt; 和 &lt;code&gt;？&lt;/code&gt;
+* 重复&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.&lt;/code&gt;
+* 通配符&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;\&lt;/code&gt;
+* 转义字符&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;|&lt;/code&gt;
+* 选择符&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;^&lt;/code&gt; 和 &lt;code&gt;$&lt;/code&gt;
+* 字符串或行的开始和结束&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;请注意，ORO 不支持关键字 \Q 和 \E。[在其他的 RE 引擎中，这些可以用来引用 RE 的一部分，使元字符代表它们自己。]可以使用函数来执行相同的操作，请参阅 &lt;a href="http://jmeter.apache.org/usermanual/functions.html#__escapeOroRegexpChars"&gt;&lt;code&gt;${__escapeOroRegexpChars(valueToEscape)}&lt;/code&gt;&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ORO 支持以下 Perl5 扩展正则表达式。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;(?#text)&lt;/code&gt;
+* 内嵌注释，可以使 &lt;code&gt;text&lt;/code&gt; 内容被忽略。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;(?:regexp)&lt;/code&gt;
+* 像"&lt;code&gt;()&lt;/code&gt;"一样获取匹配，但并不保存匹配结果。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;(?=regexp)&lt;/code&gt;
+* 零长度正向肯定断言。例如，&lt;code&gt;\w+(?=\s)&lt;/code&gt; 匹配一个后跟空格的单词，匹配结果不包含空格。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;(?!regexp)&lt;/code&gt;
+* 零长度正向否定断言。例如，&lt;code&gt;foo(?!bar)&lt;/code&gt; 匹配任何 '&lt;code&gt;foo&lt;/code&gt;' 后面不跟 '&lt;code&gt;bar&lt;/code&gt;' 的结果。请注意，这是一个零长度断言，这意味着 &lt;code&gt;a(?!b)d&lt;/code&gt; 匹配 &lt;code&gt;ad&lt;/code&gt;，因为 &lt;code&gt;a&lt;/code&gt; 后面是一个非 &lt;code&gt;b&lt;/code&gt; 字符（&lt;code&gt;d&lt;/code&gt;），而 &lt;code&gt;d&lt;/code&gt; 符合此断言。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;(?imsx)&lt;/code&gt;
+* 一个或多个嵌入模式匹配修饰符。&lt;code&gt;i&lt;/code&gt; 启用大小写不敏感，&lt;code&gt;m&lt;/code&gt; 启用多行输入处理，&lt;code&gt;s&lt;/code&gt; 启用单行输入处理，&lt;code&gt;x&lt;/code&gt; 启用扩展的空白注释。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;请注意：不支持反向肯定断言——&lt;code&gt;(?&amp;lt;=regexp)&lt;/code&gt; 。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;21.5 修饰符的放置&lt;/h2&gt;
+&lt;p&gt;修饰符可以放在正则表达式的任何地方，然后从放置点开始作用。[ ORO 中有个 bug 使它们不能放在正则表达式的最后。不过，对其他没有影响。]&lt;/p&gt;
+&lt;p&gt;单行 &lt;code&gt;(?s)&lt;/code&gt; 和多行 &lt;code&gt;(?m)&lt;/code&gt; 修饰符通常放置在正则表达式的开头。&lt;/p&gt;
+&lt;p&gt;忽略大小写修饰符 &lt;code&gt;(?i)&lt;/code&gt; 可以适用于正则表达式的一部分，例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Match ExAct case or (?i)ArBiTrARY(?-i) case
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将匹配 &lt;code&gt;Match ExAct case or arbitrary case&lt;/code&gt; 以及 &lt;code&gt;Match ExAct case or ARBitrary case&lt;/code&gt;，但不匹配 &lt;code&gt;Match exact case or ArBiTrARY case&lt;/code&gt;。&lt;/p&gt;
+&lt;h2&gt;21.6 测试正则表达式&lt;/h2&gt;
+&lt;p&gt;从 JMeter 2.4 开始，监听器（Listener）&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#View_Results_Tree"&gt;查看结果树&lt;/a&gt;（View Results Tree）包含一个正则表达式测试器，用于直接在采样器（Sampler）响应数据上测试正则表达式。&lt;/p&gt;
+&lt;p&gt;还有一个&lt;a href="http://www.regexplanet.com/advanced/java/index.html"&gt;网站&lt;/a&gt;可以测试 Java 正则表达式。&lt;/p&gt;
+&lt;p&gt;另一种方法是使用简单的测试计划来测试正则表达式。Java 请求（Java Request ）采样器可用于生成示例，或 HTTP （HTTP Request）采样器可用于加载文件。添加 Debug Sampler 和树视图监听器，可以无需访问任何外部服务器，快速测试出正则表达式的更改。&lt;/p&gt;</content><category term="JMeter"></category><category term="Documentation"></category><category term="Translation"></category></entry><entry><title>JMeter后置处理器之常用提取器介绍</title><link href="https://jlhxxxx.github.io/jmeter-extractor.html" rel="alternate"></link><published>2019-05-05T00:00:00+08:00</published><updated>2019-05-05T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-05:/jmeter-extractor.html</id><summary type="html">&lt;h2&gt;正则表达式提取器&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Name of created variable&lt;/strong&gt;：用于存储结果的变量名称&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Regular Expression&lt;/strong&gt;：正则表达式&lt;/li&gt;
@@ -143,7 +281,7 @@ input_matchNr=3
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;似乎有点bug，只能获取几个常见属性，像下面的&lt;code&gt;type&lt;/code&gt;，&lt;code&gt;name&lt;/code&gt;，&lt;code&gt;id&lt;/code&gt;，&lt;code&gt;tabindex&lt;/code&gt;，但&lt;code&gt;autocomplete&lt;/code&gt;不行，但使用应该足够了。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;amp;lt;input type=&amp;quot;text&amp;quot; name=&amp;quot;username&amp;quot; id=&amp;quot;username&amp;quot; tabindex=&amp;quot;1&amp;quot; autocomplete=&amp;quot;off&amp;quot;&amp;amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;input type=&amp;quot;text&amp;quot; name=&amp;quot;username&amp;quot; id=&amp;quot;username&amp;quot; tabindex=&amp;quot;1&amp;quot; autocomplete=&amp;quot;off&amp;quot;&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -586,19 +724,19 @@ oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt
 
 &lt;p&gt;连接数据库：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;sqlplus&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nolog&lt;/span&gt;
-&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;connect&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;sysdba&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;connect&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;sysdba&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;修改连接数，重启Oracle：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;alter&lt;/span&gt; &lt;span class="k"&gt;system&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;processes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt; &lt;span class="k"&gt;scope&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;spfile&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;SHUTDOWN&lt;/span&gt; &lt;span class="k"&gt;IMMEDIATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;STARTUP&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;alter&lt;/span&gt; &lt;span class="k"&gt;system&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;processes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt; &lt;span class="k"&gt;scope&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;spfile&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;SHUTDOWN&lt;/span&gt; &lt;span class="k"&gt;IMMEDIATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;STARTUP&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;验证一下：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;show&lt;/span&gt; &lt;span class="k"&gt;parameter&lt;/span&gt; &lt;span class="n"&gt;processes&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;show&lt;/span&gt; &lt;span class="k"&gt;parameter&lt;/span&gt; &lt;span class="n"&gt;processes&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="n"&gt;NAME&lt;/span&gt;                     &lt;span class="k"&gt;TYPE&lt;/span&gt;    &lt;span class="n"&gt;VALUE&lt;/span&gt;
 &lt;span class="c1"&gt;------------------------------------ ----------- ------------------------------&lt;/span&gt;
@@ -614,7 +752,7 @@ oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt
 
 &lt;p&gt;连接数已修改。但是没过一会连接又满了：&lt;code&gt;ORA-00020:maximum number of processes (1000) exceeded&lt;/code&gt;，这时候就要排查问题了。&lt;/p&gt;
 &lt;p&gt;再次连上数据库，观察会话使用情况：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;v$session&lt;/span&gt; &lt;span class="k"&gt;group&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt; &lt;span class="k"&gt;order&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;v$session&lt;/span&gt; &lt;span class="k"&gt;group&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt; &lt;span class="k"&gt;order&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;......&lt;/span&gt;
 &lt;span class="n"&gt;EVENT&lt;/span&gt;                                   &lt;span class="n"&gt;PROGRAM&lt;/span&gt;                             &lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="c1"&gt;------------------------------------------------------------------------------ ----------&lt;/span&gt;
@@ -626,7 +764,7 @@ oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt
 
 &lt;p&gt;可以看到JDBC连接数过多。&lt;/p&gt;
 &lt;p&gt;下面排查下是哪个项目的问题，首先查看每个oracle帐户的连接总数 ：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;v$session&lt;/span&gt; &lt;span class="k"&gt;where&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt; &lt;span class="k"&gt;group&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;v$session&lt;/span&gt; &lt;span class="k"&gt;where&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt; &lt;span class="k"&gt;group&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="n"&gt;USERNAME&lt;/span&gt;               &lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;USERNAME&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="c1"&gt;------------------------------ ---------------&lt;/span&gt;
@@ -650,7 +788,7 @@ oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;由于缺省从 v$session 中不能直接获得客户端 IP，可以在数据库中创建一个追踪客户端IP地址的触发器： &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;create&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="k"&gt;replace&lt;/span&gt; &lt;span class="k"&gt;trigger&lt;/span&gt; &lt;span class="n"&gt;on_logon_trigger&lt;/span&gt; &lt;span class="k"&gt;after&lt;/span&gt; &lt;span class="n"&gt;logon&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="k"&gt;database&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;create&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="k"&gt;replace&lt;/span&gt; &lt;span class="k"&gt;trigger&lt;/span&gt; &lt;span class="n"&gt;on_logon_trigger&lt;/span&gt; &lt;span class="k"&gt;after&lt;/span&gt; &lt;span class="n"&gt;logon&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="k"&gt;database&lt;/span&gt;
   &lt;span class="mi"&gt;2&lt;/span&gt;  &lt;span class="k"&gt;begin&lt;/span&gt;
   &lt;span class="mi"&gt;3&lt;/span&gt;      &lt;span class="n"&gt;dbms_application_info&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_client_info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys_context&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;userenv&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ip_address&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; 
   &lt;span class="mi"&gt;4&lt;/span&gt;  &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -661,7 +799,7 @@ oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;显示客户端信息：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;sid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;serial&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;client_info&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;v$session&lt;/span&gt; &lt;span class="k"&gt;where&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt; &lt;span class="k"&gt;order&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;sid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;serial&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;client_info&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;v$session&lt;/span&gt; &lt;span class="k"&gt;where&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt; &lt;span class="k"&gt;order&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="p"&gt;......&lt;/span&gt;
     &lt;span class="n"&gt;SID&lt;/span&gt;    &lt;span class="nb"&gt;SERIAL&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;USERNAME&lt;/span&gt;    &lt;span class="n"&gt;PROGRAM&lt;/span&gt;             &lt;span class="n"&gt;MACHINE&lt;/span&gt;   &lt;span class="n"&gt;CLIENT_INFO&lt;/span&gt;
@@ -1355,7 +1493,7 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;/ul&gt;</content><category term="Linux"></category><category term="CentOS"></category></entry><entry><title>Oracle LOOP循环</title><link href="https://jlhxxxx.github.io/oracle-loop.html" rel="alternate"></link><published>2018-04-26T00:00:00+08:00</published><updated>2018-04-26T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-26:/oracle-loop.html</id><summary type="html">&lt;p&gt;本文基本全文转载，原文链接：&lt;a href="http://www.cnblogs.com/Richardzhu/p/3455806.html"&gt;Oracle PL/SQL之LOOP循环控制语句&lt;/a&gt;。作者写的看着很舒服，所以收藏起来自己用。主要是一些语法格式，适合新手对照练习。&lt;/p&gt;
 &lt;h2&gt;一、基本的LOOP语句&lt;/h2&gt;
 &lt;p&gt;LOOP语句的基本语法结构如下：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="n"&gt;LOOP&lt;/span&gt;
  &lt;span class="k"&gt;statement&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
 &lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;LOOP&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -1370,37 +1508,41 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;li&gt;&lt;code&gt;END LOOP&lt;/code&gt;：LOOP循环结束标志，可以添加LOOP结构的标签。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4&gt;实例一： 利用EXIT...WHEN结束循环操作&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;serveroutput&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;--exit when&lt;/span&gt;
-&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
-   &lt;span class="n"&gt;v_rlt …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;本文基本全文转载，原文链接：&lt;a href="http://www.cnblogs.com/Richardzhu/p/3455806.html"&gt;Oracle PL/SQL之LOOP循环控制语句&lt;/a&gt;。作者写的看着很舒服，所以收藏起来自己用。主要是一些语法格式，适合新手对照练习。&lt;/p&gt;
-&lt;h2&gt;一、基本的LOOP语句&lt;/h2&gt;
-&lt;p&gt;LOOP语句的基本语法结构如下：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;]&lt;/span&gt;
-&lt;span class="n"&gt;LOOP&lt;/span&gt;
- &lt;span class="k"&gt;statement&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
-&lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;LOOP&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;strong&gt;【语法说明】&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;&amp;lt;label_name&amp;gt;&amp;gt;&lt;/code&gt;：LOOP结构的标签，是可选项。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;LOOP&lt;/code&gt;：LOOP循环开始标志。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;statement&lt;/code&gt;：LOOP语句中循环执行的语句序列。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;END LOOP&lt;/code&gt;：LOOP循环结束标志，可以添加LOOP结构的标签。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;实例一： 利用EXIT...WHEN结束循环操作&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;serveroutput&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;--exit when&lt;/span&gt;
-&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;serveroutput&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;--exit when&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
    &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
  &lt;span class="k"&gt;begin&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;fst_loop&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;fst_loop&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="n"&gt;loop&lt;/span&gt;
+      &lt;span class="n"&gt;dbms_output …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;本文基本全文转载，原文链接：&lt;a href="http://www.cnblogs.com/Richardzhu/p/3455806.html"&gt;Oracle PL/SQL之LOOP循环控制语句&lt;/a&gt;。作者写的看着很舒服，所以收藏起来自己用。主要是一些语法格式，适合新手对照练习。&lt;/p&gt;
+&lt;h2&gt;一、基本的LOOP语句&lt;/h2&gt;
+&lt;p&gt;LOOP语句的基本语法结构如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;LOOP&lt;/span&gt;
+ &lt;span class="k"&gt;statement&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;LOOP&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;【语法说明】&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;&amp;lt;label_name&amp;gt;&amp;gt;&lt;/code&gt;：LOOP结构的标签，是可选项。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LOOP&lt;/code&gt;：LOOP循环开始标志。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;statement&lt;/code&gt;：LOOP语句中循环执行的语句序列。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;END LOOP&lt;/code&gt;：LOOP循环结束标志，可以添加LOOP结构的标签。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;实例一： 利用EXIT...WHEN结束循环操作&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;serveroutput&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;--exit when&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
+   &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;begin&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;fst_loop&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;
     &lt;span class="n"&gt;loop&lt;/span&gt;
       &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;v_rlt = &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
       &lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-      &lt;span class="n"&gt;exit&lt;/span&gt; &lt;span class="n"&gt;fst_loop&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="n"&gt;exit&lt;/span&gt; &lt;span class="n"&gt;fst_loop&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
       &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;LOOP循环已经结束！&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
  &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -1418,15 +1560,15 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 
 
 &lt;h4&gt;实例二： 利用IF...EXIT语句结束循环&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;--if exit&lt;/span&gt;
-&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;--if exit&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
    &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
  &lt;span class="k"&gt;begin&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;fst_loop&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;fst_loop&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;
     &lt;span class="n"&gt;loop&lt;/span&gt;
       &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;v_rlt = &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
       &lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
        &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;变量的值已经大于3，当前值为&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
        &lt;span class="n"&gt;exit&lt;/span&gt; &lt;span class="n"&gt;fst_loop&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
       &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -1450,7 +1592,7 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;h2&gt;二、WHILE...LOOP结构&lt;/h2&gt;
 &lt;p&gt;WHILE...LOOP结构和基本的LOOP语句不同，它本身可以结束LOOP循环。WHILE关键词后面需要有布尔表达式，当WHILE后面的布尔表达式为TRUE时，则循环体重的语句序列被执行1次，然后会重新判断WHILE后面的表达式是否为TRUE，只有当WHILE后的布尔表达式为FALSE时，才结束整个LOOP循环。&lt;/p&gt;
 &lt;p&gt;该语句结构的相关语法如下：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="n"&gt;WHILE&lt;/span&gt; &lt;span class="n"&gt;boolean_expression&lt;/span&gt;
 &lt;span class="n"&gt;LOOP&lt;/span&gt;
 &lt;span class="k"&gt;statement&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
@@ -1464,12 +1606,12 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;li&gt;&lt;code&gt;statement&lt;/code&gt;：语句序列，当&lt;code&gt;boolean_expression&lt;/code&gt;为&lt;code&gt;TRUE&lt;/code&gt;时，该语句序列可获得执行权。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4&gt;实例&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;--while...loop&lt;/span&gt;
-&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;--while...loop&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
    &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
  &lt;span class="k"&gt;begin&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;while_loop&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="n"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;while_loop&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="n"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;loop&lt;/span&gt;
       &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;v_rlt = &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
       &lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -1492,7 +1634,7 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;h2&gt;三、FOR...LOOP结构&lt;/h2&gt;
 &lt;p&gt;FOR...LOOP语句可以遍历某个范围的整数，该范围被FOR和LOOP关键词封闭。首次进入循环时，循环范围将被确定，并且以后不会再次计算。每循环一次，循环指数将会自动增加1。&lt;/p&gt;
 &lt;p&gt;FOR...LOOP语句的语法结构如下：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="k"&gt;FOR&lt;/span&gt; &lt;span class="n"&gt;index_name&lt;/span&gt; &lt;span class="k"&gt;IN&lt;/span&gt;
 &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="n"&gt;REVERSE&lt;/span&gt; &lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="n"&gt;lower_bound&lt;/span&gt; &lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="n"&gt;upper_bound&lt;/span&gt;
@@ -1511,8 +1653,8 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;li&gt;下边界和上边界之间的"&lt;code&gt;..&lt;/code&gt;"不能省略。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4&gt;实例&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;--for..loop&lt;/span&gt;
-&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;begin&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;--for..loop&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;begin&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;..&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt;
       &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;v_rlt = &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -1609,7 +1751,7 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
     &lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;INTO&lt;/span&gt; &lt;span class="n"&gt;CI54&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CCI554&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;AAC001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;AAB001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;CCD001&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;VALUES&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
      &lt;span class="s1"&gt;&amp;#39;80&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;030005&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;LPAD&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SEQ_CCI554&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nextval&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;622925199012056023&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;0205000027&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;170010602898&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="k"&gt;COMMIT&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="n"&gt;EXIT&lt;/span&gt; &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="n"&gt;I&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;EXIT&lt;/span&gt; &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="n"&gt;I&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;=&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="n"&gt;I&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;LOOP&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -2033,34 +2175,34 @@ pip list
 &lt;p&gt;gitalk&lt;/p&gt;
 &lt;p&gt;直接到theme--tempaltes下，参考gitalk配置，新建gitalk.html，这里我稍微配置了个环境变量&lt;code&gt;GITALK_OWNER&lt;/code&gt;。而且我的&lt;code&gt;repo&lt;/code&gt;没有选择博客文件所在仓库，而是另外建了一个仓库，注意&lt;code&gt;createIssueManually&lt;/code&gt;最好设置为&lt;code&gt;true&lt;/code&gt;，这样文章发表之后在评论处点击初始化就可以自动生成一个issue，当然每篇文章都要点一下。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% if GITALK_OWNER %}
-&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css&amp;quot;&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js&amp;quot;&lt;span class="ni"&gt;&amp;amp;gt;&amp;amp;lt;&lt;/span&gt;/script&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;div id=&amp;quot;gitalk-container&amp;quot;&lt;span class="ni"&gt;&amp;amp;gt;&amp;amp;lt;&lt;/span&gt;/div&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;script&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-    var gitalk_owner = &amp;#39;{{ GITALK_OWNER }}&amp;#39;;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;gitalk-container&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;gitalk_owner&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{{ GITALK_OWNER }}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-    var gitalk = new Gitalk({
-      clientID: &amp;#39;a61......&amp;#39;,
-      clientSecret: &amp;#39;38c......&amp;#39;,
-      repo: &amp;#39;comments&amp;#39;,
-      owner: gitalk_owner,
-      admin: [gitalk_owner],
-      distractionFreeMode: false,  // Facebook-like distraction free mode
-      createIssueManually: true
-    })
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;gitalk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Gitalk&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+      &lt;span class="nx"&gt;clientID&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;a61......&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nx"&gt;clientSecret&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;38c......&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nx"&gt;repo&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;comments&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nx"&gt;owner&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;gitalk_owner&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nx"&gt;admin&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;gitalk_owner&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+      &lt;span class="nx"&gt;distractionFreeMode&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="c1"&gt;// Facebook-like distraction free mode&lt;/span&gt;
+      &lt;span class="nx"&gt;createIssueManually&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+    &lt;span class="p"&gt;})&lt;/span&gt;
 
-    gitalk.render(&amp;#39;gitalk-container&amp;#39;)
-&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;/script&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
+    &lt;span class="nx"&gt;gitalk&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;gitalk-container&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 {% endif %}
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;然后打开article.html，找到&lt;code&gt;{% if DISQUS_SITENAME %}&lt;/code&gt;这行，从这之后开始修改：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% if COMMENT %}
-&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;div class=&amp;quot;comments&amp;quot;&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-  &lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;h2&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;Comments&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;/h2&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h2&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Comments&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h2&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
     {% include &amp;#39;gitalk.html&amp;#39; %}
-&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;/div&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 {% endif %}
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -2071,18 +2213,18 @@ pip list
 &lt;p&gt;disqus&lt;/p&gt;
 &lt;p&gt;这个配置相对简单。首先到&lt;a href="https://disqus.com/"&gt;disqus&lt;/a&gt;注册账号；&lt;strong&gt;create a new site&lt;/strong&gt;，记住你填的&lt;code&gt;shortname&lt;/code&gt;；然后选择新建的&lt;strong&gt;site&lt;/strong&gt;，&lt;strong&gt;Installing Disqus&lt;/strong&gt;，下一步下一步把代码复制出来；然后在theme--tempaltes下，新建disqus.html，把刚才代码粘贴进去去掉注释，增加头部&lt;code&gt;{% if DISQUS_SITENAME %}&lt;/code&gt;尾部&lt;code&gt;{% endif %}&lt;/code&gt;和&lt;code&gt;DISQUS_SITENAME&lt;/code&gt;变量，最后就变成这样：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% if DISQUS_SITENAME %}
-&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;div id=&amp;quot;disqus_thread&amp;quot;&lt;span class="ni"&gt;&amp;amp;gt;&amp;amp;lt;&lt;/span&gt;/div&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;script type=&amp;quot;text/javascript&amp;quot;&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-    var disqus_shortname = &amp;#39;{{ DISQUS_SITENAME }}&amp;#39;;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;disqus_thread&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;disqus_shortname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{{ DISQUS_SITENAME }}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-    (function() { // DON&amp;#39;T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement(&amp;#39;script&amp;#39;);
-    s.src = &amp;#39;http://&amp;#39; + disqus_shortname + &amp;#39;.disqus.com/embed.js&amp;#39;;;
-    s.setAttribute(&amp;#39;data-timestamp&amp;#39;, +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;/script&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;noscript&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;a href=&amp;quot;http://disqus.com/?ref_noscript&amp;quot;&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;/a&lt;span class="ni"&gt;&amp;amp;gt;&amp;amp;lt;&lt;/span&gt;/noscript&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="c1"&gt;// DON&amp;#39;T EDIT BELOW THIS LINE&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;createElement&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;script&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;src&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;http://&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;disqus_shortname&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.disqus.com/embed.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;;&lt;/span&gt;
+    &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setAttribute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data-timestamp&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;head&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nx"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;appendChild&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;})();&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;noscript&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://disqus.com/?ref_noscript&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;noscript&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 {% endif %}
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -2194,15 +2336,15 @@ pip list
 
 &lt;p&gt;那我的思路就有了：将html转换成json，再从json中提取token不就简单了。&lt;/p&gt;
 &lt;p&gt;依然还是老办法，拿出我的终极武器——&lt;strong&gt;redmine&lt;/strong&gt;来测试。登陆页面的返回值大概是这样的，我们要提取的是&lt;code&gt;csrf-token&lt;/code&gt;：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;!DOCTYPE html&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;html lang=&amp;quot;zh&amp;quot;&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-    &lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;head&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-        &lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;meta charset=&amp;quot;utf-8&amp;quot; /&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-        &lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;title&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;Redmine&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;/title&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-        &lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;meta name=&amp;quot;description&amp;quot; content=&amp;quot;Redmine&amp;quot; /&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-        &lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;meta name=&amp;quot;keywords&amp;quot; content=&amp;quot;issue,bug,tracker&amp;quot; /&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-        &lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;meta name=&amp;quot;csrf-param&amp;quot; content=&amp;quot;authenticity_token&amp;quot; /&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
-        &lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;meta name=&amp;quot;csrf-token&amp;quot; content=&amp;quot;u9XfPXNDqQ/v+/xUtQuAjESgvNXCTHxCWW4NIZ/rJBmfZjzqJBVD1fDOxHnlbza4iDreX+St9SE9XFIN4on47Q==&amp;quot; /&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt; &lt;span class="na"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;zh&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Redmine&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;description&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;content&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Redmine&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;keywords&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;content&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;issue,bug,tracker&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;csrf-param&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;content&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;authenticity_token&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;csrf-token&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;content&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;u9XfPXNDqQ/v+/xUtQuAjESgvNXCTHxCWW4NIZ/rJBmfZjzqJBVD1fDOxHnlbza4iDreX+St9SE9XFIN4on47Q==&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
         ...
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -2275,7 +2417,7 @@ pip list
 &lt;p&gt;用PLSQL执行数据查询的时候，FROM子句是必须的，当不想查具体的表时，可以使用虚拟表dual。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;IS&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SUCCESS&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="k"&gt;RESULT&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SUCCESS&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="k"&gt;RESULT&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;SYSDATE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -2285,11 +2427,13 @@ pip list
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CASE&lt;/span&gt; &lt;span class="n"&gt;AAC004&lt;/span&gt;  
 &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;MALE&amp;#39;&lt;/span&gt;  
 &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;FEMALE&amp;#39;&lt;/span&gt;  
-&lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;END …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;SELECT 1 FROM DUAL&lt;/h2&gt;
+&lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;--CASE搜索函数 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;SELECT 1 FROM DUAL&lt;/h2&gt;
 &lt;p&gt;用PLSQL执行数据查询的时候，FROM子句是必须的，当不想查具体的表时，可以使用虚拟表dual。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;IS&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SUCCESS&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="k"&gt;RESULT&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SUCCESS&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="k"&gt;RESULT&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;SYSDATE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -2373,7 +2517,7 @@ pip list
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;举例&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;--SALARY&amp;amp;gt;8000,加薪15%；SALARY&amp;amp;lt;8000,加薪20%;SALARY=8000,加薪15%&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;--SALARY&amp;gt;8000,加薪15%；SALARY&amp;lt;8000,加薪20%;SALARY=8000,加薪15%&lt;/span&gt;
 &lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;DECODE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SIGN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SALARY&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;8000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;SALARY&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;SALARY&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;SALARY&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;EMPLOYEE&lt;/span&gt;&lt;span class="err"&gt;；&lt;/span&gt;
 
 &lt;span class="c1"&gt;--统计AC01表中19940911出生的男女数&lt;/span&gt;

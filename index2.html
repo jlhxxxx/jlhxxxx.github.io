@@ -80,6 +80,54 @@
                         <article>
                             <header>
                                 <h1 class="entry-title">
+                                    <a href="https://jlhxxxx.github.io/oracle-sequence.html" rel="bookmark" title="Permalink to Oracle SEQUENCE使用">
+                                       Oracle SEQUENCE使用
+                                    </a>
+                                </h1>
+                            </header>
+                            <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="https://jlhxxxx.github.io/category/sql.html">SQL</a>
+
+    on 2018-04-26
+
+        |
+        tags:         <a href="https://jlhxxxx.github.io/tag/oracle.html">Oracle</a>
+        <a href="https://jlhxxxx.github.io/tag/sequence.html">SEQUENCE</a>
+
+
+
+    
+</footer><!-- /.post-info -->                                <p>序列(SEQUENCE)是序列号生成器，可以为表中的行自动生成序列号，产生一组等间隔的数值(类型为数字)。序列主要用于生成主键。</p>
+<h2>建立序列</h2>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="n">SEQUENCE</span> <span class="n">sequence_name</span> 
+<span class="p">[</span><span class="k">INCREMENT</span> <span class="k">BY</span> <span class="n">n</span><span class="p">]</span> 
+<span class="p">[</span><span class="k">START</span> <span class="k">WITH</span> <span class="n">n</span><span class="p">]</span> 
+<span class="p">[</span><span class="err">{</span><span class="k">MAXVALUE</span><span class="o">/</span><span class="k">MINVALUE</span> <span class="n">n</span><span class="o">|</span><span class="n">NOMAXVALUE</span><span class="o">/</span><span class="n">NOMINVALUE</span><span class="err">}</span><span class="p">]</span> 
+<span class="p">[</span><span class="err">{</span><span class="k">CYCLE</span><span class="o">|</span><span class="n">NOCYCLE</span><span class="err">}</span><span class="p">]</span> 
+<span class="p">[</span><span class="err">{</span><span class="k">CACHE</span> <span class="n">n</span><span class="o">|</span><span class="n">NOCACHE</span><span class="err">}</span><span class="p">];</span>
+</pre></div>
+
+
+<ul>
+<li><code>INCREMENT BY</code>：用于定义序列的步长，如果省略，则默认为<code>1</code>，如果出现负值，则代表序列的值是按照此步长递减的。</li>
+<li><code>START WITH</code> ：定义序列的初始值(即产生的第一个值)，默认为<code>1</code>。</li>
+<li><code>MAXVALUE</code> ：定义序列生成器能产生的最大值。选项<code>NOMAXVALUE</code>是默认选项，代表没有最大值定义，这时对于递增序列，系统能够产生的最大值是10的27次方；对于递减序列 …</li></ul>
+                                <p class="readmore">
+                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/oracle-sequence.html">Read more...</a>
+                                </p>
+                            </div><!-- /.entry-content -->
+                            <hr/>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <header>
+                                <h1 class="entry-title">
                                     <a href="https://jlhxxxx.github.io/banwagong-ss.html" rel="bookmark" title="Permalink to 搬瓦工SS教程">
                                        搬瓦工SS教程
                                     </a>
@@ -347,7 +395,7 @@
 <p>用PLSQL执行数据查询的时候，FROM子句是必须的，当不想查具体的表时，可以使用虚拟表dual。</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="mi">1</span><span class="o">+</span><span class="mi">1</span> <span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
 <span class="k">SELECT</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="n">dual</span> <span class="k">WHERE</span> <span class="k">NULL</span> <span class="k">IS</span> <span class="k">NULL</span><span class="p">;</span>
-<span class="k">SELECT</span> <span class="s1">&#39;SUCCESS&#39;</span> <span class="k">AS</span> <span class="k">RESULT</span> <span class="k">FROM</span> <span class="n">dual</span> <span class="k">WHERE</span> <span class="mi">50</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">60</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="s1">&#39;SUCCESS&#39;</span> <span class="k">AS</span> <span class="k">RESULT</span> <span class="k">FROM</span> <span class="n">dual</span> <span class="k">WHERE</span> <span class="mi">50</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">;</span>
 <span class="k">SELECT</span> <span class="n">SYSDATE</span> <span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
 </pre></div>
 
@@ -357,7 +405,9 @@
 <div class="highlight"><pre><span></span><span class="k">CASE</span> <span class="n">AAC004</span>  
 <span class="k">WHEN</span> <span class="s1">&#39;1&#39;</span> <span class="k">THEN</span> <span class="s1">&#39;MALE&#39;</span>  
 <span class="k">WHEN</span> <span class="s1">&#39;2&#39;</span> <span class="k">THEN</span> <span class="s1">&#39;FEMALE&#39;</span>  
-<span class="k">ELSE</span> <span class="k">NULL</span> <span class="k">END …</span></pre></div>
+<span class="k">ELSE</span> <span class="k">NULL</span> <span class="k">END</span><span class="p">;</span>
+
+<span class="c1">--CASE搜索函数 …</span></pre></div>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/oracle-skills.html">Read more...</a>
                                 </p>
