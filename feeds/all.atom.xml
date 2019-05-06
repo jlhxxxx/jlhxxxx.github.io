@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-05-06T00:00:00+08:00</updated><entry><title>JMeter文档翻译之20-函数和变量</title><link href="https://jlhxxxx.github.io/jmeter-doc-cn-20.html" rel="alternate"></link><published>2019-05-06T00:00:00+08:00</published><updated>2019-05-06T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-cn-20.html</id><summary type="html">&lt;p&gt;英文文档地址：&amp;lt;&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&amp;gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-05-06T00:00:00+08:00</updated><entry><title>JMeter文档翻译之20-函数和变量</title><link href="https://jlhxxxx.github.io/jmeter-doc-cn-20.html" rel="alternate"></link><published>2019-05-06T00:00:00+08:00</published><updated>2019-05-06T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-cn-20.html</id><summary type="html">&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;JMeter 的函数是一些特殊值，它们可以填充在测试树的任何采样器或其他元件中。函数调用的语法如下：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;${__functionName(var1,var2,var3)}&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;其中“__functionName”匹配函数的名称。
@@ -10,7 +10,7 @@
 
 
 &lt;p&gt;如果逗号没有被转义——例如 &lt;code&gt;${__javaScript(Math.max(2,5))}&lt;/code&gt; ——你会得到像这样的错误信息：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ERROR - jmeter.functions …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;英文文档地址：&amp;lt;&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&amp;gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ERROR - jmeter.functions …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;JMeter 的函数是一些特殊值，它们可以填充在测试树的任何采样器或其他元件中。函数调用的语法如下：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;${__functionName(var1,var2,var3)}&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;其中“__functionName”匹配函数的名称。
