@@ -352,18 +352,20 @@
 &lt;/blockquote&gt;
 &lt;h2&gt;20.2 函数和变量可以用在哪？&lt;/h2&gt;
 &lt;p&gt;函数和变量可以用在任何测试元件的任何输入域中（除了测试计划——见下文）。有些输入域只接受数字而不支持字符串，因此它们也不支持函数。然而，大多数输入域还是支持函数的。&lt;/p&gt;
-&lt;p&gt;在测试计划中使用函数是有限制的。当函数被调用时，JMeter 线程变量并没有完全初始化，因此变量名称作为参数传递时也没有初始化，变量会引用失败，所以 &lt;code&gt;split()&lt;/code&gt; 和 &lt;code&gt;regex()&lt;/code&gt; 和变量赋值函数都不能正常工作。&lt;code&gt;threadNum()&lt;/code&gt; 函数也不会工作（它在测试计划层也没有意义）。下面是可以在测试计划中使用的的函数：
-* intSum
-* longSum
-* machineName
-* BeanShell
-* groovy
-* javaScript
-* jexl2/jexl3
-* random
-* time
-* property functions
-* log functions&lt;/p&gt;
+&lt;p&gt;在测试计划中使用函数是有限制的。当函数被调用时，JMeter 线程变量并没有完全初始化，因此变量名称作为参数传递时也没有初始化，变量会引用失败，所以 &lt;code&gt;split()&lt;/code&gt; 和 &lt;code&gt;regex()&lt;/code&gt; 和变量赋值函数都不能正常工作。&lt;code&gt;threadNum()&lt;/code&gt; 函数也不会工作（它在测试计划层也没有意义）。下面是可以在测试计划中使用的的函数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;intSum&lt;/li&gt;
+&lt;li&gt;longSum&lt;/li&gt;
+&lt;li&gt;machineName&lt;/li&gt;
+&lt;li&gt;BeanShell&lt;/li&gt;
+&lt;li&gt;groovy&lt;/li&gt;
+&lt;li&gt;javaScript&lt;/li&gt;
+&lt;li&gt;jexl2/jexl3&lt;/li&gt;
+&lt;li&gt;random&lt;/li&gt;
+&lt;li&gt;time&lt;/li&gt;
+&lt;li&gt;property functions&lt;/li&gt;
+&lt;li&gt;log functions&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;配置元件是由独立线程处理的。因此像 &lt;code&gt;__threadNum&lt;/code&gt; 这样的函数在一些测试元件（例如用户定义的变量）中不能正常地工作。同样要注意在用户定义的变量（UDV）中定义的变量，在（UDV）元件被处理前是不能使用的。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;当在 SQL 代码（或其他）中引用变量/函数时，要记得给文本字符串添加必要的引号，即使用：&lt;/p&gt;
@@ -416,12 +418,14 @@
 &lt;h3 id="regexFunction"&gt;__regexFunction&lt;/h3&gt;
 
 &lt;p&gt;regexFunction 函数可以使用任意正则表达式（用户提供的）来解析之前的服务器响应（或变量值）。函数返回填充了变量值的模版字符串。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;__regexFunction&lt;/code&gt; 也可以存储值供以后使用。你可以在它的第六个参数中设定一个引用名称。在函数执行之后，可以使用用户定义的值的语法在稍后时间检索相同的值。例如，如果输入 “&lt;code&gt;refName&lt;/code&gt;” 作为第六个参数，那么可以使用：
-* &lt;code&gt;${refName}&lt;/code&gt; 来引用该函数解析的第二个参数（“替换字符串的模版”）的计算结果
-* &lt;code&gt;${refName_g0}&lt;/code&gt; 来引用该函数解析的整个匹配
-* &lt;code&gt;${refName_g1}&lt;/code&gt; 来引用该函数解析的第一个匹配组合
-* &lt;code&gt;${refName_g#}&lt;/code&gt; 来引用该函数解析的第 N 个匹配组合
-* &lt;code&gt;${refName_matchNr}&lt;/code&gt; 来引用该函数解析的匹配组合数量&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;__regexFunction&lt;/code&gt; 也可以存储值供以后使用。你可以在它的第六个参数中设定一个引用名称。在函数执行之后，可以使用用户定义的值的语法在稍后时间检索相同的值。例如，如果输入 “&lt;code&gt;refName&lt;/code&gt;” 作为第六个参数，那么可以使用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;${refName}&lt;/code&gt; 来引用该函数解析的第二个参数（“替换字符串的模版”）的计算结果&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${refName_g0}&lt;/code&gt; 来引用该函数解析的整个匹配&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${refName_g1}&lt;/code&gt; 来引用该函数解析的第一个匹配组合&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${refName_g#}&lt;/code&gt; 来引用该函数解析的第 N 个匹配组合&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${refName_matchNr}&lt;/code&gt; 来引用该函数解析的匹配组合数量&lt;/li&gt;
+&lt;/ul&gt;
 &lt;blockquote&gt;
 &lt;p&gt;如果是分布式测试，要切换模式（见 &lt;code&gt;jmeter.properties&lt;/code&gt;）确保它不在剥离模式下，参见 &lt;a href="https://bz.apache.org/bugzilla/show_bug.cgi?id=56376"&gt;&lt;code&gt;Bug 56376&lt;/code&gt;&lt;/a&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -789,14 +793,16 @@
 &lt;/blockquote&gt;
 &lt;p&gt;对于 Nashorn 引擎，请参阅&lt;a href="https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/"&gt; Java 平台标准版 Nashorn 用户指南&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;对于 Rhino 引擎，请参阅&lt;a href="http://www.mozilla.org/rhino/overview.html"&gt;Mozilla Rhino 概述&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;以下变量可用于脚本：
-  * &lt;code&gt;log&lt;/code&gt; - 函数的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录&lt;/a&gt;
-  * &lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象
-  * &lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象
-  * &lt;code&gt;threadName&lt;/code&gt; - 包含当前线程名称的字符串
-  * &lt;code&gt;sampler&lt;/code&gt; - 当前&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;对象（如果有的话）
-  * &lt;code&gt;samplerResult&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt; 对象（如果有的话）
-  * &lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象&lt;/p&gt;
+&lt;p&gt;以下变量可用于脚本：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;log&lt;/code&gt; - 函数的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;threadName&lt;/code&gt; - 包含当前线程名称的字符串&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sampler&lt;/code&gt; - 当前&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;对象（如果有的话）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;samplerResult&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt; 对象（如果有的话）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Rhinoscript 允许通过其 Packages 对象访问静态方法。请参阅 &lt;a href="https://wiki.openjdk.java.net/display/Nashorn/Rhino+Migration+Guide"&gt;Java 脚本&lt;/a&gt; 文档。例如，可以像这样访问 JMeterContextService 静态方法：&lt;code&gt;Java.type("org.apache.jmeter.threads.JMeterContextService").getTotalThreads()&lt;/code&gt;。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;JMeter 不是浏览器，不能解释下载页面中的 JavaScript。&lt;/p&gt;
@@ -1002,13 +1008,15 @@
 &lt;h3 id="RandomFromMultipleVars"&gt;__RandomFromMultipleVars&lt;/h3&gt;
 
 &lt;p&gt;RandomFromMultipleVars 函数根据&lt;code&gt;源变量&lt;/code&gt;提供的变量值返回一个随机值。&lt;/p&gt;
-&lt;p&gt;变量可以是单值或多值的，它们可以由以下提取器生成：
-  * &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#Boundary_Extractor"&gt;边界提取器&lt;/a&gt;
-  * &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#Regular_Expression_Extractor"&gt;正则表达式提取器&lt;/a&gt;
-  * &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#CSS_Selector_Extractor"&gt;CSS 提取器&lt;/a&gt;
-  * &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#JSON_Extractor"&gt;JSON 提取器&lt;/a&gt;
-  * &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath_Extractor"&gt;XPath 提取器&lt;/a&gt;
-  * &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath2_Extractor"&gt;XPath2 提取器&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;变量可以是单值或多值的，它们可以由以下提取器生成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#Boundary_Extractor"&gt;边界提取器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#Regular_Expression_Extractor"&gt;正则表达式提取器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#CSS_Selector_Extractor"&gt;CSS 提取器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#JSON_Extractor"&gt;JSON 提取器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath_Extractor"&gt;XPath 提取器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath2_Extractor"&gt;XPath2 提取器&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;多值变量就是，当你设置 &lt;code&gt;-1&lt;/code&gt; 作为&lt;code&gt;匹配数字&lt;/code&gt;所提取的值。当n = 1，2，3...时会创建相应匹配号变量 &lt;code&gt;varName_matchNr&lt;/code&gt;，并为每个值创建变量 &lt;code&gt;varName_n&lt;/code&gt;，其中n = 1，2，3 等 。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
@@ -1094,11 +1102,13 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;例如，你可以设置一些变量如下：
-  * COL1a &lt;code&gt;${__CSVRead(random.txt,0)}&lt;/code&gt;
-  * COL2a &lt;code&gt;${__CSVRead(random.txt,1)}${__CSVRead(random.txt,next)}&lt;/code&gt;
-  * COL1b &lt;code&gt;${__CSVRead(random.txt,0)}&lt;/code&gt;
-  * COL2b &lt;code&gt;${__CSVRead(random.txt,1)}${__CSVRead(random.txt,next)}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;例如，你可以设置一些变量如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;COL1a &lt;code&gt;${__CSVRead(random.txt,0)}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;COL2a &lt;code&gt;${__CSVRead(random.txt,1)}${__CSVRead(random.txt,next)}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;COL1b &lt;code&gt;${__CSVRead(random.txt,0)}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;COL2b &lt;code&gt;${__CSVRead(random.txt,1)}${__CSVRead(random.txt,next)}&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;这将从一行中读取两列，从下一行中读取两列。如果所有变量都在相同的前置处理器的用户参数上定义，那么这些行将是连续的。否则的话，另外一个线程可能会读取下一行。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;该函数不适用于大文件，因为它会将整个文件存储在内存中。对于较大的文件，请使用 &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#CSV_Data_Set_Config"&gt;CSV Data Set Config 元件&lt;/a&gt; 或 &lt;a href="#StringFromFile"&gt;StringFromFile&lt;/a&gt;。&lt;/p&gt;
@@ -1107,11 +1117,13 @@
 &lt;h3 id="property"&gt;__property&lt;/h3&gt;
 
 &lt;p&gt;property 函数返回 JMeter 属性的值。如果找不到属性值，并且没有提供默认值，则返回属性名称。当提供默认值时，可以不需要函数名称——参数可以设置为 null，并且将被忽略。&lt;/p&gt;
-&lt;p&gt;例如：
-  * &lt;code&gt;${__property(user.dir)}&lt;/code&gt; - 返回 &lt;code&gt;user.dir&lt;/code&gt; 的值
-  * &lt;code&gt;${__property(user.dir,UDIR)}&lt;/code&gt; - 返回 &lt;code&gt;user.dir&lt;/code&gt; 的值并保存在 &lt;code&gt;UDIR&lt;/code&gt; 中
-  * &lt;code&gt;${__property(abcd,ABCD,atod)}&lt;/code&gt; - 返回属性 &lt;code&gt;abcd&lt;/code&gt; 的值（如果没有定义，则返回“&lt;code&gt;atod&lt;/code&gt;”）并保存在 &lt;code&gt;ABCD&lt;/code&gt; 中
-  * &lt;code&gt;${__property(abcd,,atod)}&lt;/code&gt; - 返回属性 &lt;code&gt;abcd&lt;/code&gt;的值（如果未定义，则返回“&lt;code&gt;atod&lt;/code&gt;”）但不保存&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;${__property(user.dir)}&lt;/code&gt; - 返回 &lt;code&gt;user.dir&lt;/code&gt; 的值&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${__property(user.dir,UDIR)}&lt;/code&gt; - 返回 &lt;code&gt;user.dir&lt;/code&gt; 的值并保存在 &lt;code&gt;UDIR&lt;/code&gt; 中&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${__property(abcd,ABCD,atod)}&lt;/code&gt; - 返回属性 &lt;code&gt;abcd&lt;/code&gt; 的值（如果没有定义，则返回“&lt;code&gt;atod&lt;/code&gt;”）并保存在 &lt;code&gt;ABCD&lt;/code&gt; 中&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${__property(abcd,,atod)}&lt;/code&gt; - 返回属性 &lt;code&gt;abcd&lt;/code&gt;的值（如果未定义，则返回“&lt;code&gt;atod&lt;/code&gt;”）但不保存&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1149,10 +1161,12 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;获取值：
-  * &lt;code&gt;${__P(group1.threads)}&lt;/code&gt; - 返回 &lt;code&gt;group1.threads&lt;/code&gt; 的值
-  * &lt;code&gt;${__P(group1.loops)}&lt;/code&gt; - 返回 &lt;code&gt;group1.loops&lt;/code&gt; 的值
-  * &lt;code&gt;${__P(hostname,www.dummy.org)}&lt;/code&gt; - 返回属性的值的 &lt;code&gt;hostname&lt;/code&gt;（主机名）或 &lt;code&gt;www.dummy.org&lt;/code&gt; 。如果在上面的例子中没有定义，第一个函数调用将返回&lt;code&gt;7&lt;/code&gt;，第二个返回 &lt;code&gt;1&lt;/code&gt;，最后一个将返回 &lt;code&gt;www.dummy.org&lt;/code&gt; （除非这些属性在别处有定义！）&lt;/p&gt;
+&lt;p&gt;获取值：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;${__P(group1.threads)}&lt;/code&gt; - 返回 &lt;code&gt;group1.threads&lt;/code&gt; 的值&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${__P(group1.loops)}&lt;/code&gt; - 返回 &lt;code&gt;group1.loops&lt;/code&gt; 的值&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${__P(hostname,www.dummy.org)}&lt;/code&gt; - 返回属性的值的 &lt;code&gt;hostname&lt;/code&gt;（主机名）或 &lt;code&gt;www.dummy.org&lt;/code&gt; 。如果在上面的例子中没有定义，第一个函数调用将返回&lt;code&gt;7&lt;/code&gt;，第二个返回 &lt;code&gt;1&lt;/code&gt;，最后一个将返回 &lt;code&gt;www.dummy.org&lt;/code&gt; （除非这些属性在别处有定义！）&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1211,10 +1225,12 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;code&gt;OUT&lt;/code&gt; 和 &lt;code&gt;ERR&lt;/code&gt; 日志级别会直接输出记录到 &lt;code&gt;System.out&lt;/code&gt; 和 &lt;code&gt;System.err&lt;/code&gt;。这种情况下，输出始终会被打印——它不依赖于当前的日志设置。
-  * &lt;code&gt;${__log(Message)}&lt;/code&gt; 写入日志文件,形如“&lt;code&gt;… thread Name : Message&lt;/code&gt;”
-  * &lt;code&gt;${__log(Message,OUT)}&lt;/code&gt; 写到控制台窗口
-  * &lt;code&gt;${__log(${VAR},,,VAR=)}&lt;/code&gt; 写入日志文件，形如“&lt;code&gt;… thread Name VAR=value&lt;/code&gt;”&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;OUT&lt;/code&gt; 和 &lt;code&gt;ERR&lt;/code&gt; 日志级别会直接输出记录到 &lt;code&gt;System.out&lt;/code&gt; 和 &lt;code&gt;System.err&lt;/code&gt;。这种情况下，输出始终会被打印——它不依赖于当前的日志设置。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;${__log(Message)}&lt;/code&gt; 写入日志文件,形如“&lt;code&gt;… thread Name : Message&lt;/code&gt;”&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${__log(Message,OUT)}&lt;/code&gt; 写到控制台窗口&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${__log(${VAR},,,VAR=)}&lt;/code&gt; 写入日志文件，形如“&lt;code&gt;… thread Name VAR=value&lt;/code&gt;”&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="logn"&gt;__logn&lt;/h3&gt;
 
@@ -1246,8 +1262,10 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;code&gt;OUT&lt;/code&gt; 和 &lt;code&gt;ERR&lt;/code&gt; 日志级别会直接输出记录到 &lt;code&gt;System.out&lt;/code&gt; 和 &lt;code&gt;System.err&lt;/code&gt;。这种情况下，输出始终会被打印——它不依赖于当前的日志设置。
-  * &lt;code&gt;${__logn(VAR1=${VAR1},OUT)}&lt;/code&gt; 将变量的值写到控制台窗口&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;OUT&lt;/code&gt; 和 &lt;code&gt;ERR&lt;/code&gt; 日志级别会直接输出记录到 &lt;code&gt;System.out&lt;/code&gt; 和 &lt;code&gt;System.err&lt;/code&gt;。这种情况下，输出始终会被打印——它不依赖于当前的日志设置。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;${__logn(VAR1=${VAR1},OUT)}&lt;/code&gt; 将变量的值写到控制台窗口&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="BeanShell"&gt;__BeanShell&lt;/h3&gt;
 
@@ -1261,14 +1279,16 @@
 &lt;/blockquote&gt;
 &lt;p&gt;单个函数实例可以从多个线程中调用。但是函数 &lt;code&gt;execute()&lt;/code&gt; 的方法是同步的。&lt;/p&gt;
 &lt;p&gt;如果属性“&lt;code&gt;beanshell.function.init&lt;/code&gt;”已被定义，则将其作为源文件传递给解释器。这可以用来定义通用的方法和变量。在 bin 目录中有一个 init 示例文件：&lt;code&gt;BeanShellFunction.bshrc&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;以下变量在脚本执行之前已经被设置：
-  * &lt;code&gt;log&lt;/code&gt; - BeanShell 函数（*）的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录器&lt;/a&gt;
-  * &lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象
-  * &lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象
-  * &lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象
-  * &lt;code&gt;threadName&lt;/code&gt; - 线程名称 （字符串）
-  * &lt;code&gt;Sampler&lt;/code&gt; - 当前的&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;，如果有的话
-  * &lt;code&gt;SampleResult&lt;/code&gt; - 当前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt;，如果有的话&lt;/p&gt;
+&lt;p&gt;以下变量在脚本执行之前已经被设置：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;log&lt;/code&gt; - BeanShell 函数（*）的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;threadName&lt;/code&gt; - 线程名称 （字符串）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Sampler&lt;/code&gt; - 当前的&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;，如果有的话&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SampleResult&lt;/code&gt; - 当前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt;，如果有的话&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;（*）表示这是在 init 文件（如果有的话）被处理之前设置的。其他变量因调用而异。
 &lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
@@ -1303,15 +1323,17 @@
 
 &lt;p&gt;groovy 函数执行 &lt;a href="http://groovy-lang.org/"&gt;Apache Groovy&lt;/a&gt; 传递给它的脚本，并返回结果。&lt;/p&gt;
 &lt;p&gt;如果属性“&lt;code&gt;groovy.utilities&lt;/code&gt;”已被定义，它会被 ScriptEngine（脚本引擎）加载。这可以用来定义通用的方法和变量。在 bin 目录中有一个 init 示例文件：&lt;code&gt;utility.groovy&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;以下变量在脚本执行之前已经被设置：
-  * &lt;code&gt;log&lt;/code&gt; - groovy 函数（*）的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录器&lt;/a&gt;
-  * &lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象
-  * &lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象
-  * &lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象
-  * &lt;code&gt;threadName&lt;/code&gt; - 线程名称 （字符串）
-  * &lt;code&gt;Sampler&lt;/code&gt; - 当前的&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;，如果有的话
-  * &lt;code&gt;prev&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt;，如果有的话
-  * &lt;code&gt;OUT&lt;/code&gt; - System.out&lt;/p&gt;
+&lt;p&gt;以下变量在脚本执行之前已经被设置：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;log&lt;/code&gt; - groovy 函数（*）的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;threadName&lt;/code&gt; - 线程名称 （字符串）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Sampler&lt;/code&gt; - 当前的&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;，如果有的话&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;prev&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt;，如果有的话&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OUT&lt;/code&gt; - System.out&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;（*）表示这是在 init 文件（如果有的话）被处理之前设置的。其他变量因调用而异。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;使用此函数时，请使用之前定义的变量而不是使用字符串替换来访问脚本中的变量。遵循此模式以确保缓存Groovy，从而确保您的测试具有高效性。 &lt;/p&gt;
@@ -1501,12 +1523,14 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;如果省略了格式字符串，则该函数返回自纪元开始至今的时间（以毫秒为单位）。如果格式匹配“&lt;code&gt;/ddd&lt;/code&gt;”（其中 &lt;code&gt;ddd&lt;/code&gt; 是十进制数字），则该函数返回以毫秒为单位的至今的时间除以 &lt;code&gt;ddd&lt;/code&gt; 的值。例如，“&lt;code&gt;/1000&lt;/code&gt;”将返回自纪元开始至今的时间（以秒为单位）。否则，当前时间传递给 SimpleDateFormat。支持以下简写别名：
-  * &lt;code&gt;YMD&lt;/code&gt; = &lt;code&gt;yyyyMMdd&lt;/code&gt;
-  * &lt;code&gt;HMS&lt;/code&gt; = &lt;code&gt;HHmmss&lt;/code&gt;
-  * &lt;code&gt;YMDHMS&lt;/code&gt; = &lt;code&gt;yyyyMMdd-HHmmss&lt;/code&gt;
-  * &lt;code&gt;USER1&lt;/code&gt; = JMeter 属性 &lt;code&gt;time.USER1&lt;/code&gt;
-  * &lt;code&gt;USER2&lt;/code&gt; = JMeter 属性 &lt;code&gt;time.USER2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果省略了格式字符串，则该函数返回自纪元开始至今的时间（以毫秒为单位）。如果格式匹配“&lt;code&gt;/ddd&lt;/code&gt;”（其中 &lt;code&gt;ddd&lt;/code&gt; 是十进制数字），则该函数返回以毫秒为单位的至今的时间除以 &lt;code&gt;ddd&lt;/code&gt; 的值。例如，“&lt;code&gt;/1000&lt;/code&gt;”将返回自纪元开始至今的时间（以秒为单位）。否则，当前时间传递给 SimpleDateFormat。支持以下简写别名：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;YMD&lt;/code&gt; = &lt;code&gt;yyyyMMdd&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HMS&lt;/code&gt; = &lt;code&gt;HHmmss&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;YMDHMS&lt;/code&gt; = &lt;code&gt;yyyyMMdd-HHmmss&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USER1&lt;/code&gt; = JMeter 属性 &lt;code&gt;time.USER1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USER2&lt;/code&gt; = JMeter 属性 &lt;code&gt;time.USER2&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;默认值可以通过设置适当的 JMeter 属性来改变，例如 &lt;code&gt;time.YMD=yyMMdd&lt;/code&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dd&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;MM&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yyyy&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -1527,9 +1551,11 @@
 &lt;h3 id="jexl2"&gt;__jexl2&lt;/h3&gt;
 
 &lt;p&gt;jexl 函数返回执行 &lt;a href="http://commons.apache.org/proper/commons-jexl/"&gt;通用 JEXL 表达式&lt;/a&gt;的结果 。有关 JEXL 表达式的更多信息，请参阅下面的链接。&lt;/p&gt;
-&lt;p&gt;jexl2 函数使用通用 JEXL 2
-  * &lt;a href="http://commons.apache.org/proper/commons-jexl/reference/syntax.html"&gt;JEXL 语法描述&lt;/a&gt;
-  * &lt;a href="http://commons.apache.org/proper/commons-jexl/reference/examples.html#Example_Expressions"&gt;JEXL 的例子&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;jexl2 函数使用通用 JEXL 2&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://commons.apache.org/proper/commons-jexl/reference/syntax.html"&gt;JEXL 语法描述&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://commons.apache.org/proper/commons-jexl/reference/examples.html#Example_Expressions"&gt;JEXL 的例子&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1552,15 +1578,17 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;以下变量可用于脚本：
-  * &lt;code&gt;log&lt;/code&gt; - 函数的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录器&lt;/a&gt;
-  * &lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象
-  * &lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象
-  * &lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象
-  * &lt;code&gt;threadName&lt;/code&gt; - 包含当前线程名称的字符串
-  * &lt;code&gt;Sampler&lt;/code&gt; - 当前的&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;对象，如果有的话
-  * &lt;code&gt;sampleResult&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt;对象，如果有的话
-  * &lt;code&gt;OUT&lt;/code&gt; - System.out 例如：&lt;code&gt;OUT.println("message")&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;以下变量可用于脚本：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;log&lt;/code&gt; - 函数的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;threadName&lt;/code&gt; - 包含当前线程名称的字符串&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Sampler&lt;/code&gt; - 当前的&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;对象，如果有的话&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sampleResult&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt;对象，如果有的话&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OUT&lt;/code&gt; - System.out 例如：&lt;code&gt;OUT.println("message")&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Jexl 也可以创建类和调用其方法，例如：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Systemclass=log.class.forName(&amp;quot;java.lang.System&amp;quot;);
 now=Systemclass.currentTimeMillis();
@@ -1605,15 +1633,17 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;以下变量可用于脚本：
-  * &lt;code&gt;log&lt;/code&gt; - 函数的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录器&lt;/a&gt;
-  * &lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象
-  * &lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象
-  * &lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象
-  * &lt;code&gt;threadName&lt;/code&gt; - 包含当前线程名称的字符串
-  * &lt;code&gt;Sampler&lt;/code&gt; - 当前的&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;对象，如果有的话
-  * &lt;code&gt;sampleResult&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt; 对象，如果有的话
-  * &lt;code&gt;OUT&lt;/code&gt; - System.out 例如：&lt;code&gt;OUT.println("message")&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;以下变量可用于脚本：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;log&lt;/code&gt; - 函数的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ctx&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt; 对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vars&lt;/code&gt; - &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html"&gt;JMeterVariables&lt;/a&gt; 对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;threadName&lt;/code&gt; - 包含当前线程名称的字符串&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Sampler&lt;/code&gt; - 当前的&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html"&gt;采样器&lt;/a&gt;对象，如果有的话&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sampleResult&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt; 对象，如果有的话&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OUT&lt;/code&gt; - System.out 例如：&lt;code&gt;OUT.println("message")&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Jexl 也可以创建类和调用其方法，例如：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Systemclass=log.class.forName(&amp;quot;java.lang.System&amp;quot;);
 now=Systemclass.currentTimeMillis();
@@ -1633,10 +1663,12 @@ i.intValue(); // 或使用 i.longValue()
 &lt;h3 id="V"&gt;__V&lt;/h3&gt;
 
 &lt;p&gt;V（变量）函数返回执行变量名称表达式的结果。这可以用来执行嵌套变量引用（目前不支持）。&lt;/p&gt;
-&lt;p&gt;例如，如果有变量 &lt;code&gt;A1&lt;/code&gt;，&lt;code&gt;A2&lt;/code&gt; 和 &lt;code&gt;N&lt;/code&gt;=&lt;code&gt;1&lt;/code&gt;：
-  * &lt;code&gt;${A1}&lt;/code&gt; - 可以使用
-  * &lt;code&gt;${A${N}}&lt;/code&gt; - 不起作用（嵌套变量引用）
-  * &lt;code&gt;${__V(A${N})}&lt;/code&gt; - 可以使用。&lt;code&gt;${N}&lt;/code&gt; 变成 &lt;code&gt;A1&lt;/code&gt;，&lt;code&gt;__V&lt;/code&gt; 函数返回 &lt;code&gt;A1&lt;/code&gt; 的值&lt;/p&gt;
+&lt;p&gt;例如，如果有变量 &lt;code&gt;A1&lt;/code&gt;，&lt;code&gt;A2&lt;/code&gt; 和 &lt;code&gt;N&lt;/code&gt;=&lt;code&gt;1&lt;/code&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;${A1}&lt;/code&gt; - 可以使用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${A${N}}&lt;/code&gt; - 不起作用（嵌套变量引用）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${__V(A${N})}&lt;/code&gt; - 可以使用。&lt;code&gt;${N}&lt;/code&gt; 变成 &lt;code&gt;A1&lt;/code&gt;，&lt;code&gt;__V&lt;/code&gt; 函数返回 &lt;code&gt;A1&lt;/code&gt; 的值&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1685,11 +1717,13 @@ i.intValue(); // 或使用 i.longValue()
 &lt;h3 id="eval"&gt;__eval&lt;/h3&gt;
 
 &lt;p&gt;eval 函数返回执行字符串表达式的结果。&lt;/p&gt;
-&lt;p&gt;这允许往变量中存储的字符串中插入变量和函数引用。例如，给定以下变量：
-  * &lt;code&gt;name&lt;/code&gt;=&lt;code&gt;Smith&lt;/code&gt;
-  * &lt;code&gt;column&lt;/code&gt;=&lt;code&gt;age&lt;/code&gt;
-  * &lt;code&gt;table&lt;/code&gt;=&lt;code&gt;birthdays&lt;/code&gt;
-  * &lt;code&gt;SQL&lt;/code&gt;=&lt;code&gt;select ${column} from ${table} where name='${name}'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这允许往变量中存储的字符串中插入变量和函数引用。例如，给定以下变量：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt;=&lt;code&gt;Smith&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;column&lt;/code&gt;=&lt;code&gt;age&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;table&lt;/code&gt;=&lt;code&gt;birthdays&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SQL&lt;/code&gt;=&lt;code&gt;select ${column} from ${table} where name='${name}'&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;code&gt;${__eval(${SQL})}&lt;/code&gt; 将执行 “&lt;code&gt;select age from birthdays where name='Smith'&lt;/code&gt;”&lt;/p&gt;
 &lt;p&gt;这可以与 CSV 数据集结合使用，例如在数据文件中定义 SQL 语句和值。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
@@ -1731,9 +1765,11 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;例子：
-  * &lt;code&gt;${__char(13,10)}&lt;/code&gt; = &lt;code&gt;${__char(0xD,0xA)}&lt;/code&gt; = &lt;code&gt;${__char(015,012)}&lt;/code&gt; = &lt;code&gt;CRLF&lt;/code&gt;
-  * &lt;code&gt;${__char(165)}&lt;/code&gt; = &lt;code&gt;¥&lt;/code&gt; (元)&lt;/p&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;${__char(13,10)}&lt;/code&gt; = &lt;code&gt;${__char(0xD,0xA)}&lt;/code&gt; = &lt;code&gt;${__char(015,012)}&lt;/code&gt; = &lt;code&gt;CRLF&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${__char(165)}&lt;/code&gt; = &lt;code&gt;¥&lt;/code&gt; (元)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="unescape"&gt;__unescape&lt;/h3&gt;
 
@@ -1756,9 +1792,11 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;例子：
-  * &lt;code&gt;${__unescape(\r\n)}&lt;/code&gt; = &lt;code&gt;CRLF&lt;/code&gt; 
-  * &lt;code&gt;${__unescape(1\t2)}&lt;/code&gt; = &lt;code&gt;1&lt;/code&gt;[tab]&lt;code&gt;2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;${__unescape(\r\n)}&lt;/code&gt; = &lt;code&gt;CRLF&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${__unescape(1\t2)}&lt;/code&gt; = &lt;code&gt;1&lt;/code&gt;[tab]&lt;code&gt;2&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="unescapeHtml"&gt;__unescapeHtml&lt;/h3&gt;
 
@@ -2258,17 +2296,21 @@ i.intValue(); // 或使用 i.longValue()
 &lt;p&gt;将返回&lt;code&gt;Omnibus viis romam pervenitur&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;20.6 预定义变量&lt;/h2&gt;
-&lt;p&gt;大多数变量都是通过调用函数或者用户定义的变量等测试元件来设置的；在这种情况下，用户对所使用的变量名称有完整的控制权。但是有些变量是 JMeter 内部定义的。这些在下面列出：
-  * &lt;code&gt;COOKIE_cookiename&lt;/code&gt; - 包含 cookie 的值（请参阅 &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP_Cookie_Manager"&gt;HTTP Cookie 管理器&lt;/a&gt;）
-  * &lt;code&gt;JMeterThread.last_sample_ok&lt;/code&gt; - 不管最后一个采样是否可用 - &lt;code&gt;true/false&lt;/code&gt;。注意：它会在后置处理器和断言运行后更新。
-  * &lt;code&gt;START&lt;/code&gt; 变量（参见下一节）&lt;/p&gt;
+&lt;p&gt;大多数变量都是通过调用函数或者用户定义的变量等测试元件来设置的；在这种情况下，用户对所使用的变量名称有完整的控制权。但是有些变量是 JMeter 内部定义的。这些在下面列出：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;COOKIE_cookiename&lt;/code&gt; - 包含 cookie 的值（请参阅 &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP_Cookie_Manager"&gt;HTTP Cookie 管理器&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;JMeterThread.last_sample_ok&lt;/code&gt; - 不管最后一个采样是否可用 - &lt;code&gt;true/false&lt;/code&gt;。注意：它会在后置处理器和断言运行后更新。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;START&lt;/code&gt; 变量（参见下一节）&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2&gt;20.7 预定义属性&lt;/h2&gt;
 &lt;p&gt;JMeter 属性集是在 JMeter 启动时通过系统属性定义来初始化的；附加的 JMeter 属性在 &lt;code&gt;jmeter.properties&lt;/code&gt;，&lt;code&gt;user.properties&lt;/code&gt; 或命令行中定义。&lt;/p&gt;
-&lt;p&gt;一些内置属性由 JMeter 定义。这些在下面列出。为方便起见，&lt;code&gt;START&lt;/code&gt; 属性也被复制到具有相同名称的变量中。
-  * &lt;code&gt;START.MS&lt;/code&gt; - 以毫秒为单位的 JMeter 启动时间
-  * &lt;code&gt;START.YMD&lt;/code&gt; - 格式为 &lt;code&gt;yyyyMMdd&lt;/code&gt; 的 JMeter 启动日期
-  * &lt;code&gt;START.HMS&lt;/code&gt; - 格式为 &lt;code&gt;HHmmss&lt;/code&gt; 的 JMeter 启动时间
-  * &lt;code&gt;TESTSTART.MS&lt;/code&gt; - 以毫秒为单位的测试启动时间&lt;/p&gt;
+&lt;p&gt;一些内置属性由 JMeter 定义。这些在下面列出。为方便起见，&lt;code&gt;START&lt;/code&gt; 属性也被复制到具有相同名称的变量中。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;START.MS&lt;/code&gt; - 以毫秒为单位的 JMeter 启动时间&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;START.YMD&lt;/code&gt; - 格式为 &lt;code&gt;yyyyMMdd&lt;/code&gt; 的 JMeter 启动日期&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;START.HMS&lt;/code&gt; - 格式为 &lt;code&gt;HHmmss&lt;/code&gt; 的 JMeter 启动时间&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;TESTSTART.MS&lt;/code&gt; - 以毫秒为单位的测试启动时间&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;请注意，&lt;code&gt;START&lt;/code&gt; 变量/属性表示的是 JMeter 启动时间，而不是测试启动时间。它们主要用于文件名等地方。 &lt;/p&gt;</content><category term="JMeter"></category><category term="Documentation"></category><category term="Translation"></category></entry><entry><title>JMeter文档翻译之21-正则表达式</title><link href="https://jlhxxxx.github.io/jmeter-doc-cn-21.html" rel="alternate"></link><published>2019-05-06T00:00:00+08:00</published><updated>2019-05-06T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-cn-21.html</id><summary type="html">&lt;p&gt;英文文档地址：&amp;lt;&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&amp;gt;&lt;/p&gt;
 &lt;h2&gt;21.1 概述&lt;/h2&gt;
 &lt;p&gt;JMeter 包含模式匹配软件 &lt;a href="http://attic.apache.org/projects/jakarta-oro.html"&gt;Apache Jakarta ORO&lt;/a&gt; 。 
