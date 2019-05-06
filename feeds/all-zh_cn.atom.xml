@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all-zh_cn.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-05-06T00:00:00+08:00</updated><entry><title>JMeter文档翻译之20-函数和变量</title><link href="https://jlhxxxx.github.io/jmeter-doc-cn-20.html" rel="alternate"></link><published>2019-05-06T00:00:00+08:00</published><updated>2019-05-06T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-cn-20.html</id><summary type="html">&lt;p&gt;英文文档地址：&amp;lt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all-zh_cn.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-05-06T00:00:00+08:00</updated><entry><title>JMeter文档翻译之20-函数和变量</title><link href="https://jlhxxxx.github.io/jmeter-doc-cn-20.html" rel="alternate"></link><published>2019-05-06T00:00:00+08:00</published><updated>2019-05-06T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-cn-20.html</id><summary type="html">&lt;p&gt;英文文档地址：&amp;lt;&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&amp;gt;&lt;/p&gt;
 &lt;p&gt;JMeter 的函数是一些特殊值，它们可以填充在测试树的任何采样器或其他元件中。函数调用的语法如下：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;${__functionName(var1,var2,var3)}&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;其中“__functionName”匹配函数的名称。
@@ -10,7 +10,7 @@
 
 
 &lt;p&gt;如果逗号没有被转义——例如 &lt;code&gt;${__javaScript(Math.max(2,5))}&lt;/code&gt; ——你会得到像这样的错误信息：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ERROR - jmeter.functions …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;英文文档地址：&amp;lt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ERROR - jmeter.functions …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;英文文档地址：&amp;lt;&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&amp;gt;&lt;/p&gt;
 &lt;p&gt;JMeter 的函数是一些特殊值，它们可以填充在测试树的任何采样器或其他元件中。函数调用的语法如下：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;${__functionName(var1,var2,var3)}&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;其中“__functionName”匹配函数的名称。
@@ -408,8 +408,8 @@
 &lt;/blockquote&gt;
 &lt;h2&gt;20.4 函数助手对话框&lt;/h2&gt;
 &lt;p&gt;函数助手对话框可以在 JMeter 的工具菜单中找到。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="../pic/2017-11-19-14-42-41.png"&gt;&lt;br&gt;
-&lt;em&gt;函数助手对话框&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://jmeter.apache.org/images/screenshots/function_helper_dialog.png"&gt;  &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;函数助手对话框&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;使用函数助手，可以从下拉列表中选择一个函数，并给它的参数赋值。表格左列是参数的简要说明，表格的右列填入相应参数的值。不同的函数有不同的参数。&lt;/p&gt;
 &lt;p&gt;上述操作完成之后，点击“生成（Generate）”按钮，相应调用函数的字符串就生成了，你可以复制-粘贴到测试计划中的任何地方。&lt;/p&gt;
 &lt;h2&gt;20.5 函数&lt;/h2&gt;
@@ -472,7 +472,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="counter"&gt;__counter&lt;/h3&gt;
 
 &lt;p&gt;计数器每次调用会生成一个新值，从 1 开始，每次加 1。计数器可以配置成对每个虚拟用户独立的，也可以配置成对所有用户公用的。如果每个用户的值分开计数，通常用于计算测试计划的执行次数。全局计数器通常用于计算请求的次数。&lt;/p&gt;
@@ -502,7 +502,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="threadNum"&gt;__threadNum&lt;/h3&gt;
 
 &lt;p&gt;threadNum 函数只是返回当前正在执行的线程编号。线程编号独立于线程组，这意味着从该函数的角度来看，一个线程组中的线程 #1 与另一个线程组中的线程 #1 是没有区别的。&lt;/p&gt;
@@ -516,7 +516,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;这个函数在任何配置元件（例如用户定义的变量）中都不起作用，因为它们是在一个单独的线程中运行的。在测试计划中也不能使用。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="threadGroupName"&gt;__threadGroupName&lt;/h3&gt;
 
 &lt;p&gt;threadGroupName 函数只返回正在执行的线程组的名称。 &lt;/p&gt;
@@ -529,7 +529,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;这个函数在任何配置元件（例如用户定义的变量）中都不起作用，因为它们是在一个单独的线程中运行的。在测试计划中也不能使用。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="intSum"&gt;__intSum&lt;/h3&gt;
 
 &lt;p&gt;intSum 函数可用于计算两个或更多个整数值之和。&lt;/p&gt;
@@ -584,7 +584,7 @@
 
 
 &lt;p&gt;如果 MYVAR 值等于 8，1 + 2 + 5 + ${MYVAR}，返回 16。&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="longSum"&gt;__longSum&lt;/h3&gt;
 
 &lt;p&gt;longSum 函数可用于计算两个或更多个长整型值之和，当计算值不在 -2147483648 到 2147483647 之间，使用此函数而不是 __intSum。&lt;/p&gt;
@@ -636,7 +636,7 @@
 
 
 &lt;p&gt;如果 MYVAR 值等于 8，1 + 2 + 5 + ${MYVAR}，返回 16。 &lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="StringFromFile"&gt;__StringFromFile&lt;/h3&gt;
 
 &lt;p&gt;StringFromFile 函数可以用来从文本文件中读取字符串。这对于运行需要大量可变数据的测试非常有用。例如，在测试银行应用程序时，可能需要 100 或 1000 个不同的帐号。&lt;/p&gt;
@@ -715,7 +715,7 @@
 &lt;code&gt;${__StringFromFile(PIN#'.'DAT,,1,2)}&lt;/code&gt; 读取 &lt;code&gt;PIN1.DAT&lt;/code&gt;, &lt;code&gt;PIN2.DAT&lt;/code&gt; 
 &lt;code&gt;${__StringFromFile(PIN.DAT,,,2)}&lt;/code&gt; 读取 &lt;code&gt;PIN.DAT&lt;/code&gt; 两次 
 注意上面 &lt;code&gt;PIN.DAT&lt;/code&gt; 中的“&lt;code&gt;.&lt;/code&gt;”不应被引号包含。在这种起始序列号被省略的情况下，文件名完全按原样使用。&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="machineName"&gt;__machineName&lt;/h3&gt;
 
 &lt;p&gt;machineName 函数返回本地主机名称。它使用 Java 方法 &lt;code&gt;InetAddress.getLocalHost()&lt;/code&gt; 并将值传递给 &lt;code&gt;getHostName()&lt;/code&gt;。&lt;/p&gt;
@@ -747,7 +747,7 @@
 
 
 &lt;p&gt;返回机器的主机名称&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="machineIP"&gt;__machineIP&lt;/h3&gt;
 
 &lt;p&gt;machineIP 函数返回本地 IP 地址。它使用 Java 方法&lt;code&gt;InetAddress.getLocalHost()&lt;/code&gt; 并将其值传递给 &lt;code&gt;getHostAddress()&lt;/code&gt;。&lt;/p&gt;
@@ -779,7 +779,7 @@
 
 
 &lt;p&gt;返回机器的 IP 地址&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="javaScript"&gt;__javaScript&lt;/h3&gt;
 
 &lt;p&gt;javaScript 函数执行一段 JavaScript（不是 Java！）代码并返回它的值。&lt;/p&gt;
@@ -857,7 +857,7 @@
 
 
 &lt;p&gt;将 &lt;code&gt;VAR&lt;/code&gt; 变量的值与 &lt;code&gt;abcd&lt;/code&gt; 进行比较，返回 &lt;code&gt;true&lt;/code&gt; 或 &lt;code&gt;false&lt;/code&gt; 并将结果存储在 &lt;code&gt;MYRESULT&lt;/code&gt; 中&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="Random"&gt;__Random&lt;/h3&gt;
 
 &lt;p&gt;random 函数返回一个介于给定最小值和最大值之间的随机数。&lt;/p&gt;
@@ -899,7 +899,7 @@
 
 
 &lt;p&gt;返回一个 0 到 10 之间的随机数，并将其存储在 &lt;code&gt;MYVAR&lt;/code&gt;中。&lt;code&gt;${MYVAR}&lt;/code&gt;将包含此随机数。&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="RandomDate"&gt;__RandomDate&lt;/h3&gt;
 
 &lt;p&gt;RandomDate 函数返回一个位于给定开始日期和结束日期值之间的随机日期。&lt;/p&gt;
@@ -951,7 +951,7 @@
 
 
 &lt;p&gt;将返回一个自定义格式的随机日期，例如 &lt;code&gt;04 03 2034&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="RandomString"&gt;__RandomString&lt;/h3&gt;
 
 &lt;p&gt;RandomString 函数返回一个 chars 长度内的随机字符串。&lt;/p&gt;
@@ -998,7 +998,7 @@
 
 
 &lt;p&gt;从 &lt;code&gt;a12zeczclk&lt;/code&gt; 集合中返回一个由 6 个字符组成的随机字符串，并将结果存储在 &lt;code&gt;MYVAR&lt;/code&gt; 中，&lt;code&gt;MYVAR&lt;/code&gt; 将包含像 &lt;code&gt;2z22ak&lt;/code&gt; 或 &lt;code&gt;z11kce&lt;/code&gt; 这样的字符串，...&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="RandomFromMultipleVars"&gt;__RandomFromMultipleVars&lt;/h3&gt;
 
 &lt;p&gt;RandomFromMultipleVars 函数根据&lt;code&gt;源变量&lt;/code&gt;提供的变量值返回一个随机值。&lt;/p&gt;
@@ -1048,7 +1048,7 @@
 
 
 &lt;p&gt;根据变量 val1 和 val2 的内容返回一个随机字符串，不管它们是否为多值，并将结果存储在 &lt;code&gt;MYVAR&lt;/code&gt; 中 &lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="UUID"&gt;__UUID&lt;/h3&gt;
 
 &lt;p&gt;UUID 函数返回伪随机类型为 4 的通用唯一标识符（UUID）。&lt;/p&gt;
@@ -1059,7 +1059,7 @@
 
 
 &lt;p&gt;将返回具有以下格式的 UUID：&lt;code&gt;c69e0dd1-ac6b-4f2b-8d59-5d4e8743eecd&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="CSVRead"&gt;__CSVRead&lt;/h3&gt;
 
 &lt;p&gt;CSVRead 函数从 CSV 文件返回一个字符串（注意与 &lt;a href="#StringFromFile"&gt;StringFromFile&lt;/a&gt; 的区别）。&lt;/p&gt;
@@ -1103,7 +1103,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;该函数不适用于大文件，因为它会将整个文件存储在内存中。对于较大的文件，请使用 &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#CSV_Data_Set_Config"&gt;CSV Data Set Config 元件&lt;/a&gt; 或 &lt;a href="#StringFromFile"&gt;StringFromFile&lt;/a&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="property"&gt;__property&lt;/h3&gt;
 
 &lt;p&gt;property 函数返回 JMeter 属性的值。如果找不到属性值，并且没有提供默认值，则返回属性名称。当提供默认值时，可以不需要函数名称——参数可以设置为 null，并且将被忽略。&lt;/p&gt;
@@ -1139,7 +1139,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="P"&gt;__P&lt;/h3&gt;
 
 &lt;p&gt;这是一个简化的属性函数，用于在命令行中定义的属性。与&lt;code&gt;__property&lt;/code&gt; 函数不同，没有选项可将值保存在变量中，如果未提供默认值，则假定为 1。选择 1 作为假定默认值是因为它对于常见测试变量如循环次数，线程数，加速等都有效。&lt;/p&gt;
@@ -1175,7 +1175,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="log"&gt;__log&lt;/h3&gt;
 
 &lt;p&gt;log 函数记录一条日志，并返回它的输入字符串。&lt;/p&gt;
@@ -1215,7 +1215,7 @@
   * &lt;code&gt;${__log(Message)}&lt;/code&gt; 写入日志文件,形如“&lt;code&gt;… thread Name : Message&lt;/code&gt;”
   * &lt;code&gt;${__log(Message,OUT)}&lt;/code&gt; 写到控制台窗口
   * &lt;code&gt;${__log(${VAR},,,VAR=)}&lt;/code&gt; 写入日志文件，形如“&lt;code&gt;… thread Name VAR=value&lt;/code&gt;”&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="logn"&gt;__logn&lt;/h3&gt;
 
 &lt;p&gt;logn 函数记录一条日志，并返回空字符串。&lt;/p&gt;
@@ -1248,7 +1248,7 @@
 &lt;/table&gt;
 &lt;p&gt;&lt;code&gt;OUT&lt;/code&gt; 和 &lt;code&gt;ERR&lt;/code&gt; 日志级别会直接输出记录到 &lt;code&gt;System.out&lt;/code&gt; 和 &lt;code&gt;System.err&lt;/code&gt;。这种情况下，输出始终会被打印——它不依赖于当前的日志设置。
   * &lt;code&gt;${__logn(VAR1=${VAR1},OUT)}&lt;/code&gt; 将变量的值写到控制台窗口&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="BeanShell"&gt;__BeanShell&lt;/h3&gt;
 
 &lt;p&gt;BeanShell 函数执行传递给它的脚本，并返回结果。&lt;/p&gt;
@@ -1298,7 +1298,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;请记住为文本字符串和表示文本字符串的 JMeter 变量添加必要的引号。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="groovy"&gt;__groovy&lt;/h3&gt;
 
 &lt;p&gt;groovy 函数执行 &lt;a href="http://groovy-lang.org/"&gt;Apache Groovy&lt;/a&gt; 传递给它的脚本，并返回结果。&lt;/p&gt;
@@ -1363,7 +1363,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;请记住为文本字符串和表示文本字符串的 JMeter 变量添加必要的引号。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="split"&gt;__split&lt;/h3&gt;
 
 &lt;p&gt;split 函数根据分隔符拆分传递给它的字符串，并返回原始字符串。如果分隔符与分隔符是相邻的，则返回“&lt;code&gt;？&lt;/code&gt;”作为值。拆分出来的字符串将返回到 &lt;code&gt;${VAR_1}&lt;/code&gt;，&lt;code&gt;${VAR_2}&lt;/code&gt;……这些变量中。变量的计数将返回到 &lt;code&gt;${VAR_n}&lt;/code&gt; 中。拖尾分隔符被视为缺失变量，并返回“&lt;code&gt;？&lt;/code&gt;”。此外，为了使它在 ForEach 控制器上更好地工作， &lt;code&gt;__split&lt;/code&gt; 现在会删除第一个不使用的变量，以防它是上一次拆分所设置的。&lt;/p&gt;
@@ -1407,7 +1407,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="XPath"&gt;__XPath&lt;/h3&gt;
 
 &lt;p&gt;XPath 函数读取一个 XML 文件并匹配 XPath。每次调用该函数时，都会返回下一个匹配项。到达文件末尾后，会返回到开始。如果没有匹配的节点，该函数将返回空字符串，同时将一条警告消息写入 JMeter 日志文件。&lt;/p&gt;
@@ -1442,7 +1442,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="setProperty"&gt;__setProperty&lt;/h3&gt;
 
 &lt;p&gt;setProperty 函数用来设置 JMeter 属性的值。函数的默认返回值是空字符串，因此在函数有效处都可以调用此函数。&lt;/p&gt;
@@ -1475,7 +1475,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="time"&gt;__time&lt;/h3&gt;
 
 &lt;p&gt;time 函数以各种格式返回当前时间。&lt;/p&gt;
@@ -1523,7 +1523,7 @@
 
 
 &lt;p&gt;将返回以毫秒表示的时间&lt;code&gt;1516540541624&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="jexl2"&gt;__jexl2&lt;/h3&gt;
 
 &lt;p&gt;jexl 函数返回执行 &lt;a href="http://commons.apache.org/proper/commons-jexl/"&gt;通用 JEXL 表达式&lt;/a&gt;的结果 。有关 JEXL 表达式的更多信息，请参阅下面的链接。&lt;/p&gt;
@@ -1576,7 +1576,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;blockquote&gt;
 &lt;p&gt;JMeter 允许表达式包含多个语句。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="jexl3"&gt;__jexl3&lt;/h3&gt;
 
 &lt;p&gt;jexl 函数返回执行 &lt;a href="http://commons.apache.org/proper/commons-jexl/"&gt;通用 JEXL 表达式&lt;/a&gt;的结果 。有关 JEXL 表达式的更多信息，请参阅下面的链接。&lt;/p&gt;
@@ -1629,7 +1629,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;blockquote&gt;
 &lt;p&gt;JMeter 允许表达式包含多个语句。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="V"&gt;__V&lt;/h3&gt;
 
 &lt;p&gt;V（变量）函数返回执行变量名称表达式的结果。这可以用来执行嵌套变量引用（目前不支持）。&lt;/p&gt;
@@ -1659,7 +1659,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="evalVar"&gt;__evalVar&lt;/h3&gt;
 
 &lt;p&gt;evalVar 函数返回执行存储在变量中的表达式的结果。&lt;/p&gt;
@@ -1681,7 +1681,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="eval"&gt;__eval&lt;/h3&gt;
 
 &lt;p&gt;eval 函数返回执行字符串表达式的结果。&lt;/p&gt;
@@ -1709,7 +1709,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="char"&gt;__char&lt;/h3&gt;
 
 &lt;p&gt;char 函数将一个数字转换成 Unicode 字符。另外请参阅下面的&lt;code&gt;__unescape()&lt;/code&gt;。&lt;/p&gt;
@@ -1734,7 +1734,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;p&gt;例子：
   * &lt;code&gt;${__char(13,10)}&lt;/code&gt; = &lt;code&gt;${__char(0xD,0xA)}&lt;/code&gt; = &lt;code&gt;${__char(015,012)}&lt;/code&gt; = &lt;code&gt;CRLF&lt;/code&gt;
   * &lt;code&gt;${__char(165)}&lt;/code&gt; = &lt;code&gt;¥&lt;/code&gt; (元)&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="unescape"&gt;__unescape&lt;/h3&gt;
 
 &lt;p&gt;unescape 函数将返回将 Java 转义过的字符串反转义的结果。另外请参阅上面的&lt;code&gt;__char()&lt;/code&gt;。&lt;/p&gt;
@@ -1759,7 +1759,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;p&gt;例子：
   * &lt;code&gt;${__unescape(\r\n)}&lt;/code&gt; = &lt;code&gt;CRLF&lt;/code&gt; 
   * &lt;code&gt;${__unescape(1\t2)}&lt;/code&gt; = &lt;code&gt;1&lt;/code&gt;[tab]&lt;code&gt;2&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="unescapeHtml"&gt;__unescapeHtml&lt;/h3&gt;
 
 &lt;p&gt;函数将包含 HTML 实体的字符串反转义为包含对应于转义符的实际 Unicode 字符的字符串。支持 HTML 4.0 实体。&lt;/p&gt;
@@ -1788,7 +1788,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="escapeHtml"&gt;__escapeHtml&lt;/h3&gt;
 
 &lt;p&gt;函数用于转义使用 HTML 实体的字符串。支持HTML 4.0 实体。&lt;/p&gt;
@@ -1816,7 +1816,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="urldecode"&gt;__urldecode&lt;/h3&gt;
 
 &lt;p&gt;函数用来解码 &lt;code&gt;application/x-www-form-urlencoded&lt;/code&gt; 字符串，注意：使用 UTF-8 作为编码方案。&lt;/p&gt;
@@ -1844,7 +1844,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="urlencode"&gt;__urlencode&lt;/h3&gt;
 
 &lt;p&gt;函数用来将字符串转码成 &lt;code&gt;application/x-www-form-urlencoded&lt;/code&gt; 字符串。&lt;/p&gt;
@@ -1872,7 +1872,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="FileToString"&gt;__FileToString&lt;/h3&gt;
 
 &lt;p&gt;FileToString 函数可以用来读取整个文件。每次调用时读取整个文件。&lt;/p&gt;
@@ -1905,7 +1905,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;每次执行函数时都会解析文件名，编码和引用名称参数。&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="samplerName"&gt;__samplerName&lt;/h3&gt;
 
 &lt;p&gt;samplerName 函数返回当前采样器的名称（即标签）。&lt;/p&gt;
@@ -1932,7 +1932,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="TestPlanName"&gt;__TestPlanName&lt;/h3&gt;
 
 &lt;p&gt;TestPlanName 函数返回当前测试计划的名称（可用于内部计划以掌握调用的测试计划的名称）。&lt;/p&gt;
@@ -1942,7 +1942,7 @@ i.intValue(); // 或使用 i.longValue()
 
 
 &lt;p&gt;将返回测试计划的文件名称，例如，如果计划在一个名为 Demo.jmx 的文件中，它将返回“&lt;code&gt;Demo.jmx&lt;/code&gt;”。&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="escapeOroRegexpChars"&gt;__escapeOroRegexpChars&lt;/h3&gt;
 
 &lt;p&gt;函数用于转义 ORO 正则表达式元字符，相当于 Java 正则表达式引擎中的 &lt;code&gt;\Q&lt;/code&gt; &lt;code&gt;\E&lt;/code&gt; 。&lt;/p&gt;
@@ -1975,7 +1975,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="escapeXml"&gt;__escapeXml&lt;/h3&gt;
 
 &lt;p&gt;函数用来转义使用 XML 1.0 实体的字符串中的字符。&lt;/p&gt;
@@ -2003,7 +2003,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="timeShift"&gt;__timeShift&lt;/h3&gt;
 
 &lt;p&gt;timeShift 函数返回指定格式的日期，并加上指定的秒数，分钟数，小时数，天数或月数。&lt;/p&gt;
@@ -2055,7 +2055,7 @@ i.intValue(); // 或使用 i.longValue()
 
 
 &lt;p&gt;返回&lt;code&gt;23 février 2018&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="digest "&gt;__digest &lt;/h3&gt;
 
 &lt;p&gt;digest 函数返回特定的哈希算法的加密后的值，哈希算法有多种，名称为大写，可带 salt。&lt;/p&gt;
@@ -2107,7 +2107,7 @@ i.intValue(); // 或使用 i.longValue()
 
 
 &lt;p&gt;返回&lt;code&gt;a3bc6900fe2b2fc5fa8a601a4a84e27a079bf2c581d485009bc5c00516729ac7&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="dateTimeConvert"&gt;__dateTimeConvert&lt;/h3&gt;
 
 &lt;p&gt;dateTimeConvert 函数将日期从源格式转换成目标格式并将结果储存到变量名中。&lt;/p&gt;
@@ -2155,7 +2155,7 @@ i.intValue(); // 或使用 i.longValue()
 
 
 &lt;p&gt;以UTC时间（Duser.timezone=GMT）返回&lt;code&gt;17/05/2018 16:34&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="isPropDefined"&gt;__isPropDefined&lt;/h3&gt;
 
 &lt;p&gt;isPropDefined 函数当属性存在时返回 true，不存在时返回 false。&lt;/p&gt;
@@ -2182,7 +2182,7 @@ i.intValue(); // 或使用 i.longValue()
 
 
 &lt;p&gt;将返回&lt;code&gt;true&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="isVarDefined"&gt;__isVarDefined&lt;/h3&gt;
 
 &lt;p&gt;isVarDefined 函数当变量存在时返回 true，不存在时返回 false。&lt;/p&gt;
@@ -2209,7 +2209,7 @@ i.intValue(); // 或使用 i.longValue()
 
 
 &lt;p&gt;将返回&lt;code&gt;true&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="changeCase"&gt;__changeCase&lt;/h3&gt;
 
 &lt;p&gt;changeCase 函数返回大小写经过特定模式变更后的字符串值。结果储存在 JMeter 变量中。&lt;/p&gt;
@@ -2256,7 +2256,7 @@ i.intValue(); // 或使用 i.longValue()
 
 
 &lt;p&gt;将返回&lt;code&gt;Omnibus viis romam pervenitur&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="#20-函数和变量"&gt;【返回标题】&lt;/a&gt; &lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;20.6 预定义变量&lt;/h2&gt;
 &lt;p&gt;大多数变量都是通过调用函数或者用户定义的变量等测试元件来设置的；在这种情况下，用户对所使用的变量名称有完整的控制权。但是有些变量是 JMeter 内部定义的。这些在下面列出：
   * &lt;code&gt;COOKIE_cookiename&lt;/code&gt; - 包含 cookie 的值（请参阅 &lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP_Cookie_Manager"&gt;HTTP Cookie 管理器&lt;/a&gt;）
@@ -2269,14 +2269,14 @@ i.intValue(); // 或使用 i.longValue()
   * &lt;code&gt;START.YMD&lt;/code&gt; - 格式为 &lt;code&gt;yyyyMMdd&lt;/code&gt; 的 JMeter 启动日期
   * &lt;code&gt;START.HMS&lt;/code&gt; - 格式为 &lt;code&gt;HHmmss&lt;/code&gt; 的 JMeter 启动时间
   * &lt;code&gt;TESTSTART.MS&lt;/code&gt; - 以毫秒为单位的测试启动时间&lt;/p&gt;
-&lt;p&gt;请注意，&lt;code&gt;START&lt;/code&gt; 变量/属性表示的是 JMeter 启动时间，而不是测试启动时间。它们主要用于文件名等地方。 &lt;/p&gt;</content><category term="JMeter"></category><category term="Documentation"></category><category term="Translation"></category></entry><entry><title>JMeter文档翻译之21-正则表达式</title><link href="https://jlhxxxx.github.io/jmeter-doc-cn-21.html" rel="alternate"></link><published>2019-05-06T00:00:00+08:00</published><updated>2019-05-06T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-cn-21.html</id><summary type="html">&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/regular_expressions.html"&gt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;请注意，&lt;code&gt;START&lt;/code&gt; 变量/属性表示的是 JMeter 启动时间，而不是测试启动时间。它们主要用于文件名等地方。 &lt;/p&gt;</content><category term="JMeter"></category><category term="Documentation"></category><category term="Translation"></category></entry><entry><title>JMeter文档翻译之21-正则表达式</title><link href="https://jlhxxxx.github.io/jmeter-doc-cn-21.html" rel="alternate"></link><published>2019-05-06T00:00:00+08:00</published><updated>2019-05-06T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-cn-21.html</id><summary type="html">&lt;p&gt;英文文档地址：&amp;lt;&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&amp;gt;&lt;/p&gt;
 &lt;h2&gt;21.1 概述&lt;/h2&gt;
 &lt;p&gt;JMeter 包含模式匹配软件 &lt;a href="http://attic.apache.org/projects/jakarta-oro.html"&gt;Apache Jakarta ORO&lt;/a&gt; 。 
 在 Jakarta 网站上有一些相关文档，例如：&lt;a href="http://archimedes.fas.harvard.edu/scrapbook/jakarta-oro-2.0.6/docs/api/org/apache/oro/text/regex/package-summary.html"&gt;模式匹配字符摘要&lt;/a&gt;。  &lt;/p&gt;
 &lt;p&gt;在 &lt;a href="http://www.savarese.org/oro/docs/OROMatcher/index.html"&gt;OROMatcher 用户指南&lt;/a&gt;上还有关于该产品旧版本的文档 ，也许会有些用处。  &lt;/p&gt;
 &lt;p&gt;模式匹配与 Perl 中的模式匹配非常类似。Perl 的完整安装会包含大量关于正则表达式的文档——查找 &lt;code&gt;perlrequick&lt;/code&gt;， &lt;code&gt;perlretut&lt;/code&gt;， &lt;code&gt;perlre&lt;/code&gt; 和 &lt;code&gt;perlreref&lt;/code&gt;。  &lt;/p&gt;
 &lt;p&gt;有必要强调“包含（contains）”和“匹配（matches）”之间的区别，它们被用在响应断言（Response Assertion）测试元件上： &lt;/p&gt;
-&lt;p&gt;"&lt;em&gt;包含（contains …&lt;/em&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/regular_expressions.html"&gt;http://jmeter.apache.org/usermanual/regular_expressions.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;"&lt;em&gt;包含（contains …&lt;/em&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;英文文档地址：&amp;lt;&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&amp;gt;&lt;/p&gt;
 &lt;h2&gt;21.1 概述&lt;/h2&gt;
 &lt;p&gt;JMeter 包含模式匹配软件 &lt;a href="http://attic.apache.org/projects/jakarta-oro.html"&gt;Apache Jakarta ORO&lt;/a&gt; 。 
 在 Jakarta 网站上有一些相关文档，例如：&lt;a href="http://archimedes.fas.harvard.edu/scrapbook/jakarta-oro-2.0.6/docs/api/org/apache/oro/text/regex/package-summary.html"&gt;模式匹配字符摘要&lt;/a&gt;。  &lt;/p&gt;
