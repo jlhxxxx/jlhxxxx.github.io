@@ -482,7 +482,7 @@
 &lt;p&gt;计数器每次调用会生成一个新值，从 1 开始，每次加 1。计数器可以配置成对每个虚拟用户独立的，也可以配置成对所有用户公用的。如果每个用户的值分开计数，通常用于计算测试计划的执行次数。全局计数器通常用于计算请求的次数。&lt;/p&gt;
 &lt;p&gt;计数器使用一个整型变量来保存计数，允许的最大值为 2,147,483,647。&lt;/p&gt;
 &lt;p&gt;计数器函数实例是完全独立的。全局计数器 - “&lt;code&gt;FALSE&lt;/code&gt;” - 的每个实例都是独立维护的。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;__counter&lt;/code&gt; 函数在同一个迭代中的多次调用不会进一步增加值。&lt;/strong&gt; 
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;__counter&lt;/code&gt; 函数在同一个迭代中的多次调用不会进一步增加值。&lt;/strong&gt;&lt;br&gt;
 如果您想对每个采样器计数，请使用前置处理器（例如&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#User_Parameters"&gt;用户参数&lt;/a&gt;）中的功能。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
@@ -510,6 +510,13 @@
 &lt;h3 id="threadNum"&gt;__threadNum&lt;/h3&gt;
 
 &lt;p&gt;threadNum 函数只是返回当前正在执行的线程编号。线程编号独立于线程组，这意味着从该函数的角度来看，一个线程组中的线程 #1 与另一个线程组中的线程 #1 是没有区别的。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;该函数返回一个介于1和最大运行线程数之间的数字。注意，如果您将JSR223代码与&lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html"&gt;JMeterContext&lt;/a&gt;对象（&lt;code&gt;ctx&lt;/code&gt;变量）一起使用，则下面的代码返回一个介于0和（最大运行线程数减1）之间的数字&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;   ctx.getThreadNum（）
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/blockquote&gt;
 &lt;p&gt;这个函数没有参数。&lt;/p&gt;
 &lt;p&gt;用法示例：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__threadNum&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
@@ -710,14 +717,14 @@
 &lt;li&gt;生成不带前导零的附加数字，同时保持 &lt;code&gt;.&lt;/code&gt;：&lt;code&gt;pin.dat1&lt;/code&gt;，...，&lt;code&gt;pin.dat9&lt;/code&gt;，...，&lt;code&gt;pin.dat999&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;如果需要的位数多于格式字符数，数字将根据需要进行扩展。
-&lt;strong&gt;要防止格式字符被解释，请将其包含在单引号中。请注意，“&lt;code&gt;.&lt;/code&gt;”是一个格式字符，必须用单引号引起来&lt;/strong&gt; （尽管 &lt;code&gt;#.&lt;/code&gt; 和 &lt;code&gt;000.&lt;/code&gt; 在工作区能按预期的方式工作，因为它被视为小数点，而小数点也是“&lt;code&gt;.&lt;/code&gt;”）。
-在其他语言环境（例如 &lt;code&gt;fr&lt;/code&gt;）中，小数点是“&lt;code&gt;,&lt;/code&gt;” - 这意味着“&lt;code&gt;#.&lt;/code&gt;”会变成“&lt;code&gt;nnn,&lt;/code&gt;”。
-有关完整的细节，请参阅 DecimalFormat （十进制格式）的文档。
-如果路径名称不包含任何特殊的格式字符，则将当前的序号直接附加到名称上，否则将根据格式化指令插入数字。 
-如果起始序列号被忽略，并且指定了结束序列号，则结束序列号将被解释为循环计数，并且该文件将被使用循环计数的最大次数。在这种情况下，文件名不是格式化的。
-&lt;code&gt;${__StringFromFile(PIN#'.'DAT,,1,2)}&lt;/code&gt; 读取 &lt;code&gt;PIN1.DAT&lt;/code&gt;, &lt;code&gt;PIN2.DAT&lt;/code&gt; 
-&lt;code&gt;${__StringFromFile(PIN.DAT,,,2)}&lt;/code&gt; 读取 &lt;code&gt;PIN.DAT&lt;/code&gt; 两次 
+&lt;p&gt;如果需要的位数多于格式字符数，数字将根据需要进行扩展。&lt;br&gt;
+&lt;strong&gt;要防止格式字符被解释，请将其包含在单引号中。请注意，“&lt;code&gt;.&lt;/code&gt;”是一个格式字符，必须用单引号引起来&lt;/strong&gt; （尽管 &lt;code&gt;#.&lt;/code&gt; 和 &lt;code&gt;000.&lt;/code&gt; 在工作区能按预期的方式工作，因为它被视为小数点，而小数点也是“&lt;code&gt;.&lt;/code&gt;”）。&lt;br&gt;
+在其他语言环境（例如 &lt;code&gt;fr&lt;/code&gt;）中，小数点是“&lt;code&gt;,&lt;/code&gt;” - 这意味着“&lt;code&gt;#.&lt;/code&gt;”会变成“&lt;code&gt;nnn,&lt;/code&gt;”。&lt;br&gt;
+有关完整的细节，请参阅 DecimalFormat （十进制格式）的文档。&lt;br&gt;
+如果路径名称不包含任何特殊的格式字符，则将当前的序号直接附加到名称上，否则将根据格式化指令插入数字。&lt;br&gt;
+如果起始序列号被忽略，并且指定了结束序列号，则结束序列号将被解释为循环计数，并且该文件将被使用循环计数的最大次数。在这种情况下，文件名不是格式化的。&lt;br&gt;
+&lt;code&gt;${__StringFromFile(PIN#'.'DAT,,1,2)}&lt;/code&gt; 读取 &lt;code&gt;PIN1.DAT&lt;/code&gt;, &lt;code&gt;PIN2.DAT&lt;/code&gt; &lt;br&gt;
+&lt;code&gt;${__StringFromFile(PIN.DAT,,,2)}&lt;/code&gt; 读取 &lt;code&gt;PIN.DAT&lt;/code&gt; 两次 &lt;br&gt;
 注意上面 &lt;code&gt;PIN.DAT&lt;/code&gt; 中的“&lt;code&gt;.&lt;/code&gt;”不应被引号包含。在这种起始序列号被省略的情况下，文件名完全按原样使用。&lt;/p&gt;
 &lt;p&gt;&lt;a href="#functions_list"&gt;【返回函数列表】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="machineName"&gt;__machineName&lt;/h3&gt;
@@ -735,7 +742,7 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;变量名称&lt;/td&gt;
-&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算值的引用名称&lt;/td&gt;
 &lt;td&gt;否&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -767,7 +774,7 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;变量名称&lt;/td&gt;
-&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算值的引用名称&lt;/td&gt;
 &lt;td&gt;否&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -791,8 +798,8 @@
 &lt;blockquote&gt;
 &lt;p&gt;在 JMeter 中，javaScript 并不是最好的脚本语言。如果你的测试计划需要大量的线程，建议使用&lt;code&gt;__jexl3&lt;/code&gt; 或&lt;code&gt;__groovy&lt;/code&gt; 函数。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;对于 Nashorn 引擎，请参阅&lt;a href="https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/"&gt; Java 平台标准版 Nashorn 用户指南&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;对于 Rhino 引擎，请参阅&lt;a href="http://www.mozilla.org/rhino/overview.html"&gt;Mozilla Rhino 概述&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;对于 Nashorn 引擎，请参阅&lt;a href="https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/"&gt; Java 平台标准版 Nashorn 用户指南&lt;/a&gt;。&lt;br&gt;
+对于 Rhino 引擎，请参阅&lt;a href="http://www.mozilla.org/rhino/overview.html"&gt;Mozilla Rhino 概述&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;以下变量可用于脚本：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;log&lt;/code&gt; - 函数的&lt;a href="https://www.slf4j.org/api/org/slf4j/Logger.html"&gt;记录&lt;/a&gt;&lt;/li&gt;
@@ -803,7 +810,8 @@
 &lt;li&gt;&lt;code&gt;samplerResult&lt;/code&gt; - 之前的 &lt;a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html"&gt;SampleResult&lt;/a&gt; 对象（如果有的话）&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;props&lt;/code&gt; - JMeterProperties（类 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"&gt;java.util.Properties&lt;/a&gt;）对象&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Rhinoscript 允许通过其 Packages 对象访问静态方法。请参阅 &lt;a href="https://wiki.openjdk.java.net/display/Nashorn/Rhino+Migration+Guide"&gt;Java 脚本&lt;/a&gt; 文档。例如，可以像这样访问 JMeterContextService 静态方法：&lt;code&gt;Java.type("org.apache.jmeter.threads.JMeterContextService").getTotalThreads()&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;Rhinoscript 允许通过其 Packages 对象访问静态方法。请参阅 &lt;a href="https://wiki.openjdk.java.net/display/Nashorn/Rhino+Migration+Guide"&gt;Java 脚本&lt;/a&gt; 文档。例如，可以像这样访问 JMeterContextService 静态方法：&lt;br&gt;
+&lt;code&gt;Java.type("org.apache.jmeter.threads.JMeterContextService").getTotalThreads()&lt;/code&gt;。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;JMeter 不是浏览器，不能解释下载页面中的 JavaScript。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -824,14 +832,14 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;变量名称&lt;/td&gt;
-&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算值的引用名称&lt;/td&gt;
 &lt;td&gt;否&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
 &lt;p&gt;请记住为文本字符串和 JMeter 变量添加必要的引号。另外，如果表达式有逗号，请确保将其转义。例如：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__javaScript&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;${sp&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;#39;.slice(7\,99999))}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__javaScript&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;${sp&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;#39;.slice(7\,99999))}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -889,7 +897,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;变量名称&lt;/td&gt;
-&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算值的引用名称&lt;/td&gt;
 &lt;td&gt;否&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -983,7 +991,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;变量名称&lt;/td&gt;
-&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算值的引用名称&lt;/td&gt;
 &lt;td&gt;否&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -1035,7 +1043,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;变量名称&lt;/td&gt;
-&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算值的引用名称&lt;/td&gt;
 &lt;td&gt;否&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -1141,7 +1149,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;变量名称&lt;/td&gt;
-&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算值的引用名称&lt;/td&gt;
 &lt;td&gt;否&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -1273,7 +1281,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;为了更好的性能，请使用&lt;a href="#groovy"&gt;&lt;code&gt;__groovy&lt;/code&gt;&lt;/a&gt;函数 &lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;有关使用 BeanShell 的完整详细信息，请参考 BeanShell 网站：&lt;a href="http://www.beanshell.org/"&gt;http://www.beanshell.org/&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;**有关使用 BeanShell 的完整详细信息，请参考 BeanShell 网站：&lt;a href="http://www.beanshell.org/"&gt;http://www.beanshell.org/&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;注意，测试脚本中每个独立的函数调用都使用不同的解释器，但是后续的调用使用相同的解释器。这意味着变量在不同的函数的调用中会持续存在。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1307,7 +1315,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;变量名称&lt;/td&gt;
-&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算值的引用名称&lt;/td&gt;
 &lt;td&gt;否&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -1343,8 +1351,8 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;想象一下，变量myVar随每个事务而变化，上面的Groovy无法缓存，因为脚本每次都会更改。
-但是执行下面的操作，就可以缓存：&lt;/p&gt;
+&lt;p&gt;想象一下，变量myVar随每个事务而变化，上面的Groovy无法缓存，因为脚本每次都会更改。&lt;/p&gt;
+&lt;p&gt;但是执行下面的操作，就可以缓存：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__groovy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myVar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;substring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;\&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -1366,7 +1374,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;变量名称&lt;/td&gt;
-&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算值的引用名称&lt;/td&gt;
 &lt;td&gt;否&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -1389,18 +1397,18 @@
 &lt;h3 id="split"&gt;__split&lt;/h3&gt;
 
 &lt;p&gt;split 函数根据分隔符拆分传递给它的字符串，并返回原始字符串。如果分隔符与分隔符是相邻的，则返回“&lt;code&gt;？&lt;/code&gt;”作为值。拆分出来的字符串将返回到 &lt;code&gt;${VAR_1}&lt;/code&gt;，&lt;code&gt;${VAR_2}&lt;/code&gt;……这些变量中。变量的计数将返回到 &lt;code&gt;${VAR_n}&lt;/code&gt; 中。拖尾分隔符被视为缺失变量，并返回“&lt;code&gt;？&lt;/code&gt;”。此外，为了使它在 ForEach 控制器上更好地工作， &lt;code&gt;__split&lt;/code&gt; 现在会删除第一个不使用的变量，以防它是上一次拆分所设置的。&lt;/p&gt;
-&lt;p&gt;例子：
+&lt;p&gt;例子：&lt;br&gt;
 在测试计划中定义 &lt;code&gt;VAR&lt;/code&gt;="&lt;code&gt;a||c|&lt;/code&gt;"。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;VAR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;,VAR,|)}
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;这将返回 &lt;code&gt;VAR&lt;/code&gt; 的内容，即“&lt;code&gt;a||c|&lt;/code&gt;”并设置以下变量：
-&lt;code&gt;VAR_n&lt;/code&gt;=&lt;code&gt;4&lt;/code&gt;
-&lt;code&gt;VAR_1&lt;/code&gt;=&lt;code&gt;a&lt;/code&gt;
-&lt;code&gt;VAR_2&lt;/code&gt;=&lt;code&gt;?&lt;/code&gt;
-&lt;code&gt;VAR_3&lt;/code&gt;=&lt;code&gt;c&lt;/code&gt;
-&lt;code&gt;VAR_4&lt;/code&gt;=&lt;code&gt;?&lt;/code&gt;
+&lt;p&gt;这将返回 &lt;code&gt;VAR&lt;/code&gt; 的内容，即“&lt;code&gt;a||c|&lt;/code&gt;”并设置以下变量：&lt;br&gt;
+&lt;code&gt;VAR_n&lt;/code&gt;=&lt;code&gt;4&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;VAR_1&lt;/code&gt;=&lt;code&gt;a&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;VAR_2&lt;/code&gt;=&lt;code&gt;?&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;VAR_3&lt;/code&gt;=&lt;code&gt;c&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;VAR_4&lt;/code&gt;=&lt;code&gt;?&lt;/code&gt;&lt;br&gt;
 &lt;code&gt;VAR_5&lt;/code&gt;=&lt;code&gt;null&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参数（Parameters）&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
@@ -1419,7 +1427,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;变量名称&lt;/td&gt;
-&lt;td&gt;重用此函数计算的值的引用名称&lt;/td&gt;
+&lt;td&gt;重用此函数计算值的引用名称&lt;/td&gt;
 &lt;td&gt;是&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;

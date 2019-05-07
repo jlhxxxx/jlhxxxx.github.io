@@ -573,7 +573,7 @@
 <p>计数器每次调用会生成一个新值，从 1 开始，每次加 1。计数器可以配置成对每个虚拟用户独立的，也可以配置成对所有用户公用的。如果每个用户的值分开计数，通常用于计算测试计划的执行次数。全局计数器通常用于计算请求的次数。</p>
 <p>计数器使用一个整型变量来保存计数，允许的最大值为 2,147,483,647。</p>
 <p>计数器函数实例是完全独立的。全局计数器 - “<code>FALSE</code>” - 的每个实例都是独立维护的。</p>
-<p><strong><code>__counter</code> 函数在同一个迭代中的多次调用不会进一步增加值。</strong> 
+<p><strong><code>__counter</code> 函数在同一个迭代中的多次调用不会进一步增加值。</strong><br>
 如果您想对每个采样器计数，请使用前置处理器（例如<a href="http://jmeter.apache.org/usermanual/component_reference.html#User_Parameters">用户参数</a>）中的功能。</p>
 <p><strong>参数（Parameters）</strong></p>
 <table>
@@ -601,6 +601,13 @@
 <h3 id="threadNum">__threadNum</h3>
 
 <p>threadNum 函数只是返回当前正在执行的线程编号。线程编号独立于线程组，这意味着从该函数的角度来看，一个线程组中的线程 #1 与另一个线程组中的线程 #1 是没有区别的。</p>
+<blockquote>
+<p>该函数返回一个介于1和最大运行线程数之间的数字。注意，如果您将JSR223代码与<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html">JMeterContext</a>对象（<code>ctx</code>变量）一起使用，则下面的代码返回一个介于0和（最大运行线程数减1）之间的数字</p>
+<div class="highlight"><pre><span></span>   ctx.getThreadNum（）
+</pre></div>
+
+
+</blockquote>
 <p>这个函数没有参数。</p>
 <p>用法示例：</p>
 <div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__threadNum</span><span class="cp">}</span>
@@ -801,14 +808,14 @@
 <li>生成不带前导零的附加数字，同时保持 <code>.</code>：<code>pin.dat1</code>，...，<code>pin.dat9</code>，...，<code>pin.dat999</code></li>
 </ul>
 </blockquote>
-<p>如果需要的位数多于格式字符数，数字将根据需要进行扩展。
-<strong>要防止格式字符被解释，请将其包含在单引号中。请注意，“<code>.</code>”是一个格式字符，必须用单引号引起来</strong> （尽管 <code>#.</code> 和 <code>000.</code> 在工作区能按预期的方式工作，因为它被视为小数点，而小数点也是“<code>.</code>”）。
-在其他语言环境（例如 <code>fr</code>）中，小数点是“<code>,</code>” - 这意味着“<code>#.</code>”会变成“<code>nnn,</code>”。
-有关完整的细节，请参阅 DecimalFormat （十进制格式）的文档。
-如果路径名称不包含任何特殊的格式字符，则将当前的序号直接附加到名称上，否则将根据格式化指令插入数字。 
-如果起始序列号被忽略，并且指定了结束序列号，则结束序列号将被解释为循环计数，并且该文件将被使用循环计数的最大次数。在这种情况下，文件名不是格式化的。
-<code>${__StringFromFile(PIN#'.'DAT,,1,2)}</code> 读取 <code>PIN1.DAT</code>, <code>PIN2.DAT</code> 
-<code>${__StringFromFile(PIN.DAT,,,2)}</code> 读取 <code>PIN.DAT</code> 两次 
+<p>如果需要的位数多于格式字符数，数字将根据需要进行扩展。<br>
+<strong>要防止格式字符被解释，请将其包含在单引号中。请注意，“<code>.</code>”是一个格式字符，必须用单引号引起来</strong> （尽管 <code>#.</code> 和 <code>000.</code> 在工作区能按预期的方式工作，因为它被视为小数点，而小数点也是“<code>.</code>”）。<br>
+在其他语言环境（例如 <code>fr</code>）中，小数点是“<code>,</code>” - 这意味着“<code>#.</code>”会变成“<code>nnn,</code>”。<br>
+有关完整的细节，请参阅 DecimalFormat （十进制格式）的文档。<br>
+如果路径名称不包含任何特殊的格式字符，则将当前的序号直接附加到名称上，否则将根据格式化指令插入数字。<br>
+如果起始序列号被忽略，并且指定了结束序列号，则结束序列号将被解释为循环计数，并且该文件将被使用循环计数的最大次数。在这种情况下，文件名不是格式化的。<br>
+<code>${__StringFromFile(PIN#'.'DAT,,1,2)}</code> 读取 <code>PIN1.DAT</code>, <code>PIN2.DAT</code> <br>
+<code>${__StringFromFile(PIN.DAT,,,2)}</code> 读取 <code>PIN.DAT</code> 两次 <br>
 注意上面 <code>PIN.DAT</code> 中的“<code>.</code>”不应被引号包含。在这种起始序列号被省略的情况下，文件名完全按原样使用。</p>
 <p><a href="#functions_list">【返回函数列表】</a></p>
 <h3 id="machineName">__machineName</h3>
@@ -826,7 +833,7 @@
 <tbody>
 <tr>
 <td>变量名称</td>
-<td>重用此函数计算的值的引用名称</td>
+<td>重用此函数计算值的引用名称</td>
 <td>否</td>
 </tr>
 </tbody>
@@ -858,7 +865,7 @@
 <tbody>
 <tr>
 <td>变量名称</td>
-<td>重用此函数计算的值的引用名称</td>
+<td>重用此函数计算值的引用名称</td>
 <td>否</td>
 </tr>
 </tbody>
@@ -882,8 +889,8 @@
 <blockquote>
 <p>在 JMeter 中，javaScript 并不是最好的脚本语言。如果你的测试计划需要大量的线程，建议使用<code>__jexl3</code> 或<code>__groovy</code> 函数。</p>
 </blockquote>
-<p>对于 Nashorn 引擎，请参阅<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/"> Java 平台标准版 Nashorn 用户指南</a>。</p>
-<p>对于 Rhino 引擎，请参阅<a href="http://www.mozilla.org/rhino/overview.html">Mozilla Rhino 概述</a>。</p>
+<p>对于 Nashorn 引擎，请参阅<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/"> Java 平台标准版 Nashorn 用户指南</a>。<br>
+对于 Rhino 引擎，请参阅<a href="http://www.mozilla.org/rhino/overview.html">Mozilla Rhino 概述</a>。</p>
 <p>以下变量可用于脚本：</p>
 <ul>
 <li><code>log</code> - 函数的<a href="https://www.slf4j.org/api/org/slf4j/Logger.html">记录</a></li>
@@ -894,7 +901,8 @@
 <li><code>samplerResult</code> - 之前的 <a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html">SampleResult</a> 对象（如果有的话）</li>
 <li><code>props</code> - JMeterProperties（类 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html">java.util.Properties</a>）对象</li>
 </ul>
-<p>Rhinoscript 允许通过其 Packages 对象访问静态方法。请参阅 <a href="https://wiki.openjdk.java.net/display/Nashorn/Rhino+Migration+Guide">Java 脚本</a> 文档。例如，可以像这样访问 JMeterContextService 静态方法：<code>Java.type("org.apache.jmeter.threads.JMeterContextService").getTotalThreads()</code>。</p>
+<p>Rhinoscript 允许通过其 Packages 对象访问静态方法。请参阅 <a href="https://wiki.openjdk.java.net/display/Nashorn/Rhino+Migration+Guide">Java 脚本</a> 文档。例如，可以像这样访问 JMeterContextService 静态方法：<br>
+<code>Java.type("org.apache.jmeter.threads.JMeterContextService").getTotalThreads()</code>。</p>
 <blockquote>
 <p>JMeter 不是浏览器，不能解释下载页面中的 JavaScript。</p>
 </blockquote>
@@ -915,14 +923,14 @@
 </tr>
 <tr>
 <td>变量名称</td>
-<td>重用此函数计算的值的引用名称</td>
+<td>重用此函数计算值的引用名称</td>
 <td>否</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
 <p>请记住为文本字符串和 JMeter 变量添加必要的引号。另外，如果表达式有逗号，请确保将其转义。例如：</p>
-<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__javaScript</span><span class="p">(</span><span class="s1">&#39;${sp</span><span class="cp">}</span>&#39;.slice(7\,99999))}
+<div class="highlight"><pre><span></span>    <span class="cp">${</span><span class="n">__javaScript</span><span class="p">(</span><span class="s1">&#39;${sp</span><span class="cp">}</span>&#39;.slice(7\,99999))}
 </pre></div>
 
 
@@ -980,7 +988,7 @@
 </tr>
 <tr>
 <td>变量名称</td>
-<td>重用此函数计算的值的引用名称</td>
+<td>重用此函数计算值的引用名称</td>
 <td>否</td>
 </tr>
 </tbody>
@@ -1074,7 +1082,7 @@
 </tr>
 <tr>
 <td>变量名称</td>
-<td>重用此函数计算的值的引用名称</td>
+<td>重用此函数计算值的引用名称</td>
 <td>否</td>
 </tr>
 </tbody>
@@ -1126,7 +1134,7 @@
 </tr>
 <tr>
 <td>变量名称</td>
-<td>重用此函数计算的值的引用名称</td>
+<td>重用此函数计算值的引用名称</td>
 <td>否</td>
 </tr>
 </tbody>
@@ -1232,7 +1240,7 @@
 </tr>
 <tr>
 <td>变量名称</td>
-<td>重用此函数计算的值的引用名称</td>
+<td>重用此函数计算值的引用名称</td>
 <td>否</td>
 </tr>
 <tr>
@@ -1364,7 +1372,7 @@
 <blockquote>
 <p>为了更好的性能，请使用<a href="#groovy"><code>__groovy</code></a>函数 </p>
 </blockquote>
-<p><strong>有关使用 BeanShell 的完整详细信息，请参考 BeanShell 网站：<a href="http://www.beanshell.org/">http://www.beanshell.org/</a></strong></p>
+<p>**有关使用 BeanShell 的完整详细信息，请参考 BeanShell 网站：<a href="http://www.beanshell.org/">http://www.beanshell.org/</a></p>
 <blockquote>
 <p>注意，测试脚本中每个独立的函数调用都使用不同的解释器，但是后续的调用使用相同的解释器。这意味着变量在不同的函数的调用中会持续存在。</p>
 </blockquote>
@@ -1398,7 +1406,7 @@
 </tr>
 <tr>
 <td>变量名称</td>
-<td>重用此函数计算的值的引用名称</td>
+<td>重用此函数计算值的引用名称</td>
 <td>否</td>
 </tr>
 </tbody>
@@ -1434,8 +1442,8 @@
 </pre></div>
 
 
-<p>想象一下，变量myVar随每个事务而变化，上面的Groovy无法缓存，因为脚本每次都会更改。
-但是执行下面的操作，就可以缓存：</p>
+<p>想象一下，变量myVar随每个事务而变化，上面的Groovy无法缓存，因为脚本每次都会更改。</p>
+<p>但是执行下面的操作，就可以缓存：</p>
 <div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__groovy</span><span class="p">(</span><span class="nb">vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;myVar&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">substring</span><span class="p">(</span><span class="mi">0</span>\<span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="cp">}</span>
 </pre></div>
 
@@ -1457,7 +1465,7 @@
 </tr>
 <tr>
 <td>变量名称</td>
-<td>重用此函数计算的值的引用名称</td>
+<td>重用此函数计算值的引用名称</td>
 <td>否</td>
 </tr>
 </tbody>
@@ -1480,18 +1488,18 @@
 <h3 id="split">__split</h3>
 
 <p>split 函数根据分隔符拆分传递给它的字符串，并返回原始字符串。如果分隔符与分隔符是相邻的，则返回“<code>？</code>”作为值。拆分出来的字符串将返回到 <code>${VAR_1}</code>，<code>${VAR_2}</code>……这些变量中。变量的计数将返回到 <code>${VAR_n}</code> 中。拖尾分隔符被视为缺失变量，并返回“<code>？</code>”。此外，为了使它在 ForEach 控制器上更好地工作， <code>__split</code> 现在会删除第一个不使用的变量，以防它是上一次拆分所设置的。</p>
-<p>例子：
+<p>例子：<br>
 在测试计划中定义 <code>VAR</code>="<code>a||c|</code>"。</p>
 <div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__split</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">VAR</span><span class="cp">}</span>,VAR,|)}
 </pre></div>
 
 
-<p>这将返回 <code>VAR</code> 的内容，即“<code>a||c|</code>”并设置以下变量：
-<code>VAR_n</code>=<code>4</code>
-<code>VAR_1</code>=<code>a</code>
-<code>VAR_2</code>=<code>?</code>
-<code>VAR_3</code>=<code>c</code>
-<code>VAR_4</code>=<code>?</code>
+<p>这将返回 <code>VAR</code> 的内容，即“<code>a||c|</code>”并设置以下变量：<br>
+<code>VAR_n</code>=<code>4</code><br>
+<code>VAR_1</code>=<code>a</code><br>
+<code>VAR_2</code>=<code>?</code><br>
+<code>VAR_3</code>=<code>c</code><br>
+<code>VAR_4</code>=<code>?</code><br>
 <code>VAR_5</code>=<code>null</code></p>
 <p><strong>参数（Parameters）</strong></p>
 <table>
@@ -1510,7 +1518,7 @@
 </tr>
 <tr>
 <td>变量名称</td>
-<td>重用此函数计算的值的引用名称</td>
+<td>重用此函数计算值的引用名称</td>
 <td>是</td>
 </tr>
 <tr>
