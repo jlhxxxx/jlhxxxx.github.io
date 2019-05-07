@@ -101,7 +101,7 @@
     
 </footer><!-- /.post-info -->
 
-        <p>英文文档地址：&lt;<a href="http://jmeter.apache.org/usermanual/functions.html">http://jmeter.apache.org/usermanual/functions.html</a>&gt;</p>
+        <p>英文文档地址：<a href="http://jmeter.apache.org/usermanual/functions.html">http://jmeter.apache.org/usermanual/functions.html</a></p>
 <h2>21.1 概述</h2>
 <p>JMeter 包含模式匹配软件 <a href="http://attic.apache.org/projects/jakarta-oro.html">Apache Jakarta ORO</a> 。 
 在 Jakarta 网站上有一些相关文档，例如：<a href="http://archimedes.fas.harvard.edu/scrapbook/jakarta-oro-2.0.6/docs/api/org/apache/oro/text/regex/package-summary.html">模式匹配字符摘要</a>。  </p>
@@ -135,12 +135,18 @@
 <ul>
 <li>这些包围匹配字符串的部分将被返回  </li>
 </ul>
-<p><code>.</code> 
-* 匹配任何字符</p>
-<p><code>+</code>
-* 一次或多次</p>
-<p><code>？</code>
-* 不要贪婪，即在第一次匹配成功时停止 </p>
+<p><code>.</code> </p>
+<ul>
+<li>匹配任何字符</li>
+</ul>
+<p><code>+</code></p>
+<ul>
+<li>一次或多次</li>
+</ul>
+<p><code>？</code></p>
+<ul>
+<li>不要贪婪，即在第一次匹配成功时停止 </li>
+</ul>
 <p>注意：如果没有 <code>？</code>，<code>.+</code> 在第一个 <code>"&gt;</code> 后会继续寻找，直到最后一个 <code>"&gt;</code> ——这可能不是我们所期望的。 </p>
 <p>注意：虽然上面的正则表达式可用，但使用下面的表达式会更有效率：<br>
 <code>name ="file" value ="([^"]+)"&gt;</code> <br>
@@ -189,36 +195,62 @@
 <p>默认情况下 '<code>^</code>' 和 '<code>$</code>' 只匹配字符串的开头和结尾。在多行模式下， '<code>^</code>' 匹配每一行的开头， '<code>$</code>' 匹配每一行的结尾。</p>
 <h2>21.4 元字符</h2>
 <p>正则表达式使用特定字符作为元字符——这些字符对匹配（RE）引擎有特殊的意义。这些字符必须用 <code>\</code>（反斜杠）前缀来转义，转义之后才能将它们视为普通字符。以下是元字符及其含义的列表（如有疑问，请查阅 ORO 文档）。</p>
-<p><code>(</code> 和 <code>）</code>
-* 分组</p>
-<p><code>[</code> 和 <code>]</code>
-* 字符集合</p>
-<p><code>{</code> 和 <code>}</code>
-* 重复</p>
-<p><code>*</code>，<code>+</code> 和 <code>？</code>
-* 重复</p>
-<p><code>.</code>
-* 通配符</p>
-<p><code>\</code>
-* 转义字符</p>
-<p><code>|</code>
-* 选择符</p>
-<p><code>^</code> 和 <code>$</code>
-* 字符串或行的开始和结束</p>
+<p><code>(</code> 和 <code>）</code></p>
+<ul>
+<li>分组</li>
+</ul>
+<p><code>[</code> 和 <code>]</code></p>
+<ul>
+<li>字符集合</li>
+</ul>
+<p><code>{</code> 和 <code>}</code></p>
+<ul>
+<li>重复</li>
+</ul>
+<p><code>*</code>，<code>+</code> 和 <code>？</code></p>
+<ul>
+<li>重复</li>
+</ul>
+<p><code>.</code></p>
+<ul>
+<li>通配符</li>
+</ul>
+<p><code>\</code></p>
+<ul>
+<li>转义字符</li>
+</ul>
+<p><code>|</code></p>
+<ul>
+<li>选择符</li>
+</ul>
+<p><code>^</code> 和 <code>$</code></p>
+<ul>
+<li>字符串或行的开始和结束</li>
+</ul>
 <blockquote>
 <p>请注意，ORO 不支持关键字 \Q 和 \E。[在其他的 RE 引擎中，这些可以用来引用 RE 的一部分，使元字符代表它们自己。]可以使用函数来执行相同的操作，请参阅 <a href="http://jmeter.apache.org/usermanual/functions.html#__escapeOroRegexpChars"><code>${__escapeOroRegexpChars(valueToEscape)}</code></a>。</p>
 </blockquote>
 <p>ORO 支持以下 Perl5 扩展正则表达式。</p>
-<p><code>(?#text)</code>
-* 内嵌注释，可以使 <code>text</code> 内容被忽略。</p>
-<p><code>(?:regexp)</code>
-* 像"<code>()</code>"一样获取匹配，但并不保存匹配结果。</p>
-<p><code>(?=regexp)</code>
-* 零长度正向肯定断言。例如，<code>\w+(?=\s)</code> 匹配一个后跟空格的单词，匹配结果不包含空格。</p>
-<p><code>(?!regexp)</code>
-* 零长度正向否定断言。例如，<code>foo(?!bar)</code> 匹配任何 '<code>foo</code>' 后面不跟 '<code>bar</code>' 的结果。请注意，这是一个零长度断言，这意味着 <code>a(?!b)d</code> 匹配 <code>ad</code>，因为 <code>a</code> 后面是一个非 <code>b</code> 字符（<code>d</code>），而 <code>d</code> 符合此断言。</p>
-<p><code>(?imsx)</code>
-* 一个或多个嵌入模式匹配修饰符。<code>i</code> 启用大小写不敏感，<code>m</code> 启用多行输入处理，<code>s</code> 启用单行输入处理，<code>x</code> 启用扩展的空白注释。</p>
+<p><code>(?#text)</code></p>
+<ul>
+<li>内嵌注释，可以使 <code>text</code> 内容被忽略。</li>
+</ul>
+<p><code>(?:regexp)</code></p>
+<ul>
+<li>像"<code>()</code>"一样获取匹配，但并不保存匹配结果。</li>
+</ul>
+<p><code>(?=regexp)</code></p>
+<ul>
+<li>零长度正向肯定断言。例如，<code>\w+(?=\s)</code> 匹配一个后跟空格的单词，匹配结果不包含空格。</li>
+</ul>
+<p><code>(?!regexp)</code></p>
+<ul>
+<li>零长度正向否定断言。例如，<code>foo(?!bar)</code> 匹配任何 '<code>foo</code>' 后面不跟 '<code>bar</code>' 的结果。请注意，这是一个零长度断言，这意味着 <code>a(?!b)d</code> 匹配 <code>ad</code>，因为 <code>a</code> 后面是一个非 <code>b</code> 字符（<code>d</code>），而 <code>d</code> 符合此断言。</li>
+</ul>
+<p><code>(?imsx)</code></p>
+<ul>
+<li>一个或多个嵌入模式匹配修饰符。<code>i</code> 启用大小写不敏感，<code>m</code> 启用多行输入处理，<code>s</code> 启用单行输入处理，<code>x</code> 启用扩展的空白注释。</li>
+</ul>
 <p><strong>请注意：不支持反向肯定断言——<code>(?&lt;=regexp)</code> 。</strong></p>
 <h2>21.5 修饰符的放置</h2>
 <p>修饰符可以放在正则表达式的任何地方，然后从放置点开始作用。[ ORO 中有个 bug 使它们不能放在正则表达式的最后。不过，对其他没有影响。]</p>

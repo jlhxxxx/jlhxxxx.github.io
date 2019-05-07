@@ -89,7 +89,7 @@
 
     in <a href="https://jlhxxxx.github.io/category/test-tools.html">Test Tools</a>
 
-    on 2019-05-06
+    on 2019-05-07
 
         |
         tags:         <a href="https://jlhxxxx.github.io/tag/jmeter.html">JMeter</a>
@@ -1372,7 +1372,7 @@
 <blockquote>
 <p>为了更好的性能，请使用<a href="#groovy"><code>__groovy</code></a>函数 </p>
 </blockquote>
-<p>**有关使用 BeanShell 的完整详细信息，请参考 BeanShell 网站：<a href="http://www.beanshell.org/">http://www.beanshell.org/</a></p>
+<p><strong>有关使用 BeanShell 的完整详细信息，请参考 BeanShell 网站：</strong><a href="http://www.beanshell.org/">http://www.beanshell.org/</a></p>
 <blockquote>
 <p>注意，测试脚本中每个独立的函数调用都使用不同的解释器，但是后续的调用使用相同的解释器。这意味着变量在不同的函数的调用中会持续存在。</p>
 </blockquote>
@@ -1411,9 +1411,17 @@
 </tr>
 </tbody>
 </table>
-<p>例子：
-  * <code>${__BeanShell(123*456)}</code> 返回 <code>56088</code>
-  * <code>${__BeanShell(source("function.bsh"))}</code> 在 <code>function.bsh</code> 中处理脚本</p>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__BeanShell</span><span class="p">(</span><span class="mi">123</span><span class="o">*</span><span class="mi">456</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回 <code>56088</code></p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__BeanShell</span><span class="p">(</span><span class="n">source</span><span class="p">(</span><span class="s2">&quot;function.bsh&quot;</span><span class="p">))</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>在 <code>function.bsh</code> 中处理脚本</p>
 <blockquote>
 <p>请记住为文本字符串和表示文本字符串的 JMeter 变量添加必要的引号。</p>
 </blockquote>
@@ -1707,9 +1715,11 @@ i.intValue(); // 或使用 i.longValue()
 <h3 id="jexl3">__jexl3</h3>
 
 <p>jexl 函数返回执行 <a href="http://commons.apache.org/proper/commons-jexl/">通用 JEXL 表达式</a>的结果 。有关 JEXL 表达式的更多信息，请参阅下面的链接。</p>
-<p>jexl3 函数使用通用 JEXL 3
-  * <a href="http://commons.apache.org/proper/commons-jexl/reference/syntax.html">JEXL 语法描述</a>
-  * <a href="http://commons.apache.org/proper/commons-jexl/reference/examples.html#Example_Expressions">JEXL 的例子</a></p>
+<p>jexl3 函数使用通用 JEXL 3</p>
+<ul>
+<li><a href="http://commons.apache.org/proper/commons-jexl/reference/syntax.html">JEXL 语法描述</a></li>
+<li><a href="http://commons.apache.org/proper/commons-jexl/reference/examples.html#Example_Expressions">JEXL 的例子</a></li>
+</ul>
 <p><strong>参数（Parameters）</strong></p>
 <table>
 <thead>
