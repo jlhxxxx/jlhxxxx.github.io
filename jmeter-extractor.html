@@ -161,15 +161,12 @@ data_matchNr=2
 
 <p>说明：</p>
 <ul>
-<li>
-<p>Match No.值为<code>-1</code>，提取全部的2个匹配项，变量名称规则<code>refName_Ñ_g</code>，<code>refName</code>取默认值；若为<code>0</code>或<code>正数</code>，只提取一个匹配项，变量名称规则<code>refName_g</code>，<code>refName</code>取模板创建值；</p>
-</li>
-<li>
-<p>Template填入<code>$0$</code>，<code>refName_Ñ</code>对应的值为匹配到的整个匹配项；若填入<code>$1$$1$</code>，则<code>refName_Ñ</code>对应的值为<code>refName_Ñ_g1</code>和<code>refName_Ñ_g3</code>的拼接。</p>
-</li>
+<li>Match No.值为<code>-1</code>，提取全部的2个匹配项，变量名称规则<code>refName_Ñ_g</code>，<code>refName</code>取默认值；若为<code>0</code>或<code>正数</code>，只提取一个匹配项，变量名称规则<code>refName_g</code>，<code>refName</code>取模板创建值；</li>
+<li>Template填入<code>$0$</code>，<code>refName_Ñ</code>对应的值为匹配到的整个匹配项；若填入<code>$1$$3$</code>，则<code>refName_Ñ</code>对应的值为<code>refName_Ñ_g1</code>和<code>refName_Ñ_g3</code>的拼接。</li>
+<li>有大佬做了个图解的，看起来更直观更好理解：<a href="https://jmetervn.com/2016/10/30/regular-expression-extractor-in-jmeter/">Regular Expression Extractor in JMeter</a></li>
 </ul>
 <h2>JSON提取器</h2>
-<p>可以使用JSON-PATH语法从<strong>JSON响应</strong>中提取数据。</p>
+<p>可以使用<a href="https://goessner.net/articles/JsonPath/">JSON-PATH语法</a>从<strong>JSON响应</strong>中提取数据。</p>
 <ul>
 <li><strong>Name of created variables</strong>：变量名称。注意这里是复数形式，可以填写多个变量名称，名称与名称之间用<code>;</code>分隔。</li>
 <li><strong>Json Path expressions</strong>：JSON路径表达式。</li>
@@ -179,7 +176,7 @@ data_matchNr=2
 </ul>
 <p>例子参考正则表达式提取器的例子，提取器填写如下：</p>
 <div class="highlight"><pre><span></span><span class="nt">Name</span> <span class="nt">of</span> <span class="nt">created</span> <span class="nt">variables</span><span class="o">:</span> <span class="nt">time</span><span class="o">;</span><span class="nt">context</span>
-<span class="nt">Json</span> <span class="nt">Path</span> <span class="nt">expressions</span><span class="o">:</span> <span class="o">$</span><span class="p">.</span><span class="nc">data</span><span class="cp">[</span><span class="o">*</span><span class="cp">]</span><span class="p">.</span><span class="nc">time</span><span class="o">;$</span><span class="p">.</span><span class="nc">data</span><span class="cp">[</span><span class="o">*</span><span class="cp">]</span><span class="p">.</span><span class="nc">context</span>
+<span class="nt">Json</span> <span class="nt">Path</span> <span class="nt">expressions</span><span class="o">:</span> <span class="o">$</span><span class="p">.</span><span class="nc">data</span><span class="cp">[</span><span class="o">*</span><span class="cp">]</span><span class="p">.</span><span class="nc">time</span><span class="o">;$.</span><span class="p">.</span><span class="nc">context</span>
 <span class="nt">Match</span> <span class="nt">No</span><span class="o">.:</span> <span class="nt">-1</span><span class="o">;</span><span class="nt">-1</span>
 <span class="nt">Compute</span> <span class="nt">concatenation</span> <span class="nt">var</span><span class="err">：✔</span>
 <span class="nt">Default</span> <span class="nt">Values</span><span class="o">:</span> <span class="nt">0</span><span class="o">;</span><span class="nt">0</span>
@@ -202,6 +199,7 @@ time_matchNr=2
 <ul>
 <li>表达式、默认值一定要和变量数量匹配</li>
 <li>表达式路径中数组编号用<code>*</code>表示模糊匹配</li>
+<li>关于JSON PATH表达式更高级的运用，可以参考：<a href="https://jmetervn.com/2016/09/17/json-path-postprocessor-in-jmeter/">JSON Path PostProcessor in JMeter</a></li>
 </ul>
 <h2>CSS/JQuery提取器</h2>
 <p>可以使用CSS Selector语法从服务器HTML响应中提取值。</p>
@@ -308,6 +306,7 @@ city_matchNr=4
 <p>说明：</p>
 <ul>
 <li>虽然返回值包含了3个命名空间的信息，但是我们提取的值只在默认命名空间里，所以<strong>Namespaces aliases list</strong>只填入默认命名空间即可；别名可以任意命名，注意调用一致。</li>
+<li>XPath2还有更高级的用法，可以支持XPath2函数，比如：<code>compare(/book[1]/page[2],/book[2]/page[2])</code>，参考<a href="http://saxon.sourceforge.net/saxon7.9.1/functions.html">XPath2函数</a>。</li>
 </ul>
 <h2>边界值提取器</h2>
 <p>可以使用左右边界从服务器响应中提取值。</p>
@@ -336,7 +335,7 @@ url_matchNr=5
 
 <p>说明：</p>
 <ul>
-<li>类似简化版的正则表达式提取器，默认greedy模式。但是左右边界不支持正则表达式，感觉局限性挺大，比如说上面的例子中我只要提取3个url，就很麻烦。</li>
+<li>类似简化版的正则表达式提取器，默认非greedy模式。但是左右边界不支持正则表达式，感觉局限性挺大，比如说上面的例子中我只要提取3个url，就很麻烦。</li>
 </ul>
 <blockquote>
 <p>当然牛逼的大佬根本不用这些花哨的提取器，一个BeanShell就够了，参考文章：<a href="https://www.cnblogs.com/nzg-noway/p/7490412.html">jmeter ---json几种读取方式，ArrayList循环读取</a>。</p>
