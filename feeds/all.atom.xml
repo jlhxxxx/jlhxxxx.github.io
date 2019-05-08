@@ -2286,7 +2286,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;大小写变更模式&lt;/td&gt;
-&lt;td&gt;改变大小写的模式，例如对&lt;code&gt;ab-CD eF&lt;/code&gt;：&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;code&gt;UPPER&lt;/code&gt;模式返回 AB-CD EF &lt;/li&gt;&lt;li&gt;&lt;code&gt;LOWER&lt;/code&gt;模式返回 ab-cd ed &lt;/li&gt;&lt;li&gt;&lt;code&gt;CAPITALIZE&lt;/code&gt;模式返回 Ab-CD eF &lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;blockquote&gt;变更模式名称不区分大小写&lt;/blockquote&gt;&lt;/td&gt;
+&lt;td&gt;改变大小写的模式，例如对&lt;code&gt;ab-CD eF&lt;/code&gt;：&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;code&gt;UPPER&lt;/code&gt;模式返回 AB-CD EF &lt;/li&gt;&lt;li&gt;&lt;code&gt;LOWER&lt;/code&gt;模式返回 ab-cd ed &lt;/li&gt;&lt;li&gt;&lt;code&gt;CAPITALIZE&lt;/code&gt;模式返回 Ab-CD eF &lt;/li&gt;&lt;/ul&gt;&lt;blockquote&gt;变更模式名称不区分大小写&lt;/blockquote&gt;&lt;/td&gt;
 &lt;td&gt;是&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
