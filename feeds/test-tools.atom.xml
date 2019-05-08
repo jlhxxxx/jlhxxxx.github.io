@@ -2127,7 +2127,7 @@ i.intValue(); // 或使用 i.longValue()
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;算法&lt;/td&gt;
-&lt;td&gt;用来加密的算法。可用的算法请参阅 &lt;a href="https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html"&gt;StandardNames&lt;/a&gt; 的 MessageDigest  &lt;br/&gt;&lt;ul&gt;&lt;li&gt;MD2&lt;/li&gt;&lt;li&gt;MD5&lt;/li&gt;&lt;li&gt;SHA-1&lt;/li&gt;&lt;li&gt;SHA-224&lt;/li&gt;&lt;li&gt;SHA-256&lt;/li&gt;&lt;li&gt;SHA-384&lt;/li&gt;&lt;li&gt;SHA-512&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;blockquote&gt;&lt;code&gt;要添加的 salt&lt;/code&gt;和&lt;code&gt;要编码的字符串&lt;/code&gt;中是要考虑空格的&lt;/blockquote&gt;&lt;/td&gt;
+&lt;td&gt;用来加密的算法。可用的算法请参阅 &lt;a href="https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html"&gt;StandardNames&lt;/a&gt; 的 MessageDigest  &lt;ul&gt;&lt;li&gt;MD2&lt;/li&gt;&lt;li&gt;MD5&lt;/li&gt;&lt;li&gt;SHA-1&lt;/li&gt;&lt;li&gt;SHA-224&lt;/li&gt;&lt;li&gt;SHA-256&lt;/li&gt;&lt;li&gt;SHA-384&lt;/li&gt;&lt;li&gt;SHA-512&lt;/li&gt;&lt;/ul&gt;&lt;blockquote&gt;&lt;code&gt;要添加的 salt&lt;/code&gt;和&lt;code&gt;要编码的字符串&lt;/code&gt;中是要考虑空格的&lt;/blockquote&gt;&lt;/td&gt;
 &lt;td&gt;是&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
