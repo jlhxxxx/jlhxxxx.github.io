@@ -31,7 +31,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h4&gt;下载SDK tools并安装其他工具&lt;/h4&gt;
-&lt;p&gt;官方地址：https://developer.android.com/studio …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Appium环境配置&lt;/h2&gt;
+&lt;p&gt;官方地址：&lt;a href="https://developer.android.com/studio"&gt;https://developer.android.com/studio …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Appium环境配置&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;本地环境&lt;/strong&gt;：win10_x64 + JDK8 + python3&lt;/p&gt;
 &lt;h3&gt;Appium-Client安装配置&lt;/h3&gt;
 &lt;p&gt;这里我们选用&lt;a href="https://github.com/appium/python-client"&gt;python-client&lt;/a&gt;，建议在虚拟环境下安装，命令如下：&lt;/p&gt;
@@ -63,7 +63,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h4&gt;下载SDK tools并安装其他工具&lt;/h4&gt;
-&lt;p&gt;官方地址：https://developer.android.com/studio。拉到最下面&lt;strong&gt;Command line tools only&lt;/strong&gt;处，下载Windows版本，目前版本为：&lt;code&gt;sdk-tools-windows-4333796.zip&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;官方地址：&lt;a href="https://developer.android.com/studio"&gt;https://developer.android.com/studio&lt;/a&gt;。拉到最下面&lt;strong&gt;Command line tools only&lt;/strong&gt;处，下载Windows版本，目前版本为：&lt;code&gt;sdk-tools-windows-4333796.zip&lt;/code&gt;。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;有必要说明一下，支持图形化界面的SDK manager和AVD manager的SDK tools最高版本为25.2.5，只支持Android-25（即Android 7.1.1）及以下版本的虚拟机运行。如果不使用Android 8.0以上虚拟机，可以参考虫师文章安装配置：&lt;a href="http://www.testclass.net/appium/appium-base-sdk"&gt;appium新手入门（2）—— 安装 Android SDK&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;最新版本的SDK tools（目前为26.1.1）只支持纯命令行运行SDK manager和AVD manager。可以运行更高版本的虚拟机。&lt;/p&gt;
@@ -75,7 +75,7 @@
 &lt;/ul&gt;
 &lt;p&gt;要运行相应的虚拟机，需要安装对应版本的SDK Platform和System Image以及相应或更高版本的SDK Buid-Tools。例如，如果我要运行Android 9（Android-28）虚拟机，需要安装SDK Platform 28，由于我的CPU支持Intel HAXM且是64位，所以System Image选择Intel x86 Atom_64 System Image（Android-28），SDK Buid-Tools选择最新版本Android SDK Buid-Tools 29，其他工具可以按B4A推荐的安装。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;关于&lt;strong&gt;Intel HAXM&lt;/strong&gt;，大致就是使用基于Intel(R) Virtualization Technology (VT) 的硬件加速，提高Android模拟器的响应速度。下载后需要单独安装。官方GITHUB地址：https://github.com/intel/haxm&lt;/p&gt;
+&lt;p&gt;关于&lt;strong&gt;Intel HAXM&lt;/strong&gt;，大致就是使用基于Intel(R) Virtualization Technology (VT) 的硬件加速，提高Android模拟器的响应速度。下载后需要单独安装。官方GITHUB地址：&lt;a href="https://github.com/intel/haxm"&gt;https://github.com/intel/haxm&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h4&gt;配置并运行虚拟机&lt;/h4&gt;
 &lt;p&gt;按新手推荐下载安装相应包之后，运行B4A AVD Manager，选择好屏幕尺寸和Platform，创建AVD后即可运行虚拟机。这里可配置的选项只有2个，但是没有关系，我们后面可以直接修改配置文件。&lt;/p&gt;
