@@ -134,13 +134,13 @@
 <h4>下载SDK tools并安装其他工具</h4>
 <p>官方地址：<a href="https://developer.android.com/studio">https://developer.android.com/studio</a>。拉到最下面<strong>Command line tools only</strong>处，下载Windows版本，目前版本为：<code>sdk-tools-windows-4333796.zip</code>。</p>
 <blockquote>
-<p>有必要说明一下，支持图形化界面的SDK manager和AVD manager的SDK tools最高版本为25.2.5，只支持Android-25（即Android 7.1.1）及以下版本的虚拟机运行。如果不使用Android 8.0以上虚拟机，可以参考虫师文章安装配置：<a href="http://www.testclass.net/appium/appium-base-sdk">appium新手入门（2）—— 安装 Android SDK</a>。</p>
+<p>有必要说明一下，支持图形化界面的SDK manager和AVD manager的SDK tools最高版本为25.2.5，只支持Android-25（即Android 7.1.1）及以下版本的虚拟机运行。</p>
 <p>最新版本的SDK tools（目前为26.1.1）只支持纯命令行运行SDK manager和AVD manager。可以运行更高版本的虚拟机。</p>
 </blockquote>
 <p><strong>安装其他工具有两种方法</strong></p>
 <ul>
-<li><strong>（新手推荐）通过第三方图形化界面工具<a href="https://www.b4x.com/b4a.html#installation">B4A</a></strong>：安装好B4A后配置javac.exe和sdkmanager.bat路径，即可使用图形化界面的SDK manager和AVD manager。参考文章：<a href="https://www.b4x.com/android/forum/threads/gui-sdk-manager-for-newer-versions-of-android-tools.80090/">GUI SDK Manager for newer versions of Android tools</a>。</li>
-<li><strong>（需对SDK工具有较深的理解）直接通过命令行下载</strong>：将上面下载的SDK tools解压到SDK主目录下，进入<code>tools\bin\</code>目录，找到sdkmanager.bat，在命令提示符下输入<code>sdkmanager --list</code>，列出可以安装的工具，输入<code>sdkmanager &lt;package&gt;</code>安装相应工具（其中<code>packages</code>参数为软件包的<code>Path</code>名称，需带引号）；使用<code>sdkmanager --update</code>命令更新已安装的工具（如果有更新的版本）。</li>
+<li><strong>（新手推荐）通过第三方图形化界面工具<a href="https://www.b4x.com/b4a.html#installation">B4A</a></strong>：安装好B4A后配置javac.exe和sdkmanager.bat路径，即可使用图形化界面的SDK manager和AVD manager。</li>
+<li><strong>（需对SDK工具有较深的理解）通过<a href="https://developer.android.com/studio/command-line/sdkmanager">SDKmanager</a>下载</strong>：将上面下载的SDK tools解压到SDK主目录下，进入<code>tools\bin\</code>目录，找到sdkmanager.bat，在命令提示符下输入<code>sdkmanager --list</code>，列出可以安装的工具，输入<code>sdkmanager &lt;package&gt;</code>安装相应工具（其中<code>packages</code>参数为软件包的<code>Path</code>名称，需带引号）；使用<code>sdkmanager --update</code>命令更新已安装的工具（如果有更新的版本）。</li>
 </ul>
 <p>要运行相应的虚拟机，需要安装对应版本的SDK Platform和System Image以及相应或更高版本的SDK Buid-Tools。例如，如果我要运行Android 9（Android-28）虚拟机，需要安装SDK Platform 28，由于我的CPU支持Intel HAXM且是64位，所以System Image选择Intel x86 Atom_64 System Image（Android-28），SDK Buid-Tools选择最新版本Android SDK Buid-Tools 29，其他工具可以按B4A推荐的安装。</p>
 <blockquote>
@@ -180,7 +180,7 @@ hw.lcd.height=800
 hw.lcd.width=480
 hw.mainKeys=yes                                         # 是否不显示底部导航栏
 hw.sdCard=no                                            # 是否使用sdCard，可以配置大小
-hw.sensors.orientation=yes                              # 方向传感器，见下文
+hw.sensors.orientation=yes                              # 方向传感器
 hw.sensors.proximity=yes                                # 距离传感器
 hw.trackBall=no                                         # 轨迹球
 image.sysdir.1=system-images\android-28\default\x86_64\ # 系统映像目录
@@ -193,10 +193,8 @@ tag.id=default
 
 
 <ul>
-<li><code>abi.type</code>：abi即Application Binary Interface，配置应与<code>cpu.arch</code>对应，参考<a href="https://developer.android.com/ndk/guides/abis">ABI 管理</a></li>
-<li><code>hw.gpu.enabled</code>：可以同时配置<code>hw.gpu.mode</code>，参考<a href="https://developer.android.com/studio/run/emulator-acceleration">Configure hardware acceleration for the Android Emulator</a></li>
-<li><code>hw.sensors</code>：参考<a href="https://developer.android.com/guide/topics/sensors/sensors_overview">Sensors Overview</a></li>
-<li>其他可以配置的内容：参考<a href="https://developer.android.com/studio/run/managing-avds?hl=zh-cn">创建和管理虚拟设备</a></li>
+<li><code>abi.type</code>：abi即Application Binary Interface，配置应与<code>cpu.arch</code>对应，参考<a href="https://developer.android.com/ndk/guides/abis">ABI 管理</a>。</li>
+<li><code>hw.gpu.enabled</code>和<code>hw.gpu.mode</code>，参考<a href="https://developer.android.com/studio/run/emulator-acceleration">Configure hardware acceleration for the Android Emulator</a>。</li>
 </ul>
 <p>两个配置文件掌握之后，我们就可以很方便地通过配置文件来创建虚拟机。其实只需要创建虚拟机存放目录和这2个配置文件，虚拟机就算建好了，至于虚拟机存放目录下的其他文件，会在第一次启动虚拟机后自动生成。</p>
 <p><strong>通过命令行启动虚拟机</strong></p>
@@ -227,10 +225,9 @@ adb start-server
 </pre></div>
 
 
-<p>参考教程：<a href="https://www.cnblogs.com/lhx0827/p/9577575.html">UI Automator Viewer工具的使用</a>。</p>
 </li>
 <li>
-<p><strong>Chrome inspector</strong>：只能解析webview元素，且需要翻墙，逼格很高。参考教程：<a href="https://www.cnblogs.com/hjblog/p/9055105.html">混合开发使用Chrome Inspect调试WebView预览手机界面和定位元素</a>。</p>
+<p><strong>Chrome inspector</strong>：只能解析webview元素，且需要翻墙，逼格很高。</p>
 </li>
 </ol>
 <h4>无法定位到元素的问题</h4>
@@ -252,14 +249,25 @@ adb start-server
 </pre></div>
 
 
-<p>参考教程：<a href="https://blog.csdn.net/weixin_39142498/article/details/79991380">Appium+python自动化13-native和webview切换</a></p>
 <h4>切换webview报Chrome version错误</h4>
 <p>官方文档<a href="http://appium.io/docs/cn/advanced-concepts/chromedriver/">Chromedriver</a>给出了解释：</p>
 <blockquote>
 <p>每次 Chromedriver 升级，支持的 Chrome 的最小版本都会升级，这就导致了老设备上经常无法在绑定的版本上自动化。</p>
 </blockquote>
 <p>查看Appium Desktop日志，到官方文档上下载相应版本的Chromedriver并替换最新版即可。</p>
-<p>参考教程：<a href="https://www.cnblogs.com/yoyoketang/p/9009209.html">appium+python自动化41-切换webview时候报chromedriver版本问题</a></p>
+<h3>参考文章：</h3>
+<ul>
+<li>简洁明晰版本：<a href="https://testerhome.com/topics/11318">浅谈自动化测试工具 Appium</a></li>
+<li>较详细版本：<a href="http://www.testclass.net/appium">Appium 简明教程</a></li>
+<li>其他参考<ul>
+<li><a href="https://www.b4x.com/android/forum/threads/gui-sdk-manager-for-newer-versions-of-android-tools.80090/">GUI SDK Manager for newer versions of Android tools</a></li>
+<li><a href="https://www.cnblogs.com/lhx0827/p/9577575.html">UI Automator Viewer工具的使用</a></li>
+<li><a href="https://www.cnblogs.com/hjblog/p/9055105.html">混合开发使用Chrome Inspect调试WebView预览手机界面和定位元素</a></li>
+<li><a href="https://blog.csdn.net/weixin_39142498/article/details/79991380">Appium+python自动化13-native和webview切换</a></li>
+<li><a href="https://www.cnblogs.com/yoyoketang/p/9009209.html">appium+python自动化41-切换webview时候报chromedriver版本问题</a></li>
+</ul>
+</li>
+</ul>
 
       </div><!-- /.entry-content -->
       <div class="comments">
