@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Tue, 07 May 2019 00:00:00 +0800</lastBuildDate><item><title>JMeter文档翻译之20-函数和变量</title><link>https://jlhxxxx.github.io/jmeter-doc-cn-20.html</link><description>&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&lt;/p&gt;
+<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Mon, 08 Jul 2019 00:00:00 +0800</lastBuildDate><item><title>Appium环境搭建及自动化的一些参考</title><link>https://jlhxxxx.github.io/appium-base-01.html</link><description>&lt;h2&gt;Appium环境配置&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;本地环境&lt;/strong&gt;：win10_x64 + JDK8 + python3&lt;/p&gt;
+&lt;h3&gt;Appium-Client安装配置&lt;/h3&gt;
+&lt;p&gt;这里我们选用&lt;a href="https://github.com/appium/python-client"&gt;python-client&lt;/a&gt;，建议在虚拟环境下安装，命令如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Appium&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Client&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Appium-Server安装配置&lt;/h3&gt;
+&lt;p&gt;推荐使用&lt;a href="https://github.com/appium/appium-desktop"&gt;appium-desktop&lt;/a&gt;，图形化界面，自带Inspector，非常好用。&lt;/p&gt;
+&lt;h3&gt;Android SDK安装配置&lt;/h3&gt;
+&lt;h4&gt;设置SDK环境变量&lt;/h4&gt;
+&lt;p&gt;这里只讲不使用Android Studio情况下安装SDK，首先新建一个SDK主目录（空文件夹即可），假设是&lt;code&gt;D:\SDK&lt;/code&gt;。配置相应环境变量：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;变量名&lt;/th&gt;
+&lt;th&gt;变量值&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;ANDROID_HOME&lt;/td&gt;
+&lt;td&gt;D:\SDK&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PATH&lt;/td&gt;
+&lt;td&gt;;%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\tools;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4&gt;下载SDK tools并安装其他工具&lt;/h4&gt;
+&lt;p&gt;官方地址：https://developer.android.com/studio …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 08 Jul 2019 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2019-07-08:/appium-base-01.html</guid><category>Appium</category><category>Automated</category></item><item><title>JMeter文档翻译之20-函数和变量</title><link>https://jlhxxxx.github.io/jmeter-doc-cn-20.html</link><description>&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;JMeter 的函数是一些特殊值，它们可以填充在测试树的任何采样器或其他元件中。函数调用的语法如下：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;${__functionName(var1,var2,var3)}&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;其中“__functionName”匹配函数的名称。
