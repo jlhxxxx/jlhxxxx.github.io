@@ -153,7 +153,7 @@
 
 
 <p>这时候取到全局变量了，不过<code>[object Object],[object Object]...</code>需要翻译啊，很明显取到<code>meta</code>这一层是没错的：</p>
-<p><img alt="Postman-start-04.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/Postman-start-04.png?raw=true"></p>
+<p><img alt="Postman-start-04.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-04.png?raw=true"></p>
 <p>这时候需要一个将json转换成字符串的工具，方便我分析，然后就找到了<code>JSON.stringify()</code>：</p>
 <div class="highlight"><pre><span></span><span class="nx">pm</span><span class="p">.</span><span class="nx">globals</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;getstring&quot;</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">jsonObject</span><span class="p">.</span><span class="nx">html</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">meta</span><span class="p">));</span>
 </pre></div>
