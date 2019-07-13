@@ -302,7 +302,7 @@ li.tag-1 {
   font-size: 1.4em;
   font-weight: 400; }
 
-:(not#google-custom-search) table {
+:not(#google-custom-search) table {
   margin: 10px 0px 12px 0px; }
 
 table tr:nth-child(2n) {
