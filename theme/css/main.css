@@ -308,6 +308,6 @@ table tr:nth-child(2n) {
 table td, table th {
     border: 1px solid #dfe2e5;
     padding: 6px 13px;}
-  table td .gsib_b {
-    border: 0px;
-    padding: 0px 0px;}
+  table td, table th .gsib_b {
+    border: 0px !important;
+    padding: 0px 0px !important;}
