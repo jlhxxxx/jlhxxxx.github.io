@@ -98,7 +98,8 @@ em, i {
 
 ul {
   list-style: outside disc;
-  margin: 1em 0 1.5em 1.5em;
+  /*margin: 1em 0 1.5em 1.5em;*/
+  margin: 5px 0px 5px 20px;
 }
 
 ol {
@@ -407,8 +408,4 @@ table td, table th {
 table.gsc-search-box td {
   border: 0px !important;
   padding: 0px 0px !important;
-}
-
-ul {
-    margin: 5px 0px 5px 20px !important;
 }
