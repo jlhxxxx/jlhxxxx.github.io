@@ -309,6 +309,6 @@ table td, table th {
     border: 1px solid #dfe2e5;
     padding: 6px 13px;}
 
-td.gsib_a, td.gsib_b {
+table.gsc-search-box td {
     border: 0px !important;
     padding: 0px 0px !important;}
