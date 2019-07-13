@@ -395,12 +395,12 @@ table tr:nth-child(2n) {
   background-color: #f6f8fa;
 }
 
-table td, table th {
+table td:not(.gsib_b), table th {
   border: 1px solid #dfe2e5;
   padding: 6px 13px;
 }
 
-.gsib_b {
-  border: 0px !important;
-  padding: 0px 0px !important;
+table td.gsib_b {
+  border: 0px;
+  padding: 0px 0px;
 }
