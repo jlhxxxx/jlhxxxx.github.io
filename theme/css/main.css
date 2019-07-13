@@ -305,7 +305,7 @@ li.tag-1 {
 table {
   margin: 10px 0px 12px 0px; }
   
-table.gsc-search-box, table.gstl_50 gsc-input {
+table.gsc-search-box, table#gs_id50 {
   margin: 0px 0px 0px 0px !important; }
 
 table tr:nth-child(2n) {
