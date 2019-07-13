@@ -156,7 +156,7 @@ code, pre {
 blockquote {
   margin: 20px;
   font-style: normal;
-  border-left: .25em solid #dfe2e5;
+  border: 0;
   p {
     font-size: 15px;
     margin-bottom: 1em;
@@ -396,8 +396,4 @@ li.tag-2 {
 li.tag-1 {
   font-size: 1.4em;
   font-weight: 400;
-}
-
-table tr:nth-child(2n) {
-    background-color: #f6f8fa;
 }
