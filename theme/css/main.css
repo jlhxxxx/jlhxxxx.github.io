@@ -306,22 +306,3 @@ li.tag-2 {
 li.tag-1 {
   font-size: 1.4em;
   font-weight: 400; }
-
-blockquote {
-  margin: 0 0 1rem;
-}
-
-.blockquote {
-  margin-bottom: 1rem;
-  font-size: 1.015625rem;
-}
-
-.blockquote-footer {
-  display: block;
-  font-size: 80%;
-  color: #777;
-}
-
-.blockquote-footer::before {
-  content: "\2014\00A0";
-}
