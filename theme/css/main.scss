@@ -401,3 +401,8 @@ li.tag-1 {
 table tr:nth-child(2n) {
     background-color: #f6f8fa;
 }
+
+table td, table th {
+    border: 1px solid #dfe2e5;
+    padding: 6px 13px;
+}
