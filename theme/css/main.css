@@ -302,8 +302,11 @@ li.tag-1 {
   font-size: 1.4em;
   font-weight: 400; }
 
-:not(#google-custom-search) table {
+table {
   margin: 10px 0px 12px 0px; }
+  
+table.gsc-search-box, table.gstl_50 gsc-input {
+  margin: 0px 0px 0px 0px !important; }
 
 table tr:nth-child(2n) {
   background-color: #f6f8fa; }
