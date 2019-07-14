@@ -1,0 +1,1037 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - SQL</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/sql.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2018-06-20T00:00:00+08:00</updated><entry><title>Oracle报错排查：ORA-00020:maximum number of processes (500) exceeded</title><link href="https://jlhxxxx.github.io/oracle-00020.html" rel="alternate"></link><published>2018-06-20T00:00:00+08:00</published><updated>2018-06-20T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-06-20:/oracle-00020.html</id><summary type="html">&lt;p&gt;看到这个报错的时候，已经连不上数据库了。所以思路是：先结束掉部分进程，再增大连接数。&lt;/p&gt;
+&lt;p&gt;先查找进程：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep oracle&lt;/span&gt;
+oracle    &lt;span class="m"&gt;4801&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; Apr28 ?        &lt;span class="m"&gt;00&lt;/span&gt;:02:24 tnslsnr LISTENER -inherit
+oracle   &lt;span class="m"&gt;16284&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;11&lt;/span&gt;:41 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:06 ora_pmon_orcl
+......
+oracle   &lt;span class="m"&gt;22021&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;看到这个报错的时候，已经连不上数据库了。所以思路是：先结束掉部分进程，再增大连接数。&lt;/p&gt;
+&lt;p&gt;先查找进程：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep oracle&lt;/span&gt;
+oracle    &lt;span class="m"&gt;4801&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; Apr28 ?        &lt;span class="m"&gt;00&lt;/span&gt;:02:24 tnslsnr LISTENER -inherit
+oracle   &lt;span class="m"&gt;16284&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;11&lt;/span&gt;:41 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:06 ora_pmon_orcl
+......
+oracle   &lt;span class="m"&gt;22021&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+oracle   &lt;span class="m"&gt;22029&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:02:53 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+......
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;发现非本地连接都带有&lt;code&gt;LOCAL=NO&lt;/code&gt;，这样就简单了，验证一下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep LOCAL=NO|grep -v grep&lt;/span&gt;
+oracle   &lt;span class="m"&gt;22021&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+......
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;确实都是Oracle的进程，结束掉几个就好了，只要让能连上数据库：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# 两种写法都可以，结束掉前10个进程&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep LOCAL=NO|grep -v grep|awk &amp;#39;{print $2}&amp;#39;|head|xargs kill -9&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep LOCAL=NO|grep -v grep|cut -c 9-15|head|xargs kill -9&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;连接数据库：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;sqlplus&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nolog&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;connect&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;sysdba&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;修改连接数，重启Oracle：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;alter&lt;/span&gt; &lt;span class="k"&gt;system&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;processes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt; &lt;span class="k"&gt;scope&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;spfile&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;SHUTDOWN&lt;/span&gt; &lt;span class="k"&gt;IMMEDIATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;STARTUP&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;验证一下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;show&lt;/span&gt; &lt;span class="k"&gt;parameter&lt;/span&gt; &lt;span class="n"&gt;processes&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="n"&gt;NAME&lt;/span&gt;                     &lt;span class="k"&gt;TYPE&lt;/span&gt;    &lt;span class="n"&gt;VALUE&lt;/span&gt;
+&lt;span class="c1"&gt;------------------------------------ ----------- ------------------------------&lt;/span&gt;
+&lt;span class="n"&gt;aq_tm_processes&lt;/span&gt;              &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;db_writer_processes&lt;/span&gt;          &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;gcs_server_processes&lt;/span&gt;             &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;global_txn_processes&lt;/span&gt;             &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;job_queue_processes&lt;/span&gt;          &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;1000&lt;/span&gt;
+&lt;span class="n"&gt;log_archive_max_processes&lt;/span&gt;        &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;4&lt;/span&gt;
+&lt;span class="n"&gt;processes&lt;/span&gt;                &lt;span class="nb"&gt;integer&lt;/span&gt;     &lt;span class="mi"&gt;1000&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;连接数已修改。但是没过一会连接又满了：&lt;code&gt;ORA-00020:maximum number of processes (1000) exceeded&lt;/code&gt;，这时候就要排查问题了。&lt;/p&gt;
+&lt;p&gt;再次连上数据库，观察会话使用情况：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;v$session&lt;/span&gt; &lt;span class="k"&gt;group&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt; &lt;span class="k"&gt;order&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;......&lt;/span&gt;
+&lt;span class="n"&gt;EVENT&lt;/span&gt;                                   &lt;span class="n"&gt;PROGRAM&lt;/span&gt;                             &lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;------------------------------------------------------------------------------ ----------&lt;/span&gt;
+&lt;span class="n"&gt;rdbms&lt;/span&gt; &lt;span class="n"&gt;ipc&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;                       &lt;span class="n"&gt;oracle&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;oramod&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;GEN0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;                      &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;Net&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;             &lt;span class="n"&gt;plsqldev&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exe&lt;/span&gt;                              &lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;Net&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;             &lt;span class="n"&gt;JDBC&lt;/span&gt; &lt;span class="n"&gt;Thin&lt;/span&gt; &lt;span class="n"&gt;Client&lt;/span&gt;                          &lt;span class="mi"&gt;78&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;可以看到JDBC连接数过多。&lt;/p&gt;
+&lt;p&gt;下面排查下是哪个项目的问题，首先查看每个oracle帐户的连接总数 ：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;v$session&lt;/span&gt; &lt;span class="k"&gt;where&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt; &lt;span class="k"&gt;group&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="n"&gt;USERNAME&lt;/span&gt;               &lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;USERNAME&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;------------------------------ ---------------&lt;/span&gt;
+&lt;span class="n"&gt;TEST_ROGCHEN&lt;/span&gt;                    &lt;span class="mi"&gt;11&lt;/span&gt;
+&lt;span class="n"&gt;DEPT_USERCENTER&lt;/span&gt;                 &lt;span class="mi"&gt;11&lt;/span&gt;
+&lt;span class="n"&gt;MMSW&lt;/span&gt;                        &lt;span class="mi"&gt;68&lt;/span&gt;
+&lt;span class="n"&gt;BYS&lt;/span&gt;                      &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;RSBGGFWWTADMIN&lt;/span&gt;                   &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;NW_SYBX&lt;/span&gt;                     &lt;span class="mi"&gt;12&lt;/span&gt;
+&lt;span class="n"&gt;APP_LZF&lt;/span&gt;                      &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;FZDKRH&lt;/span&gt;                       &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;SYS&lt;/span&gt;                      &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;FZGGFWWT&lt;/span&gt;                     &lt;span class="mi"&gt;4&lt;/span&gt;
+
+&lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="k"&gt;rows&lt;/span&gt; &lt;span class="n"&gt;selected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;可以看到连接最多的是MMSW账户。&lt;/p&gt;
+&lt;p&gt;查看所有链接Oracle的客户端的IP等信息： &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;由于缺省从 v$session 中不能直接获得客户端 IP，可以在数据库中创建一个追踪客户端IP地址的触发器： &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;create&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="k"&gt;replace&lt;/span&gt; &lt;span class="k"&gt;trigger&lt;/span&gt; &lt;span class="n"&gt;on_logon_trigger&lt;/span&gt; &lt;span class="k"&gt;after&lt;/span&gt; &lt;span class="n"&gt;logon&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="k"&gt;database&lt;/span&gt;
+  &lt;span class="mi"&gt;2&lt;/span&gt;  &lt;span class="k"&gt;begin&lt;/span&gt;
+  &lt;span class="mi"&gt;3&lt;/span&gt;      &lt;span class="n"&gt;dbms_application_info&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_client_info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys_context&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;userenv&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ip_address&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; 
+  &lt;span class="mi"&gt;4&lt;/span&gt;  &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="mi"&gt;5&lt;/span&gt;  &lt;span class="o"&gt;/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;显示客户端信息：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="n"&gt;sid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;serial&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;client_info&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;v$session&lt;/span&gt; &lt;span class="k"&gt;where&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt; &lt;span class="k"&gt;order&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;machine&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="p"&gt;......&lt;/span&gt;
+    &lt;span class="n"&gt;SID&lt;/span&gt;    &lt;span class="nb"&gt;SERIAL&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;USERNAME&lt;/span&gt;    &lt;span class="n"&gt;PROGRAM&lt;/span&gt;             &lt;span class="n"&gt;MACHINE&lt;/span&gt;   &lt;span class="n"&gt;CLIENT_INFO&lt;/span&gt;
+&lt;span class="c1"&gt;----------------------------------------------------------------------------------------&lt;/span&gt;
+    &lt;span class="mi"&gt;12&lt;/span&gt;    &lt;span class="mi"&gt;505&lt;/span&gt; &lt;span class="n"&gt;TEST_ROGCHEN&lt;/span&gt;    &lt;span class="n"&gt;JDBC&lt;/span&gt; &lt;span class="n"&gt;Thin&lt;/span&gt; &lt;span class="n"&gt;Client&lt;/span&gt;     &lt;span class="n"&gt;rhel7&lt;/span&gt;     &lt;span class="mi"&gt;192&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;168&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;44&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;81&lt;/span&gt;
+&lt;span class="p"&gt;......&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以看到链接最多的来自192.168.44.81这台主机。&lt;/p&gt;
+&lt;p&gt;所以初步判断为192.168.44.81主机上使用MMSW账户的项目有问题。然后就没有然后了。&lt;/p&gt;
+&lt;h3&gt;参考文章&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://blog.itpub.net/12798004/viewspace-1742938/"&gt;ORA-00020:maximum number of processes (500) exceeded 错误解决方法&lt;/a&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://blog.csdn.net/keaihuilang/article/details/54910573"&gt;ORA-00020: maximum number of processes (1000) exceeded 故障一列&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://blog.csdn.net/sunny05296/article/details/79171018"&gt;查看Oracle链接客户端的IP等信息&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Oracle"></category><category term="Troubleshooting"></category></entry><entry><title>Oracle 十全大补汤</title><link href="https://jlhxxxx.github.io/oracle-rudiment.html" rel="alternate"></link><published>2018-05-12T00:00:00+08:00</published><updated>2018-05-12T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-12:/oracle-rudiment.html</id><summary type="html">&lt;h2&gt;安装卸载&lt;/h2&gt;
+&lt;h4&gt;安装&lt;/h4&gt;
+&lt;p&gt;新手不建议安装发布不久的最新版本，一来新版本可能有一些新特性，但是网上相关的文章较少，入坑概率很大，老手尚需时间来适应，新手肯定更觉得难以上手了；二来旧版本相对比较稳定，各种文档丰富，常见BUG都有比较成熟的应对方法；三是要看使用环境了，兼容性是考虑重点，客户端和服务器端版本要尽量一致，这里的问题实在太多，几百M都讲不完，说多了都是眼泪。&lt;/p&gt;
+&lt;p&gt;Oracle下载地址：&lt;a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html"&gt;【英文地址】&lt;/a&gt;、&lt;a href="http://www.oracle.com/technetwork/cn/database/enterprise-edition/downloads/index.html"&gt;【中文地址】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Windows下安装教程&lt;/strong&gt;：&lt;a href="https://blog.csdn.net/anxpp/article/details/51345074"&gt; Oracle 12c Windows安装、介绍及简单使用(图文) &lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;网上这个教程以Oracle 12c为例，其他版本安装过程都差不多，注意&lt;strong&gt;安装位置&lt;/strong&gt;自己设置一下（只要设置Oracle基目录即可，其他目录会相应改变），&lt;strong&gt;字符集选UTF-8&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Linux下安装教程&lt;/strong&gt;：todo&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安装过程中出现的问题&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://blog.csdn.net/qq_33530388/article/details/56669466"&gt;win10 下安装Oracle 11g(问题：环境不满足最低要求) &lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;先决条件检查有失败内容&lt;/p&gt;
+&lt;p&gt;查看失败内容，如果是“预期值：N/A，实际值 …&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h2&gt;安装卸载&lt;/h2&gt;
+&lt;h4&gt;安装&lt;/h4&gt;
+&lt;p&gt;新手不建议安装发布不久的最新版本，一来新版本可能有一些新特性，但是网上相关的文章较少，入坑概率很大，老手尚需时间来适应，新手肯定更觉得难以上手了；二来旧版本相对比较稳定，各种文档丰富，常见BUG都有比较成熟的应对方法；三是要看使用环境了，兼容性是考虑重点，客户端和服务器端版本要尽量一致，这里的问题实在太多，几百M都讲不完，说多了都是眼泪。&lt;/p&gt;
+&lt;p&gt;Oracle下载地址：&lt;a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html"&gt;【英文地址】&lt;/a&gt;、&lt;a href="http://www.oracle.com/technetwork/cn/database/enterprise-edition/downloads/index.html"&gt;【中文地址】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Windows下安装教程&lt;/strong&gt;：&lt;a href="https://blog.csdn.net/anxpp/article/details/51345074"&gt; Oracle 12c Windows安装、介绍及简单使用(图文) &lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;网上这个教程以Oracle 12c为例，其他版本安装过程都差不多，注意&lt;strong&gt;安装位置&lt;/strong&gt;自己设置一下（只要设置Oracle基目录即可，其他目录会相应改变），&lt;strong&gt;字符集选UTF-8&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Linux下安装教程&lt;/strong&gt;：todo&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安装过程中出现的问题&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://blog.csdn.net/qq_33530388/article/details/56669466"&gt;win10 下安装Oracle 11g(问题：环境不满足最低要求) &lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;先决条件检查有失败内容&lt;/p&gt;
+&lt;p&gt;查看失败内容，如果是“预期值：N/A，实际值：N/A”这样的，是因为操作系统未开启默认共享，导致Oracle无法检查环境的可用性 ，这种情况直接点击右上角的全部忽略，就可以进行下一步安装了；如果确实某方面配置不达标，就不建议继续安装了，装个PL/SQL连服务器上的库玩就好了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;卸载&lt;/h4&gt;
+&lt;p&gt;新手导错库或者初始化配置错误不知道还原的方法怎么办，简单，卸载重装。^_^ 装装卸卸多了，就变成熟手了。这个有现成的教程，亲测好用：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Windows下卸载&lt;/strong&gt;：&lt;a href="https://blog.csdn.net/Devin_LiuYM/article/details/59539020"&gt;彻底的卸载干净oracle 11g&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Linux下卸载&lt;/strong&gt;：todo&lt;/p&gt;
+&lt;h2&gt;常用目录结构&lt;/h2&gt;
+&lt;p&gt;了解Oracle常用目录结构，将大大提高数据库管理与维护的工作效率 。这里以oracle 11g为例。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.                                   # 主目录
+│─ cfgtoollogs                       # 存放当运行dbca，dbua，emca，netca等图形化配置程序时的log
+│─ flash_recovery_area                  # 存储并管理与备份和恢复有关的文件
+│─ oradata                              # 数据库文件缺省存储目录
+│   │─ dbf文件                        # 对应数据库中每个表空间
+│   │─ ctl文件                          # 控制文件
+│   └─ log文件                          # 对应重做日志文件组及其成员
+└─ product                              # 客户端主目录
+    └─ 11.2.0\dbhome_1
+            │─ bin                  # 主要包含用于数据库管理的各种命令
+            │─ css                  # 与Oracle Cluster Synchronization服务有关的文件
+            │─ database
+            │   └─ SPFILEORCL.ORA   # 服务器参数文件
+            │─ dbs                    # 存放数据库服务器端的参数文件Spfile
+            │─ demo                   # 存放数据库实例模式的脚本等
+            │─ install              # 用于存储ORACLE安装后的端口号,iSQL*Plus以及Enterprise Manager Database Control启动并登录的方式等,如该路径下的portlist.ini
+            │─ network/admin            # 有关监听器listener.ora和sqlnet.ora以及tnsnames.ora等
+            └─ sysman/config            # 用于与Oracle Enterprise Management有关的端口管理等
+                └─emkey.ora         # 加密密钥
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.csdn.net/leshami/article/details/5633093"&gt;Oracle 常用目录结构(10g) &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;监听/别名配置&lt;/h2&gt;
+&lt;p&gt;Oracle只有在&lt;strong&gt;服务器端配置监听是必须&lt;/strong&gt;的，在&lt;strong&gt;客户端可以不用配置&lt;/strong&gt;；而且一般服务器端都是监听本地，默认配置都有，不需要另外配置；只有监听其他地址才需要另外配置。网上很多配置监听的教程都是修改\oracle\product\11.2.0\dbhome_1\NETWORK\ADMIN\目录下tnsname.ora文件 ,其实是错误的，监听配置文件是同一目录下listener.ora文件，下面三篇文章感觉写的比较深入，但没有具体实践对比过。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.csdn.net/nixiangxiren/article/details/6293880"&gt;oracle监听器配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://blog.csdn.net/scofy0/article/details/49069217"&gt;Oracle监听配置详解&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cnblogs.com/wanghongyun/p/6307548.html"&gt;Oracle的tnsnames.ora 监听配置文件详解&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;那么tnsname.ora文件是做什么用的呢，其实这是&lt;strong&gt;别名配置文件&lt;/strong&gt;，类似于hosts文件，提供tnsname到主机名或者ip的对应。&lt;/p&gt;
+&lt;p&gt;配置监听和别名的格式是一样的，添加如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;TEST&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;                                                              &lt;span class="c1"&gt;--别名&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DESCRIPTION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ADDRESS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PROTOCOL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TCP&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="k"&gt;HOST&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;168&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;PORT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1521&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  &lt;span class="c1"&gt;--地址及端口号&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CONNECT_DATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SERVICE_NAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;orcl&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;                                         &lt;span class="c1"&gt;--实例名称&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;cmd命令&lt;/h2&gt;
+&lt;p&gt;前提是本地安装了Oracle客户端，打开cmd，输入命令。由于帮助文档是中文的，所以不展开。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;tnsping&lt;/code&gt;：诊断连接，查看帮助&lt;code&gt;tnsping&lt;/code&gt;，地址可以使用别名。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;exp&lt;/code&gt;：导出，查看帮助&lt;code&gt;EXP HELP=Y&lt;/code&gt;，具体参见数据库迁移内容。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;imp&lt;/code&gt;：导入，查看帮助&lt;code&gt;IMP HELP=Y&lt;/code&gt;，具体参见数据库迁移内容。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;sqlplus&lt;/code&gt;：链接，查看版本及帮助&lt;code&gt;sqlplus -H&lt;/code&gt;。链接成功后命令提示符变成&lt;code&gt;SQL&amp;gt;&lt;/code&gt;，此后可以输入正常SQL语句，记得句末带&lt;code&gt;;&lt;/code&gt;，正常退出使用&lt;code&gt;quit&lt;/code&gt;，其他输错密码或陷入不可描述状态退出可使用&lt;code&gt;Ctrl+C&lt;/code&gt;，或者直接关闭终端。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其他命令还有很多，都在\oracle\product\11.2.0\dbhome_1\BIN\目录下，Windows下可执行命令为exe文件。&lt;/p&gt;
+&lt;h2&gt;数据库初始化&lt;/h2&gt;
+&lt;p&gt;数据库初始化主要分三步：创建表空间，建立用户和用户授权。&lt;/p&gt;
+&lt;h4&gt;创建表空间&lt;/h4&gt;
+&lt;p&gt;在创建表空间之前，首先要知道什么是表空间，并且要清楚临时表空间、永久表空间、默认表空间、UNDO表空间之间的区别，这里有几篇文章可以好好看下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://blog.csdn.net/leshami/article/details/5611738"&gt;Oracle 表空间与数据文件&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.cnblogs.com/fnng/archive/2012/08/12/2634485.html"&gt;Oracle表空间（tablespaces）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://blog.csdn.net/jmilk/article/details/51599260"&gt;Oracle 表空间详解&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.cnblogs.com/zhangyingai/p/7082594.html"&gt;临时表空间概念&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这里需要注意的是，若数据库没有临时表空间，在创建正式表空间之前，应先建一个临时表空间。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;概念掌握之后，在实际创建表空间之前，最好先查询一下，确保要使用的名称没有被使用：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;--查看已有的表空间&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;v$tablespace&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;--查看详细数据文件&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;file_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;tablespace_name&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dba_data_files&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;--查看表空间使用情况&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TABLESPACE_NAME&lt;/span&gt;                     &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;TABLESPACE_NAME&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="n"&gt;ROUND&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BYTES&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;    &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;TOTAL(G)&amp;quot;&lt;/span&gt;     &lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="n"&gt;ROUND&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BYTES&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;    &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;USED(G)&amp;quot;&lt;/span&gt;      &lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="n"&gt;ROUND&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;C&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BYTES&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;    &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;FREE(G)&amp;quot;&lt;/span&gt;      &lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="n"&gt;ROUND&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BYTES&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BYTES&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;% USED&amp;quot;&lt;/span&gt;       &lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="n"&gt;ROUND&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="k"&gt;C&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BYTES&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BYTES&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;% FREE&amp;quot;&lt;/span&gt; 
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;SYS&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SM$TS_AVAIL&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;SYS&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SM$TS_USED&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;SYS&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SM$TS_FREE&lt;/span&gt; &lt;span class="k"&gt;C&lt;/span&gt; 
+&lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TABLESPACE_NAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TABLESPACE_NAME&lt;/span&gt; 
+&lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TABLESPACE_NAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;C&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TABLESPACE_NAME&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;要创建表空间，首先要使用有CREATE  TABLESPACE权限的用户，&lt;strong&gt;创建表空间语法&lt;/strong&gt;如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;BIGFILE&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;SMALLFILE&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;TEMPORARY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;TABLESPACE&lt;/span&gt; &lt;span class="n"&gt;tablespace_name&lt;/span&gt;
+&lt;span class="n"&gt;DATAFILE&lt;/span&gt; &lt;span class="n"&gt;datafile&lt;/span&gt; &lt;span class="n"&gt;spec&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;TEMPFILE&lt;/span&gt; &lt;span class="n"&gt;tempfile&lt;/span&gt; &lt;span class="n"&gt;spec&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;MINIMUM&lt;/span&gt; &lt;span class="n"&gt;EXTENT&lt;/span&gt; &lt;span class="n"&gt;minimum&lt;/span&gt; &lt;span class="n"&gt;extent&lt;/span&gt; &lt;span class="k"&gt;size&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;BLOCKSIZE&lt;/span&gt; &lt;span class="n"&gt;blocksize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="n"&gt;COMPRESS&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCOMPRESS&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;DEFAULT&lt;/span&gt; &lt;span class="k"&gt;STORAGE&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="k"&gt;storage&lt;/span&gt; &lt;span class="n"&gt;clause&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;LOGGING&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOLOGGING&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;FORCE&lt;/span&gt; &lt;span class="n"&gt;LOGGING&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ONLINE&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;OFFLINE&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;EXTENT&lt;/span&gt; &lt;span class="n"&gt;MANAGEMENT&lt;/span&gt; &lt;span class="k"&gt;DICTIONARY&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="k"&gt;LOCAL&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;AUTOALLOCATE&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;UNIFORM&lt;/span&gt; &lt;span class="k"&gt;SIZE&lt;/span&gt; &lt;span class="k"&gt;size&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;SEGMENT&lt;/span&gt; &lt;span class="k"&gt;SPACE&lt;/span&gt; &lt;span class="n"&gt;MANAGEMENT&lt;/span&gt; &lt;span class="n"&gt;MANUAL&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;AUTO&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;FLASHBACK&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="k"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.linuxidc.com/Linux/2016-12/138981.htm"&gt;Oracle create tablespace 创建表空间语法详解&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;语法看起来有点复杂，但是实际应用中并不是每个选项都需要配置，你只需知道能配置哪些就好，下面举一些栗子：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;--创建临时表空间&lt;/span&gt;
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;TEMPORARY&lt;/span&gt; &lt;span class="n"&gt;TABLESPACE&lt;/span&gt; &lt;span class="n"&gt;TEMP&lt;/span&gt; 
+&lt;span class="n"&gt;TEMPFILE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/u02/oradata/temp.dbf&amp;#39;&lt;/span&gt; 
+&lt;span class="k"&gt;SIZE&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; 
+&lt;span class="n"&gt;AUTOEXTEND&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; 
+&lt;span class="k"&gt;NEXT&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;MAXSIZE&lt;/span&gt; &lt;span class="mi"&gt;20480&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; 
+&lt;span class="n"&gt;EXTENT&lt;/span&gt; &lt;span class="n"&gt;MANAGEMENT&lt;/span&gt; &lt;span class="k"&gt;LOCAL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;--创建单个表空间    &lt;/span&gt;
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;TABLESPACE&lt;/span&gt; &lt;span class="n"&gt;TEST&lt;/span&gt;                                  &lt;span class="c1"&gt;--名称&lt;/span&gt;
+  &lt;span class="n"&gt;DATAFILE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;d:\work\oracle\oradata\test\TEST.DBF&amp;#39;&lt;/span&gt;       &lt;span class="c1"&gt;--存储位置&lt;/span&gt;
+  &lt;span class="k"&gt;SIZE&lt;/span&gt; &lt;span class="mi"&gt;2048&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;                                            &lt;span class="c1"&gt;--初始大小&lt;/span&gt;
+  &lt;span class="n"&gt;AUTOEXTEND&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt;                                         &lt;span class="c1"&gt;--自动增长&lt;/span&gt;
+  &lt;span class="k"&gt;NEXT&lt;/span&gt; &lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt; &lt;span class="n"&gt;MAXSIZE&lt;/span&gt; &lt;span class="n"&gt;UNLIMITED&lt;/span&gt;                           &lt;span class="c1"&gt;--每次递增32M&lt;/span&gt;
+  &lt;span class="n"&gt;EXTENT&lt;/span&gt; &lt;span class="n"&gt;MANAGEMENT&lt;/span&gt; &lt;span class="k"&gt;LOCAL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;                              &lt;span class="c1"&gt;--本地管理&lt;/span&gt;
+
+&lt;span class="c1"&gt;--创建多个表空间        &lt;/span&gt;
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;TABLESPACE&lt;/span&gt; &lt;span class="n"&gt;TS_IMAGEDATA&lt;/span&gt;
+&lt;span class="n"&gt;LOGGING&lt;/span&gt;
+&lt;span class="n"&gt;DATAFILE&lt;/span&gt;  &lt;span class="s1"&gt;&amp;#39;E:&amp;quot;ORACLE&amp;quot;ORADATA&amp;quot;DATA_01.DBF&amp;#39;&lt;/span&gt;  &lt;span class="k"&gt;SIZE&lt;/span&gt; &lt;span class="mi"&gt;2000&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt; &lt;span class="n"&gt;REUSE&lt;/span&gt;    
+                &lt;span class="n"&gt;AUTOEXTEND&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt;    
+                &lt;span class="k"&gt;NEXT&lt;/span&gt; &lt;span class="mi"&gt;51200&lt;/span&gt;&lt;span class="n"&gt;K&lt;/span&gt; &lt;span class="n"&gt;MAXSIZE&lt;/span&gt; &lt;span class="mi"&gt;3900&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;    
+          &lt;span class="s1"&gt;&amp;#39;E:&amp;quot;ORACLE&amp;quot;ORADATA&amp;quot;XL&amp;quot;DATA_02.DBF&amp;#39;&lt;/span&gt;  &lt;span class="k"&gt;SIZE&lt;/span&gt; &lt;span class="mi"&gt;2000&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt; &lt;span class="n"&gt;REUSE&lt;/span&gt;    
+                &lt;span class="n"&gt;AUTOEXTEND&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt;    
+                &lt;span class="k"&gt;NEXT&lt;/span&gt; &lt;span class="mi"&gt;51200&lt;/span&gt;&lt;span class="n"&gt;K&lt;/span&gt; &lt;span class="n"&gt;MAXSIZE&lt;/span&gt; &lt;span class="mi"&gt;3900&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;    
+          &lt;span class="s1"&gt;&amp;#39;E:&amp;quot;ORACLE&amp;quot;ORADATA&amp;quot;XL&amp;quot;DATA_03.DBF&amp;#39;&lt;/span&gt;  &lt;span class="k"&gt;SIZE&lt;/span&gt; &lt;span class="mi"&gt;2000&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt; &lt;span class="n"&gt;REUSE&lt;/span&gt;    
+                &lt;span class="n"&gt;AUTOEXTEND&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt;    
+                &lt;span class="k"&gt;NEXT&lt;/span&gt; &lt;span class="mi"&gt;51200&lt;/span&gt;&lt;span class="n"&gt;K&lt;/span&gt; &lt;span class="n"&gt;MAXSIZE&lt;/span&gt; &lt;span class="mi"&gt;3900&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;    
+          &lt;span class="s1"&gt;&amp;#39;E:&amp;quot;ORACLE&amp;quot;ORADATA&amp;quot;XL&amp;quot;DATA_04.DBF&amp;#39;&lt;/span&gt;  &lt;span class="k"&gt;SIZE&lt;/span&gt; &lt;span class="mi"&gt;2000&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt; &lt;span class="n"&gt;REUSE&lt;/span&gt;    
+                &lt;span class="n"&gt;AUTOEXTEND&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt;    
+                &lt;span class="k"&gt;NEXT&lt;/span&gt; &lt;span class="mi"&gt;51200&lt;/span&gt;&lt;span class="n"&gt;K&lt;/span&gt; &lt;span class="n"&gt;MAXSIZE&lt;/span&gt; &lt;span class="mi"&gt;3900&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;    
+&lt;span class="n"&gt;EXTENT&lt;/span&gt; &lt;span class="n"&gt;MANAGEMENT&lt;/span&gt; &lt;span class="k"&gt;LOCAL&lt;/span&gt;    
+&lt;span class="n"&gt;SEGMENT&lt;/span&gt; &lt;span class="k"&gt;SPACE&lt;/span&gt; &lt;span class="n"&gt;MANAGEMENT&lt;/span&gt; &lt;span class="n"&gt;AUTO&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;--创建UNDO表空间       &lt;/span&gt;
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;UNDO&lt;/span&gt; &lt;span class="n"&gt;TABLESPACE&lt;/span&gt; &lt;span class="n"&gt;ts_undo01&lt;/span&gt;    
+      &lt;span class="n"&gt;DATAFILE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/data/ts_undo01.dbf&amp;#39;&lt;/span&gt;      
+      &lt;span class="k"&gt;SIZE&lt;/span&gt; &lt;span class="mi"&gt;50000&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt; &lt;span class="n"&gt;REUSE&lt;/span&gt;    
+      &lt;span class="n"&gt;AUTOEXTEND&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;建立用户&lt;/h4&gt;
+&lt;p&gt;在建立用户之前，最好也先查询一下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dba_users&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://xlbd.me/query-oracle-users/"&gt;查询oracle中所有用户信息&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;建立用户当然也要使用有建立用户权限的账户，&lt;a href="https://www.jianshu.com/p/c25dcdbaf797"&gt;&lt;strong&gt;语法&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;实例&lt;/strong&gt;：创建一个名为&lt;code&gt;maxsu&lt;/code&gt;的新用户，密码&lt;code&gt;passwd1234&lt;/code&gt;，默认表空间为&lt;code&gt;tbs_perm_01&lt;/code&gt;，配额为&lt;code&gt;20MB&lt;/code&gt;，使用&lt;code&gt;tbs_temp_01&lt;/code&gt; 临时表空间。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;maxsu&lt;/span&gt;
+  &lt;span class="n"&gt;IDENTIFIED&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;passwd1234&lt;/span&gt;
+  &lt;span class="k"&gt;DEFAULT&lt;/span&gt; &lt;span class="n"&gt;TABLESPACE&lt;/span&gt; &lt;span class="n"&gt;tbs_perm_01&lt;/span&gt;
+  &lt;span class="k"&gt;TEMPORARY&lt;/span&gt; &lt;span class="n"&gt;TABLESPACE&lt;/span&gt; &lt;span class="n"&gt;tbs_temp_01&lt;/span&gt;
+  &lt;span class="n"&gt;QUOTA&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;tbs_perm_01&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;Oracle12中建立本地用户需要在用户名前加&lt;code&gt;C##&lt;/code&gt;，我试用了一下就卸载了。T_T&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;授权用户&lt;/h4&gt;
+&lt;p&gt;当然首先了解下用户权限相关概念，初始化这里的授权一般只是授予用户的系统权限。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.csdn.net/junmail/article/details/4381287"&gt;Oracle用户、权限、角色管理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;系统权限分为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DBA：拥有全部特权，是系统最高权限，只有DBA才可以创建数据库结构。（&lt;strong&gt;此权限慎授&lt;/strong&gt;）&lt;/li&gt;
+&lt;li&gt;RESOURCE：拥有Resource权限的用户只可以创建实体，不可以创建数据库结构。&lt;/li&gt;
+&lt;li&gt;CONNECT：拥有Connect权限的用户只可以登录Oracle，不可以创建实体，不可以创建数据库结构。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;系统权限只能由DBA用户授出或收回：sys, system(最开始只能是这两个用户)&lt;/p&gt;
+&lt;p&gt;普通用户通过授权可以具有与system相同的用户权限，但永远不能达到与sys用户相同的权限，system用户的权限也可以被回收。 &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;语法&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;--系统权限授权&lt;/span&gt;
+&lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;CONNECT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;RESOURCE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DBA&lt;/span&gt; &lt;span class="k"&gt;TO&lt;/span&gt; &lt;span class="n"&gt;user1&lt;/span&gt; &lt;span class="p"&gt;[,&lt;/span&gt;&lt;span class="n"&gt;user2&lt;/span&gt;&lt;span class="p"&gt;]...;&lt;/span&gt;
+
+&lt;span class="c1"&gt;--系统权限传递：增加WITH ADMIN OPTION选项，则得到的权限可以传递。&lt;/span&gt;
+&lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;CONNECT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;RESOURCE&lt;/span&gt; &lt;span class="k"&gt;TO&lt;/span&gt; &lt;span class="n"&gt;user1&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="k"&gt;ADMIN&lt;/span&gt; &lt;span class="k"&gt;OPTION&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;--系统权限回收&lt;/span&gt;
+&lt;span class="k"&gt;REVOKE&lt;/span&gt; &lt;span class="k"&gt;CONNECT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;RESOURCE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;user1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;删除表空间和用户&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;--删除表空间&lt;/span&gt;
+&lt;span class="k"&gt;DROP&lt;/span&gt; &lt;span class="n"&gt;TABLESPACE&lt;/span&gt; &lt;span class="n"&gt;tablespace_name&lt;/span&gt; &lt;span class="k"&gt;INCLUDING&lt;/span&gt; &lt;span class="n"&gt;CONTENTS&lt;/span&gt; &lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="n"&gt;DATAFILES&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;--删除用户：加上CASCADE则将用户连同其创建的东西全部删除&lt;/span&gt;
+&lt;span class="k"&gt;DROP&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;user_name&lt;/span&gt; &lt;span class="k"&gt;CASCADE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;导出/导入数据&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;前提&lt;/strong&gt;：我们导出/导入数据，肯定是要通过Oracle自带的可执行程序来完成数据的导入导出工作，所以要安装Oracle客户端；同时导出/导入的用户必须要有导出/导入的权限才行。&lt;/p&gt;
+&lt;p&gt;导出/导入一般有两种方法：&lt;/p&gt;
+&lt;h4&gt;1. 以cmd命令操作符导入导出&lt;/h4&gt;
+&lt;p&gt;导出/导入的&lt;strong&gt;基本语法&lt;/strong&gt;如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;EXP&lt;/span&gt; &lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;passwd&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;dbname&lt;/span&gt; &lt;span class="n"&gt;KEYWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="n"&gt;IMP&lt;/span&gt; &lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;passwd&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;dbname&lt;/span&gt; &lt;span class="n"&gt;KEYWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;具体的&lt;code&gt;KEYWORD&lt;/code&gt;可以通过&lt;code&gt;EXP/IMP HELP=Y&lt;/code&gt;查看，这里有几个注意事项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;@dbname&lt;/code&gt;为实例名称，远程服务器一般是&lt;code&gt;@IP/实例名&lt;/code&gt;，本地可以省略IP，可以使用别名。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;full=y&lt;/code&gt;表示&lt;strong&gt;全库&lt;/strong&gt;（是整个数据库）导出/导入（&lt;strong&gt;慎用！&lt;/strong&gt;），这个需要有DBA权限的用户，如果只要导出某个用户的所有数据，请不要加上&lt;code&gt;full=y&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;如果导入的表已经存在，直接导入会报错，加上&lt;code&gt;ignore=y&lt;/code&gt;，对该表就不进行导入 ；如果是表数据不全，可以删掉该表再加上关键字&lt;code&gt;tables=...&lt;/code&gt;重新导入。&lt;/li&gt;
+&lt;li&gt;如果使用sys账户链接导出某个用户数据，使用&lt;code&gt;exp "'sys/passwd@orcl as SYSDBA'" file=d:\test.dmp owner=ts&lt;/code&gt;，注意&lt;code&gt;"'sys/passwd@orcl as SYSDBA'"&lt;/code&gt;这里用了两组引号，如果只用一组引号，需要用&lt;code&gt;\&lt;/code&gt;转义：&lt;code&gt;exp \"sys/passwd@orcl as SYSDBA\" file=d:\test.dmp owner=ts&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;如果使用&lt;code&gt;KEYWORD=(value1,value2,...,valueN)&lt;/code&gt;，括号也需要转义：&lt;code&gt;KEYWORD=\(value1,value2,...,valueN\)&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;上述2点其实就是括号和引号需要转义。&lt;/li&gt;
+&lt;li&gt;如果导入的用户和导出的用户不一致，记得加上&lt;code&gt;fromuser&lt;/code&gt;和&lt;code&gt;touser&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;导出/导入最好最好加上&lt;code&gt;log&lt;/code&gt;选项，方便查看过程中遇到的错误，如果有哪张表有问题，可以另外单独处理。最可怕的就是你不知道库没导全。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;2. 用PL/SQL Developer工具导出/导入&lt;/h4&gt;
+&lt;p&gt;PL/SQL连上数据库后，也可以进行数据库的导出/导入，但是这里要注意PL/SQL的导出有两部分内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;tools-&amp;gt;export user objects&lt;/strong&gt;：导出的.sql文件是建表语句（包括存储结构、函数、包等内容，&lt;strong&gt;不包含表数据&lt;/strong&gt;，&lt;strong&gt;不包含dblink&lt;/strong&gt;）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;tools-&amp;gt;export tables&lt;/strong&gt;：导出的是表结构和表数据（&lt;strong&gt;只有表&lt;/strong&gt;，不包含其他内容）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意导出时要选择导出的用户。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所以要完整的导出用户数据，必须将user objects和tables都导出；完整的导入先导入user objects，再导入tables，如果还有dblink，需要手动复制粘贴导入（需要dblink链接的数据库密码）。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;PL/SQL export tables有三种方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Oracle导出&lt;/strong&gt;：其实就是用Oracle客户端的EXP导出，跟cmd导出指定表是一样的，只是不用输命令，但是这里只能用本地客户端的EXP命令，如果本地Oracle版本和服务器版本不一致，可能会有兼容性问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SQL插入&lt;/strong&gt;：导出的是SQL语句，通用性比较好，方便查看或修改。缺点是日志要全部导出操作完成才能查看，如果表数据量大会有卡死的错觉；而且效率似乎比用EXP低，适合小数据量导入导出。勾选&lt;code&gt;删掉表&lt;/code&gt;选项，导入时会在插入表数据前先删掉表，然后重建表插入数据，好处就是如果已存在的表有数据就会直接替换掉。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果表包含有CLOB等类型字段的话，是无法导出sql文件的。导出时会有报错提示，可以把这个表单独拿出来用&lt;strong&gt;Oracle导出&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;PL/SQL Developer&lt;/strong&gt;：用PL/SQL自带工具导出/导入，导出为.pde格式 ，效率最低（没试过），好处是不需要安装客户端，应该适合少量数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;总结&lt;/h4&gt;
+&lt;p&gt;从效率上来说，用EXP/IMP最好，最好的导出/导入方法是在服务器本地导出/导入，这样的好处一是导出/导入的客户端版本和服务器版本一致，不存在兼容性问题（只是单纯的导出或者导入操作不存在兼容性问题，如果导出的服务器和导入的服务器版本不一致，还是有可能有兼容性问题）；二是服务器本地导出速度更快；三是个人电脑关机不影响服务器操作。而且使用EXP/IMP比较方便，一个命令就解决了，但是遇到兼容性问题不太好处理。&lt;/p&gt;
+&lt;p&gt;从通用性来说，用PL/SQL的SQL插入比较好，而且不容易出现兼容性问题，即使出现了，直接修改SQL语句也比较方便。但是使用PL/SQL容易导不全，需要仔细检查。&lt;/p&gt;
+&lt;p&gt;如果数据量大的话，建议不要一次性导出/导入，分开导出/导入更安全。&lt;/p&gt;
+&lt;h4&gt;数据导出/导入完整流程&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;了解&lt;/strong&gt;要导出和导入的数据库情况，包括Oracle版本，用户权限，需要导出的数据的大致大小，有无特殊数据类型，有没有依赖其他库的东西，dblink链接密码等，要是能确定具体导哪些表哪些存储过程最好，这样一是导出数据量比较小，二是可以排除其他无效数据的影响；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;导出&lt;/strong&gt;时对照HELP文档检查导出语句，确保需要配置的KEYWORD都有且正确，记得加上日志选项，导出完毕查看日志，若有报错可能需要单独处理；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;导入&lt;/strong&gt;时按照上面初始化内容：建立表空间，建立用户并授权，检查导入语句正确无误后开始执行导入，若导入的用户名和导出的用户名不一致，需要加上&lt;code&gt;fromuser&lt;/code&gt;和&lt;code&gt;touser&lt;/code&gt;；导入完毕查看日志，若有报错可能需要单独处理；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;检查&lt;/strong&gt;数据是否正确导入，是否有遗漏项；没有问题后编译无效对象，PL/SQL有个按钮直接就能执行，编译完毕后如果仍存在无效对象，检查原库对象是否有效，若是也无效就不用管了（毕竟可能有一些遗留问题），否则需要排查问题；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;整理&lt;/strong&gt;导出导入过程相关资料，这样下一次重复工作就变得简单了。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;曾经遇到的问题&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;导出报错：数据库链接口令无效&lt;/p&gt;
+&lt;p&gt;数据库链接指的就是dblink，这个问题只发生在EXP下，一般是导出客户端版本低于服务器端，解决方法一是在服务器本地导出避开兼容性问题；二是另外备份好dblink，删除后再导出，导出后记得恢复。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;错误使用&lt;code&gt;full=y&lt;/code&gt;导出：导入时各种报错&lt;/p&gt;
+&lt;p&gt;这个只有新手才会犯的错误，搞清楚概念就不会发生了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;OEM创建&lt;/h2&gt;
+&lt;h4&gt;todo&lt;/h4&gt;
+&lt;p&gt;question 1：oem是个what？&lt;/p&gt;
+&lt;p&gt;question 2：why should we build oem？&lt;/p&gt;
+&lt;p&gt;question 3：how to？&lt;/p&gt;</content><category term="Oracle"></category><category term="Rudiment"></category></entry><entry><title>Oracle LOOP循环</title><link href="https://jlhxxxx.github.io/oracle-loop.html" rel="alternate"></link><published>2018-04-26T00:00:00+08:00</published><updated>2018-04-26T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-26:/oracle-loop.html</id><summary type="html">&lt;p&gt;本文基本全文转载，原文链接：&lt;a href="http://www.cnblogs.com/Richardzhu/p/3455806.html"&gt;Oracle PL/SQL之LOOP循环控制语句&lt;/a&gt;。作者写的看着很舒服，所以收藏起来自己用。主要是一些语法格式，适合新手对照练习。&lt;/p&gt;
+&lt;h2&gt;一、基本的LOOP语句&lt;/h2&gt;
+&lt;p&gt;LOOP语句的基本语法结构如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;LOOP&lt;/span&gt;
+ &lt;span class="k"&gt;statement&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;LOOP&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;【语法说明】&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;&amp;lt;label_name&amp;gt;&amp;gt;&lt;/code&gt;：LOOP结构的标签，是可选项。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LOOP&lt;/code&gt;：LOOP循环开始标志。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;statement&lt;/code&gt;：LOOP语句中循环执行的语句序列。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;END LOOP&lt;/code&gt;：LOOP循环结束标志，可以添加LOOP结构的标签。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;实例一： 利用EXIT...WHEN结束循环操作&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;serveroutput&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;--exit when&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
+   &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;begin&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;fst_loop&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="n"&gt;loop&lt;/span&gt;
+      &lt;span class="n"&gt;dbms_output …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;本文基本全文转载，原文链接：&lt;a href="http://www.cnblogs.com/Richardzhu/p/3455806.html"&gt;Oracle PL/SQL之LOOP循环控制语句&lt;/a&gt;。作者写的看着很舒服，所以收藏起来自己用。主要是一些语法格式，适合新手对照练习。&lt;/p&gt;
+&lt;h2&gt;一、基本的LOOP语句&lt;/h2&gt;
+&lt;p&gt;LOOP语句的基本语法结构如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;LOOP&lt;/span&gt;
+ &lt;span class="k"&gt;statement&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;LOOP&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;【语法说明】&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;&amp;lt;label_name&amp;gt;&amp;gt;&lt;/code&gt;：LOOP结构的标签，是可选项。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LOOP&lt;/code&gt;：LOOP循环开始标志。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;statement&lt;/code&gt;：LOOP语句中循环执行的语句序列。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;END LOOP&lt;/code&gt;：LOOP循环结束标志，可以添加LOOP结构的标签。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;实例一： 利用EXIT...WHEN结束循环操作&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;serveroutput&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;--exit when&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
+   &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;begin&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;fst_loop&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="n"&gt;loop&lt;/span&gt;
+      &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;v_rlt = &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="n"&gt;exit&lt;/span&gt; &lt;span class="n"&gt;fst_loop&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;LOOP循环已经结束！&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+ &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;/&lt;/span&gt;
+
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;LOOP循环已经结束&lt;/span&gt;&lt;span class="err"&gt;！&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;实例二： 利用IF...EXIT语句结束循环&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;--if exit&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
+   &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;begin&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;fst_loop&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="n"&gt;loop&lt;/span&gt;
+      &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;v_rlt = &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+       &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;变量的值已经大于3，当前值为&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+       &lt;span class="n"&gt;exit&lt;/span&gt; &lt;span class="n"&gt;fst_loop&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="n"&gt;fst_loop&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;LOOP循环已经结束！&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+ &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="o"&gt;/&lt;/span&gt;
+
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="err"&gt;变量的值已经大于&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="err"&gt;，当前值为&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;
+&lt;span class="n"&gt;LOOP循环已经结束&lt;/span&gt;&lt;span class="err"&gt;！&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;二、WHILE...LOOP结构&lt;/h2&gt;
+&lt;p&gt;WHILE...LOOP结构和基本的LOOP语句不同，它本身可以结束LOOP循环。WHILE关键词后面需要有布尔表达式，当WHILE后面的布尔表达式为TRUE时，则循环体重的语句序列被执行1次，然后会重新判断WHILE后面的表达式是否为TRUE，只有当WHILE后的布尔表达式为FALSE时，才结束整个LOOP循环。&lt;/p&gt;
+&lt;p&gt;该语句结构的相关语法如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;WHILE&lt;/span&gt; &lt;span class="n"&gt;boolean_expression&lt;/span&gt;
+&lt;span class="n"&gt;LOOP&lt;/span&gt;
+&lt;span class="k"&gt;statement&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;LOOP&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;【语法说明】&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;boolean_expression&lt;/code&gt;：布尔表达式。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;statement&lt;/code&gt;：语句序列，当&lt;code&gt;boolean_expression&lt;/code&gt;为&lt;code&gt;TRUE&lt;/code&gt;时，该语句序列可获得执行权。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;实例&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;--while...loop&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
+   &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;begin&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;while_loop&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="n"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;loop&lt;/span&gt;
+      &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;v_rlt = &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="n"&gt;while_loop&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;WHILE循环已经结束！&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+ &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="o"&gt;/&lt;/span&gt;
+
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;WHILE循环已经结束&lt;/span&gt;&lt;span class="err"&gt;！&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;三、FOR...LOOP结构&lt;/h2&gt;
+&lt;p&gt;FOR...LOOP语句可以遍历某个范围的整数，该范围被FOR和LOOP关键词封闭。首次进入循环时，循环范围将被确定，并且以后不会再次计算。每循环一次，循环指数将会自动增加1。&lt;/p&gt;
+&lt;p&gt;FOR...LOOP语句的语法结构如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;FOR&lt;/span&gt; &lt;span class="n"&gt;index_name&lt;/span&gt; &lt;span class="k"&gt;IN&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="n"&gt;REVERSE&lt;/span&gt; &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;lower_bound&lt;/span&gt; &lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="n"&gt;upper_bound&lt;/span&gt;
+&lt;span class="n"&gt;LOOP&lt;/span&gt;
+&lt;span class="k"&gt;statement&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;LOOP&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;【语法说明】&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;index_name&lt;/code&gt;：循环计数器，是一个变量，它可以得到当前的循环指数。需要注意的是，不能为其手工赋值。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;REVERSE&lt;/code&gt;：可选项，指定循环方式。默认的循环方式由下边界(&lt;code&gt;lower_bound&lt;/code&gt;)到上边界(&lt;code&gt;upper_bound&lt;/code&gt;)。使用该选项则从上标界到下标界。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;lower_bound&lt;/code&gt;：循环范围的下边界。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;upper_bound&lt;/code&gt;：循环范围的上边界。&lt;/li&gt;
+&lt;li&gt;下边界和上边界之间的"&lt;code&gt;..&lt;/code&gt;"不能省略。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;实例&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;--for..loop&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;begin&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;..&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt;
+      &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;v_rlt = &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;v_rlt&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="n"&gt;dbms_output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;FOR循环已经结束！&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+ &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="o"&gt;/&lt;/span&gt;
+
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;FOR循环已经结束&lt;/span&gt;&lt;span class="err"&gt;！&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Oracle"></category><category term="LOOP"></category></entry><entry><title>Oracle SEQUENCE使用</title><link href="https://jlhxxxx.github.io/oracle-sequence.html" rel="alternate"></link><published>2018-04-26T00:00:00+08:00</published><updated>2018-04-26T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-26:/oracle-sequence.html</id><summary type="html">&lt;p&gt;序列(SEQUENCE)是序列号生成器，可以为表中的行自动生成序列号，产生一组等间隔的数值(类型为数字)。序列主要用于生成主键。&lt;/p&gt;
+&lt;h2&gt;建立序列&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;SEQUENCE&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;INCREMENT&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;START&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;MAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;MINVALUE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOMAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;NOMINVALUE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CYCLE&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCYCLE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CACHE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCACHE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;INCREMENT BY&lt;/code&gt;：用于定义序列的步长，如果省略，则默认为&lt;code&gt;1&lt;/code&gt;，如果出现负值，则代表序列的值是按照此步长递减的。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;START WITH&lt;/code&gt; ：定义序列的初始值(即产生的第一个值)，默认为&lt;code&gt;1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MAXVALUE&lt;/code&gt; ：定义序列生成器能产生的最大值。选项&lt;code&gt;NOMAXVALUE&lt;/code&gt;是默认选项，代表没有最大值定义，这时对于递增序列，系统能够产生的最大值是10的27次方；对于递减序列 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;序列(SEQUENCE)是序列号生成器，可以为表中的行自动生成序列号，产生一组等间隔的数值(类型为数字)。序列主要用于生成主键。&lt;/p&gt;
+&lt;h2&gt;建立序列&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;SEQUENCE&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;INCREMENT&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;START&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;MAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;MINVALUE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOMAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;NOMINVALUE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CYCLE&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCYCLE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CACHE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCACHE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;INCREMENT BY&lt;/code&gt;：用于定义序列的步长，如果省略，则默认为&lt;code&gt;1&lt;/code&gt;，如果出现负值，则代表序列的值是按照此步长递减的。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;START WITH&lt;/code&gt; ：定义序列的初始值(即产生的第一个值)，默认为&lt;code&gt;1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MAXVALUE&lt;/code&gt; ：定义序列生成器能产生的最大值。选项&lt;code&gt;NOMAXVALUE&lt;/code&gt;是默认选项，代表没有最大值定义，这时对于递增序列，系统能够产生的最大值是10的27次方；对于递减序列，最大值是&lt;code&gt;-1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MINVALUE&lt;/code&gt;：定义序列生成器能产生的最小值。选项&lt;code&gt;NOMINVALUE&lt;/code&gt;是默认选项，代表没有最小值定义，这时对于递减序列，系统能够产生的最小值是？10的26次方；对于递增序列，最小值是&lt;code&gt;1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CYCLE&lt;/code&gt;和&lt;code&gt;NOCYCLE&lt;/code&gt;：表示当序列生成器的值达到限制值后是否循环。&lt;code&gt;CYCLE&lt;/code&gt;代表循环，&lt;code&gt;NOCYCLE&lt;/code&gt;代表不循环。如果循环，则当递增序列达到最大值时，循环到最小值；对于递减序列达到最小值时，循环到最大值。如果不循环，达到限制值后，继续产生新值就会发生错误。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CACHE&lt;/code&gt;：(缓冲)定义存放序列的内存块的大小，默认为20。&lt;code&gt;NOCACHE&lt;/code&gt;表示不对序列进行内存缓冲。&lt;strong&gt;对序列进行内存缓冲，可以改善序列的性能。&lt;/strong&gt;（高级操作，一般人用不到）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;使用序列&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;取序列的下一值（首次取初值）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nextval&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取序列当前值&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;currval&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看所有序列&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;user_sequences&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;更新序列&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;ALTER&lt;/span&gt; &lt;span class="n"&gt;SEQUENCE&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;INCREMENT&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;MAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;MINVALUE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOMAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;NOMINVALUE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CYCLE&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCYCLE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CACHE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCACHE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;注意：&lt;code&gt;ALTER&lt;/code&gt;不能修改&lt;code&gt;START WITH&lt;/code&gt;，如果要修改，只能删除后重建。&lt;/p&gt;
+&lt;h2&gt;删除序列&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;DROP&lt;/span&gt; &lt;span class="n"&gt;SEQUENCE&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;举例&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;SEQUENCE&lt;/span&gt; &lt;span class="n"&gt;SEQ_CCI554&lt;/span&gt; &lt;span class="k"&gt;START&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;INCREMENT&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;MAXVALUE&lt;/span&gt; &lt;span class="mi"&gt;9999&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;DECLARE&lt;/span&gt;
+  &lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;BEGIN&lt;/span&gt;
+  &lt;span class="n"&gt;LOOP&lt;/span&gt;
+    &lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;INTO&lt;/span&gt; &lt;span class="n"&gt;CI54&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CCI554&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;AAC001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;AAB001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;CCD001&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;VALUES&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+     &lt;span class="s1"&gt;&amp;#39;80&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;030005&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;LPAD&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SEQ_CCI554&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nextval&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;622925199012056023&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;0205000027&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;170010602898&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;COMMIT&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;EXIT&lt;/span&gt; &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="n"&gt;I&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;=&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;I&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;LOOP&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;其中&lt;code&gt;||&lt;/code&gt;用于字符串拼接，&lt;code&gt;LPAD()&lt;/code&gt;用于固定位数字符串补齐。&lt;/p&gt;
+&lt;p&gt;需要注意的是，首句&lt;code&gt;CREATE SEQUENCE&lt;/code&gt;只能执行一次，序列创建后除非&lt;code&gt;DROP&lt;/code&gt;，否则不会自动消失。我在使用&lt;code&gt;JDBC&lt;/code&gt;连接的时候就犯了这个错误。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;小技巧：重置序列&lt;/h2&gt;
+&lt;p&gt;重置序列的方法一般有两个。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;第一种方法是&lt;code&gt;DROP&lt;/code&gt;之后重新&lt;code&gt;CREATE&lt;/code&gt;，这种方式有很多弊端，&lt;code&gt;DROP&lt;/code&gt;之后&lt;code&gt;CREATE&lt;/code&gt;之前依赖它的函数和存储过程将失效，需要重新编译。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第二种方法比较巧妙，利用递增参数：先查出&lt;code&gt;SEQUENCE&lt;/code&gt;的&lt;code&gt;currval&lt;/code&gt;，记为&lt;code&gt;value&lt;/code&gt;，然后将递增参数改为&lt;code&gt;-value&lt;/code&gt;，取它的&lt;code&gt;nextval&lt;/code&gt;，再将递增参数改回来。奉上大佬写的存储过程。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;OR&lt;/span&gt; &lt;span class="k"&gt;REPLACE&lt;/span&gt; &lt;span class="k"&gt;PROCEDURE&lt;/span&gt; &lt;span class="n"&gt;SEQ_RESET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sequence_name&lt;/span&gt; &lt;span class="n"&gt;VARCHAR2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="nb"&gt;NUMBER&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;TSQL&lt;/span&gt; &lt;span class="n"&gt;VARCHAR2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+ &lt;span class="k"&gt;BEGIN&lt;/span&gt;
+ &lt;span class="k"&gt;EXECUTE&lt;/span&gt; &lt;span class="k"&gt;IMMEDIATE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SELECT &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.currval FROM dual&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;INTO&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;TSQL&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ALTER SEQUENCE &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; INCREMENT BY &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;EXECUTE&lt;/span&gt; &lt;span class="k"&gt;IMMEDIATE&lt;/span&gt; &lt;span class="n"&gt;TSQL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;EXECUTE&lt;/span&gt; &lt;span class="k"&gt;IMMEDIATE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SELECT &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.nextval FROM dual&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;INTO&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;TSQL&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ALTER SEQUENCE &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="n"&gt;sequence_name&lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; INCREMENT BY 1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;EXECUTE&lt;/span&gt; &lt;span class="k"&gt;IMMEDIATE&lt;/span&gt; &lt;span class="n"&gt;TSQL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;SEQ_RESET&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;参考文章&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://lehsyh.iteye.com/blog/473210"&gt;ORACLE序列的使用(oracle sequence)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.cnblogs.com/huangzhen/archive/2011/09/19/2181257.html"&gt;Oracle重置序列(不删除重建方式)&lt;/a&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Oracle"></category><category term="SEQUENCE"></category></entry><entry><title>Oracle取系统时间</title><link href="https://jlhxxxx.github.io/oracle-get-sysdate.html" rel="alternate"></link><published>2018-04-23T00:00:00+08:00</published><updated>2018-04-23T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-23:/oracle-get-sysdate.html</id><summary type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;取今天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取上个月今天的前一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ADD_MONTHS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取本月第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;MM&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取本季度第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Q&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取上季度第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ADD_MONTHS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Q&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取今年第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;取今天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取上个月今天的前一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ADD_MONTHS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取本月第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;MM&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取本季度第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Q&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取上季度第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ADD_MONTHS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Q&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取今年第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYY&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取去年第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ADD_MONTHS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYY&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取上周第一天（周日）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;D&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取当前时间（24h）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;HH24&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取当前时间&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;HH&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取当前时间前1s&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYY-MM-DD HH24:MI:SS&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取当前时间前1min&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYY-MM-DD HH24:MI:SS&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取当前时间前1h&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYY-MM-DD HH24:MI:SS&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取今天凌晨1点半&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYY-MM-DD HH24:MI:SS&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Oracle"></category></entry><entry><title>Oracle奇技淫巧</title><link href="https://jlhxxxx.github.io/oracle-skills.html" rel="alternate"></link><published>2018-04-02T00:00:00+08:00</published><updated>2018-04-02T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-02:/oracle-skills.html</id><summary type="html">&lt;h2&gt;SELECT 1 FROM DUAL&lt;/h2&gt;
+&lt;p&gt;用PLSQL执行数据查询的时候，FROM子句是必须的，当不想查具体的表时，可以使用虚拟表dual。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;IS&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SUCCESS&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="k"&gt;RESULT&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;SYSDATE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;CASE语句&lt;/h2&gt;
+&lt;p&gt;CASE表达式有两种形式：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CASE&lt;/span&gt; &lt;span class="n"&gt;AAC004&lt;/span&gt;  
+&lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;MALE&amp;#39;&lt;/span&gt;  
+&lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;FEMALE&amp;#39;&lt;/span&gt;  
+&lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;--CASE搜索函数 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;SELECT 1 FROM DUAL&lt;/h2&gt;
+&lt;p&gt;用PLSQL执行数据查询的时候，FROM子句是必须的，当不想查具体的表时，可以使用虚拟表dual。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;IS&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SUCCESS&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="k"&gt;RESULT&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;SYSDATE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;CASE语句&lt;/h2&gt;
+&lt;p&gt;CASE表达式有两种形式：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CASE&lt;/span&gt; &lt;span class="n"&gt;AAC004&lt;/span&gt;  
+&lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;MALE&amp;#39;&lt;/span&gt;  
+&lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;FEMALE&amp;#39;&lt;/span&gt;  
+&lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;--CASE搜索函数  &lt;/span&gt;
+&lt;span class="k"&gt;CASE&lt;/span&gt;
+&lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="n"&gt;AAC004&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;MALE&amp;#39;&lt;/span&gt;  
+&lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="n"&gt;AAC004&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;FEMALE&amp;#39;&lt;/span&gt;  
+&lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SELECT CASE WHEN 用法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;  &lt;span class="n"&gt;AAC012&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;COUNT&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;CASE&lt;/span&gt; &lt;span class="n"&gt;AAC004&lt;/span&gt;
+                       &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+                       &lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;
+                       &lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;MALE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="k"&gt;COUNT&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;CASE&lt;/span&gt; &lt;span class="n"&gt;AAC004&lt;/span&gt;
+                       &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+                       &lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;
+                       &lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;FEMALE&lt;/span&gt;
+    &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;AC01&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;AAC002&lt;/span&gt; &lt;span class="k"&gt;LIKE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;%19940911%&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;GROUP&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;AAC012&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;CASE&lt;/span&gt; 
+        &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="err"&gt;表达式&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;RESULT1&amp;#39;&lt;/span&gt;
+        &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="err"&gt;表达式&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;RESULT2&amp;#39;&lt;/span&gt;
+        &lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;RESULT3&amp;#39;&lt;/span&gt;
+        &lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="k"&gt;RESULT&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;WHERE CASE WHEN 用法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;T2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;T1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;
+   &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;T1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;T2&lt;/span&gt;
+  &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;CASE&lt;/span&gt; 
+         &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="n"&gt;T2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;COMPARE_TYPE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="n"&gt;T1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SOME_TYPE&lt;/span&gt; &lt;span class="k"&gt;LIKE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;NOTHING%&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+         &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="n"&gt;T2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;COMPARE_TYPE&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="n"&gt;T1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SOME_TYPE&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;LIKE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;NOTHING%&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+           &lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+           &lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;GROUP BY CASE WHEN 用法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="k"&gt;CASE&lt;/span&gt; &lt;span class="n"&gt;AAC004&lt;/span&gt;
+    &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;MALE&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;FEMALE&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;
+    &lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;SEX&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="c1"&gt;--别名&lt;/span&gt;
+    &lt;span class="n"&gt;CUONT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;AC01&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;AAC002&lt;/span&gt; &lt;span class="k"&gt;LIKE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;%19940911%&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;GROUP&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="k"&gt;CASE&lt;/span&gt; &lt;span class="n"&gt;AAC004&lt;/span&gt;
+        &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;MALE&amp;#39;&lt;/span&gt;
+        &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;FEMALE&amp;#39;&lt;/span&gt;
+        &lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;DECODE用法&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;等价于IF-THEN-ELSE&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;DECODE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;VALUE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IF1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;THEN1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IF2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;THEN2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IF3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;THEN3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;举例&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;--SALARY&amp;gt;8000,加薪15%；SALARY&amp;lt;8000,加薪20%;SALARY=8000,加薪15%&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;DECODE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SIGN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SALARY&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;8000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;SALARY&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;SALARY&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;SALARY&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;EMPLOYEE&lt;/span&gt;&lt;span class="err"&gt;；&lt;/span&gt;
+
+&lt;span class="c1"&gt;--统计AC01表中19940911出生的男女数&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DECODE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;AAC004&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;MALE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DECODE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;AAC004&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;FEMALE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;AC01&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;AAC002&lt;/span&gt; &lt;span class="k"&gt;LIKE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;%19940911%&amp;#39;&lt;/span&gt;&lt;span class="err"&gt;；&lt;/span&gt;
+
+&lt;span class="c1"&gt;--另外一种实现方法&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;DECODE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;AAC004&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;MALE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;FEMALE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;SEX&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;AC01&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;AAC002&lt;/span&gt; &lt;span class="k"&gt;LIKE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;%19940911%&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;GROUP&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;DECODE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;AAC004&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;MALE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;FEMALE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="err"&gt;；&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;参考文章&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.cnblogs.com/soundcode/p/5549901.html"&gt;Oracle CASE WHEN 用法介绍&lt;/a&gt; &lt;/li&gt;
+&lt;/ul&gt;</content><category term="Oracle"></category><category term="CASE"></category><category term="DECODE"></category></entry></feed>

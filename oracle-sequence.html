@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Aman" />
+    <meta name="robots" content="index, follow"/>
+	<meta name="baidu-site-verification" content="maDdvat0eq" />
+
+    <meta property="og:title" content="Oracle SEQUENCE使用"/>
+    <meta property="og:url" content="https://jlhxxxx.github.io/oracle-sequence.html"/>
+    <meta property="og:site_name" content="AMAN's BLOG"/>
+    <meta property="og:type" content="article"/>
+
+    <link rel="canonical" href="https://jlhxxxx.github.io/oracle-sequence.html" />
+
+    <title>Oracle SEQUENCE使用 | AMAN's BLOG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="https://jlhxxxx.github.io/theme/css/main.css" />
+    <link href="https://jlhxxxx.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="AMAN's BLOG Atom Feed" />
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">
+        stLight.options({
+            publisher: "",
+            doNotHash: false,
+            doNotCopy: false,
+            hashAddressBar: false
+        });
+    </script>
+</head>
+
+<body id="index">
+<a class="hidden-phone" href="https://github.com/jlhxxxx/jlhxxxx.github.io">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" />
+</a>
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <header id="banner" >
+                <h1>
+                    <a href="https://jlhxxxx.github.io/">AMAN's BLOG </a>
+                </h1>
+                <nav class="navbar">
+                    <div class="navbar-inner">
+                        <ul class="nav">
+                            <li ><a href="https://jlhxxxx.github.io/category/software.html">Software</a></li>
+                            <li class="active"><a href="https://jlhxxxx.github.io/category/sql.html">SQL</a></li>
+                            <li ><a href="https://jlhxxxx.github.io/category/test-tools.html">Test Tools</a></li>
+                        </ul>
+<script>
+  (function() {
+    var cx = '000342699563853547877:_ntl2s92dby';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<div id="google-custom-search" class="nav">
+    <gcse:search></gcse:search>
+</div>
+                    </div>
+                </nav>
+            </header><!-- /#banner -->
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <div class="row-fluid">
+<div class="span10 offset1">
+  <section>
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="https://jlhxxxx.github.io/oracle-sequence.html" rel="bookmark"
+             title="Permalink to Oracle SEQUENCE使用">Oracle SEQUENCE使用</a></h1>
+      </header>
+      <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="https://jlhxxxx.github.io/category/sql.html">SQL</a>
+
+    on 2018-04-26
+
+        |
+        tags:         <a href="https://jlhxxxx.github.io/tag/oracle.html">Oracle</a>
+        <a href="https://jlhxxxx.github.io/tag/sequence.html">SEQUENCE</a>
+
+
+
+    
+</footer><!-- /.post-info -->
+
+        <p>序列(SEQUENCE)是序列号生成器，可以为表中的行自动生成序列号，产生一组等间隔的数值(类型为数字)。序列主要用于生成主键。</p>
+<h2>建立序列</h2>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="n">SEQUENCE</span> <span class="n">sequence_name</span> 
+<span class="p">[</span><span class="k">INCREMENT</span> <span class="k">BY</span> <span class="n">n</span><span class="p">]</span> 
+<span class="p">[</span><span class="k">START</span> <span class="k">WITH</span> <span class="n">n</span><span class="p">]</span> 
+<span class="p">[</span><span class="err">{</span><span class="k">MAXVALUE</span><span class="o">/</span><span class="k">MINVALUE</span> <span class="n">n</span><span class="o">|</span><span class="n">NOMAXVALUE</span><span class="o">/</span><span class="n">NOMINVALUE</span><span class="err">}</span><span class="p">]</span> 
+<span class="p">[</span><span class="err">{</span><span class="k">CYCLE</span><span class="o">|</span><span class="n">NOCYCLE</span><span class="err">}</span><span class="p">]</span> 
+<span class="p">[</span><span class="err">{</span><span class="k">CACHE</span> <span class="n">n</span><span class="o">|</span><span class="n">NOCACHE</span><span class="err">}</span><span class="p">];</span>
+</pre></div>
+
+
+<ul>
+<li><code>INCREMENT BY</code>：用于定义序列的步长，如果省略，则默认为<code>1</code>，如果出现负值，则代表序列的值是按照此步长递减的。</li>
+<li><code>START WITH</code> ：定义序列的初始值(即产生的第一个值)，默认为<code>1</code>。</li>
+<li><code>MAXVALUE</code> ：定义序列生成器能产生的最大值。选项<code>NOMAXVALUE</code>是默认选项，代表没有最大值定义，这时对于递增序列，系统能够产生的最大值是10的27次方；对于递减序列，最大值是<code>-1</code>。</li>
+<li><code>MINVALUE</code>：定义序列生成器能产生的最小值。选项<code>NOMINVALUE</code>是默认选项，代表没有最小值定义，这时对于递减序列，系统能够产生的最小值是？10的26次方；对于递增序列，最小值是<code>1</code>。</li>
+<li><code>CYCLE</code>和<code>NOCYCLE</code>：表示当序列生成器的值达到限制值后是否循环。<code>CYCLE</code>代表循环，<code>NOCYCLE</code>代表不循环。如果循环，则当递增序列达到最大值时，循环到最小值；对于递减序列达到最小值时，循环到最大值。如果不循环，达到限制值后，继续产生新值就会发生错误。</li>
+<li><code>CACHE</code>：(缓冲)定义存放序列的内存块的大小，默认为20。<code>NOCACHE</code>表示不对序列进行内存缓冲。<strong>对序列进行内存缓冲，可以改善序列的性能。</strong>（高级操作，一般人用不到）</li>
+</ul>
+<h2>使用序列</h2>
+<ul>
+<li>
+<p>取序列的下一值（首次取初值）</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">sequence_name</span><span class="p">.</span><span class="n">nextval</span> <span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>取序列当前值</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">sequence_name</span><span class="p">.</span><span class="n">currval</span> <span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>查看所有序列</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">user_sequences</span><span class="p">;</span>
+</pre></div>
+
+
+</li>
+</ul>
+<h2>更新序列</h2>
+<div class="highlight"><pre><span></span><span class="k">ALTER</span> <span class="n">SEQUENCE</span> <span class="n">sequence_name</span>
+<span class="p">[</span><span class="k">INCREMENT</span> <span class="k">BY</span> <span class="n">n</span><span class="p">]</span> 
+<span class="p">[</span><span class="err">{</span><span class="k">MAXVALUE</span><span class="o">/</span><span class="k">MINVALUE</span> <span class="n">n</span><span class="o">|</span><span class="n">NOMAXVALUE</span><span class="o">/</span><span class="n">NOMINVALUE</span><span class="err">}</span><span class="p">]</span> 
+<span class="p">[</span><span class="err">{</span><span class="k">CYCLE</span><span class="o">|</span><span class="n">NOCYCLE</span><span class="err">}</span><span class="p">]</span> 
+<span class="p">[</span><span class="err">{</span><span class="k">CACHE</span> <span class="n">n</span><span class="o">|</span><span class="n">NOCACHE</span><span class="err">}</span><span class="p">];</span>
+</pre></div>
+
+
+<p>注意：<code>ALTER</code>不能修改<code>START WITH</code>，如果要修改，只能删除后重建。</p>
+<h2>删除序列</h2>
+<div class="highlight"><pre><span></span><span class="k">DROP</span> <span class="n">SEQUENCE</span> <span class="n">sequence_name</span><span class="p">;</span>
+</pre></div>
+
+
+<h2>举例</h2>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="n">SEQUENCE</span> <span class="n">SEQ_CCI554</span> <span class="k">START</span> <span class="k">WITH</span> <span class="mi">1</span> <span class="k">INCREMENT</span> <span class="k">BY</span> <span class="mi">1</span> <span class="k">MAXVALUE</span> <span class="mi">9999</span><span class="p">;</span>
+<span class="k">DECLARE</span>
+  <span class="n">I</span> <span class="nb">INT</span><span class="p">:</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+  <span class="n">LOOP</span>
+    <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">CI54</span> <span class="p">(</span><span class="n">CCI554</span><span class="p">,</span> <span class="n">AAC001</span><span class="p">,</span> <span class="n">AAB001</span><span class="p">,</span> <span class="n">CCD001</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span>
+     <span class="s1">&#39;80&#39;</span><span class="o">||</span><span class="s1">&#39;030005&#39;</span><span class="o">||</span><span class="n">LPAD</span><span class="p">(</span><span class="n">TO_CHAR</span><span class="p">(</span><span class="n">SEQ_CCI554</span><span class="p">.</span><span class="n">nextval</span><span class="p">),</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;0&#39;</span><span class="p">),</span> <span class="s1">&#39;622925199012056023&#39;</span><span class="p">,</span> <span class="s1">&#39;0205000027&#39;</span><span class="p">,</span> <span class="s1">&#39;170010602898&#39;</span><span class="p">);</span>
+    <span class="k">COMMIT</span><span class="p">;</span>
+    <span class="n">EXIT</span> <span class="k">WHEN</span> <span class="n">I</span><span class="o">&gt;=</span><span class="mi">12</span><span class="p">;</span>
+    <span class="n">I</span><span class="p">:</span><span class="o">=</span><span class="n">I</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+</pre></div>
+
+
+<blockquote>
+<p>其中<code>||</code>用于字符串拼接，<code>LPAD()</code>用于固定位数字符串补齐。</p>
+<p>需要注意的是，首句<code>CREATE SEQUENCE</code>只能执行一次，序列创建后除非<code>DROP</code>，否则不会自动消失。我在使用<code>JDBC</code>连接的时候就犯了这个错误。</p>
+</blockquote>
+<h2>小技巧：重置序列</h2>
+<p>重置序列的方法一般有两个。</p>
+<ul>
+<li>
+<p>第一种方法是<code>DROP</code>之后重新<code>CREATE</code>，这种方式有很多弊端，<code>DROP</code>之后<code>CREATE</code>之前依赖它的函数和存储过程将失效，需要重新编译。</p>
+</li>
+<li>
+<p>第二种方法比较巧妙，利用递增参数：先查出<code>SEQUENCE</code>的<code>currval</code>，记为<code>value</code>，然后将递增参数改为<code>-value</code>，取它的<code>nextval</code>，再将递增参数改回来。奉上大佬写的存储过程。</p>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">OR</span> <span class="k">REPLACE</span> <span class="k">PROCEDURE</span> <span class="n">SEQ_RESET</span><span class="p">(</span><span class="n">sequence_name</span> <span class="n">VARCHAR2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">n</span> <span class="nb">NUMBER</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">TSQL</span> <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+ <span class="k">BEGIN</span>
+ <span class="k">EXECUTE</span> <span class="k">IMMEDIATE</span> <span class="s1">&#39;SELECT &#39;</span><span class="o">||</span><span class="n">sequence_name</span><span class="o">||</span><span class="s1">&#39;.currval FROM dual&#39;</span> <span class="k">INTO</span> <span class="n">n</span><span class="p">;</span>
+  <span class="n">n</span><span class="p">:</span><span class="o">=-</span><span class="n">n</span><span class="p">;</span>
+  <span class="n">TSQL</span><span class="p">:</span><span class="o">=</span><span class="s1">&#39;ALTER SEQUENCE &#39;</span><span class="o">||</span><span class="n">sequence_name</span><span class="o">||</span><span class="s1">&#39; INCREMENT BY &#39;</span><span class="o">||</span> <span class="n">n</span><span class="p">;</span>
+  <span class="k">EXECUTE</span> <span class="k">IMMEDIATE</span> <span class="n">TSQL</span><span class="p">;</span>
+ <span class="k">EXECUTE</span> <span class="k">IMMEDIATE</span> <span class="s1">&#39;SELECT &#39;</span><span class="o">||</span><span class="n">sequence_name</span><span class="o">||</span><span class="s1">&#39;.nextval FROM dual&#39;</span> <span class="k">INTO</span> <span class="n">n</span><span class="p">;</span>
+  <span class="n">TSQL</span><span class="p">:</span><span class="o">=</span><span class="s1">&#39;ALTER SEQUENCE &#39;</span><span class="o">||</span><span class="n">sequence_name</span><span class="o">||</span><span class="s1">&#39; INCREMENT BY 1&#39;</span><span class="p">;</span>
+ <span class="k">EXECUTE</span> <span class="k">IMMEDIATE</span> <span class="n">TSQL</span><span class="p">;</span>
+ <span class="k">END</span> <span class="n">SEQ_RESET</span><span class="p">;</span>
+</pre></div>
+
+
+</li>
+</ul>
+<h3>参考文章</h3>
+<ul>
+<li>
+<p><a href="http://lehsyh.iteye.com/blog/473210">ORACLE序列的使用(oracle sequence)</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/huangzhen/archive/2011/09/19/2181257.html">Oracle重置序列(不删除重建方式)</a> </p>
+</li>
+</ul>
+
+      </div><!-- /.entry-content -->
+      <div class="comments">
+        <h2>Comments</h2>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script>
+	var gitalk_owner = 'jlhxxxx';
+	
+	var gitalk = new Gitalk({
+	  clientID: 'a616e9a93853f37e454b',
+	  clientSecret: '38c3bbfaa4dd71957b8824ec071a705ea6fffdfe',
+	  repo: 'comments',
+	  owner: gitalk_owner,
+	  admin: [gitalk_owner],
+	  distractionFreeMode: false,  // Facebook-like distraction free mode
+	  createIssueManually: true
+	})
+
+	gitalk.render('gitalk-container')
+</script>
+                                  </div>
+
+    </article>
+  </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="site-footer">
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <address>
+                    <p>
+                        This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                    </p>
+                    <p>
+                        <a href="http://github.com/jsliang/pelican-fresh/">Fresh</a> is a responsive theme designed by <a href="http://jsliang.com/">jsliang</a> and <a href="https://github.com/jsliang/pelican-fresh/graphs/contributors">contributors</a>.
+                        Special thanks to <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a> and <a href="http://getbootstrap.com/">Twitter Bootstrap</a>.
+                    </p>
+                </address>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-117906599-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+</body>
+</html>

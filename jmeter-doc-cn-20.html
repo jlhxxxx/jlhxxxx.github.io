@@ -1,0 +1,2483 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Aman" />
+    <meta name="robots" content="index, follow"/>
+	<meta name="baidu-site-verification" content="maDdvat0eq" />
+
+    <meta property="og:title" content="JMeter文档翻译之20-函数和变量"/>
+    <meta property="og:url" content="https://jlhxxxx.github.io/jmeter-doc-cn-20.html"/>
+    <meta property="og:site_name" content="AMAN's BLOG"/>
+    <meta property="og:type" content="article"/>
+
+    <link rel="canonical" href="https://jlhxxxx.github.io/jmeter-doc-cn-20.html" />
+
+    <title>JMeter文档翻译之20-函数和变量 | AMAN's BLOG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="https://jlhxxxx.github.io/theme/css/main.css" />
+    <link href="https://jlhxxxx.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="AMAN's BLOG Atom Feed" />
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">
+        stLight.options({
+            publisher: "",
+            doNotHash: false,
+            doNotCopy: false,
+            hashAddressBar: false
+        });
+    </script>
+</head>
+
+<body id="index">
+<a class="hidden-phone" href="https://github.com/jlhxxxx/jlhxxxx.github.io">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" />
+</a>
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <header id="banner" >
+                <h1>
+                    <a href="https://jlhxxxx.github.io/">AMAN's BLOG </a>
+                </h1>
+                <nav class="navbar">
+                    <div class="navbar-inner">
+                        <ul class="nav">
+                            <li ><a href="https://jlhxxxx.github.io/category/software.html">Software</a></li>
+                            <li ><a href="https://jlhxxxx.github.io/category/sql.html">SQL</a></li>
+                            <li class="active"><a href="https://jlhxxxx.github.io/category/test-tools.html">Test Tools</a></li>
+                        </ul>
+<script>
+  (function() {
+    var cx = '000342699563853547877:_ntl2s92dby';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<div id="google-custom-search" class="nav">
+    <gcse:search></gcse:search>
+</div>
+                    </div>
+                </nav>
+            </header><!-- /#banner -->
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <div class="row-fluid">
+<div class="span10 offset1">
+  <section>
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="https://jlhxxxx.github.io/jmeter-doc-cn-20.html" rel="bookmark"
+             title="Permalink to JMeter文档翻译之20-函数和变量">JMeter文档翻译之20-函数和变量</a></h1>
+      </header>
+      <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="https://jlhxxxx.github.io/category/test-tools.html">Test Tools</a>
+
+    on 2019-05-07
+
+        |
+        tags:         <a href="https://jlhxxxx.github.io/tag/jmeter.html">JMeter</a>
+        <a href="https://jlhxxxx.github.io/tag/documentation.html">Documentation</a>
+        <a href="https://jlhxxxx.github.io/tag/translation.html">Translation</a>
+
+
+
+    
+</footer><!-- /.post-info -->
+
+        <p>英文文档地址：<a href="http://jmeter.apache.org/usermanual/functions.html">http://jmeter.apache.org/usermanual/functions.html</a></p>
+<p>JMeter 的函数是一些特殊值，它们可以填充在测试树的任何采样器或其他元件中。函数调用的语法如下：</p>
+<p><code>${__functionName(var1,var2,var3)}</code></p>
+<p>其中“__functionName”匹配函数的名称。
+圆括号内为函数参数，不同函数的参数也不同，例如 <code>${__time(YMD)}</code>。没有参数的函数可以不需要圆括号，例如 <code>${__threadNum}</code>。</p>
+<p>如果函数的参数包含逗号，需要加上“<code>\</code>”来转义，否则 JMeter 会把逗号当做参数的分隔符。例如：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__time</span><span class="p">(</span><span class="n">EEE</span>\<span class="p">,</span> <span class="n">d</span> <span class="n">MMM</span> <span class="n">yyyy</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>如果逗号没有被转义——例如 <code>${__javaScript(Math.max(2,5))}</code> ——你会得到像这样的错误信息：</p>
+<div class="highlight"><pre><span></span>ERROR - jmeter.functions.JavaScript: Error processing Javascript: [Math.max(2] org.mozilla.javascript.EvaluatorException: missing ) after argument list (&lt;cmd&gt;#1)
+</pre></div>
+
+
+<p>这是因为字符串“<code>Math.max(2,5)</code>”被当做<code>__javascript</code> 函数的两个参数： 
+<code>Math.max(2</code> 和 <code>5)</code> 
+其他错误信息也是有可能的。</p>
+<p>变量的引用如下：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">VARIABLE</span><span class="cp">}</span>
+</pre></div>
+
+
+<p><strong>如果引用了未定义的变量或函数，那么 JMeter 并不会报告或者记录错误信息——引用返回值就是引用自身。例如，如果 <code>UNDEF</code> 没有被定义为变量，<code>${UNDEF}</code> 的返回值就是 <code>${UNDEF}</code>。</strong> 变量和函数（包括属性）都是区分大小写的。<strong>JMeter 会剔除变量名称中的空格，例如 <code>${__Random(1,63, LOTTERY )}</code> 中的变量‘ <code>LOTTERY</code> ’会被‘<code>LOTTERY</code>’取代。</strong></p>
+<blockquote>
+<p>属性与变量不一样。变量对线程而言是局部的；属性是针对所有线程的，属性需要使用 <code>__P</code> 或 <code>__property</code> 函数来引用。</p>
+<p>在 Windows 路径变量（例如 <code>C:\test\${test}</code>）前使用 <code>\</code> 时，要确保加上 <code>\</code> 来转义，否则 JMeter 将不能解释变量，所以要这样写：<code>C:\\test\\${test}</code>。<br>
+还有一种方法，就是使用 <code>/</code> 作为路径分隔符，例如 <code>C:/test/${test}</code>——Windows 的 JVMs 在必要时会将它转换成路径分隔符。</p>
+</blockquote>
+<p id="functions_list">函数列表，不严格的按类型划分：</p>
+
+<table>
+<thead>
+<tr>
+<th>函数类型</th>
+<th>名称</th>
+<th>注释</th>
+<th align="left">开始使用版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>信息</td>
+<td><a href="#threadNum">threadNum</a></td>
+<td>获得线程编号</td>
+<td align="left">1.X</td>
+</tr>
+<tr>
+<td>信息</td>
+<td><a href="#threadGroupName">threadGroupName</a></td>
+<td>获得线程组名称</td>
+<td align="left">4.1</td>
+</tr>
+<tr>
+<td>信息</td>
+<td><a href="#samplerName">samplerName</a></td>
+<td>获得采样器名称（标签）</td>
+<td align="left">2.5</td>
+</tr>
+<tr>
+<td>信息</td>
+<td><a href="#machineIP">machineIP</a></td>
+<td>获得本地 IP 地址</td>
+<td align="left">2.6</td>
+</tr>
+<tr>
+<td>信息</td>
+<td><a href="#machineName">machineName</a></td>
+<td>获得本地主机名称</td>
+<td align="left">1.X</td>
+</tr>
+<tr>
+<td>信息</td>
+<td><a href="#time">time</a></td>
+<td>以各种格式返回当前时间</td>
+<td align="left">2.2</td>
+</tr>
+<tr>
+<td>信息</td>
+<td><a href="#timeShift">timeShift</a></td>
+<td>返回各种格式的日期加上指定的秒数/分钟数/小时数/天数或月数</td>
+<td align="left">3.3</td>
+</tr>
+<tr>
+<td>信息</td>
+<td><a href="#log">log</a></td>
+<td>记录（或显示）一条日志（并返回其值）</td>
+<td align="left">2.2</td>
+</tr>
+<tr>
+<td>信息</td>
+<td><a href="#logn">logn</a></td>
+<td>记录（或显示）一条日志（并返回空值）</td>
+<td align="left">2.2</td>
+</tr>
+<tr>
+<td>输入</td>
+<td><a href="#StringFromFile">StringFromFile</a></td>
+<td>从文件中读取一行</td>
+<td align="left">1.9</td>
+</tr>
+<tr>
+<td>输入</td>
+<td><a href="#FileToString">FileToString</a></td>
+<td>读取整个文件</td>
+<td align="left">2.4</td>
+</tr>
+<tr>
+<td>输入</td>
+<td><a href="#CSVRead">CSVRead</a></td>
+<td>从 CSV 分隔文件中读取</td>
+<td align="left">1.9</td>
+</tr>
+<tr>
+<td>输入</td>
+<td><a href="#XPath">XPath</a></td>
+<td>使用 XPath 表达式从文件中读取</td>
+<td align="left">2.0.3</td>
+</tr>
+<tr>
+<td>计算</td>
+<td><a href="#counter">counter</a></td>
+<td>生成递增的数字</td>
+<td align="left">1.X</td>
+</tr>
+<tr>
+<td>格式化</td>
+<td><a href="#dateTimeConvert">dateTimeConvert</a></td>
+<td>将日期或时间从源格式转换为目标格式</td>
+<td align="left">4.0</td>
+</tr>
+<tr>
+<td>计算</td>
+<td><a href="#digest">digest</a></td>
+<td>生成摘要（SHA-1, SHA-256, MD5...）</td>
+<td align="left">4.0</td>
+</tr>
+<tr>
+<td>计算</td>
+<td><a href="#intSum">intSum</a></td>
+<td>计算整形数（int）的和</td>
+<td align="left">1.8.1</td>
+</tr>
+<tr>
+<td>计算</td>
+<td><a href="#longSum">longSum</a></td>
+<td>计算长整形数（long）的和</td>
+<td align="left">2.3.2</td>
+</tr>
+<tr>
+<td>计算</td>
+<td><a href="#Random">Random</a></td>
+<td>生成随机数</td>
+<td align="left">1.9</td>
+</tr>
+<tr>
+<td>计算</td>
+<td><a href="#RandomDate">RandomDate</a></td>
+<td>在指定日期范围内生成随机日期</td>
+<td align="left">3.3</td>
+</tr>
+<tr>
+<td>计算</td>
+<td><a href="#RandomFromMultipleVars">RandomFromMultipleVars</a></td>
+<td>从由 <code>|</code> 分隔的一组变量值中随机提取一个元素</td>
+<td align="left">3.1</td>
+</tr>
+<tr>
+<td>计算</td>
+<td><a href="#RandomString">RandomString</a></td>
+<td>生成随机字符串</td>
+<td align="left">2.6</td>
+</tr>
+<tr>
+<td>计算</td>
+<td><a href="#UUID">UUID</a></td>
+<td>生成随机的类型为 4 的通用唯一标识符（UUID）</td>
+<td align="left">2.9</td>
+</tr>
+<tr>
+<td>脚本</td>
+<td><a href="#groovy">groovy</a></td>
+<td>执行 Groovy 脚本</td>
+<td align="left">3.1</td>
+</tr>
+<tr>
+<td>脚本</td>
+<td><a href="#BeanShell">BeanShell</a></td>
+<td>执行 BeanShell 脚本</td>
+<td align="left">1.X</td>
+</tr>
+<tr>
+<td>脚本</td>
+<td><a href="#javaScript">javaScript</a></td>
+<td>处理 JavaScript (Nashorn)</td>
+<td align="left">1.9</td>
+</tr>
+<tr>
+<td>脚本</td>
+<td><a href="#jexl2">jexl2</a></td>
+<td>执行通用 Jexl2 表达式</td>
+<td align="left">jexl2(2.1.1)</td>
+</tr>
+<tr>
+<td>脚本</td>
+<td><a href="#jexl3">jexl3</a></td>
+<td>执行通用 Jexl3 表达式</td>
+<td align="left">jexl3 (3.0)</td>
+</tr>
+<tr>
+<td>属性</td>
+<td><a href="#isPropDefined">isPropDefined</a></td>
+<td>测试属性是否存在</td>
+<td align="left">4.0</td>
+</tr>
+<tr>
+<td>属性</td>
+<td><a href="#property">property</a></td>
+<td>读取属性</td>
+<td align="left">2.0</td>
+</tr>
+<tr>
+<td>属性</td>
+<td><a href="#P">P</a></td>
+<td>读取属性（速记方式）</td>
+<td align="left">2.0</td>
+</tr>
+<tr>
+<td>属性</td>
+<td><a href="#setProperty">setProperty</a></td>
+<td>设置 JMeter 属性</td>
+<td align="left">2.1</td>
+</tr>
+<tr>
+<td>变量</td>
+<td><a href="#split">split</a></td>
+<td>将字符串拆分为变量</td>
+<td align="left">2.0.2</td>
+</tr>
+<tr>
+<td>变量</td>
+<td><a href="#eval">eval</a></td>
+<td>执行变量表达式</td>
+<td align="left">2.3.1</td>
+</tr>
+<tr>
+<td>变量</td>
+<td><a href="#evalVar">evalVar</a></td>
+<td>存储在变量中的表达式</td>
+<td align="left">2.3.1</td>
+</tr>
+<tr>
+<td>属性</td>
+<td><a href="#isVarDefined">isVarDefined</a></td>
+<td>测试变量是否存在</td>
+<td align="left">4.0</td>
+</tr>
+<tr>
+<td>变量</td>
+<td><a href="#V">V</a></td>
+<td>执行变量名称</td>
+<td align="left">2.3RC3</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><a href="#char">char</a></td>
+<td>将相应的编码转换成 Unicode 字符值</td>
+<td align="left">2.3.3</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><a href="#changeCase">changeCase</a></td>
+<td>改变大小写模式</td>
+<td align="left">4.0</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><a href="#escapeHtml">escapeHtml</a></td>
+<td>使用 HTML 编码对字符串进行编码</td>
+<td align="left">2.3.3</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><a href="#escapeOroRegexpChars">escapeOroRegexpChars</a></td>
+<td>引用 ORO 正则表达式使用的元字符</td>
+<td align="left">2.9</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><a href="#escapeXml">escapeXml</a></td>
+<td>使用 XMl 编码对字符串进行编码</td>
+<td align="left">3.2</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><a href="#regexFunction">regexFunction</a></td>
+<td>使用正则表达式解析之前的响应</td>
+<td align="left">1.X</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><a href="#unescape">unescape</a></td>
+<td>将 Java 转义过的字符串（例如 \n &amp; \t）反转义</td>
+<td align="left">2.3.3</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><a href="#unescapeHtml">unescapeHtml</a></td>
+<td>将 HTML 编码的字符串解码</td>
+<td align="left">2.3.3</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><a href="#urldecode">urldecode</a></td>
+<td>对 application/x-www-form-urlencoded 字符串解码</td>
+<td align="left">2.10</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><a href="#urlencode">urlencode</a></td>
+<td>将字符串编码成 application/x-www-form-urlencoded 字符串</td>
+<td align="left">2.10</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><a href="#TestPlanName">TestPlanName</a></td>
+<td>返回当前测试计划的名称</td>
+<td align="left">2.6</td>
+</tr>
+</tbody>
+</table>
+<h2>20.1 函数可以做什么</h2>
+<p>JMeter 有两种函数：用户定义的静态值（或变量）和内建函数。<br>
+用户定义的静态值允许用户在编译或者运行测试树时，使用自定义变量来替换静态值。这种替换只在测试运行的开始阶段执行一次。例如，可以用自定义变量来替换所有 HTTP 请求的 DOMAIN 域，这样就使得在不同服务器下执行相同测试的测试变更成为一件简单的事情。</p>
+<p>注意，目前变量不支持嵌套，例如 <code>${Var${N}}</code> 是无效的，但是可以使用函数 <code>__V(variable)</code> 来实现嵌套变量的目的：<code>${__V(Var${N})}</code>。同样可以用 <code>${__BeanShell(vars.get("Var${N}")}</code> 来实现。</p>
+<p>这种类型的替换可以不用函数来实现，但是这样就没有那么方便和直观了。用户可以创建默认配置元件来填充采样器中的空值。变量可以替换任何给定值的一部分，而不只是填充空值。</p>
+<p>用户可以通过使用内建函数在运行时根据之前的响应数据、函数所在线程、当前时间和其他资源计算出新的变量值。这些变量值在测试过程中会根据每个请求动态刷新。</p>
+<blockquote>
+<p>函数被线程共享。在测试计划中每次函数的调用，都由一个单独的函数实例来处理。</p>
+</blockquote>
+<h2>20.2 函数和变量可以用在哪？</h2>
+<p>函数和变量可以用在任何测试元件的任何输入域中（除了测试计划——见下文）。有些输入域只接受数字而不支持字符串，因此它们也不支持函数。然而，大多数输入域还是支持函数的。</p>
+<p>在测试计划中使用函数是有限制的。当函数被调用时，JMeter 线程变量并没有完全初始化，因此变量名称作为参数传递时也没有初始化，变量会引用失败，所以 <code>split()</code> 和 <code>regex()</code> 和变量赋值函数都不能正常工作。<code>threadNum()</code> 函数也不会工作（它在测试计划层也没有意义）。下面是可以在测试计划中使用的的函数：</p>
+<ul>
+<li>intSum</li>
+<li>longSum</li>
+<li>machineName</li>
+<li>BeanShell</li>
+<li>groovy</li>
+<li>javaScript</li>
+<li>jexl2/jexl3</li>
+<li>random</li>
+<li>time</li>
+<li>property functions</li>
+<li>log functions</li>
+</ul>
+<p>配置元件是由独立线程处理的。因此像 <code>__threadNum</code> 这样的函数在一些测试元件（例如用户定义的变量）中不能正常地工作。同样要注意在用户定义的变量（UDV）中定义的变量，在（UDV）元件被处理前是不能使用的。</p>
+<blockquote>
+<p>当在 SQL 代码（或其他）中引用变量/函数时，要记得给文本字符串添加必要的引号，即使用：</p>
+<div class="highlight"><pre><span></span>  SELECT item from table where name=&#39;<span class="cp">${</span><span class="n">VAR</span><span class="cp">}</span>&#39;
+</pre></div>
+
+
+<p>而不是：</p>
+<div class="highlight"><pre><span></span>  SELECT item from table where name=<span class="cp">${</span><span class="n">VAR</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>（除非 <code>VAR</code> 本身包含引号）</p>
+</blockquote>
+<h2>20.3 如何引用变量和函数</h2>
+<p>在测试元件中引用一个变量可以通过使用 <code>${</code> 和 <code>}</code> 将变量名称括起来实现。</p>
+<p>函数引用的方法相同，但是按照惯例，函数名称以“<code>__</code>”开头来和变量名称区分开。一些函数带参数，参数放在圆括号中，用逗号分隔。如果函数不带参数，可以省略圆括号。</p>
+<p><strong>如果参数本身带逗号，必须将其转义。可以使用‘<code>\,</code>’来转义。</strong> 这适用于例如脚本函数 - Javascript，Beanshell，Jexl，groovy - 有必要对所有脚本函数调用中的逗号加以转义，例如：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__BeanShell</span><span class="p">(</span><span class="nb">vars</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;name&quot;</span>\<span class="p">,</span><span class="s2">&quot;value&quot;</span><span class="p">))</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>换一种方法，你也可以将你的脚本定义为一个变量，例如在测试计划中定义：</p>
+<div class="highlight"><pre><span></span>SCRIPT          vars.put(&quot;name&quot;,&quot;value&quot;)
+</pre></div>
+
+
+<p>定义过的脚本可以像下面这样被引用：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__BeanShell</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">SCRIPT</span><span class="cp">}</span>)}
+</pre></div>
+
+
+<p>在 <code>SCRIPT</code> 变量中就没有必要对逗号进行转义了，因为函数的调用在变量用其值替换之前被解析。该方法适用于 JSR223 或者 BeanShell 采样器，这两种采样器可用来测试 Javascript，Jexl 和 BeanShell 脚本。</p>
+<p>函数可以引用参数和其他函数，例如 <code>${__XPath(${__P(xpath.file),${XPATH})}</code> 使用“<code>xpath.file</code>”的值作为文件名，使用变量 <code>XPATH</code> 的内容作为搜索表达式。</p>
+<p>JMeter 提供一个工具来帮助建立各种内置函数的函数调用，只需使用复制-粘贴就可以实现。它不会自动为你转义，因为函数可以作为其他函数的参数，应该只对文本内容进行转义。</p>
+<blockquote>
+<p>如果一个字符串既包含反斜杠（‘<code>\</code>’）又包含函数或者变量引用，出现在‘<code>$</code>’或‘<code>,</code>’或‘<code>\</code>’之前的反斜杠会被移除。这种操作对于包含逗号或者 <code>${</code> 的嵌套函数是有必要的。如果一个字符串不包含函数或者变量引用，那么在‘<code>$</code>’或‘<code>,</code>’或‘<code>\</code>’之前的反斜杠不会被移除。</p>
+</blockquote>
+<p><strong>变量或函数的值可以用 <a href="#logn"><code>__logn()</code></a> 函数来报告</strong>，<code>__logn()</code> 函数在要报告的变量被定义之后可以在测试计划的任何地方被引用。除此之外，Java 请求采样器可以用来生成一个包含变量引用的采样；其输出能在合适的监听器中显示。注意也可以通过在查看结果树中使用 <a href="http://jmeter.apache.org/usermanual/component_reference.html#Debug_Sampler">Debug Sampler</a> 来显示变量的值。</p>
+<blockquote>
+<p>如果用和内建函数同样的名称定义一个用户静态变量，那么定义的静态变量将覆盖同名内建函数。</p>
+</blockquote>
+<h2>20.4 函数助手对话框</h2>
+<p>函数助手对话框可以在 JMeter 的工具菜单中找到。</p>
+<p><img alt="Function Helper Dialog" src="http://jmeter.apache.org/images/screenshots/function_helper_dialog.png">  </p>
+<p><em>函数助手对话框</em></p>
+<p>使用函数助手，可以从下拉列表中选择一个函数，并给它的参数赋值。表格左列是参数的简要说明，表格的右列填入相应参数的值。不同的函数有不同的参数。</p>
+<p>上述操作完成之后，点击“生成（Generate）”按钮，相应调用函数的字符串就生成了，你可以复制-粘贴到测试计划中的任何地方。</p>
+<h2>20.5 函数</h2>
+<h3 id="regexFunction">__regexFunction</h3>
+
+<p>regexFunction 函数可以使用任意正则表达式（用户提供的）来解析之前的服务器响应（或变量值）。函数返回填充了变量值的模版字符串。</p>
+<p><code>__regexFunction</code> 也可以存储值供以后使用。你可以在它的第六个参数中设定一个引用名称。在函数执行之后，可以使用用户定义的值的语法在稍后时间检索相同的值。例如，如果输入 “<code>refName</code>” 作为第六个参数，那么可以使用：</p>
+<ul>
+<li><code>${refName}</code> 来引用该函数解析的第二个参数（“替换字符串的模版”）的计算结果</li>
+<li><code>${refName_g0}</code> 来引用该函数解析的整个匹配</li>
+<li><code>${refName_g1}</code> 来引用该函数解析的第一个匹配组合</li>
+<li><code>${refName_g#}</code> 来引用该函数解析的第 N 个匹配组合</li>
+<li><code>${refName_matchNr}</code> 来引用该函数解析的匹配组合数量</li>
+</ul>
+<blockquote>
+<p>如果是分布式测试，要切换模式（见 <code>jmeter.properties</code>）确保它不在剥离模式下，参见 <a href="https://bz.apache.org/bugzilla/show_bug.cgi?id=56376"><code>Bug 56376</code></a>。</p>
+</blockquote>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一个参数</td>
+<td>第一个参数是解析响应数据的正则表达式。它会抓取所有匹配。请在模版字符串中给该表达式中想要使用的部分加上括号。例如：<code>&lt;a href="(.*)"&gt;</code>。它将抓取链接值并储存在第一个匹配组合中（这里只有一个匹配组合）。另一个例子：<code>&lt;input type="hidden" name="(.*)" value="(.*)"&gt;</code>。它将抓取 name 的值作为第一个匹配组合，value 的值作为第二个匹配组合。这些匹配的值可以用在模版字符串中。</td>
+<td>是</td>
+</tr>
+<tr>
+<td>第二个参数</td>
+<td>这是一个运行时会替换函数的模版字符串。要引用正则表达式中捕获的匹配组合，使用下面的句法：<code>$[group_number]$</code>。例如 <code>$1$</code> 或者 <code>$2$</code>。你的模版可以是任意字符串。</td>
+<td>是</td>
+</tr>
+<tr>
+<td>第三个参数</td>
+<td>第三个参数告诉 JMeter 使用第几个匹配。你的正则表达式可能找到多个匹配。对此有四个选项：<br/><ul><li> 整数——直接告诉 JMeter 使用第几个匹配。‘<code>1</code>’对应第一个，‘<code>2</code>’对应第二个，以此类推。 </li><li> <code>RAND</code>——告诉 JMeter 使用随机匹配。</li><li> <code>ALL</code>——告诉 JMeter 使用所有匹配，对应每个匹配生成一个模版字符串并将它们组合到一起。这个选项很少用到。</li><li> 0 到 1 之间的浮点数——告诉 JMeter 根据公式（总的匹配个数*浮点值）计算使用第几个匹配项，计算值向最近的整数取整</li></ul></td>
+<td>否，默认值 = 1</td>
+</tr>
+<tr>
+<td>第四个参数</td>
+<td>如果上一个参数选择 <code>ALL</code>，这个参数会被插入到每个附加的模版值副本之间</td>
+<td>否</td>
+</tr>
+<tr>
+<td>第五个参数</td>
+<td>如果没有匹配项返回的默认值</td>
+<td>否</td>
+</tr>
+<tr>
+<td>第六个参数</td>
+<td>重用此函数解析的值的引用名称,储存的值包括 <code>${refName}</code>（替换的模版字符串）和 <code>${refName_g#}</code> ,其中“<code>#</code>”代表正则表达式匹配分组的序号（“<code>0</code>”可以用来引用整个匹配）</td>
+<td>否</td>
+</tr>
+<tr>
+<td>第七个参数</td>
+<td>输入变量名称。如果指定了这个参数，那么将使用变量的值作为输入，而不是使用之前的采样结果。</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="counter">__counter</h3>
+
+<p>计数器每次调用会生成一个新值，从 1 开始，每次加 1。计数器可以配置成对每个虚拟用户独立的，也可以配置成对所有用户公用的。如果每个用户的值分开计数，通常用于计算测试计划的执行次数。全局计数器通常用于计算请求的次数。</p>
+<p>计数器使用一个整型变量来保存计数，允许的最大值为 2,147,483,647。</p>
+<p>计数器函数实例是完全独立的。全局计数器 - “<code>FALSE</code>” - 的每个实例都是独立维护的。</p>
+<p><strong><code>__counter</code> 函数在同一个迭代中的多次调用不会进一步增加值。</strong><br>
+如果您想对每个采样器计数，请使用前置处理器（例如<a href="http://jmeter.apache.org/usermanual/component_reference.html#User_Parameters">用户参数</a>）中的功能。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一个参数</td>
+<td><code>TRUE</code> 如果您希望每个虚拟用户的计数器保持独立并与其他用户分开。 <code>FLASE</code> 全局计数器。</td>
+<td>是</td>
+</tr>
+<tr>
+<td>第二个参数</td>
+<td>重用此函数创建的值的引用名称。<br/>存储的值的格式为 <code>${refName}</code>。这允许你保留一个计数器，并在多个地方引用它的值。</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="threadNum">__threadNum</h3>
+
+<p>threadNum 函数只是返回当前正在执行的线程编号。线程编号独立于线程组，这意味着从该函数的角度来看，一个线程组中的线程 #1 与另一个线程组中的线程 #1 是没有区别的。</p>
+<blockquote>
+<p>该函数返回一个介于1和最大运行线程数之间的数字。注意，如果您将JSR223代码与<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html">JMeterContext</a>对象（<code>ctx</code>变量）一起使用，则下面的代码返回一个介于0和（最大运行线程数减1）之间的数字</p>
+<div class="highlight"><pre><span></span>   ctx.getThreadNum（）
+</pre></div>
+
+
+</blockquote>
+<p>这个函数没有参数。</p>
+<p>用法示例：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__threadNum</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回 1 到线程组中配置的运行线程的最大值之间的数字。</p>
+<blockquote>
+<p>这个函数在任何配置元件（例如用户定义的变量）中都不起作用，因为它们是在一个单独的线程中运行的。在测试计划中也不能使用。</p>
+</blockquote>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="threadGroupName">__threadGroupName</h3>
+
+<p>threadGroupName 函数只返回正在执行的线程组的名称。 </p>
+<p>这个函数没有参数。</p>
+<p>用法示例：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__threadGroupName</span><span class="cp">}</span>
+</pre></div>
+
+
+<blockquote>
+<p>这个函数在任何配置元件（例如用户定义的变量）中都不起作用，因为它们是在一个单独的线程中运行的。在测试计划中也不能使用。</p>
+</blockquote>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="intSum">__intSum</h3>
+
+<p>intSum 函数可用于计算两个或更多个整数值之和。</p>
+<blockquote>
+<p>引用名称是可选的，但不能是有效的整数。</p>
+</blockquote>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一个参数</td>
+<td>第一个整数值</td>
+<td>是</td>
+</tr>
+<tr>
+<td>第二个参数</td>
+<td>第二个整数值</td>
+<td>是</td>
+</tr>
+<tr>
+<td>第 n 个参数</td>
+<td>第 n 个整数值</td>
+<td>否</td>
+</tr>
+<tr>
+<td>最后一个参数</td>
+<td>重用此函数计算值的引用名称。如果该参数被指定，引用名称必须包含至少一个非数字字符，否则将被视为另一个要添加的整数值</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__intSum</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">MYVAR</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回 7（2 + 5）并将结果存储在 MYVAR 变量中。所以 <code>${MYVAR}</code> 将等于 7。</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__intSum</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回 14（2 + 5 + 7）并将结果存储在 MYVAR 变量中。</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__intSum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="err">$</span><span class="p">{</span><span class="n">MYVAR</span><span class="cp">}</span>)}
+</pre></div>
+
+
+<p>如果 MYVAR 值等于 8，1 + 2 + 5 + ${MYVAR}，返回 16。</p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="longSum">__longSum</h3>
+
+<p>longSum 函数可用于计算两个或更多个长整型值之和，当计算值不在 -2147483648 到 2147483647 之间，使用此函数而不是 __intSum。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一个参数</td>
+<td>第一个长整型值</td>
+<td>是</td>
+</tr>
+<tr>
+<td>第二个参数</td>
+<td>第二个长整型值</td>
+<td>是</td>
+</tr>
+<tr>
+<td>第 n 个参数</td>
+<td>第 n 个长整型值</td>
+<td>否</td>
+</tr>
+<tr>
+<td>最后一个参数</td>
+<td>重用此函数计算值的引用名称。如果该参数被指定，引用名称必须包含至少一个非数字字符，否则将被视为另一个要添加的长整型值</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__longSum</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">MYVAR</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回 7（2 + 5）并将结果存储在 MYVAR 变量中。所以 <code>${MYVAR}</code> 将等于 7。</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__longSum</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回 14（2 + 5 + 7）并将结果存储在 MYVAR 变量中。</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__longSum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="err">$</span><span class="p">{</span><span class="n">MYVAR</span><span class="cp">}</span>)}
+</pre></div>
+
+
+<p>如果 MYVAR 值等于 8，1 + 2 + 5 + ${MYVAR}，返回 16。 </p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="StringFromFile">__StringFromFile</h3>
+
+<p>StringFromFile 函数可以用来从文本文件中读取字符串。这对于运行需要大量可变数据的测试非常有用。例如，在测试银行应用程序时，可能需要 100 或 1000 个不同的帐号。</p>
+<p>另请参阅可能更易于使用的 <a href="http://jmeter.apache.org/usermanual/component_reference.html#CSV_Data_Set_Config">CSV Data Set Config 测试元件</a>。但是，目前不支持多个输入文件。</p>
+<p>每次调用该函数都会从文件中读取下一行。所有的线程共享相同的实例，所以不同的线程会读取不同的行。到达文件末尾时，除非达到最大循环次数，否则将从头开始重新读取。如果在一个测试脚本中引用该函数多次，每此引用都将独立打开文件，即使文件名相同。（如果要在其他地方再次使用该值，请为每个函数调用使用不同的变量名称。）</p>
+<blockquote>
+<p>函数实例在线程之间共享，并且无论线程​​是否需要下一行输入，该文件都会（重新）打开，因此使用 <code>threadNumber</code> 作为文件名的一部分将导致不可预知的行为。</p>
+</blockquote>
+<p>如果打开或读取文件时发生错误，函数会返回字符串“<code>**ERR**</code>”。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件名称</td>
+<td>文件名称的路径。（可以使用相对于 JMeter 启动目录的相对路径）如果要使用可选的序列号，路径名称应该适合转换成十进制格式。看下面的例子。</td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>引用名称 - <code>refName</code> - 用于重用由此函数创建的值。存储该值的格式为 <code>${refName}</code>。默认值是“<code>StringFromFile_</code>”。</td>
+<td>否</td>
+</tr>
+<tr>
+<td>开始序列号</td>
+<td>初始序列号（如果省略，结束序列号将被视为循环计数）</td>
+<td>否</td>
+</tr>
+<tr>
+<td>结束序列号</td>
+<td>终止序列号（如果省略，序列号可以不受限制地增加下去）</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>文件名称参数在文件打开或重新打开时被解析。</p>
+<p>引用名称参数（如果支持）在每次执行函数时被解析。</p>
+<p><strong>使用序列号：</strong></p>
+<p>使用可选的序列号时，路径名称将使用 <code>java.text.DecimalFormat</code> 的格式字符串。当前的序列号将作为唯一的参数传入。如果没有指定可选的开始序列号，就使用路径名称作为起始值。有用的格式序列如下：</p>
+<p><code>#</code></p>
+<ul>
+<li>插入不带前导零或空格的数字</li>
+</ul>
+<p><code>000</code> </p>
+<ul>
+<li>插入带有前导零的三位数字，如果需要的话</li>
+</ul>
+<blockquote>
+<p><h4>格式字符串的使用</h4></p>
+<p>以下是几个格式字符串以及它们将生成的对应序列。</p>
+<p><code>pin#'.'dat</code></p>
+<ul>
+<li>生成不带前导零的序列，<code>.</code> 还是 <code>.</code>：<code>pin1.dat</code>，...，<code>pin9.dat</code>，<code>pin10.dat</code>，...，<code>pin9999.dat</code></li>
+</ul>
+<p><code>pin000'.'dat</code></p>
+<ul>
+<li>生成带前导零的序列，同时保持 <code>.</code>。当数字位数超过三位时，序列将使用更多位数的数字：<code>pin001.dat</code>，... <code>pin099.dat</code>，...，<code>pin999.dat</code>，...，<code>pin9999.dat</code></li>
+</ul>
+<p><code>pin'.'dat#</code></p>
+<ul>
+<li>生成不带前导零的附加数字，同时保持 <code>.</code>：<code>pin.dat1</code>，...，<code>pin.dat9</code>，...，<code>pin.dat999</code></li>
+</ul>
+</blockquote>
+<p>如果需要的位数多于格式字符数，数字将根据需要进行扩展。<br>
+<strong>要防止格式字符被解释，请将其包含在单引号中。请注意，“<code>.</code>”是一个格式字符，必须用单引号引起来</strong> （尽管 <code>#.</code> 和 <code>000.</code> 在工作区能按预期的方式工作，因为它被视为小数点，而小数点也是“<code>.</code>”）。<br>
+在其他语言环境（例如 <code>fr</code>）中，小数点是“<code>,</code>” - 这意味着“<code>#.</code>”会变成“<code>nnn,</code>”。<br>
+有关完整的细节，请参阅 DecimalFormat （十进制格式）的文档。<br>
+如果路径名称不包含任何特殊的格式字符，则将当前的序号直接附加到名称上，否则将根据格式化指令插入数字。<br>
+如果起始序列号被忽略，并且指定了结束序列号，则结束序列号将被解释为循环计数，并且该文件将被使用循环计数的最大次数。在这种情况下，文件名不是格式化的。<br>
+<code>${__StringFromFile(PIN#'.'DAT,,1,2)}</code> 读取 <code>PIN1.DAT</code>, <code>PIN2.DAT</code> <br>
+<code>${__StringFromFile(PIN.DAT,,,2)}</code> 读取 <code>PIN.DAT</code> 两次 <br>
+注意上面 <code>PIN.DAT</code> 中的“<code>.</code>”不应被引号包含。在这种起始序列号被省略的情况下，文件名完全按原样使用。</p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="machineName">__machineName</h3>
+
+<p>machineName 函数返回本地主机名称。它使用 Java 方法 <code>InetAddress.getLocalHost()</code> 并将值传递给 <code>getHostName()</code>。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>变量名称</td>
+<td>重用此函数计算值的引用名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__machineName</span><span class="p">()</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回机器的主机名称</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__machineName</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回机器的主机名称</p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="machineIP">__machineIP</h3>
+
+<p>machineIP 函数返回本地 IP 地址。它使用 Java 方法<code>InetAddress.getLocalHost()</code> 并将其值传递给 <code>getHostAddress()</code>。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>变量名称</td>
+<td>重用此函数计算值的引用名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__machineIP</span><span class="p">()</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回机器的 IP 地址</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__machineIP</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回机器的 IP 地址</p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="javaScript">__javaScript</h3>
+
+<p>javaScript 函数执行一段 JavaScript（不是 Java！）代码并返回它的值。</p>
+<p>JMeter Javascrip t函数调用独立的 JavaScript 解释器。Javascript 被当作脚本语言使用，所以可以做相应的计算等。</p>
+<blockquote>
+<p>在 JMeter 中，javaScript 并不是最好的脚本语言。如果你的测试计划需要大量的线程，建议使用<code>__jexl3</code> 或<code>__groovy</code> 函数。</p>
+</blockquote>
+<p>对于 Nashorn 引擎，请参阅<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/"> Java 平台标准版 Nashorn 用户指南</a>。<br>
+对于 Rhino 引擎，请参阅<a href="http://www.mozilla.org/rhino/overview.html">Mozilla Rhino 概述</a>。</p>
+<p>以下变量可用于脚本：</p>
+<ul>
+<li><code>log</code> - 函数的<a href="https://www.slf4j.org/api/org/slf4j/Logger.html">记录</a></li>
+<li><code>ctx</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html">JMeterContext</a> 对象</li>
+<li><code>vars</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a> 对象</li>
+<li><code>threadName</code> - 包含当前线程名称的字符串</li>
+<li><code>sampler</code> - 当前<a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html">采样器</a>对象（如果有的话）</li>
+<li><code>samplerResult</code> - 之前的 <a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html">SampleResult</a> 对象（如果有的话）</li>
+<li><code>props</code> - JMeterProperties（类 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html">java.util.Properties</a>）对象</li>
+</ul>
+<p>Rhinoscript 允许通过其 Packages 对象访问静态方法。请参阅 <a href="https://wiki.openjdk.java.net/display/Nashorn/Rhino+Migration+Guide">Java 脚本</a> 文档。例如，可以像这样访问 JMeterContextService 静态方法：<br>
+<code>Java.type("org.apache.jmeter.threads.JMeterContextService").getTotalThreads()</code>。</p>
+<blockquote>
+<p>JMeter 不是浏览器，不能解释下载页面中的 JavaScript。</p>
+</blockquote>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>表达式</td>
+<td>要执行的JavaScript表达式。例如：<br/><ul><li><code>new Date()</code> - 返回当前日期和时间</li><li><code>Math.floor(Math.random()*(${maxRandom}+1))</code> - 一个介于 <code>0</code> 和变量 <code>maxRandom</code> 之间的随机数</li><li><code>${minRandom}+Math.floor(Math.random()*(${maxRandom}-${minRandom}+1))</code> - 介于变量 <code>minRandom</code> 和 <code>maxRandom</code> 之间的随机数</li><li><code>"${VAR}"=="abcd"</code></li></ul></td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>重用此函数计算值的引用名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>请记住为文本字符串和 JMeter 变量添加必要的引号。另外，如果表达式有逗号，请确保将其转义。例如：</p>
+<div class="highlight"><pre><span></span>    <span class="cp">${</span><span class="n">__javaScript</span><span class="p">(</span><span class="s1">&#39;${sp</span><span class="cp">}</span>&#39;.slice(7\,99999))}
+</pre></div>
+
+
+<p><code>7</code> 之后的逗号被转义了。</p>
+</blockquote>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__javaScript</span><span class="p">(</span><span class="n">new</span> <span class="n">Date</span><span class="p">())</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回 <code>Sat Jan 09 2016 16:22:15 GMT+0100 (CET)</code> </p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__javaScript</span><span class="p">(</span><span class="n">new</span> <span class="n">Date</span><span class="p">(),</span><span class="n">MYDATE</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回 <code>Sat Jan 09 2016 16:22:15 GMT+0100 (CET)</code> 并将其存储在变量 <code>MYDATE</code> 下 </p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__javaScript</span><span class="p">(</span><span class="n">Math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">Math</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">maxRandom</span><span class="cp">}</span>+1)),MYRESULT)}
+</pre></div>
+
+
+<p>使用 <code>maxRandom</code> 变量，返回 <code>0</code> 和 <code>maxRandom</code> 之间的随机值并将其存储在  <code>MYRESULT</code> 中</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__javaScript</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">minRandom</span><span class="cp">}</span>+Math.floor(Math.random()*(<span class="cp">${</span><span class="n">maxRandom</span><span class="cp">}</span>-<span class="cp">${</span><span class="n">minRandom</span><span class="cp">}</span>+1)),MYRESULT)}
+</pre></div>
+
+
+<p>使用 <code>maxRandom</code> 和 <code>minRandom</code> 变量，返回 <code>maxRandom</code> 和 <code>minRandom</code> 之间的随机值并将其存储在 <code>MYRESULT</code> 中</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__javaScript</span><span class="p">(</span><span class="s2">&quot;${VAR</span><span class="cp">}</span>&quot;==&quot;abcd&quot;,MYRESULT)}
+</pre></div>
+
+
+<p>将 <code>VAR</code> 变量的值与 <code>abcd</code> 进行比较，返回 <code>true</code> 或 <code>false</code> 并将结果存储在 <code>MYRESULT</code> 中</p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="Random">__Random</h3>
+
+<p>random 函数返回一个介于给定最小值和最大值之间的随机数。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最小值</td>
+<td>一个数字</td>
+<td>是</td>
+</tr>
+<tr>
+<td>最大值</td>
+<td>一个更大的数字</td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>重用此函数计算值的引用名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__Random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回一个 0 到 10 之间的随机数</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__Random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="n">MYVAR</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回一个 0 到 10 之间的随机数，并将其存储在 <code>MYVAR</code>中。<code>${MYVAR}</code>将包含此随机数。</p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="RandomDate">__RandomDate</h3>
+
+<p>RandomDate 函数返回一个位于给定开始日期和结束日期值之间的随机日期。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>时间格式</td>
+<td>DateTimeFormatter 的格式字符串（默认为 <code>yyyy-MM-dd</code>）</td>
+<td>否</td>
+</tr>
+<tr>
+<td>开始日期</td>
+<td>开始日期，默认值是现在</td>
+<td>否</td>
+</tr>
+<tr>
+<td>结束日期</td>
+<td>结束日期</td>
+<td>是</td>
+</tr>
+<tr>
+<td>用于格式的区域设置</td>
+<td>语言环境的字符串格式。语言代码必须是小写。国家代码必须大写。分隔符必须是下划线，例如 <code>en_EN</code>。请参阅 <a href="http://www.oracle.com/technetwork/java/javase/javase7locales-334809.html">http://www.oracle.com/technetwork/java/javase/javase7locales-334809.html</a>。如果省略，则默认情况下该函数使用 Apache JMeter 当前语言环境。</td>
+<td>否</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>要设置的变量名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__RandomDate</span><span class="p">(,,</span><span class="mi">2050</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">08</span><span class="p">,,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回从现在到 <code>2050-07-08</code> 之间一个随机的日期。例如 <code>2039-06-21</code> </p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__RandomDate</span><span class="p">(</span><span class="n">dd</span> <span class="n">MM</span> <span class="n">yyyy</span><span class="p">,,</span><span class="mi">08</span> <span class="mo">07</span> <span class="mi">2050</span><span class="p">,,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回一个自定义格式的随机日期，例如 <code>04 03 2034</code></p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="RandomString">__RandomString</h3>
+
+<p>RandomString 函数返回一个 chars 长度内的随机字符串。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>长度</td>
+<td>生成字符串的长度</td>
+<td>是</td>
+</tr>
+<tr>
+<td>使用的字符</td>
+<td>用于生成字符串的字符</td>
+<td>否</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>重用此函数计算值的引用名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__RandomString</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回随机的可读或不可读的 5 个字符</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__RandomString</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">abcdefg</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回从 <code>abcdefg</code> 集合中挑选的 10 个字符的随机字符串，如 <code>cdbgdbeebd</code> 或 <code>adbfeggfad</code>，...</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__RandomString</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">a12zeczclk</span><span class="p">,</span> <span class="n">MYVAR</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>从 <code>a12zeczclk</code> 集合中返回一个由 6 个字符组成的随机字符串，并将结果存储在 <code>MYVAR</code> 中，<code>MYVAR</code> 将包含像 <code>2z22ak</code> 或 <code>z11kce</code> 这样的字符串，...</p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="RandomFromMultipleVars">__RandomFromMultipleVars</h3>
+
+<p>RandomFromMultipleVars 函数根据<code>源变量</code>提供的变量值返回一个随机值。</p>
+<p>变量可以是单值或多值的，它们可以由以下提取器生成：</p>
+<ul>
+<li><a href="http://jmeter.apache.org/usermanual/component_reference.html#Boundary_Extractor">边界提取器</a></li>
+<li><a href="http://jmeter.apache.org/usermanual/component_reference.html#Regular_Expression_Extractor">正则表达式提取器</a></li>
+<li><a href="http://jmeter.apache.org/usermanual/component_reference.html#CSS_Selector_Extractor">CSS 提取器</a></li>
+<li><a href="http://jmeter.apache.org/usermanual/component_reference.html#JSON_Extractor">JSON 提取器</a></li>
+<li><a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath_Extractor">XPath 提取器</a></li>
+<li><a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath2_Extractor">XPath2 提取器</a></li>
+</ul>
+<p>多值变量就是，当你设置 <code>-1</code> 作为<code>匹配数字</code>所提取的值。当n = 1，2，3...时会创建相应匹配号变量 <code>varName_matchNr</code>，并为每个值创建变量 <code>varName_n</code>，其中n = 1，2，3 等 。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>源变量</td>
+<td>变量名称包含的值将用作随机计算的输入，用 <code>|</code> 分隔</td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>重用此函数计算值的引用名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__RandomFromMultipleVars</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>根据变量 val 的内容返回一个随机的字符串，不管它们是否是多值的</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__RandomFromMultipleVars</span><span class="p">(</span><span class="n">val1</span><span class="o">|</span><span class="n">val2</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>根据变量 val1 和 val2 的内容返回一个随机字符串，不管它们是否为多值</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__RandomFromMultipleVars</span><span class="p">(</span><span class="n">val1</span><span class="o">|</span><span class="n">val2</span><span class="p">,</span> <span class="n">MYVAR</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>根据变量 val1 和 val2 的内容返回一个随机字符串，不管它们是否为多值，并将结果存储在 <code>MYVAR</code> 中 </p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="UUID">__UUID</h3>
+
+<p>UUID 函数返回伪随机类型为 4 的通用唯一标识符（UUID）。</p>
+<p>没有参数。</p>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">UUID</span><span class="p">()</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回具有以下格式的 UUID：<code>c69e0dd1-ac6b-4f2b-8d59-5d4e8743eecd</code></p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="CSVRead">__CSVRead</h3>
+
+<p>CSVRead 函数从 CSV 文件返回一个字符串（注意与 <a href="#StringFromFile">StringFromFile</a> 的区别）。</p>
+<p>注：JMeter 支持多个文件名。</p>
+<p><strong>大多数情况下，较新的 <a href="http://jmeter.apache.org/usermanual/component_reference.html#CSV_Data_Set_Config">CSV Data Set Config 元件</a>更容易使用。</strong></p>
+<p>第一次读取某个文件名时，文件被打开并读取到内部数组。空行将被视为文件结尾——这允许使用尾部注释。</p>
+<p>后续对同一文件名的所有引用使用相同的内部数组。注意，文件名是区分大小写的，即使操作系统不区分大小写，所以 <code>CSVRead(abc.txt,0)</code> 和 <code>CSVRead(aBc.txt,0)</code> 会引用不同的内部数组。</p>
+<p><code>*ALIAS</code> 功能允许同一个文件被打开多次，并且允许较短的文件名。</p>
+<p>每个线程都有自己的内部指针，指向文件数组中的当前行。当一个线程第一次引用文件时，它将被分配到数组中的下一个空闲行，所以每个线程将访问与其他所有线程不同的行（除非线程数多于数组中的行）。</p>
+<blockquote>
+<p>该函数默认情况下以逗号分割行。如果要输入包含逗号的列，需要通过设置 <code>csvread.delimiter</code> 属性将分隔符更改为不出现在任何列数据中的字符。</p>
+</blockquote>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件名称</td>
+<td>要读取的文件（或 <code>*ALIAS</code>）</td>
+<td>是</td>
+</tr>
+<tr>
+<td>列号</td>
+<td>文件中的列号。 <code>0</code> 为第一列，<code>1</code>为第二列，以此类推。"<code>next</code>" - 转到文件的下一行。 <code>*ALIAS</code> - 打开一个文件并指派一个别名</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p>例如，你可以设置一些变量如下：</p>
+<ul>
+<li>COL1a <code>${__CSVRead(random.txt,0)}</code></li>
+<li>COL2a <code>${__CSVRead(random.txt,1)}${__CSVRead(random.txt,next)}</code></li>
+<li>COL1b <code>${__CSVRead(random.txt,0)}</code></li>
+<li>COL2b <code>${__CSVRead(random.txt,1)}${__CSVRead(random.txt,next)}</code></li>
+</ul>
+<p>这将从一行中读取两列，从下一行中读取两列。如果所有变量都在相同的前置处理器的用户参数上定义，那么这些行将是连续的。否则的话，另外一个线程可能会读取下一行。</p>
+<blockquote>
+<p>该函数不适用于大文件，因为它会将整个文件存储在内存中。对于较大的文件，请使用 <a href="http://jmeter.apache.org/usermanual/component_reference.html#CSV_Data_Set_Config">CSV Data Set Config 元件</a> 或 <a href="#StringFromFile">StringFromFile</a>。</p>
+</blockquote>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="property">__property</h3>
+
+<p>property 函数返回 JMeter 属性的值。如果找不到属性值，并且没有提供默认值，则返回属性名称。当提供默认值时，可以不需要函数名称——参数可以设置为 null，并且将被忽略。</p>
+<p>例如：</p>
+<ul>
+<li><code>${__property(user.dir)}</code> - 返回 <code>user.dir</code> 的值</li>
+<li><code>${__property(user.dir,UDIR)}</code> - 返回 <code>user.dir</code> 的值并保存在 <code>UDIR</code> 中</li>
+<li><code>${__property(abcd,ABCD,atod)}</code> - 返回属性 <code>abcd</code> 的值（如果没有定义，则返回“<code>atod</code>”）并保存在 <code>ABCD</code> 中</li>
+<li><code>${__property(abcd,,atod)}</code> - 返回属性 <code>abcd</code>的值（如果未定义，则返回“<code>atod</code>”）但不保存</li>
+</ul>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>属性名称</td>
+<td>要检索的属性名称</td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>重用此函数计算值的引用名称</td>
+<td>否</td>
+</tr>
+<tr>
+<td>默认值</td>
+<td>属性的默认值</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="P">__P</h3>
+
+<p>这是一个简化的属性函数，用于在命令行中定义的属性。与<code>__property</code> 函数不同，没有选项可将值保存在变量中，如果未提供默认值，则假定为 1。选择 1 作为假定默认值是因为它对于常见测试变量如循环次数，线程数，加速等都有效。</p>
+<p>例如：</p>
+<p>定义属性值：</p>
+<div class="highlight"><pre><span></span>jmeter -Jgroup1.threads=7  -Jhostname1=www.realhost.edu
+</pre></div>
+
+
+<p>获取值：</p>
+<ul>
+<li><code>${__P(group1.threads)}</code> - 返回 <code>group1.threads</code> 的值</li>
+<li><code>${__P(group1.loops)}</code> - 返回 <code>group1.loops</code> 的值</li>
+<li><code>${__P(hostname,www.dummy.org)}</code> - 返回属性的值的 <code>hostname</code>（主机名）或 <code>www.dummy.org</code> 。如果在上面的例子中没有定义，第一个函数调用将返回<code>7</code>，第二个返回 <code>1</code>，最后一个将返回 <code>www.dummy.org</code> （除非这些属性在别处有定义！）</li>
+</ul>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>属性名称</td>
+<td>要检索的属性名称</td>
+<td>是</td>
+</tr>
+<tr>
+<td>默认值</td>
+<td>属性的默认值。如果省略，则默认为“<code>1</code>”。</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="log">__log</h3>
+
+<p>log 函数记录一条日志，并返回它的输入字符串。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要记录的字符串</td>
+<td>一个字符串</td>
+<td>是</td>
+</tr>
+<tr>
+<td>日志级别</td>
+<td><code>OUT</code>，<code>ERR</code>，<code>DEBUG</code>，<code>INFO</code>（默认），<code>WARN</code>或<code>ERROR</code></td>
+<td>否</td>
+</tr>
+<tr>
+<td>可丢弃的文本</td>
+<td>如果非空，则创建一个可丢弃的文本传递给记录器</td>
+<td>否</td>
+</tr>
+<tr>
+<td>注释</td>
+<td>如果存在，则显示在字符串中。用于标识正在记录的内容。</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><code>OUT</code> 和 <code>ERR</code> 日志级别会直接输出记录到 <code>System.out</code> 和 <code>System.err</code>。这种情况下，输出始终会被打印——它不依赖于当前的日志设置。</p>
+<ul>
+<li><code>${__log(Message)}</code> 写入日志文件,形如“<code>… thread Name : Message</code>”</li>
+<li><code>${__log(Message,OUT)}</code> 写到控制台窗口</li>
+<li><code>${__log(${VAR},,,VAR=)}</code> 写入日志文件，形如“<code>… thread Name VAR=value</code>”</li>
+</ul>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="logn">__logn</h3>
+
+<p>logn 函数记录一条日志，并返回空字符串。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要记录的字符串</td>
+<td>一个字符串</td>
+<td>是</td>
+</tr>
+<tr>
+<td>日志级别</td>
+<td><code>OUT</code>，<code>ERR</code>，<code>DEBUG</code>，<code>INFO</code>（默认），<code>WARN</code>或<code>ERROR</code></td>
+<td>否</td>
+</tr>
+<tr>
+<td>可丢弃的文本</td>
+<td>如果非空，则创建一个可丢弃的文本传递给记录器</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><code>OUT</code> 和 <code>ERR</code> 日志级别会直接输出记录到 <code>System.out</code> 和 <code>System.err</code>。这种情况下，输出始终会被打印——它不依赖于当前的日志设置。</p>
+<ul>
+<li><code>${__logn(VAR1=${VAR1},OUT)}</code> 将变量的值写到控制台窗口</li>
+</ul>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="BeanShell">__BeanShell</h3>
+
+<p>BeanShell 函数执行传递给它的脚本，并返回结果。</p>
+<blockquote>
+<p>为了更好的性能，请使用<a href="#groovy"><code>__groovy</code></a>函数 </p>
+</blockquote>
+<p><strong>有关使用 BeanShell 的完整详细信息，请参考 BeanShell 网站：</strong><a href="http://www.beanshell.org/">http://www.beanshell.org/</a></p>
+<blockquote>
+<p>注意，测试脚本中每个独立的函数调用都使用不同的解释器，但是后续的调用使用相同的解释器。这意味着变量在不同的函数的调用中会持续存在。</p>
+</blockquote>
+<p>单个函数实例可以从多个线程中调用。但是函数 <code>execute()</code> 的方法是同步的。</p>
+<p>如果属性“<code>beanshell.function.init</code>”已被定义，则将其作为源文件传递给解释器。这可以用来定义通用的方法和变量。在 bin 目录中有一个 init 示例文件：<code>BeanShellFunction.bshrc</code>。</p>
+<p>以下变量在脚本执行之前已经被设置：</p>
+<ul>
+<li><code>log</code> - BeanShell 函数（*）的<a href="https://www.slf4j.org/api/org/slf4j/Logger.html">记录器</a></li>
+<li><code>ctx</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html">JMeterContext</a> 对象</li>
+<li><code>vars</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a> 对象</li>
+<li><code>props</code> - JMeterProperties（类 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html">java.util.Properties</a>）对象</li>
+<li><code>threadName</code> - 线程名称 （字符串）</li>
+<li><code>Sampler</code> - 当前的<a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html">采样器</a>，如果有的话</li>
+<li><code>SampleResult</code> - 当前的 <a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html">SampleResult</a>，如果有的话</li>
+</ul>
+<p>（*）表示这是在 init 文件（如果有的话）被处理之前设置的。其他变量因调用而异。
+<strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BeanShell 脚本</td>
+<td>BeanShell 脚本（不是文件名）</td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>重用此函数计算值的引用名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__BeanShell</span><span class="p">(</span><span class="mi">123</span><span class="o">*</span><span class="mi">456</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回 <code>56088</code></p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__BeanShell</span><span class="p">(</span><span class="n">source</span><span class="p">(</span><span class="s2">&quot;function.bsh&quot;</span><span class="p">))</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>在 <code>function.bsh</code> 中处理脚本</p>
+<blockquote>
+<p>请记住为文本字符串和表示文本字符串的 JMeter 变量添加必要的引号。</p>
+</blockquote>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="groovy">__groovy</h3>
+
+<p>groovy 函数执行 <a href="http://groovy-lang.org/">Apache Groovy</a> 传递给它的脚本，并返回结果。</p>
+<p>如果属性“<code>groovy.utilities</code>”已被定义，它会被 ScriptEngine（脚本引擎）加载。这可以用来定义通用的方法和变量。在 bin 目录中有一个 init 示例文件：<code>utility.groovy</code>。</p>
+<p>以下变量在脚本执行之前已经被设置：</p>
+<ul>
+<li><code>log</code> - groovy 函数（*）的<a href="https://www.slf4j.org/api/org/slf4j/Logger.html">记录器</a></li>
+<li><code>ctx</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html">JMeterContext</a> 对象</li>
+<li><code>vars</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a> 对象</li>
+<li><code>props</code> - JMeterProperties（类 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html">java.util.Properties</a>）对象</li>
+<li><code>threadName</code> - 线程名称 （字符串）</li>
+<li><code>Sampler</code> - 当前的<a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html">采样器</a>，如果有的话</li>
+<li><code>prev</code> - 之前的 <a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html">SampleResult</a>，如果有的话</li>
+<li><code>OUT</code> - System.out</li>
+</ul>
+<p>（*）表示这是在 init 文件（如果有的话）被处理之前设置的。其他变量因调用而异。</p>
+<blockquote>
+<p>使用此函数时，请使用之前定义的变量而不是使用字符串替换来访问脚本中的变量。遵循此模式以确保缓存Groovy，从而确保您的测试具有高效性。 </p>
+</blockquote>
+<p>例如<strong>，不要</strong>执行以下操作： </p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__groovy</span><span class="p">(</span><span class="s2">&quot;${myVar</span><span class="cp">}</span>&quot;.substring(0\,2))}
+</pre></div>
+
+
+<p>想象一下，变量myVar随每个事务而变化，上面的Groovy无法缓存，因为脚本每次都会更改。</p>
+<p>但是执行下面的操作，就可以缓存：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__groovy</span><span class="p">(</span><span class="nb">vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;myVar&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">substring</span><span class="p">(</span><span class="mi">0</span>\<span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="cp">}</span>
+</pre></div>
+
+
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要计算的表达式</td>
+<td>一个 groovy 脚本（不是文件名）<br/><blockquote>本身包含逗号的参数值应根据需要进行转义。如果需要在参数值中包含逗号，请像这样转义： ‘<code>\,</code>’</blockquote></td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>重用此函数计算值的引用名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__groovy</span><span class="p">(</span><span class="mi">123</span><span class="o">*</span><span class="mi">456</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回 <code>56088</code></p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__groovy</span><span class="p">(</span><span class="s2">&quot;${var</span><span class="cp">}</span>&quot;.substring(0\,2))}
+</pre></div>
+
+
+<p>如果 var 的值是 <code>JMeter</code>，它会在调用 <code>String.substring(0,2)</code> 后返回 <code>JM</code>。注意 <code>,</code> 已经被 <code>\,</code> 转义。</p>
+<blockquote>
+<p>请记住为文本字符串和表示文本字符串的 JMeter 变量添加必要的引号。</p>
+</blockquote>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="split">__split</h3>
+
+<p>split 函数根据分隔符拆分传递给它的字符串，并返回原始字符串。如果分隔符与分隔符是相邻的，则返回“<code>？</code>”作为值。拆分出来的字符串将返回到 <code>${VAR_1}</code>，<code>${VAR_2}</code>……这些变量中。变量的计数将返回到 <code>${VAR_n}</code> 中。拖尾分隔符被视为缺失变量，并返回“<code>？</code>”。此外，为了使它在 ForEach 控制器上更好地工作， <code>__split</code> 现在会删除第一个不使用的变量，以防它是上一次拆分所设置的。</p>
+<p>例子：<br>
+在测试计划中定义 <code>VAR</code>="<code>a||c|</code>"。</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__split</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">VAR</span><span class="cp">}</span>,VAR,|)}
+</pre></div>
+
+
+<p>这将返回 <code>VAR</code> 的内容，即“<code>a||c|</code>”并设置以下变量：<br>
+<code>VAR_n</code>=<code>4</code><br>
+<code>VAR_1</code>=<code>a</code><br>
+<code>VAR_2</code>=<code>?</code><br>
+<code>VAR_3</code>=<code>c</code><br>
+<code>VAR_4</code>=<code>?</code><br>
+<code>VAR_5</code>=<code>null</code></p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要拆分的字符串</td>
+<td>一个要拆分的字符串，例如“<code>a|b|c</code>”</td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>重用此函数计算值的引用名称</td>
+<td>是</td>
+</tr>
+<tr>
+<td>分隔符</td>
+<td>分隔符，例如<code>|</code>。如果省略，则使用<code>,</code>。注意 <code>,</code> 需要 <code>\,</code> 来转义。</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="XPath">__XPath</h3>
+
+<p>XPath 函数读取一个 XML 文件并匹配 XPath。每次调用该函数时，都会返回下一个匹配项。到达文件末尾后，会返回到开始。如果没有匹配的节点，该函数将返回空字符串，同时将一条警告消息写入 JMeter 日志文件。</p>
+<blockquote>
+<p>注意，整个 NodeList 会被保存在内存中。</p>
+</blockquote>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__XPath</span><span class="p">(</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">xml</span><span class="p">,</span> <span class="o">//</span><span class="n">target</span><span class="o">/</span><span class="nd">@name</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>这将匹配 <code>build.xml</code> 中的所有 <code>target</code> 节点，并返回下一个 <code>name</code> 属性的内容</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>待解析的 XML 文件</td>
+<td>一个待解析的 XML 文件</td>
+<td>是</td>
+</tr>
+<tr>
+<td>XPath</td>
+<td>一个 XPath 表达式用来匹配 XML 文件中的节点</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="setProperty">__setProperty</h3>
+
+<p>setProperty 函数用来设置 JMeter 属性的值。函数的默认返回值是空字符串，因此在函数有效处都可以调用此函数。</p>
+<p>可以通过设置第 3 个可选参数为“<code>true</code>”返回原始值。</p>
+<p>属性对 JMeter 来说是全局的，所以可以用在线程和线程组之间的通信上。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>属性名称</td>
+<td>要设置的属性名称</td>
+<td>是</td>
+</tr>
+<tr>
+<td>属性值</td>
+<td>该属性的值</td>
+<td>是</td>
+</tr>
+<tr>
+<td>True/False</td>
+<td>是否返回原始值？</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="time">__time</h3>
+
+<p>time 函数以各种格式返回当前时间。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>格式</td>
+<td>要传递给 <a href="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">SimpleDateFormat</a> 的格式。该函数支持各种速记别名，见下文。如果省略，该函数将返回自纪元开始至今的时间（以毫秒为单位）。</td>
+<td>否</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>要设置的变量名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>如果省略了格式字符串，则该函数返回自纪元开始至今的时间（以毫秒为单位）。如果格式匹配“<code>/ddd</code>”（其中 <code>ddd</code> 是十进制数字），则该函数返回以毫秒为单位的至今的时间除以 <code>ddd</code> 的值。例如，“<code>/1000</code>”将返回自纪元开始至今的时间（以秒为单位）。否则，当前时间传递给 SimpleDateFormat。支持以下简写别名：</p>
+<ul>
+<li><code>YMD</code> = <code>yyyyMMdd</code></li>
+<li><code>HMS</code> = <code>HHmmss</code></li>
+<li><code>YMDHMS</code> = <code>yyyyMMdd-HHmmss</code></li>
+<li><code>USER1</code> = JMeter 属性 <code>time.USER1</code></li>
+<li><code>USER2</code> = JMeter 属性 <code>time.USER2</code></li>
+</ul>
+<p>默认值可以通过设置适当的 JMeter 属性来改变，例如 <code>time.YMD=yyMMdd</code></p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__time</span><span class="p">(</span><span class="n">dd</span><span class="o">/</span><span class="n">MM</span><span class="o">/</span><span class="n">yyyy</span><span class="p">,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>如果在2018年1月21日运行，将返回<code>21/01/2018</code></p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__time</span><span class="p">(</span><span class="n">YMD</span><span class="p">,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>如果在2018年1月21日运行，将返回<code>20180121</code></p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__time</span><span class="p">()</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回以毫秒表示的时间<code>1516540541624</code></p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="jexl2">__jexl2</h3>
+
+<p>jexl 函数返回执行 <a href="http://commons.apache.org/proper/commons-jexl/">通用 JEXL 表达式</a>的结果 。有关 JEXL 表达式的更多信息，请参阅下面的链接。</p>
+<p>jexl2 函数使用通用 JEXL 2</p>
+<ul>
+<li><a href="http://commons.apache.org/proper/commons-jexl/reference/syntax.html">JEXL 语法描述</a></li>
+<li><a href="http://commons.apache.org/proper/commons-jexl/reference/examples.html#Example_Expressions">JEXL 的例子</a></li>
+</ul>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>表达式</td>
+<td>待执行的表达式，例如：<code>6*(5+2)</code></td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>要设置的变量名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>以下变量可用于脚本：</p>
+<ul>
+<li><code>log</code> - 函数的<a href="https://www.slf4j.org/api/org/slf4j/Logger.html">记录器</a></li>
+<li><code>ctx</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html">JMeterContext</a> 对象</li>
+<li><code>vars</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a> 对象</li>
+<li><code>props</code> - JMeterProperties（类 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html">java.util.Properties</a>）对象</li>
+<li><code>threadName</code> - 包含当前线程名称的字符串</li>
+<li><code>Sampler</code> - 当前的<a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html">采样器</a>对象，如果有的话</li>
+<li><code>sampleResult</code> - 之前的 <a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html">SampleResult</a>对象，如果有的话</li>
+<li><code>OUT</code> - System.out 例如：<code>OUT.println("message")</code></li>
+</ul>
+<p>Jexl 也可以创建类和调用其方法，例如：</p>
+<div class="highlight"><pre><span></span>Systemclass=log.class.forName(&quot;java.lang.System&quot;);
+now=Systemclass.currentTimeMillis();
+</pre></div>
+
+
+<p>注意，网站上的 Jexl 文档错误地建议使用“<code>div</code>”做整数除法。实际上“<code>div</code>”和“<code>/</code>”都执行普通除法。下面的操作可以得到整数除法的效果：</p>
+<div class="highlight"><pre><span></span>i= 5 / 2;
+i.intValue(); // 或使用 i.longValue()
+</pre></div>
+
+
+<blockquote>
+<p>JMeter 允许表达式包含多个语句。</p>
+</blockquote>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="jexl3">__jexl3</h3>
+
+<p>jexl 函数返回执行 <a href="http://commons.apache.org/proper/commons-jexl/">通用 JEXL 表达式</a>的结果 。有关 JEXL 表达式的更多信息，请参阅下面的链接。</p>
+<p>jexl3 函数使用通用 JEXL 3</p>
+<ul>
+<li><a href="http://commons.apache.org/proper/commons-jexl/reference/syntax.html">JEXL 语法描述</a></li>
+<li><a href="http://commons.apache.org/proper/commons-jexl/reference/examples.html#Example_Expressions">JEXL 的例子</a></li>
+</ul>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>表达式</td>
+<td>待执行的表达式，例如：<code>6*(5+2)</code></td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>要设置的变量名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>以下变量可用于脚本：</p>
+<ul>
+<li><code>log</code> - 函数的<a href="https://www.slf4j.org/api/org/slf4j/Logger.html">记录器</a></li>
+<li><code>ctx</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html">JMeterContext</a> 对象</li>
+<li><code>vars</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a> 对象</li>
+<li><code>props</code> - JMeterProperties（类 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html">java.util.Properties</a>）对象</li>
+<li><code>threadName</code> - 包含当前线程名称的字符串</li>
+<li><code>Sampler</code> - 当前的<a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html">采样器</a>对象，如果有的话</li>
+<li><code>sampleResult</code> - 之前的 <a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html">SampleResult</a> 对象，如果有的话</li>
+<li><code>OUT</code> - System.out 例如：<code>OUT.println("message")</code></li>
+</ul>
+<p>Jexl 也可以创建类和调用其方法，例如：</p>
+<div class="highlight"><pre><span></span>Systemclass=log.class.forName(&quot;java.lang.System&quot;);
+now=Systemclass.currentTimeMillis();
+</pre></div>
+
+
+<p>注意，网站上的 Jexl 文档错误地建议使用“<code>div</code>”做整数除法。实际上“<code>div</code>”和“<code>/</code>”都执行普通除法。下面的操作可以得到整数除法的效果：</p>
+<div class="highlight"><pre><span></span>i= 5 / 2;
+i.intValue(); // 或使用 i.longValue()
+</pre></div>
+
+
+<blockquote>
+<p>JMeter 允许表达式包含多个语句。</p>
+</blockquote>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="V">__V</h3>
+
+<p>V（变量）函数返回执行变量名称表达式的结果。这可以用来执行嵌套变量引用（目前不支持）。</p>
+<p>例如，如果有变量 <code>A1</code>，<code>A2</code> 和 <code>N</code>=<code>1</code>：</p>
+<ul>
+<li><code>${A1}</code> - 可以使用</li>
+<li><code>${A${N}}</code> - 不起作用（嵌套变量引用）</li>
+<li><code>${__V(A${N})}</code> - 可以使用。<code>${N}</code> 变成 <code>A1</code>，<code>__V</code> 函数返回 <code>A1</code> 的值</li>
+</ul>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>变量名称</td>
+<td>待执行的变量</td>
+<td>是</td>
+</tr>
+<tr>
+<td>默认值</td>
+<td>未找到变量时的默认值，如果它为空且没有找到变量函数，则返回变量名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="evalVar">__evalVar</h3>
+
+<p>evalVar 函数返回执行存储在变量中的表达式的结果。</p>
+<p>这允许从文件读取字符串，并处理其中的任何变量引用。例如，如果变量“<code>query</code>”包含“<code>select ${column} from ${table}</code>”，并且“<code>column</code>”和“<code>table</code>”分别包含“<code>name</code>”和“<code>customers</code>”，那么 <code>${__evalVar(query)}</code> 将会执行“<code>select name from customers</code>”。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>变量名称</td>
+<td>待执行的变量</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="eval">__eval</h3>
+
+<p>eval 函数返回执行字符串表达式的结果。</p>
+<p>这允许往变量中存储的字符串中插入变量和函数引用。例如，给定以下变量：</p>
+<ul>
+<li><code>name</code>=<code>Smith</code></li>
+<li><code>column</code>=<code>age</code></li>
+<li><code>table</code>=<code>birthdays</code></li>
+<li><code>SQL</code>=<code>select ${column} from ${table} where name='${name}'</code></li>
+</ul>
+<p><code>${__eval(${SQL})}</code> 将执行 “<code>select age from birthdays where name='Smith'</code>”</p>
+<p>这可以与 CSV 数据集结合使用，例如在数据文件中定义 SQL 语句和值。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>变量名称</td>
+<td>要执行的变量</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="char">__char</h3>
+
+<p>char 函数将一个数字转换成 Unicode 字符。另外请参阅下面的<code>__unescape()</code>。</p>
+<p>这允许将任意字符值添加到字段中。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unicode字符编码（十进制或十六进制数）</td>
+<td>十进制数（或十六进制数前缀为 <code>0x</code>，或八进制前缀为 <code>0</code>）将被转换为 Unicode 字符。</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<ul>
+<li><code>${__char(13,10)}</code> = <code>${__char(0xD,0xA)}</code> = <code>${__char(015,012)}</code> = <code>CRLF</code></li>
+<li><code>${__char(165)}</code> = <code>¥</code> (元)</li>
+</ul>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="unescape">__unescape</h3>
+
+<p>unescape 函数将返回将 Java 转义过的字符串反转义的结果。另外请参阅上面的<code>__char()</code>。</p>
+<p>这允许添加字符到字段，否则通过 GUI 定义是非常困难的（或不可能的）。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>反转义的字符串</td>
+<td>待反转义的字符串</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<ul>
+<li><code>${__unescape(\r\n)}</code> = <code>CRLF</code> </li>
+<li><code>${__unescape(1\t2)}</code> = <code>1</code>[tab]<code>2</code></li>
+</ul>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="unescapeHtml">__unescapeHtml</h3>
+
+<p>函数将包含 HTML 实体的字符串反转义为包含对应于转义符的实际 Unicode 字符的字符串。支持 HTML 4.0 实体。</p>
+<p>例如，字符串</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__unescapeHtml</span><span class="p">(</span><span class="o">&lt;</span><span class="n">Fran</span><span class="o">&amp;</span><span class="n">ccedil</span><span class="p">;</span><span class="n">ais</span><span class="o">&gt;</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回<code>&lt;Français&gt;</code>。</p>
+<p>如果某个实体无法识别，则将其保留，并逐字地插入结果字符串中。例如 <code>${__unescapeHtml(&amp;gt;&amp;zzzz;x)}</code> 将返回 <code>"&gt;&amp;zzzz;x"</code>。</p>
+<p>使用 Commons Lang 的 <code>StringEscapeUtils#unescapeHtml(String)</code>。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>反转义的字符串</td>
+<td>待反转义的字符串</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="escapeHtml">__escapeHtml</h3>
+
+<p>函数用于转义使用 HTML 实体的字符串。支持HTML 4.0 实体。</p>
+<p>例如，</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__escapeHtml</span><span class="p">(</span><span class="s2">&quot;bread&quot;</span> <span class="o">&amp;</span> <span class="s2">&quot;butter&quot;</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回 <code>&amp;quot;bread&amp;quot; &amp;amp; &amp;quot;butter&amp;quot;</code>。</p>
+<p>使用 Commons Lang 的 <code>StringEscapeUtils#escapeHtml(String)</code>。
+<strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转义的字符串</td>
+<td>待转义的字符串</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="urldecode">__urldecode</h3>
+
+<p>函数用来解码 <code>application/x-www-form-urlencoded</code> 字符串，注意：使用 UTF-8 作为编码方案。</p>
+<p>例如，字符串</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__urldecode</span><span class="p">(</span><span class="n">Word</span><span class="o">+%</span><span class="mi">22</span><span class="n">school</span><span class="o">%</span><span class="mi">22</span><span class="o">+</span><span class="ow">is</span><span class="o">+%</span><span class="mi">22</span><span class="o">%</span><span class="n">C3</span><span class="o">%</span><span class="n">A9cole</span><span class="o">%</span><span class="mi">22</span><span class="o">+</span><span class="ow">in</span><span class="o">+</span><span class="n">french</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回 <code>Word "school" is "école" in french</code>。</p>
+<p>使用 Java 类 <a href="https://docs.oracle.com/javase/7/docs/api/java/net/URLDecoder.html">URLDecoder</a>。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要解码的字符串</td>
+<td>待解码的带有 URL 编码字符的字符串</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="urlencode">__urlencode</h3>
+
+<p>函数用来将字符串转码成 <code>application/x-www-form-urlencoded</code> 字符串。</p>
+<p>例如，字符串</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__urlencode</span><span class="p">(</span><span class="n">Word</span> <span class="s2">&quot;school&quot;</span> <span class="ow">is</span> <span class="s2">&quot;école&quot;</span> <span class="ow">in</span> <span class="n">french</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回 <code>Word+%22school%22+is+%22%C3%A9cole%22+in+french</code>。</p>
+<p>使用 Java 类 <a href="https://docs.oracle.com/javase/7/docs/api/java/net/URLDecoder.html">URLDecoder</a>。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要转码的字符串</td>
+<td>待转码的使用 URL 编码字符的字符串</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="FileToString">__FileToString</h3>
+
+<p>FileToString 函数可以用来读取整个文件。每次调用时读取整个文件。</p>
+<p>如果打开或读取文件时发生错误，函数会返回字符串“<code>**ERR**</code>”</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件名称</td>
+<td>文件名称的路径（路径可以是相对于 JMeter 启动目录的相对路径）</td>
+<td>是</td>
+</tr>
+<tr>
+<td>文件编码，如果不是平台默认的</td>
+<td>用于读取文件的编码。如果未指定，则使用平台默认编码方式</td>
+<td>否</td>
+</tr>
+<tr>
+<td>引用名称</td>
+<td>引用名称 - <code>refName</code> - 用于重用由此函数创建的值。存储的值的格式为 <code>${refName}</code></td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>每次执行函数时都会解析文件名，编码和引用名称参数。</p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="samplerName">__samplerName</h3>
+
+<p>samplerName 函数返回当前采样器的名称（即标签）。</p>
+<p>该函数在没有关联采样器的测试元件中不起作用。例如测试计划。配置元件也没有关联的采样器。但是一些配置元件会被采样器直接引用，例如 HTTP 信息头管理器和 Http Cookie 管理器，这种情况下，函数在 Http 采样器的上下文中被解析。前置处理器，后置处理器和断言总是有一个关联的采样器。</p>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__samplerName</span><span class="p">()</span><span class="cp">}</span>
+</pre></div>
+
+
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>变量名称</td>
+<td>引用名称 - <code>refName</code> - 用于重用由此函数创建的值。存储的值的格式为 <code>${refName}</code></td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="TestPlanName">__TestPlanName</h3>
+
+<p>TestPlanName 函数返回当前测试计划的名称（可用于内部计划以掌握调用的测试计划的名称）。</p>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__TestPlanName</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回测试计划的文件名称，例如，如果计划在一个名为 Demo.jmx 的文件中，它将返回“<code>Demo.jmx</code>”。</p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="escapeOroRegexpChars">__escapeOroRegexpChars</h3>
+
+<p>函数用于转义 ORO 正则表达式元字符，相当于 Java 正则表达式引擎中的 <code>\Q</code> <code>\E</code> 。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__escapeOroRegexpChars</span><span class="p">([</span><span class="o">^</span><span class="s2">&quot;].+?,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回 <code>\[\^\"\]\.\+\?</code>。</p>
+<p>使用 ORO 的 <code>Perl5Compiler#quotemeta(String)</code>。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要转义的字符串</td>
+<td>待转义的字符串</td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>引用名称 - <code>refName</code> - 用于重用由此函数创建的值。存储的值的格式为 <code>${refName}</code></td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="escapeXml">__escapeXml</h3>
+
+<p>函数用来转义使用 XML 1.0 实体的字符串中的字符。</p>
+<p>例如，</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__escapeXml</span><span class="p">(</span><span class="s2">&quot;bread&quot;</span> <span class="o">&amp;</span> <span class="s1">&#39;butter&#39;</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回 <code>&amp;quot;bread&amp;quot; &amp;amp; &amp;apos;butter&amp;apos;</code>。</p>
+<p>使用 Commons Lang 的 <code>StringEscapeUtils#escapeXml10(String)</code>。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要转义的字符串</td>
+<td>待转义的字符串</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="timeShift">__timeShift</h3>
+
+<p>timeShift 函数返回指定格式的日期，并加上指定的秒数，分钟数，小时数，天数或月数。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>格式</td>
+<td>要传递给 DateTimeFormatter 的格式。请参阅 <a href="https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html">DateTimeFormatter</a> 如果省略，则函数使用纪元时间格式</td>
+<td>否</td>
+</tr>
+<tr>
+<td>日期转换</td>
+<td>以第一个参数“格式”设置的格式转换指定日期，如果省略，则日期默认为现在</td>
+<td>否</td>
+</tr>
+<tr>
+<td>值转换</td>
+<td>根据文本表示的持续时间（如PnDTnHnMn.nS）转换成指定的秒数，分钟数，小时数或天数。请参阅<a href="https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence">https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence</a><br/><ul><li><code>PT20.345S</code> 解析为 20.345 秒</li><li><code>PT15M</code> 解析为 15 分钟</li><li><code>PT10H</code> 解析为 10 个小时</li><li><code>P2D</code> 解析为 2 天</li><li><code>P6H3M</code> 解析为 6小时3分钟</li></ul></td>
+<td>否</td>
+</tr>
+<tr>
+<td>用于格式的区域设置</td>
+<td>语言环境的字符串格式。语言代码必须是小写。国家代码必须大写。分隔符必须是下划线，例如 <code>en_EN</code>。请参阅 <a href="http://www.oracle.com/technetwork/java/javase/javase7locales-334809.html">http://www.oracle.com/technetwork/java/javase/javase7locales-334809.html</a>。如果省略，则默认情况下该函数使用 Apache JMeter 当前语言环境。</td>
+<td>否</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>要设置的变量名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__timeShift</span><span class="p">(</span><span class="n">dd</span><span class="o">/</span><span class="n">MM</span><span class="o">/</span><span class="n">yyyy</span><span class="p">,</span><span class="mi">21</span><span class="o">/</span><span class="mo">01</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span><span class="n">P2D</span><span class="p">,,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回<code>23/01/2018</code></p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__timeShift</span><span class="p">(</span><span class="n">dd</span> <span class="n">MMMM</span> <span class="n">yyyy</span><span class="p">,</span><span class="mi">21</span> <span class="n">février</span> <span class="mi">2018</span><span class="p">,</span><span class="n">P2D</span><span class="p">,</span><span class="n">fr_FR</span><span class="p">,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回<code>23 février 2018</code></p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="digest ">__digest </h3>
+
+<p>digest 函数返回特定的哈希算法的加密后的值，哈希算法有多种，名称为大写，可带 salt。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>算法</td>
+<td>用来加密的算法。可用的算法请参阅 <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html">StandardNames</a> 的 MessageDigest  <ul><li>MD2</li><li>MD5</li><li>SHA-1</li><li>SHA-224</li><li>SHA-256</li><li>SHA-384</li><li>SHA-512</li></ul><blockquote><code>要添加的 salt</code>和<code>要编码的字符串</code>中是要考虑空格的</blockquote></td>
+<td>是</td>
+</tr>
+<tr>
+<td>要编码的字符串</td>
+<td>将被加密的字符串</td>
+<td>是</td>
+</tr>
+<tr>
+<td>要添加的 salt</td>
+<td>添加到字符串的 salt（加在字符串之后）</td>
+<td>否</td>
+</tr>
+<tr>
+<td>大写值</td>
+<td>默认返回值为小写。当为true时返回值大写。</td>
+<td>否</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>要设置的变量名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__digest</span><span class="p">(</span><span class="n">MD5</span><span class="p">,</span><span class="n">Errare</span> <span class="n">humanum</span> <span class="n">est</span><span class="p">,,,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回<code>c49f00b92667a35c63708933384dad52</code></p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__digest</span><span class="p">(</span><span class="n">SHA</span><span class="o">-</span><span class="mi">256</span><span class="p">,</span><span class="n">Felix</span> <span class="n">qui</span> <span class="n">potuit</span> <span class="n">rerum</span> <span class="n">cognoscere</span> <span class="n">causas</span><span class="p">,</span><span class="n">mysalt</span><span class="p">,,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回<code>a3bc6900fe2b2fc5fa8a601a4a84e27a079bf2c581d485009bc5c00516729ac7</code></p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="dateTimeConvert">__dateTimeConvert</h3>
+
+<p>dateTimeConvert 函数将日期从源格式转换成目标格式并将结果储存到变量名中。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>日期字符串</td>
+<td>要从源格式转换到目标格式的日期字符串。如果源日期格式为空，将使用纪元时间格式的日期。</td>
+<td>是</td>
+</tr>
+<tr>
+<td>源日期格式</td>
+<td>原始日期格式。如果为空，则日期字符串字段必须是纪元时间格式。</td>
+<td>否</td>
+</tr>
+<tr>
+<td>目标日期格式</td>
+<td>新的日期格式</td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>要设置的变量名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__dateTimeConvert</span><span class="p">(</span><span class="mo">0121201</span><span class="mi">8</span><span class="p">,</span><span class="n">MMddyyyy</span><span class="p">,</span><span class="n">dd</span><span class="o">/</span><span class="n">MM</span><span class="o">/</span><span class="n">yyyy</span><span class="p">,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>返回<code>21/01/2018</code></p>
+<p>使用纪元时间：1526574881000，</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__digest</span><span class="p">(</span><span class="n">SHA</span><span class="o">-</span><span class="mi">256</span><span class="p">,</span><span class="n">Felix</span> <span class="n">qui</span> <span class="n">potuit</span> <span class="n">rerum</span> <span class="n">cognoscere</span> <span class="n">causas</span><span class="p">,</span><span class="n">mysalt</span><span class="p">,,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>以UTC时间（Duser.timezone=GMT）返回<code>17/05/2018 16:34</code></p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="isPropDefined">__isPropDefined</h3>
+
+<p>isPropDefined 函数当属性存在时返回 true，不存在时返回 false。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>属性名称</td>
+<td>要检查是否定义的属性名称</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__isPropDefined</span><span class="p">(</span><span class="n">START</span><span class="o">.</span><span class="n">HMS</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回<code>true</code></p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="isVarDefined">__isVarDefined</h3>
+
+<p>isVarDefined 函数当变量存在时返回 true，不存在时返回 false。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>变量名称</td>
+<td>要检查是否定义的变量名称</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__isVarDefined</span><span class="p">(</span><span class="n">JMeterThread</span><span class="o">.</span><span class="n">last_sample_ok</span><span class="p">)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回<code>true</code></p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h3 id="changeCase">__changeCase</h3>
+
+<p>changeCase 函数返回大小写经过特定模式变更后的字符串值。结果储存在 JMeter 变量中。</p>
+<p><strong>参数（Parameters）</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性（Attribute）</th>
+<th>描述</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>待变更大小写的字符串</td>
+<td>将变更大小写模式的字符串</td>
+<td>是</td>
+</tr>
+<tr>
+<td>大小写变更模式</td>
+<td>改变大小写的模式，例如对<code>ab-CD eF</code>：<br/><ul><li><code>UPPER</code>模式返回 AB-CD EF </li><li><code>LOWER</code>模式返回 ab-cd ed </li><li><code>CAPITALIZE</code>模式返回 Ab-CD eF </li></ul><blockquote>变更模式名称不区分大小写</blockquote></td>
+<td>是</td>
+</tr>
+<tr>
+<td>变量名称</td>
+<td>要检查是否定义的变量名称</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>例子：  </p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__changeCase</span><span class="p">(</span><span class="n">Avaro</span> <span class="n">omnia</span> <span class="n">desunt</span>\<span class="p">,</span> <span class="n">inopi</span> <span class="n">pauca</span>\<span class="p">,</span> <span class="n">sapienti</span> <span class="n">nihil</span><span class="p">,</span><span class="n">UPPER</span><span class="p">,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回<code>AVARO OMNIA DESUNT, INOPI PAUCA, SAPIENTI NIHIL</code></p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__changeCase</span><span class="p">(</span><span class="n">LABOR</span> <span class="n">OMNIA</span> <span class="n">VINCIT</span> <span class="n">IMPROBUS</span><span class="p">,</span><span class="n">LOWER</span><span class="p">,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回<code>labor omnia vincit improbus</code></p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__changeCase</span><span class="p">(</span><span class="n">omnibus</span> <span class="n">viis</span> <span class="n">romam</span> <span class="n">pervenitur</span><span class="p">,</span><span class="n">CAPITALIZE</span><span class="p">,)</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>将返回<code>Omnibus viis romam pervenitur</code></p>
+<p><a href="#functions_list">【返回函数列表】</a></p>
+<h2>20.6 预定义变量</h2>
+<p>大多数变量都是通过调用函数或者用户定义的变量等测试元件来设置的；在这种情况下，用户对所使用的变量名称有完整的控制权。但是有些变量是 JMeter 内部定义的。这些在下面列出：</p>
+<ul>
+<li><code>COOKIE_cookiename</code> - 包含 cookie 的值（请参阅 <a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP_Cookie_Manager">HTTP Cookie 管理器</a>）</li>
+<li><code>JMeterThread.last_sample_ok</code> - 不管最后一个采样是否可用 - <code>true/false</code>。注意：它会在后置处理器和断言运行后更新。</li>
+<li><code>START</code> 变量（参见下一节）</li>
+</ul>
+<h2>20.7 预定义属性</h2>
+<p>JMeter 属性集是在 JMeter 启动时通过系统属性定义来初始化的；附加的 JMeter 属性在 <code>jmeter.properties</code>，<code>user.properties</code> 或命令行中定义。</p>
+<p>一些内置属性由 JMeter 定义。这些在下面列出。为方便起见，<code>START</code> 属性也被复制到具有相同名称的变量中。</p>
+<ul>
+<li><code>START.MS</code> - 以毫秒为单位的 JMeter 启动时间</li>
+<li><code>START.YMD</code> - 格式为 <code>yyyyMMdd</code> 的 JMeter 启动日期</li>
+<li><code>START.HMS</code> - 格式为 <code>HHmmss</code> 的 JMeter 启动时间</li>
+<li><code>TESTSTART.MS</code> - 以毫秒为单位的测试启动时间</li>
+</ul>
+<p>请注意，<code>START</code> 变量/属性表示的是 JMeter 启动时间，而不是测试启动时间。它们主要用于文件名等地方。 </p>
+
+      </div><!-- /.entry-content -->
+      <div class="comments">
+        <h2>Comments</h2>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script>
+	var gitalk_owner = 'jlhxxxx';
+	
+	var gitalk = new Gitalk({
+	  clientID: 'a616e9a93853f37e454b',
+	  clientSecret: '38c3bbfaa4dd71957b8824ec071a705ea6fffdfe',
+	  repo: 'comments',
+	  owner: gitalk_owner,
+	  admin: [gitalk_owner],
+	  distractionFreeMode: false,  // Facebook-like distraction free mode
+	  createIssueManually: true
+	})
+
+	gitalk.render('gitalk-container')
+</script>
+                                  </div>
+
+    </article>
+  </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="site-footer">
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <address>
+                    <p>
+                        This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                    </p>
+                    <p>
+                        <a href="http://github.com/jsliang/pelican-fresh/">Fresh</a> is a responsive theme designed by <a href="http://jsliang.com/">jsliang</a> and <a href="https://github.com/jsliang/pelican-fresh/graphs/contributors">contributors</a>.
+                        Special thanks to <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a> and <a href="http://getbootstrap.com/">Twitter Bootstrap</a>.
+                    </p>
+                </address>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-117906599-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+</body>
+</html>

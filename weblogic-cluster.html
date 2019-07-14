@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Aman" />
+    <meta name="robots" content="index, follow"/>
+	<meta name="baidu-site-verification" content="maDdvat0eq" />
+
+    <meta property="og:title" content="Windows下WebLogic安装及集群配置"/>
+    <meta property="og:url" content="https://jlhxxxx.github.io/weblogic-cluster.html"/>
+    <meta property="og:site_name" content="AMAN's BLOG"/>
+    <meta property="og:type" content="article"/>
+
+    <link rel="canonical" href="https://jlhxxxx.github.io/weblogic-cluster.html" />
+
+    <title>Windows下WebLogic安装及集群配置 | AMAN's BLOG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="https://jlhxxxx.github.io/theme/css/main.css" />
+    <link href="https://jlhxxxx.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="AMAN's BLOG Atom Feed" />
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">
+        stLight.options({
+            publisher: "",
+            doNotHash: false,
+            doNotCopy: false,
+            hashAddressBar: false
+        });
+    </script>
+</head>
+
+<body id="index">
+<a class="hidden-phone" href="https://github.com/jlhxxxx/jlhxxxx.github.io">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" />
+</a>
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <header id="banner" >
+                <h1>
+                    <a href="https://jlhxxxx.github.io/">AMAN's BLOG </a>
+                </h1>
+                <nav class="navbar">
+                    <div class="navbar-inner">
+                        <ul class="nav">
+                            <li class="active"><a href="https://jlhxxxx.github.io/category/software.html">Software</a></li>
+                            <li ><a href="https://jlhxxxx.github.io/category/sql.html">SQL</a></li>
+                            <li ><a href="https://jlhxxxx.github.io/category/test-tools.html">Test Tools</a></li>
+                        </ul>
+<script>
+  (function() {
+    var cx = '000342699563853547877:_ntl2s92dby';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<div id="google-custom-search" class="nav">
+    <gcse:search></gcse:search>
+</div>
+                    </div>
+                </nav>
+            </header><!-- /#banner -->
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <div class="row-fluid">
+<div class="span10 offset1">
+  <section>
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="https://jlhxxxx.github.io/weblogic-cluster.html" rel="bookmark"
+             title="Permalink to Windows下WebLogic安装及集群配置">Windows下WebLogic安装及集群配置</a></h1>
+      </header>
+      <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="https://jlhxxxx.github.io/category/software.html">Software</a>
+
+    on 2018-05-22
+
+        |
+        tags:         <a href="https://jlhxxxx.github.io/tag/weblogic.html">WebLogic</a>
+        <a href="https://jlhxxxx.github.io/tag/cluster.html">Cluster</a>
+
+
+
+    
+</footer><!-- /.post-info -->
+
+        <h2>基本概念</h2>
+<p>在正式部署项目之前，还是先了解下基本概念吧。最基本要掌握域（Domain）、集群（Cluster）、服务器（Server）（区分管理服务器和受管理服务器）、计算机（Machine）、节点管理器（Node Manager）。</p>
+<p><strong>参考文章</strong>：</p>
+<ul>
+<li><a href="http://langgufu.iteye.com/blog/1700388">weblogic 域，管理服务器，受管服务器，集群和机器的基本知识</a></li>
+<li><a href="http://www.cnblogs.com/cocowool/archive/2012/04/01/2428861.html">WebLogic中的一些基本概念</a></li>
+</ul>
+<h2>常用目录结构</h2>
+<p>了解WebLogic常用目录结构，将大大提高管理与维护的工作效率 。这里以WebLogic 11g为例。</p>
+<div class="highlight"><pre><span></span>.                                      # 主目录
+│─ coherence_3.7                        # coherence集群相关
+│─ logs                                 # 日志文件，包括安装和运行%WL_HOME%\common\bin\下程序的日志
+│─ modules                             # 模块和插件目录
+│─ user_projects                         # 用户工程目录
+│  └─ domains                            # 域主目录
+│      └─ base_domain                     # DOMAIN_HOME，用户自建域主目录，默认名称为base_domain，以此为例
+│         │─ bin                          # 启动和停止域服务、设置域环境变量的相关命令文件
+│         │  └─ nodemanager               # 可以设置成当前域节点管理器配置目录，默认不使用
+│         │─ config                       # 配置文件
+│         │─ security                     # 用户口令验证相关文件
+│         └─ servers                      # 服务器相关文件
+│            └─ AdminServer               # 管理服务器，以此为例
+│               │─ logs                   # 日志文件
+│               │─ security
+│               │  └─ boot.properties     # 当前域登录信息文件，保存用户名和密码后可以免验证登录
+│               │─ stage                  # 存放当前域所部署项目部署包文件
+│               └─ tmp                    # 当前域所部署项目相关临时文件
+└─ wlserver_10.3                          # WL_HOME，WebLogic应用主目录
+   │─ common                              # 
+   │  │─ bin                              # WebLogic应用程序可执行命令目录
+   │  └─ nodemanager                      # 默认的节点管理器配置目录
+   │─ server
+   │  └─ bin                              # WebLogic服务器可执行命令目录
+   │     └─ startNodeManager.cmd          # 默认的启动节点管理器服务
+   └─ uninstall                           # 卸载相关命令文件目录
+</pre></div>
+
+
+<blockquote>
+<p>注：本文档所有<code>%WL_HOME%</code>，均指上面的wlserver_10.3目录；<code>%DOMAIN_HOME%</code>指自建域的主目录，例如上面的base_domain目录，对应域的环境变量可以查看<code>%DOMAIN_HOME%\bin\setDomainEnv.cmd</code>。</p>
+</blockquote>
+<h2>集群的安装及配置</h2>
+<p>安装WebLogic之前，先要安装Java环境。本人电脑上安装了几套Java环境，WebLogic用到的有两个<a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-jrockit-2192437.html?ssSourceSiteId=otncn">JRockit 6 - R28.2.7</a>和<a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html">Java7u80</a>，JRockit是原BEA公司的产品，现已被Oracle收购，是传说中最快的JVM，理论上来说使用JRockit性能会有明显的提升。不过JRockit最高只有1.6版本的，而目前WebLogic12c最低支持Java8，所以要想使用JRockit要安装WebLogic11g以下的版本。而我们通常所说的Java环境指的都是Sun公司JDK（也被Oracle收购了^_^）即Oracle Java（为什么要说这些，因为手动配置Java环境的时候需要知道Sun和BEA区别）。</p>
+<p><strong>教程1</strong>：<a href="http://blog.itpub.net/28536251/viewspace-1718232/">Windows下Weblogic 11G集群安装与配置</a> </p>
+<p><strong>教程2</strong>：<a href="https://blog.csdn.net/blvyoucan/article/details/78507100">Weblogic12c (12.2.1.3)集群环境搭建 两台物理机</a></p>
+<h4>安装WebLogic</h4>
+<p>教程1很详细了，如果已经安装了Java环境，可以跳过第2步，直接到<strong>3.1 安装Weblogic软件</strong>。</p>
+<h4>创建WebLogic域及集群</h4>
+<p>创建域使用QuickStart即可，配置集群有两种方法：</p>
+<ul>
+<li>
+<p><strong>创建域时配置集群</strong></p>
+<p>如果要配置集群且<strong>使用代理</strong>，请按<strong>教程1-3.3 创建Weblogic域及集群</strong>步骤来（因为我找不到从控制台添加代理的方法）；如果要配置集群但<strong>不使用代理</strong>，可以按3.3步骤在创建域时配置好集群，也可以只创建域然后到控制台配置集群。</p>
+</li>
+<li>
+<p><strong>控制台配置集群</strong></p>
+<p>参考<strong>教程2-4.4. 配置集群服务器，</strong>主要就是新增服务器（注意<strong>同一计算机上的服务器监听端口不能相同</strong>）、计算机（<strong>不同计算机节点管理器端口可以相同</strong>）、集群，这三个没有顺序要求，计算机中添加服务器，集群中添加服务器。</p>
+<blockquote>
+<p>默认<strong>计算机</strong>的<strong>节点管理器</strong>类型为<strong>SSL</strong>，如果修改成其他，通过节点管理器启动服务器的配置要相应修改，见下文。</p>
+</blockquote>
+</li>
+</ul>
+<h4>受管理服务器域的配置</h4>
+<p>如果受管理服务器和管理服务器都在同一台计算机上，不需要此步骤。这里配置的是另一台计算机上的受管理服务器。也有两种方法：</p>
+<ul>
+<li>
+<p><strong>使用QuickStart</strong></p>
+<p>参考<strong>教程1第4步</strong>，注意域名应和管理服务器上的一致，只需配置受管理服务器即可，因为当前域只有一台计算机，所以可以不用配置计算机。</p>
+</li>
+<li>
+<p><strong>使用镜像方法</strong></p>
+<p>参考<strong>教程2-4.5. 复制域到另一台物理机</strong>，管理服务器配置好后，打包域然后解压到受管理服务器上。如果部署了项目之后再打包会连项目一起打包，建议打包之后再部署项目。参考命令如下，注意是在两台计算机<code>%WL_HOME%\common\bin\</code>目录下运行命令提示符，分别输入：</p>
+<div class="highlight"><pre><span></span>pack -managed<span class="o">=</span><span class="nb">true</span> -domain<span class="o">=</span>d:<span class="se">\w</span>eblogic<span class="se">\u</span>ser_projects<span class="se">\d</span>omains<span class="se">\b</span>ase_domain -template<span class="o">=</span>d:<span class="se">\b</span>ase_domain.jar -template_name<span class="o">=</span><span class="s2">&quot;base_domain&quot;</span>
+unpack -domain<span class="o">=</span>d:<span class="se">\w</span>eblogic<span class="se">\u</span>ser_projects<span class="se">\d</span>omains<span class="se">\b</span>ase_domain -template<span class="o">=</span>d:<span class="se">\b</span>ase_domain.jar
+</pre></div>
+
+
+</li>
+</ul>
+<blockquote>
+<p>注意<strong>多台计算机WebLogic版本应一致，JDK根据部署的项目可以不一致</strong>。简单的集群使用第一种方法更便捷，复杂的集群推荐使用第二种方法。</p>
+</blockquote>
+<h4>启动管理服务器和受管理服务器</h4>
+<p>首先<strong>启动管理服务器</strong>，参考<strong>教程1-5.1 启动节点1的管理服务器</strong>或<strong>教程2-4.7.1。</strong>为了不在每次启动时输入用户名和密码，可以在<code>%DOMAIN_HOME%\servers\AdminServer\security\</code>下新建<strong>boot.properties</strong>文件，内容为：</p>
+<div class="highlight"><pre><span></span><span class="nv">username</span><span class="o">=</span>域登录名
+<span class="nv">password</span><span class="o">=</span>对应密码
+</pre></div>
+
+
+<p><strong>启动受管理服务器</strong>也有两种方法：</p>
+<ul>
+<li>
+<p>直接启动</p>
+<p>参考<strong>教程1-5.2、5.3和5.4</strong>，参考命令如下，注意是在两台计算机<code>%DOMAIN_HOME%\bin\</code>目录下运行命令提示符，<strong>地址都用管理服务器的地址</strong>：</p>
+<div class="highlight"><pre><span></span>startManagedWebLogic.cmd Server-1 http://192.168.1.103:7001
+</pre></div>
+
+
+<p>第一次启动时会提示输入用户名或密码，之后会在<code>%DOMAIN_HOME%\servers\Server-1\security\</code>下生成登录信息文件<strong>boot.properties</strong>，如果没有的话自己建一个。</p>
+<blockquote>
+<p><strong>注意如果要通过节点管理器启动一定要配置boot.properties</strong>。</p>
+</blockquote>
+</li>
+<li>
+<p>通过节点管理器启动</p>
+<p>默认节点管理器通过<code>%WL_HOME%\server\bin\</code>目录下<strong>startNodeManager.cmd</strong>启动，为全局管理器，默认配置文件目录为<code>%WL_HOME%\common\nodemanager\</code>，记为<strong>目录A</strong>。为了给不同域配置不同的节点管理器属性，具体配置如下（两台受管理服务器都要配置）：</p>
+<ul>
+<li>
+<p>复制<strong>startNodeManager.cmd</strong>到<code>%DOMAIN_HOME%</code>目录下，修改<code>NODEMGR_HOME</code>为<code>%DOMAIN_HOME%\bin\nodemanager\</code>（这里<code>%DOMAIN_HOME%</code>要替换成实际的地址），记为<strong>目录B</strong>。以管理员权限运行<strong>startNodeManager.cmd</strong>，首次运行会在<strong>目录B</strong>下生成相应的配置文件，观察控制台会报缺少<strong>nodemanager.domains</strong>文件，关闭<strong>startNodeManager.cmd</strong>。</p>
+</li>
+<li>
+<p>复制<strong>目录A</strong>中<strong>nodemanager.domains</strong>到<strong>目录B</strong>，打开修改，只留当前域的那一行即可，或者直接自己新建一个，注意Windows下目录<code>:</code>和<code>\</code>要记得转义。示例如下：</p>
+<div class="highlight"><pre><span></span><span class="nv">base_domain</span><span class="o">=</span>D<span class="se">\:\\</span>weblogic<span class="se">\\</span>user_projects<span class="se">\\</span>domains<span class="se">\\</span>base_domain
+</pre></div>
+
+
+</li>
+<li>
+<p>修改<strong>目录B</strong>中<strong>nodemanager.properties</strong>文件，配置<code>StartScriptEnabled=false</code>，如果不修改，通过节点管理器启动不会加载你的登录信息文件，会报错。</p>
+</li>
+<li>
+<p>如果新建<strong>计算机</strong>时配置的<strong>节点管理器</strong>类型为<strong>SSL</strong>，确保<code>SecureListener=true</code>；如果<strong>节点管理器</strong>类型为<strong>普通</strong>，要修改<code>SecureListener=false</code>，否则从控制台启动服务器会报找不到节点管理器的错误。</p>
+</li>
+<li>
+<p>监听地址<code>ListenAddress</code>可以置空。</p>
+</li>
+</ul>
+<p>配置好后重新启动节点管理器，在控制台【环境】-&gt;【计算机】，选择相应计算机【监视】-&gt;【节点管理器状态】，状态为【可访问】，此时可以通过【服务器】-&gt;【控制】通过节点管理器启动相应服务器。如果节点管理器状态为【非活动】，检查上面步骤，排查问题。</p>
+</li>
+</ul>
+<p><strong>总结</strong>：<strong>直接启动</strong>受管理服务器是没有办法通过控制台重启服务器的（可以关闭），所以建议<strong>通过节点管理器启动</strong>。整体流程就是：启动管理服务器--启动受管理服务器的节点管理器-通过控制台启动受管理服务器。</p>
+<h4>节点管理器随Windows启动</h4>
+<p>参考<strong>教程2-5</strong>，修改<code>%WL_HOME%\server\bin\</code>目录下<strong>installNodeMgrSvc.cmd</strong>的相应配置，执行即可。取消执行<strong>uninstallNodeMgrSvc.cmd</strong>。</p>
+<h2>部署项目注意事项</h2>
+<p>部署项目参考<strong>教程1-6. 部署应用进行测试</strong>，具体的应用各不相同，配置也不尽相同。可能遇到各种各样的问题，需要注意的是：</p>
+<ul>
+<li>
+<p>和开发沟通好，确保编译和部署的JDK环境一致或尽量一致；以及其他一些部署时需要单独配置的东西。修改JAVA_HOME等环境变量在<code>%DOMAIN_HOME%\bin\setDomainEnv.cmd</code>，修改完后重启WebLogic即可。</p>
+<p><a href="http://www.bkjia.com/Javabc/1130171.html">应用部署weblogic 报错Unsupported major.minor version 51.0的解决过程</a></p>
+</li>
+<li>
+<p>遇到报错多查看日志，帮助文档，百度谷歌，同事前辈亲朋好友。。。头发掉光都解决不了就算了。</p>
+</li>
+</ul>
+
+      </div><!-- /.entry-content -->
+      <div class="comments">
+        <h2>Comments</h2>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script>
+	var gitalk_owner = 'jlhxxxx';
+	
+	var gitalk = new Gitalk({
+	  clientID: 'a616e9a93853f37e454b',
+	  clientSecret: '38c3bbfaa4dd71957b8824ec071a705ea6fffdfe',
+	  repo: 'comments',
+	  owner: gitalk_owner,
+	  admin: [gitalk_owner],
+	  distractionFreeMode: false,  // Facebook-like distraction free mode
+	  createIssueManually: true
+	})
+
+	gitalk.render('gitalk-container')
+</script>
+                                  </div>
+
+    </article>
+  </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="site-footer">
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <address>
+                    <p>
+                        This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                    </p>
+                    <p>
+                        <a href="http://github.com/jsliang/pelican-fresh/">Fresh</a> is a responsive theme designed by <a href="http://jsliang.com/">jsliang</a> and <a href="https://github.com/jsliang/pelican-fresh/graphs/contributors">contributors</a>.
+                        Special thanks to <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a> and <a href="http://getbootstrap.com/">Twitter Bootstrap</a>.
+                    </p>
+                </address>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-117906599-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+</body>
+</html>

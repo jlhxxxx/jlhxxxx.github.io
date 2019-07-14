@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Sat, 13 Jul 2019 00:00:00 +0800</lastBuildDate><item><title>JMeter文档翻译之18-组件参考（目录跳转未完成）</title><link>https://jlhxxxx.github.io/jmeter-doc-cn-18.html</link><description>&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html"&gt;http://jmeter.apache.org/usermanual/component_reference.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b id="toc"&gt;目录：&lt;/b&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#introduction"&gt;18 导言&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#samplers"&gt;18.1 取样器&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#FTP_Request"&gt;FTP请求&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#HTTP_Request"&gt;HTTP请求&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#JDBC_Request"&gt;JDBC请求&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Java_Request"&gt;Java请求&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#LDAP_Request"&gt;LDAP请求&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#LDAP%E6%89%A9%E5%B1%95%E8%AF%B7%E6%B1%82"&gt;LDAP扩展请求&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Access-Log-Sampler"&gt;Access Log Sampler&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#BeanShell%E5%8F%96%E6%A0%B7%E5%99%A8"&gt;BeanShell取样器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#JRS223%E5%8F%96%E6%A0%B7%E5%99%A8"&gt;JRS223取样器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#TCP%E5%8F%96%E6%A0%B7%E5%99%A8"&gt;TCP取样器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#JMS%E5%8F%91%E5%B8%83"&gt;JMS发布&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#JMS%E8%AE%A2%E9%98%85"&gt;JMS订阅&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#JMS%E7%82%B9%E5%88%B0%E7%82%B9"&gt;JMS点到点&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#JUnit%E8%AF%B7%E6%B1%82"&gt;JUnit请求&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E9%82%AE%E4%BB%B6%E9%98%85%E8%AF%BB%E8%80%85%E5%8F%96%E6%A0%B7%E5%99%A8"&gt;邮件阅读者取样器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E6%B5%8B%E8%AF%95%E6%B4%BB%E5%8A%A8Flow-Control-Action"&gt;测试活动（Flow Control Action）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#SMTP%E5%8F%96%E6%A0%B7%E5%99%A8"&gt;SMTP取样器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#OS%E8%BF%9B%E7%A8%8B%E5%8F%96%E6%A0%B7%E5%99%A8"&gt;OS进程取样器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#MongoDB%E8%84%9A%E6%9C%AC%E5%B7%B2%E5%BC%83%E7%94%A8"&gt;MongoDB脚本（已弃用）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#182-%E9%80%BB%E8%BE%91%E6%8E%A7%E5%88%B6%E5%99%A8"&gt;18.2 逻辑控制器&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#%E7%AE%80%E5%8D%95%E6%8E%A7%E5%88%B6%E5%99%A8"&gt;简单控制器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E5%99%A8"&gt;循环控制器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E4%BB%85%E4%B8%80%E6%AC%A1%E6%8E%A7%E5%88%B6%E5%99%A8"&gt;仅一次控制器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E4%BA%A4%E6%9B%BF%E6%8E%A7%E5%88%B6%E5%99%A8"&gt;交替控制器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E9%9A%8F%E6%9C%BA%E6%8E%A7%E5%88%B6%E5%99%A8"&gt;随机控制器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E9%9A%8F%E6%9C%BA%E9%A1%BA%E5%BA%8F%E6%8E%A7%E5%88%B6%E5%99%A8"&gt;随机顺序控制器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E5%90%9E%E5%90%90%E9%87%8F%E6%8E%A7%E5%88%B6%E5%99%A8"&gt;吞吐量控制器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Runtime%E6%8E%A7%E5%88%B6%E5%99%A8"&gt;Runtime控制器 …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Sat, 13 Jul 2019 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2019-07-13:/jmeter-doc-cn-18.html</guid><category>JMeter</category><category>Documentation</category><category>Translation</category></item><item><title>Appium环境搭建及自动化的一些参考</title><link>https://jlhxxxx.github.io/appium-base-01.html</link><description>&lt;h2&gt;Appium环境配置&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;本地环境&lt;/strong&gt;：win10_x64 + JDK8 + python3&lt;/p&gt;
+&lt;h3&gt;Appium-Client安装配置&lt;/h3&gt;
+&lt;p&gt;这里我们选用&lt;a href="https://github.com/appium/python-client"&gt;python-client&lt;/a&gt;，建议在虚拟环境下安装，命令如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Appium&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Client&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Appium-Server安装配置&lt;/h3&gt;
+&lt;p&gt;推荐使用&lt;a href="https://github.com/appium/appium-desktop"&gt;appium-desktop&lt;/a&gt;，图形化界面，自带Inspector，非常好用。&lt;/p&gt;
+&lt;h3&gt;Android SDK安装配置&lt;/h3&gt;
+&lt;h4&gt;设置SDK环境变量&lt;/h4&gt;
+&lt;p&gt;这里只讲不使用Android Studio情况下安装SDK，首先新建一个SDK主目录（空文件夹即可），假设是&lt;code&gt;D:\SDK&lt;/code&gt;。配置相应环境变量：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;变量名&lt;/th&gt;
+&lt;th&gt;变量值&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;ANDROID_HOME&lt;/td&gt;
+&lt;td&gt;D:\SDK&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PATH&lt;/td&gt;
+&lt;td&gt;;%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\tools;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4&gt;下载SDK tools并安装其他工具&lt;/h4&gt;
+&lt;p&gt;官方地址：&lt;a href="https://developer.android.com/studio"&gt;https://developer.android.com/studio …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 08 Jul 2019 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2019-07-08:/appium-base-01.html</guid><category>Appium</category><category>Automated</category></item><item><title>JMeter文档翻译之20-函数和变量</title><link>https://jlhxxxx.github.io/jmeter-doc-cn-20.html</link><description>&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;JMeter 的函数是一些特殊值，它们可以填充在测试树的任何采样器或其他元件中。函数调用的语法如下：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;${__functionName(var1,var2,var3)}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其中“__functionName”匹配函数的名称。
+圆括号内为函数参数，不同函数的参数也不同，例如 &lt;code&gt;${__time(YMD)}&lt;/code&gt;。没有参数的函数可以不需要圆括号，例如 &lt;code&gt;${__threadNum}&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果函数的参数包含逗号，需要加上“&lt;code&gt;\&lt;/code&gt;”来转义，否则 JMeter 会把逗号当做参数的分隔符。例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;__time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EEE&lt;/span&gt;\&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;MMM&lt;/span&gt; &lt;span class="n"&gt;yyyy&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果逗号没有被转义——例如 &lt;code&gt;${__javaScript(Math.max(2,5))}&lt;/code&gt; ——你会得到像这样的错误信息：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ERROR - jmeter.functions …&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Tue, 07 May 2019 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2019-05-07:/jmeter-doc-cn-20.html</guid><category>JMeter</category><category>Documentation</category><category>Translation</category></item><item><title>JMeter文档翻译之21-正则表达式</title><link>https://jlhxxxx.github.io/jmeter-doc-cn-21.html</link><description>&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;21.1 概述&lt;/h2&gt;
+&lt;p&gt;JMeter 包含模式匹配软件 &lt;a href="http://attic.apache.org/projects/jakarta-oro.html"&gt;Apache Jakarta ORO&lt;/a&gt; 。 
+在 Jakarta 网站上有一些相关文档，例如：&lt;a href="http://archimedes.fas.harvard.edu/scrapbook/jakarta-oro-2.0.6/docs/api/org/apache/oro/text/regex/package-summary.html"&gt;模式匹配字符摘要&lt;/a&gt;。  &lt;/p&gt;
+&lt;p&gt;在 &lt;a href="http://www.savarese.org/oro/docs/OROMatcher/index.html"&gt;OROMatcher 用户指南&lt;/a&gt;上还有关于该产品旧版本的文档 ，也许会有些用处。  &lt;/p&gt;
+&lt;p&gt;模式匹配与 Perl 中的模式匹配非常类似。Perl 的完整安装会包含大量关于正则表达式的文档——查找 &lt;code&gt;perlrequick&lt;/code&gt;， &lt;code&gt;perlretut&lt;/code&gt;， &lt;code&gt;perlre&lt;/code&gt; 和 &lt;code&gt;perlreref&lt;/code&gt;。  &lt;/p&gt;
+&lt;p&gt;有必要强调“包含（contains）”和“匹配（matches）”之间的区别，它们被用在响应断言（Response Assertion）测试元件上： &lt;/p&gt;
+&lt;p&gt;"&lt;em&gt;包含（contains …&lt;/em&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 06 May 2019 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2019-05-06:/jmeter-doc-cn-21.html</guid><category>JMeter</category><category>Documentation</category><category>Translation</category></item><item><title>JMeter后置处理器之常用提取器介绍</title><link>https://jlhxxxx.github.io/jmeter-extractor.html</link><description>&lt;h2&gt;正则表达式提取器&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name of created variable&lt;/strong&gt;：用于存储结果的变量名称&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Regular Expression&lt;/strong&gt;：正则表达式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Template&lt;/strong&gt;：模板，用于从找到的匹配项创建字符串的模板。&lt;code&gt;$1$&lt;/code&gt;表示组&lt;strong&gt;1&lt;/strong&gt;，&lt;code&gt;$2$&lt;/code&gt;表示组&lt;strong&gt;2&lt;/strong&gt;，&lt;code&gt;$0$&lt;/code&gt;表示整个表达式匹配的内容，模板创建的字符串即为上面&lt;strong&gt;变量名称&lt;/strong&gt;对应的值。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Match No.&lt;/strong&gt;：指示要使用的匹配项。&lt;code&gt;0&lt;/code&gt;为随机，正数&lt;code&gt;n&lt;/code&gt;表示第n个匹配项，&lt;code&gt;-1&lt;/code&gt;表示匹配所有。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Default Value&lt;/strong&gt;：默认值，可为空&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;练习网址：&lt;a href="http://www.bejson.com/knownjson/webInterface/"&gt;JSON API免费接口&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这里以JSON响应的查询快递信息为例，返回值如下（已美化且掐头去尾）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;quot;message&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ok&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;quot;nu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;11111111111&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;quot;ischeck&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;quot;condition …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Sun, 05 May 2019 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2019-05-05:/jmeter-extractor.html</guid><category>JMeter</category><category>Extractor</category></item><item><title>Python pytesseract识别验证码</title><link>https://jlhxxxx.github.io/pytesseract.html</link><description>&lt;h2&gt;安装&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;安装库&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip install Pillow
+$ pip install pytesseract
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;安装&lt;a href="https://github.com/tesseract-ocr/tesseract/wiki"&gt;tesseract-ocr&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Windows下直接下载安装包，安装后添加到环境变量Path。&lt;/p&gt;
+&lt;p&gt;CentOS6下（前提是各种常用源都已安装，参考&lt;a href="https://blog.csdn.net/u010048823/article/details/51298183"&gt;centos7下添加常用YUM源(EPEL/Remi/RPMforge/php/Nginx)&lt;/a&gt;）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ yum install tesseract
+$ yum install tesseract-langpack-deu
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;验证码识别&lt;/h2&gt;
+&lt;p&gt;核心只有一个函数&lt;code&gt;pytesseract.image_to_string&lt;/code&gt;。&lt;/p&gt;
+&lt;h3&gt;简单的验证码识别&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="pytesseract-code1.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code1.jpg?raw=true"&gt;  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="pytesseract-code2.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code2.jpg?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;图片不需要任何处理：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;PIL&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Image&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pytesseract&lt;/span&gt;
+
+&lt;span class="n"&gt;img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;code.png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;vcode&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;pytesseract&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image_to_string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;eng …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Wed, 22 Aug 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-08-22:/pytesseract.html</guid><category>pytesseract</category></item><item><title>使用Nginx+uWSGI+Flask部署应用</title><link>https://jlhxxxx.github.io/nginx-uwsgi.html</link><description>&lt;h2&gt;原理&lt;/h2&gt;
+&lt;h3&gt;WIGS(Web Server Gateway Interface)服务器网关接口&lt;/h3&gt;
+&lt;p&gt;是Python应用程序或框架和Web服务器之间的一种接口，已经被广泛接受, 它已基本达成它的可移植性方面的目标。 
+WSGI 没有官方的实现，因为WSGI更像一个协议。只要遵照这些协议，WSGI应用(Application)都可以在任何服务器(Server)上运行，反之亦然。 
+WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛使用的django框架。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所以说WIGS是一种标准&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;uWIGS&lt;/h3&gt;
+&lt;p&gt;可以看作是一个应用程序，帮助我们实现WSGI协议，Http协议，这样我们可以不再关注网络通信的底层实现，将精力更多放在处理HTTP请求数据，返回HTML。利用uWIGS可以使我们的web应用得到更强的并发能力，uWIGS也可以返回静态文件(css，js，img…)，但是很笨拙，一般静态文件都交由Nginx进行传输，所以配置中一般不配置static-map，如果直接由uWIGS接受HTTP请求则需要设置http:xxxx，如果只需要与反向代理服务器进行交互则只需要接受socket，uWIGS与Nginx交互相当于两个进程间交互，一般使用的是.sock文件或者指定端口接受socket。指定端口时再使用浏览器访问相应端口，uWIGS会提示skip，跳过该HTTP请求 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Tue, 21 Aug 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-08-21:/nginx-uwsgi.html</guid><category>Nginx</category><category>uWSGI</category><category>Flask</category></item><item><title>Oracle报错排查：ORA-00020:maximum number of processes (500) exceeded</title><link>https://jlhxxxx.github.io/oracle-00020.html</link><description>&lt;p&gt;看到这个报错的时候，已经连不上数据库了。所以思路是：先结束掉部分进程，再增大连接数。&lt;/p&gt;
+&lt;p&gt;先查找进程：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;root@oramod ~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# ps -ef|grep oracle&lt;/span&gt;
+oracle    &lt;span class="m"&gt;4801&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; Apr28 ?        &lt;span class="m"&gt;00&lt;/span&gt;:02:24 tnslsnr LISTENER -inherit
+oracle   &lt;span class="m"&gt;16284&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;11&lt;/span&gt;:41 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:06 ora_pmon_orcl
+......
+oracle   &lt;span class="m"&gt;22021&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;:07 ?        &lt;span class="m"&gt;00&lt;/span&gt;:00:00 oracleorcl &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;LOCAL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NO&lt;span class="o"&gt;)&lt;/span&gt;
+oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;15 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Wed, 20 Jun 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-06-20:/oracle-00020.html</guid><category>Oracle</category><category>Troubleshooting</category></item><item><title>Red Hat Enterprise更换CentOS Yum源</title><link>https://jlhxxxx.github.io/rhe-change-yum.html</link><description>&lt;h2&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h2&gt;
+&lt;p&gt;查看当前系统版本&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat /etc/issue     &lt;span class="c1"&gt;# 查看系统版本&lt;/span&gt;
+cat /proc/version  &lt;span class="c1"&gt;# 查看内核版本&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://zh.wikipedia.org/zh-cn/CentOS"&gt;CentOS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.linuxidc.com/Linux/2016-07/133000.htm"&gt;CentOS和RedHat发行版与Linux内核版本的对应关系&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;备份和卸载本地yum源&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rpm -qa&lt;span class="p"&gt;|&lt;/span&gt;grep yum　　                                          &lt;span class="c1"&gt;# 查看本地yum&lt;/span&gt;
+mv /etc/yum.repos.d/your.repo  /etc/yum.repos.d/your.repo.bak   &lt;span class="c1"&gt;# your替换成本地repo名称&lt;/span&gt;
+rpm -qa&lt;span class="p"&gt;|&lt;/span&gt;grep yum&lt;span class="p"&gt;|&lt;/span&gt;xargs rpm -e --nodeps　　                    &lt;span class="c1"&gt;# 不检查依赖性，卸载yum程序&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;下载新的yum安装包&lt;/h2&gt;
+&lt;p&gt;这里采用163的镜像，我们要下的是这几个包：&lt;code&gt;python-iniparse-xxx.noarch …&lt;/code&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 28 May 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-05-28:/rhe-change-yum.html</guid><category>Linux</category><category>yum</category></item><item><title>Windows下WebLogic安装及集群配置</title><link>https://jlhxxxx.github.io/weblogic-cluster.html</link><description>&lt;h2&gt;基本概念&lt;/h2&gt;
+&lt;p&gt;在正式部署项目之前，还是先了解下基本概念吧。最基本要掌握域（Domain）、集群（Cluster）、服务器（Server）（区分管理服务器和受管理服务器）、计算机（Machine）、节点管理器（Node Manager）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参考文章&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://langgufu.iteye.com/blog/1700388"&gt;weblogic 域，管理服务器，受管服务器，集群和机器的基本知识&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cnblogs.com/cocowool/archive/2012/04/01/2428861.html"&gt;WebLogic中的一些基本概念&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;常用目录结构&lt;/h2&gt;
+&lt;p&gt;了解WebLogic常用目录结构，将大大提高管理与维护的工作效率 。这里以WebLogic 11g为例。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.                                      # 主目录
+│─ coherence_3.7                        # coherence集群相关
+│─ logs                                 # 日志文件，包括安装和运行%WL_HOME%\common\bin\下程序的日志
+│─ modules                             # 模块和插件目录
+│─ user_projects                         # 用户工程目录
+│  └─ domains                            # 域主目录
+│      └─ base_domain                     # DOMAIN_HOME，用户自建域主目录，默认名称为base_domain，以此为例
+│         │─ bin …&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Tue, 22 May 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-05-22:/weblogic-cluster.html</guid><category>WebLogic</category><category>Cluster</category></item><item><title>Oracle 十全大补汤</title><link>https://jlhxxxx.github.io/oracle-rudiment.html</link><description>&lt;h2&gt;安装卸载&lt;/h2&gt;
+&lt;h4&gt;安装&lt;/h4&gt;
+&lt;p&gt;新手不建议安装发布不久的最新版本，一来新版本可能有一些新特性，但是网上相关的文章较少，入坑概率很大，老手尚需时间来适应，新手肯定更觉得难以上手了；二来旧版本相对比较稳定，各种文档丰富，常见BUG都有比较成熟的应对方法；三是要看使用环境了，兼容性是考虑重点，客户端和服务器端版本要尽量一致，这里的问题实在太多，几百M都讲不完，说多了都是眼泪。&lt;/p&gt;
+&lt;p&gt;Oracle下载地址：&lt;a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html"&gt;【英文地址】&lt;/a&gt;、&lt;a href="http://www.oracle.com/technetwork/cn/database/enterprise-edition/downloads/index.html"&gt;【中文地址】&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Windows下安装教程&lt;/strong&gt;：&lt;a href="https://blog.csdn.net/anxpp/article/details/51345074"&gt; Oracle 12c Windows安装、介绍及简单使用(图文) &lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;网上这个教程以Oracle 12c为例，其他版本安装过程都差不多，注意&lt;strong&gt;安装位置&lt;/strong&gt;自己设置一下（只要设置Oracle基目录即可，其他目录会相应改变），&lt;strong&gt;字符集选UTF-8&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Linux下安装教程&lt;/strong&gt;：todo&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安装过程中出现的问题&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://blog.csdn.net/qq_33530388/article/details/56669466"&gt;win10 下安装Oracle 11g(问题：环境不满足最低要求) &lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;先决条件检查有失败内容&lt;/p&gt;
+&lt;p&gt;查看失败内容，如果是“预期值：N/A，实际值 …&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Sat, 12 May 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-05-12:/oracle-rudiment.html</guid><category>Oracle</category><category>Rudiment</category></item><item><title>win10下安装CentOS双系统</title><link>https://jlhxxxx.github.io/win-install-centos.html</link><description>&lt;p&gt;用惯了Windows，但是要学Linux，所以决定装个双系统。一开始装的是Ubuntu，傻瓜式安装，界面也漂亮，但是装软件时出现了依赖性问题，网上搜的方法大部分就一个&lt;code&gt;sudo apt-get -f install&lt;/code&gt;解决，但是我输完命令又出现校验和不符无法安装的问题，没有找到很好的解决办法（虽然我觉得可能是服务器的问题，当然我也没有很用力去找，只尝试了一晚上就放弃了）。一怒之下决定换个系统，Liunx系统那么多，总有一个适合自己的。&lt;/p&gt;
+&lt;p&gt;百度了下，Linux系统大致分两类：一类是RedHat系列，包括RedHat、CentOS、Fedora等，包管理工具yum；另一类是Debian系列，包括Debian、Ubuntu等，包管理工具apt-get 。由于公司服务器用的是RedHat的，所以不想浪费时间，我决定找个RedHat系列的，其中CentOS稳定性最好，是大部分服务器的配置，那就尝试下吧。下面进入正题：&lt;/p&gt;
+&lt;h2&gt;第一步：下载镜像文件&lt;/h2&gt;
+&lt;p&gt;CentOS官方下载地址：&lt;a href="https://www.centos.org/download/"&gt;https://www.centos.org/download/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CentOS官网上，提供了三种ISO镜像文件的下载：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DVD …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Wed, 02 May 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-05-02:/win-install-centos.html</guid><category>Linux</category><category>CentOS</category></item><item><title>Oracle LOOP循环</title><link>https://jlhxxxx.github.io/oracle-loop.html</link><description>&lt;p&gt;本文基本全文转载，原文链接：&lt;a href="http://www.cnblogs.com/Richardzhu/p/3455806.html"&gt;Oracle PL/SQL之LOOP循环控制语句&lt;/a&gt;。作者写的看着很舒服，所以收藏起来自己用。主要是一些语法格式，适合新手对照练习。&lt;/p&gt;
+&lt;h2&gt;一、基本的LOOP语句&lt;/h2&gt;
+&lt;p&gt;LOOP语句的基本语法结构如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;LOOP&lt;/span&gt;
+ &lt;span class="k"&gt;statement&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;LOOP&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;label_name&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;【语法说明】&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;&amp;lt;label_name&amp;gt;&amp;gt;&lt;/code&gt;：LOOP结构的标签，是可选项。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LOOP&lt;/code&gt;：LOOP循环开始标志。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;statement&lt;/code&gt;：LOOP语句中循环执行的语句序列。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;END LOOP&lt;/code&gt;：LOOP循环结束标志，可以添加LOOP结构的标签。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;实例一： 利用EXIT...WHEN结束循环操作&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;serveroutput&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;--exit when&lt;/span&gt;
+&lt;span class="k"&gt;SQL&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;declare&lt;/span&gt;
+   &lt;span class="n"&gt;v_rlt&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="k"&gt;begin&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;fst_loop&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="n"&gt;loop&lt;/span&gt;
+      &lt;span class="n"&gt;dbms_output …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Thu, 26 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-26:/oracle-loop.html</guid><category>Oracle</category><category>LOOP</category></item><item><title>Oracle SEQUENCE使用</title><link>https://jlhxxxx.github.io/oracle-sequence.html</link><description>&lt;p&gt;序列(SEQUENCE)是序列号生成器，可以为表中的行自动生成序列号，产生一组等间隔的数值(类型为数字)。序列主要用于生成主键。&lt;/p&gt;
+&lt;h2&gt;建立序列&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;SEQUENCE&lt;/span&gt; &lt;span class="n"&gt;sequence_name&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;INCREMENT&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;START&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;MAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;MINVALUE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOMAXVALUE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;NOMINVALUE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CYCLE&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCYCLE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="k"&gt;CACHE&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;NOCACHE&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;INCREMENT BY&lt;/code&gt;：用于定义序列的步长，如果省略，则默认为&lt;code&gt;1&lt;/code&gt;，如果出现负值，则代表序列的值是按照此步长递减的。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;START WITH&lt;/code&gt; ：定义序列的初始值(即产生的第一个值)，默认为&lt;code&gt;1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MAXVALUE&lt;/code&gt; ：定义序列生成器能产生的最大值。选项&lt;code&gt;NOMAXVALUE&lt;/code&gt;是默认选项，代表没有最大值定义，这时对于递增序列，系统能够产生的最大值是10的27次方；对于递减序列 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Thu, 26 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-26:/oracle-sequence.html</guid><category>Oracle</category><category>SEQUENCE</category></item><item><title>搬瓦工SS教程</title><link>https://jlhxxxx.github.io/banwagong-ss.html</link><description>&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，现在我更注重效率，尽量在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，加上优惠码，折合人民币每个月10块钱，十块钱，买不了吃亏买不了上当，还因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
+&lt;h2&gt;一、套餐选购&lt;/h2&gt;
+&lt;p&gt;搬瓦工主页：&lt;a href="https://bwh1.net/"&gt;地址1&lt;/a&gt;、&lt;a href="https://bandwagonhost.com/"&gt;地址2&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://zhuanlan.zhihu.com/p/32811900"&gt;搬瓦工2018年新手选购指南&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.bandwagonhost.net/"&gt;搬瓦工中文网&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://banwagong.cn/"&gt;搬瓦工VPS中文网&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意如果是未注册用户，不要先注册再购买，因为新注册的时候需要输入验证码，而验证码是需要翻墙才能看到的，直接购买就能顺便注册。除了邮箱和密码，其他信息随便填就好了。&lt;/p&gt;
+&lt;p&gt;购买之后邮箱里会收到几封邮件，告诉你IP address，SSH Port，和初始密码，不过都不需要记，IP和Port进入服务器控制面板就能看到，密码可以随时重新生成。&lt;/p&gt;
+&lt;h2&gt;二、安装Shadowsocks&lt;/h2&gt;
+&lt;p&gt;参考教程：&lt;a href="https://www.cnlinode.com/ban_wa_gong_qu_xiao_le_yi_jian_an_zhuang_shadowsocks_zui_xin_ban_wa_gong_ss_jiao_cheng/"&gt;搬瓦工取消了一键安装Shadowsocks，最新搬瓦工SS教程&lt;/a&gt;第二步方法二 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Wed, 25 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-25:/banwagong-ss.html</guid><category>Shadowsocks</category><category>Bandwagon</category></item><item><title>Oracle取系统时间</title><link>https://jlhxxxx.github.io/oracle-get-sysdate.html</link><description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;取今天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取上个月今天的前一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ADD_MONTHS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取本月第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;MM&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取本季度第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Q&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取上季度第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TO_CHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ADD_MONTHS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TRUNC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SYSDATE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Q&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;YYYYMMDD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;DUAL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取今年第一天&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 23 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-23:/oracle-get-sysdate.html</guid><category>Oracle</category></item><item><title>windows下用Pelican+GitHub搭建静态博客</title><link>https://jlhxxxx.github.io/pelican-github.html</link><description>&lt;h2&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;首先到GitHub进行账号注册：&lt;a href="https://github.com/"&gt;https://github.com/&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;创建新仓库，不用新建readme.md，注意仓库名使用&lt;em&gt;username.github.io&lt;/em&gt;的格式，这里&lt;em&gt;username&lt;/em&gt;改成自己的用户名。&lt;/li&gt;
+&lt;li&gt;创建SSH密钥并上传到GitHub。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;二、安装Python、Pelican、Markdown和make&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装Python。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装Pelican。建议在虚拟环境virtualenv下使用。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装virtualenv（可选）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install virtualenv
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为了使用virtualenv更方便，可以借助 virtualenvwrapper（可选）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install virtualenvwrapper-win
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;配置虚拟环境目录，默认创建的虚拟环境位于&lt;strong&gt;C:\Users\username\&lt;/strong&gt;下，可以通过环境变量 &lt;code&gt;WORKON_HOME&lt;/code&gt; 来定制。&lt;/p&gt;
+&lt;p&gt;通过&lt;strong&gt;计算机--&amp;gt;属性-- …&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 16 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-16:/pelican-github.html</guid><category>GitHub</category><category>Pelican</category><category>Blog</category></item><item><title>Postman入门第一坑：提取返回值</title><link>https://jlhxxxx.github.io/postman-start.html</link><description>&lt;p&gt;Postman是做接口测试的，但是很多接口并不是直接就能测，有的需要一些预处理。比如说身份认证，需要传递一个&lt;a href="https://zh.wikipedia.org/wiki/%E5%AE%89%E5%85%A8%E4%BB%A4%E7%89%8C"&gt;token&lt;/a&gt;。如果做网页测试，一般打开登陆界面的时候就会生成一个token，如果返回值是json格式，用Postman从中提取值是很简单的，在Tests中输入：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;jsonData&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nx"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;responseBody&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="c1"&gt;//获取body中返回的所有参数&lt;/span&gt;
+&lt;span class="nx"&gt;pm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;environment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;appKey&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;jsonData&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="c1"&gt;//把返回参数中的keys设置为环境变量&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="postman-start-01.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-01.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;如果token在返回的header里，也很简单：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;postman&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getResponseHeader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;pm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;environment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Access-Token&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="postman-start-02.png" src="https://github.com/jlhxxxx/imgur/blob/master/blog/postman-start-02.png?raw=true"&gt;&lt;/p&gt;
+&lt;p&gt;如果token在返回值的body中，呵呵，网上并没有适合小白看的清晰的解决方法。我花了&lt;strong&gt;好长好长好长&lt;/strong&gt;时间才找到这么两行小字：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;//转换XML body为JSON对象&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;jsonObject&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;xml2Json&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;responseBody&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;那我的思路就有了 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Fri, 13 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-13:/postman-start.html</guid><category>Postman</category><category>Interface</category><category>Test</category></item><item><title>Oracle奇技淫巧</title><link>https://jlhxxxx.github.io/oracle-skills.html</link><description>&lt;h2&gt;SELECT 1 FROM DUAL&lt;/h2&gt;
+&lt;p&gt;用PLSQL执行数据查询的时候，FROM子句是必须的，当不想查具体的表时，可以使用虚拟表dual。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;IS&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SUCCESS&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="k"&gt;RESULT&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;SYSDATE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;CASE语句&lt;/h2&gt;
+&lt;p&gt;CASE表达式有两种形式：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CASE&lt;/span&gt; &lt;span class="n"&gt;AAC004&lt;/span&gt;  
+&lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;MALE&amp;#39;&lt;/span&gt;  
+&lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;FEMALE&amp;#39;&lt;/span&gt;  
+&lt;span class="k"&gt;ELSE&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;--CASE搜索函数 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 02 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-02:/oracle-skills.html</guid><category>Oracle</category><category>CASE</category><category>DECODE</category></item></channel></rss>
