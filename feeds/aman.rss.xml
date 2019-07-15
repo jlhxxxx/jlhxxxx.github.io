@@ -8,7 +8,7 @@
 &lt;li&gt;&lt;a href="#HTTP_Request"&gt;HTTP请求&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#JDBC_Request"&gt;JDBC请求&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#Java_Request"&gt;Java请求&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#LDAP_Request"&gt;LDAP请求&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#LDAP请求"&gt;LDAP请求&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#LDAP%E6%89%A9%E5%B1%95%E8%AF%B7%E6%B1%82"&gt;LDAP扩展请求&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#Access-Log-Sampler"&gt;Access Log Sampler&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#BeanShell%E5%8F%96%E6%A0%B7%E5%99%A8"&gt;BeanShell取样器&lt;/a&gt;&lt;/li&gt;
