@@ -257,19 +257,241 @@
 </ul>
 </li>
 </ul>
+<div class="toc">
+<ul>
+<li><a href="#java">Java请求</a></li>
+<li><a href="#ldap">LDAP请求</a></li>
+<li><a href="#ldap_1">LDAP扩展请求</a></li>
+<li><a href="#access-log-sampler">Access Log Sampler</a></li>
+<li><a href="#beanshell">BeanShell取样器</a></li>
+<li><a href="#jrs223">JRS223取样器</a></li>
+<li><a href="#tcp">TCP取样器</a><ul>
+<li><a href="#prefixsuffix">使用前缀（prefix）和后缀（suffix）</a></li>
+</ul>
+</li>
+<li><a href="#jms">JMS发布</a></li>
+<li><a href="#jms_1">JMS订阅</a></li>
+<li><a href="#jms_2">JMS点到点</a></li>
+<li><a href="#junit">JUnit请求</a><ul>
+<li><a href="#junit_1">JUnit构造函数</a></li>
+</ul>
+</li>
+<li><a href="#_1">邮件阅读者取样器</a></li>
+<li><a href="#flow-control-action">测试活动（Flow Control Action）</a></li>
+<li><a href="#smtp">SMTP取样器</a></li>
+<li><a href="#os">OS进程取样器</a></li>
+<li><a href="#mongodb">MongoDB脚本（已弃用）</a></li>
+<li><a href="#182">18.2 逻辑控制器</a><ul>
+<li><a href="#_2">简单控制器</a><ul>
+<li><a href="#_3">使用简单控制器</a></li>
+</ul>
+</li>
+<li><a href="#_4">循环控制器</a><ul>
+<li><a href="#_5">循环示例</a></li>
+</ul>
+</li>
+<li><a href="#_6">仅一次控制器</a><ul>
+<li><a href="#_7">仅一次示例</a></li>
+</ul>
+</li>
+<li><a href="#_8">交替控制器</a><ul>
+<li><a href="#_9">简单交替示例</a></li>
+<li><a href="#_10">有用的交替示例</a></li>
+</ul>
+</li>
+<li><a href="#_11">随机控制器</a></li>
+<li><a href="#_12">随机顺序控制器</a></li>
+<li><a href="#_13">吞吐量控制器</a></li>
+<li><a href="#runtime">Runtime控制器</a></li>
+<li><a href="#if">如果（If）控制器</a><ul>
+<li><a href="#javascript">示例（JavaScript）</a></li>
+<li><a href="#_14">示例（变量表达式）</a></li>
+</ul>
+</li>
+<li><a href="#while">While控制器</a></li>
+<li><a href="#switch">Switch控制器</a></li>
+<li><a href="#foreach">ForEach控制器</a><ul>
+<li><a href="#foreach_1">ForEach示例</a></li>
+<li><a href="#foreach_2">ForEach示例</a></li>
+</ul>
+</li>
+<li><a href="#_15">模块控制器</a></li>
+<li><a href="#include">Include控制器</a></li>
+<li><a href="#_16">事务控制器</a></li>
+<li><a href="#_17">录制控制器</a></li>
+<li><a href="#_18">临界部分控制器</a></li>
+</ul>
+</li>
+<li><a href="#183">18.3 监听器</a><ul>
+<li><a href="#_19">样本结果保存配置</a></li>
+<li><a href="#_20">图形结果</a></li>
+<li><a href="#_21">断言结果</a></li>
+<li><a href="#_22">查看结果树</a></li>
+<li><a href="#_23">聚合报告</a></li>
+<li><a href="#_24">用表格查看结果</a></li>
+<li><a href="#_25">简单数据写入器</a></li>
+<li><a href="#_26">汇总图</a></li>
+<li><a href="#_27">响应时间图</a></li>
+<li><a href="#_28">邮件观察仪</a></li>
+<li><a href="#beanshell_1">BeanShell监听器</a></li>
+<li><a href="#_29">汇总报告</a></li>
+<li><a href="#_30">保存响应到文件</a></li>
+<li><a href="#jsr223">JSR223监听器</a></li>
+<li><a href="#_31">生成概要结果</a></li>
+<li><a href="#_32">比较断言可视化器</a></li>
+<li><a href="#_33">后端监听器</a></li>
+</ul>
+</li>
+<li><a href="#184">18.4 配置元件</a><ul>
+<li><a href="#csv">CSV 数据文件设置</a></li>
+<li><a href="#ftp">FTP请求默认值</a></li>
+<li><a href="#dns">DNS缓存管理器</a><ul>
+<li><a href="#_34">静态主机表的用法</a></li>
+</ul>
+</li>
+<li><a href="#http">HTTP授权管理器</a></li>
+<li><a href="#http_1">HTTP缓存管理器</a></li>
+<li><a href="#http-cookie">HTTP Cookie管理器</a></li>
+<li><a href="#http_2">HTTP请求默认值</a></li>
+<li><a href="#http_3">HTTP信息头管理器</a><ul>
+<li><a href="#_35">信息头管理器示例</a></li>
+</ul>
+</li>
+<li><a href="#java_1">Java默认请求</a></li>
+<li><a href="#jdbc">JDBC连接配置</a></li>
+<li><a href="#_36">密钥库配置</a></li>
+<li><a href="#_37">登录配置元件</a></li>
+<li><a href="#ldap_2">LDAP默认请求</a></li>
+<li><a href="#ldap_3">LDAP扩展请求默认值</a></li>
+<li><a href="#tcp_1">TCP取样器配置</a></li>
+<li><a href="#_38">用户定义的变量</a></li>
+<li><a href="#_39">随机变量</a></li>
+<li><a href="#_40">计数器</a></li>
+<li><a href="#_41">简单配置元件</a></li>
+<li><a href="#mongodb_1">MongoDB源配置（已弃用）</a></li>
+</ul>
+</li>
+<li><a href="#185">18.5 断言</a><ul>
+<li><a href="#_42">响应断言</a><ul>
+<li><a href="#_43">断言实例</a></li>
+</ul>
+</li>
+<li><a href="#_44">断言持续时间</a></li>
+<li><a href="#_45">大小断言</a></li>
+<li><a href="#xml">XML断言</a></li>
+<li><a href="#beanshell_2">BeanShell断言</a></li>
+<li><a href="#md5hex">MD5Hex断言</a></li>
+<li><a href="#html">HTML断言</a></li>
+<li><a href="#xpath">XPath断言</a></li>
+<li><a href="#xml-schema">XML Schema断言</a></li>
+<li><a href="#jsr223_1">JSR223断言</a></li>
+<li><a href="#_46">比较断言</a></li>
+<li><a href="#smime">SMIME断言</a></li>
+<li><a href="#json">JSON断言</a></li>
+</ul>
+</li>
+<li><a href="#186">18.6 定时器</a><ul>
+<li><a href="#_47">固定定时器</a></li>
+<li><a href="#_48">高斯随机定时器</a></li>
+<li><a href="#_49">统一随机定时器</a></li>
+<li><a href="#_50">常数吞吐量定时器</a></li>
+<li><a href="#_51">准确的吞吐量定时器</a><ul>
+<li><a href="#_52">测试计划中准确的吞吐量定时器的最佳位置</a></li>
+<li><a href="#_53">生成调度</a></li>
+<li><a href="#_54">加速和启动峰值</a></li>
+<li><a href="#_55">多个线程组同时启动</a></li>
+<li><a href="#_56">每小时的迭代次数</a></li>
+<li><a href="#_57">线程数和思考时间</a></li>
+<li><a href="#_58">测试低速率和可重复测试</a></li>
+<li><a href="#_59">测试高速率和/或长持续时间测试</a></li>
+<li><a href="#_60">突发负载</a></li>
+<li><a href="#_61">可变负载率</a></li>
+<li><a href="#_62">监控</a></li>
+</ul>
+</li>
+<li><a href="#_63">同步定时器</a></li>
+<li><a href="#beanshell_3">BeanShell定时器</a></li>
+<li><a href="#jsr223_2">JSR223定时器</a></li>
+<li><a href="#_64">泊松随机定时器</a></li>
+</ul>
+</li>
+<li><a href="#187">18.7 前置处理器</a><ul>
+<li><a href="#html_1">HTML链接解析器</a><ul>
+<li><a href="#_65">爬虫示例</a></li>
+<li><a href="#_66">轮询示例</a></li>
+</ul>
+</li>
+<li><a href="#http-url">HTTP URL 重写修饰符</a></li>
+<li><a href="#_67">用户参数</a></li>
+<li><a href="#beanshell_4">BeanShell预处理程序</a></li>
+<li><a href="#jsr223_3">JSR223预处理程序</a></li>
+<li><a href="#jdbc_1">JDBC预处理程序</a></li>
+<li><a href="#_68">正则表达式用户参数</a><ul>
+<li><a href="#_69">正则表达式示例</a></li>
+</ul>
+</li>
+<li><a href="#_70">取样器超时</a></li>
+</ul>
+</li>
+<li><a href="#188">18.8 后置处理器</a><ul>
+<li><a href="#_71">正则表达式提取器</a></li>
+<li><a href="#csscssjquery">CSS选择器提取器（即：CSS/JQuery提取器）</a></li>
+<li><a href="#xpath2-extractor">XPath2 Extractor</a></li>
+<li><a href="#xpath_1">XPath提取器</a></li>
+<li><a href="#_72">结果状态处理器</a></li>
+<li><a href="#beanshell_5">BeanShell后置处理程序</a></li>
+<li><a href="#jsr223_4">JSR223后置处理程序</a></li>
+<li><a href="#jdbc_2">JDBC后置处理程序</a></li>
+<li><a href="#json_1">JSON提取器</a></li>
+<li><a href="#_73">边界提取器</a></li>
+</ul>
+</li>
+<li><a href="#189">18.9 其他功能</a><ul>
+<li><a href="#_74">测试计划</a></li>
+<li><a href="#_75">线程组</a></li>
+<li><a href="#_76">工作台</a></li>
+<li><a href="#ssl">SSL管理器</a></li>
+<li><a href="#https-http">HTTP(S)测试脚本录制器 （即：HTTP代理服务器）</a><ul>
+<li><a href="#https">HTTPS录制和证书</a></li>
+<li><a href="#httpsjmeter-ca">安装用于HTTPS录制的JMeter CA证书</a><ul>
+<li><a href="#firefox">在Firefox中安装证书</a></li>
+<li><a href="#chromeinternet-explorer">在Chrome或Internet Explorer中安装证书</a></li>
+<li><a href="#opera">在Opera中安装证书</a></li>
+</ul>
+</li>
+<li><a href="#_77">录制和重定向</a></li>
+<li><a href="#_78">包含和排除</a></li>
+<li><a href="#post">捕获二进制POST数据</a></li>
+<li><a href="#_79">添加定时器</a></li>
+<li><a href="#_80">样本在何处被记录？</a></li>
+<li><a href="#http_4">处理HTTP请求默认值</a></li>
+<li><a href="#_81">用户定义的变量替换</a></li>
+<li><a href="#_82">我怎样才能同时记录服务器的响应？</a></li>
+<li><a href="#_83">将请求与响应相关联</a></li>
+<li><a href="#cookie">Cookie管理器</a></li>
+<li><a href="#_84">授权管理器</a></li>
+<li><a href="#_85">上传文件</a></li>
+<li><a href="#jmeterhttp">记录JMeter中原生不支持的基于HTTP的非文本协议</a></li>
+</ul>
+</li>
+<li><a href="#http_5">HTTP镜像服务器</a></li>
+<li><a href="#_86">属性显示</a></li>
+<li><a href="#_87">调试取样器</a></li>
+<li><a href="#_88">调试后置处理程序</a></li>
+<li><a href="#_89">测试片段</a></li>
+<li><a href="#setup">setUp线程组</a></li>
+<li><a href="#teardown">tearDown线程组</a></li>
+</ul>
+</li>
+</ul>
+</div>
 <h2 id="introduction">18 导言</h2>
 
 <blockquote>
 <p>少数测试元件使用JMeter属性来控制它们的行为。这些属性通常在类被加载时解析。这通常发生在测试计划执行前，所以不能通过<a href="http://jmeter.apache.org/usermanual/functions.html#__setProperty">__setProperty()</a>函数来改变设置。</p>
 </blockquote>
 <h2 id="samplers">18.1 取样器</h1>
-
-<div class="highlight"><pre><span></span>test
-</pre></div>
-
-
-
-取样器执行JMeter实际的工作。每个取样器（[测试活动](http://jmeter.apache.org/usermanual/component_reference.html#Flow_Control_Action)除外）生成一个或多个样本结果。样本结果具有各种属性（成功/失败，经过时间，数据大小等），并且可以在各种监听器中查看。
+取样器执行JMeter实际的工作。每个取样器（ [测试活动](http://jmeter.apache.org/usermanual/component_reference.html#Flow_Control_Action)除外）生成一个或多个样本结果。样本结果具有各种属性（成功/失败，经过时间，数据大小等），并且可以在各种监听器中查看。
 
 <h3 id="FTP_Request">FTP请求</h2>
 
@@ -399,7 +621,7 @@
 </blockquote>
 <p>如果请求需要服务器或代理登录授权（即浏览器将创建弹出对话框），则还必须添加<a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP_Authorization_Manager">HTTP授权管理器</a>配置元件。对于正常登录（即用户在表单中输入登录信息），您需要确定表单提交按钮的作用，并使用适当的方法（通常是<code>POST</code>）和表单定义中的相应的参数创建HTTP请求。如果页面使用HTTP，则可以使用JMeter代理捕获登录序列。</p>
 <p>每个线程使用单独的SSL上下文。如果要共用一个SSL上下文（不是浏览器的标准行为），请设置JMeter属性：</p>
-<div class="highlight"><pre><span></span>https.sessioncontext.shared=true
+<div class="highlight"><pre><span></span><span class="n">https</span><span class="o">.</span><span class="na">sessioncontext</span><span class="o">.</span><span class="na">shared</span><span class="o">=</span><span class="kc">true</span>
 </pre></div>
 
 
