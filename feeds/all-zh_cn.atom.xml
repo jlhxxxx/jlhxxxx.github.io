@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all-zh_cn.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-07-13T00:00:00+08:00</updated><entry><title>JMeter文档翻译之18-组件参考（目录跳转未完成）</title><link href="https://jlhxxxx.github.io/jmeter-doc-cn-18.html" rel="alternate"></link><published>2019-07-13T00:00:00+08:00</published><updated>2019-07-13T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-07-13:/jmeter-doc-cn-18.html</id><summary type="html">&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html"&gt;http://jmeter.apache.org/usermanual/component_reference.html&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all-zh_cn.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-07-13T00:00:00+08:00</updated><entry><title>JMeter文档翻译之18-组件参考</title><link href="https://jlhxxxx.github.io/jmeter-doc-cn-18.html" rel="alternate"></link><published>2019-07-13T00:00:00+08:00</published><updated>2019-07-13T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-07-13:/jmeter-doc-cn-18.html</id><summary type="html">&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html"&gt;http://jmeter.apache.org/usermanual/component_reference.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;b id="toc"&gt;目录：&lt;/b&gt;&lt;/p&gt;
 &lt;div class="toc"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#18"&gt;18 导言&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#18"&gt;18 导言&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#181"&gt;18.1 取样器&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#ftp"&gt;FTP请求&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#http"&gt;HTTP请求&lt;/a&gt;&lt;/li&gt;
@@ -14,10 +14,7 @@
 &lt;li&gt;&lt;a href="#access-log-sampler"&gt;Access Log Sampler&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#beanshell"&gt;BeanShell取样器&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#jrs223"&gt;JRS223取样器&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#tcp"&gt;TCP取样器&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#prefixsuffix"&gt;使用前缀（prefix）和后缀（suffix）&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href="#tcp"&gt;TCP取样器&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#jms"&gt;JMS发布&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#jms_1"&gt;JMS订阅&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#jms_2"&gt;JMS点到点&lt;/a&gt;&lt;/li&gt;
@@ -37,11 +34,19 @@
 &lt;li&gt;&lt;a href="#_3"&gt;使用简单控制器&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#_4"&gt;循环控制器 …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html"&gt;http://jmeter.apache.org/usermanual/component_reference.html&lt;/a&gt;&lt;/p&gt;
+&lt;li&gt;&lt;a href="#_4"&gt;循环控制器&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#_5"&gt;循环示例&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#_6"&gt;仅一次控制器&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#_7"&gt;仅一次示例&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#_8"&gt;交替控制器 …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html"&gt;http://jmeter.apache.org/usermanual/component_reference.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;b id="toc"&gt;目录：&lt;/b&gt;&lt;/p&gt;
 &lt;div class="toc"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#18"&gt;18 导言&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#18"&gt;18 导言&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#181"&gt;18.1 取样器&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#ftp"&gt;FTP请求&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#http"&gt;HTTP请求&lt;/a&gt;&lt;/li&gt;
@@ -52,10 +57,7 @@
 &lt;li&gt;&lt;a href="#access-log-sampler"&gt;Access Log Sampler&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#beanshell"&gt;BeanShell取样器&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#jrs223"&gt;JRS223取样器&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#tcp"&gt;TCP取样器&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#prefixsuffix"&gt;使用前缀（prefix）和后缀（suffix）&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href="#tcp"&gt;TCP取样器&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#jms"&gt;JMS发布&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#jms_1"&gt;JMS订阅&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#jms_2"&gt;JMS点到点&lt;/a&gt;&lt;/li&gt;
@@ -238,10 +240,8 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;/div&gt;
-&lt;h1 id="18"&gt;18 导言&lt;/h1&gt;
+&lt;h2 id="18"&gt;18 导言&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;少数测试元件使用JMeter属性来控制它们的行为。这些属性通常在类被加载时解析。这通常发生在测试计划执行前，所以不能通过&lt;a href="http://jmeter.apache.org/usermanual/functions.html#__setProperty"&gt;__setProperty()&lt;/a&gt;函数来改变设置。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1740,7 +1740,7 @@ props.put(&amp;quot;PROP1&amp;quot;,&amp;quot;1234&amp;quot;);
 &lt;p&gt;&lt;strong&gt;响应处理&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;如果定义了&lt;code&gt;tcp.status.prefix&lt;/code&gt;，则会在响应消息中从此开始搜索文本，直到后缀结束。如果找到任何此类文本，则用于设置响应代码。然后从属性文件（如果提供）中获取响应消息。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;h4 id="prefixsuffix"&gt;使用前缀（prefix）和后缀（suffix）&lt;/h4&gt;
+&lt;p&gt;&lt;b class="title"&gt;使用前缀（prefix）和后缀（suffix）&lt;/b&gt;&lt;/p&gt;
 &lt;p&gt;例如，如果prefix = “ &lt;code&gt;[&lt;/code&gt;“和suffix =“&lt;code&gt;]&lt;/code&gt;”，则下面的响应：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;   [J28] XI123,23,GBP,CR
 &lt;/pre&gt;&lt;/div&gt;
@@ -8168,7 +8168,8 @@ vars.getObject(&amp;quot;OBJ2&amp;quot;);
 &lt;p&gt;不要将JMeter用作任何其他请求类型的代理 - FTP等 - 因为JMeter无法处理它们。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;理想情况下，在录制会话时使用隐私浏览模式。这将确保浏览器在没有存储cookie的情况下启动，并防止保存某些更改。例如，Firefox不允许永久保存证书覆盖。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;HTTPS录制和证书&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;HTTPS录制和证书&lt;/h4&gt;
+
 &lt;p&gt;HTTPS连接使用证书来验证浏览器和Web服务器之间的连接。通过HTTPS连接时，服务器会将证书提供给浏览器。为了验证证书，浏览器检查服务器证书是否由链接到其内置根CA之一的证书颁发机构（CA）签名。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;浏览器还会检查证书是否适用于正确的主机或域，并且证书有效且未过期。&lt;/p&gt;
@@ -8218,7 +8219,8 @@ vars.getObject(&amp;quot;OBJ2&amp;quot;);
 &lt;blockquote&gt;
 &lt;p&gt;如果您的浏览器当前使用代理（例如公司内部网可以通过代理路由所有外部请求），那么您需要在启动JMeter之前使用&lt;a href="http://jmeter.apache.org/usermanual/get-started.html#options"&gt;命令行选项&lt;/a&gt;&lt;code&gt;-H&lt;/code&gt;和&lt;code&gt;-P&lt;/code&gt;&lt;a href="http://jmeter.apache.org/usermanual/get-started.html#proxy_server"&gt;告诉JMeter使用此代理&lt;/a&gt;。运行生成的测试计划时也需要此设置。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;安装用于HTTPS录制的JMeter CA证书&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;安装用于HTTPS录制的JMeter CA证书&lt;/h4&gt;
+
 &lt;p&gt;如上所述，在Java 8下运行时，JMeter可以为每个服务器生成证书。为了使其顺利运行，JMeter使用的根CA签名证书需要得到浏览器的信任。第一次启动录制器时，它将在必要时生成证书。根CA证书将导出到当前启动目录中名为&lt;code&gt;ApacheJMeterTemporaryRootCA&lt;/code&gt;的文件中。设置证书后，JMeter将显示一个包含当前证书详细信息的对话框。此时，可以按照以下说明将证书导入浏览器。&lt;/p&gt;
 &lt;p&gt;请注意，一旦将根CA证书安装为可信CA，浏览器将信任由其签名的任何证书。在证书过期或证书从浏览器中删除之前，它不会警告用户证书正在被依赖。因此，任何能够获取密钥库和密码的人都可以使用证书生成这些将被任何信任JMeter根CA证书的浏览器接受的证书。因此，随机生成密钥库和私钥的密码，并使用短的有效期。密码存储在本地首选项区域中。请确保只有受信任的用户才能访问具有密钥库的主机。&lt;/p&gt;
 &lt;blockquote&gt;
@@ -8227,7 +8229,8 @@ vars.getObject(&amp;quot;OBJ2&amp;quot;);
 &lt;em&gt;记录器安装证书弹窗&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;只需单击“OK”然后继续。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;在Firefox中安装证书&lt;/strong&gt;&lt;/p&gt;
+&lt;h5&gt;在Firefox中安装证书&lt;/h5&gt;
+
 &lt;p&gt;选择以下选项：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;工具/选项&lt;/code&gt;&lt;/li&gt;
@@ -8240,14 +8243,16 @@ vars.getObject(&amp;quot;OBJ2&amp;quot;);
 &lt;li&gt;如果正常，请选择“&lt;code&gt;信任此CA以识别网站&lt;/code&gt;”，然后点击&lt;code&gt;确定&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;根据需要点击“&lt;code&gt;确定&lt;/code&gt;”关闭对话框&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;在Chrome或Internet Explorer中安装证书&lt;/strong&gt;&lt;/p&gt;
+&lt;h5&gt;在Chrome或Internet Explorer中安装证书&lt;/h5&gt;
+
 &lt;p&gt;Chrome和Internet Explorer都使用相同的信任存储区来存储证书。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;浏览到JMeter启动目录，然后单击&lt;code&gt;ApacheJMeterTemporaryRootCA.crt&lt;/code&gt;文件，并将其打开&lt;/li&gt;
 &lt;li&gt;单击“&lt;code&gt;详细信息&lt;/code&gt;”选项卡，检查证书详细信息是否与JMeter测试脚本记录器显示的一致&lt;/li&gt;
 &lt;li&gt;如果确定，请返回“&lt;code&gt;常规&lt;/code&gt;”选项卡，然后单击“&lt;code&gt;安装证书...&lt;/code&gt;”并按照向导提示进行操作&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;在Opera中安装证书&lt;/strong&gt;&lt;/p&gt;
+&lt;h5&gt;在Opera中安装证书&lt;/h5&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;工具/偏好/高级/安全&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;管理证书...&lt;/code&gt;&lt;/li&gt;
@@ -8378,20 +8383,23 @@ vars.getObject(&amp;quot;OBJ2&amp;quot;);
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;录制和重定向&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;录制和重定向&lt;/h4&gt;
+
 &lt;p&gt;在录制过程中，浏览器将遵循重定向响应并生成额外的请求。代理将记录原始请求和重定向请求（取决于配置的任何排除）。生成的样本默认选择“&lt;code&gt;跟随重定向&lt;/code&gt;”，因为这通常更好。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;重定向可能取决于原始请求，因此重复原始记录的样本可能并不总是有效。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;现在，如果JMeter设置为在重放期间跟随重定向，它将发出原始请求，然后重播已记录的重定向请求。为了避免这种重复重放，JMeter尝试检测样本是否是之前重定向的结果。如果当前响应是重定向，JMeter将保存重定向URL。收到下一个请求时，会将其与保存的重定向URL进行比较，如果匹配，JMeter将禁用生成的样本。它还为重定向链添加了注释。这假设重定向链中的所有请求将在没有任何干预请求的情况下相互跟随。要禁用重定向检测，请设置属性&lt;code&gt;proxy.redirect.disabling=false&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;包含和排除&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;包含和排除&lt;/h4&gt;
+
 &lt;p&gt;&lt;strong&gt;包含和排除模式&lt;/strong&gt;被视为正则表达式（使用Jakarta ORO）。它们将与每个浏览器请求的主机名，端口（实际或隐含），路径和查询（如果有）进行匹配。如果您正在浏览的URL是“&lt;code&gt;http://localhost/jmeter/index.html?username=xxxx&lt;/code&gt;”，那么针对此字符串测试正则表达式：“&lt;code&gt;localhost:80/jmeter/index.html?username=xxxx&lt;/code&gt;”。因此，如果要包含所有&lt;code&gt;.html&lt;/code&gt;文件，如果你知道没有查询字符串或者你只想要不带查询字符串的html页面，正则表达式可以如下所示："&lt;code&gt;.*\.html(\?.*)?&lt;/code&gt;"或者"&lt;code&gt;.*\.html&lt;/code&gt;"。&lt;/p&gt;
 &lt;p&gt;如果存在任何包含模式，则URL&lt;strong&gt;必须至少与其中一个&lt;/strong&gt;模式&lt;strong&gt;匹配&lt;/strong&gt;，否则将不会记录。如果存在任何排除模式，则URL&lt;strong&gt;必须与任何&lt;/strong&gt;模式&lt;strong&gt;都不匹配&lt;/strong&gt;，否则将不会记录。使用包含和排除的组合，您应该能够记录您感兴趣的内容并跳过您不感兴趣的内容。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;注意，正则表达式匹配的字符串必须与&lt;strong&gt;整个&lt;/strong&gt;主机+路径字符串相同。
 因此“&lt;code&gt;\.html&lt;/code&gt;” 与&lt;code&gt;localhost:80/index.html&lt;/code&gt;&lt;strong&gt;不&lt;/strong&gt;匹配&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;捕获二进制POST数据&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;捕获二进制POST数据&lt;/h4&gt;
+
 &lt;p&gt;JMeter能够捕获二进制POST数据。要配置将哪些&lt;code&gt;content-types&lt;/code&gt;视为二进制，请更新JMeter属性&lt;code&gt;proxy.binary.types&lt;/code&gt;。默认设置如下：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;＃这些content-types将通过将请求保存在文件中来处理：
 proxy.binary.types=application/x-amf,application/x-java-serialized-object
@@ -8402,18 +8410,22 @@ proxy.binary.filesuffix=.binary
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;strong&gt;添加定时器&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;添加定时器&lt;/h4&gt;
+
 &lt;p&gt;也可以让代理向记录的脚本添加定时器。为此，请直接在HTTP(S)测试脚本记录器组件中创建定时器。代理会将此定时器的副本放入其记录的每个样本中，如果您正在使用分组，则将其放入每个组的第一个样本中。然后将扫描该副本以查找其属性中变量&lt;code&gt;${T}&lt;/code&gt;的出现，并且任何此类出现将被前一个样本记录的的时间间隔（以毫秒为单位）替换。&lt;/p&gt;
 &lt;p&gt;当您准备开始时，点击“&lt;code&gt;启动&lt;/code&gt;”。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;您需要编辑浏览器的代理设置以指向相应的服务器和端口，其中服务器是运行JMeter的机器，端口＃来自上面显示的代理控制面板。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;样本在何处被记录？&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;样本在何处被记录？&lt;/h4&gt;
+
 &lt;p&gt;JMeter将记录的样本放入您选择的目标控制器中。如果选择默认选项“&lt;code&gt;使用录制控制器&lt;/code&gt;”，它们将存储在测试对象树中找到的第一个录制控制器中（因此请务必在开始录制之前添加录制控制器）。&lt;/p&gt;
 &lt;p&gt;如果代理似乎没有记录任何样本，这可能是因为浏览器实际上没有使用代理。要检查是否是这种情况，请尝试停止代理。如果浏览器仍然可以下载页面，则它没有通过代理发送请求。请再次检查浏览器选项。如果您尝试从运行在同一主机上的服务器进行录制，请检查浏览器是否没有设置为“&lt;code&gt;对于本地地址不使用代理服务器&lt;/code&gt;”（此示例来自IE7，但其他浏览器也有类似的选项）。如果JMeter不记录浏览器URL，例如&lt;code&gt;http://localhost/&lt;/code&gt;或&lt;code&gt;http://127.0.0.1/&lt;/code&gt;，请尝试使用非环回主机名或IP地址，例如&lt;code&gt;http://myhost/&lt;/code&gt;或&lt;code&gt;http://192.168.0.2/&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;处理HTTP请求默认值&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;处理HTTP请求默认值&lt;/h4&gt;
+
 &lt;p&gt;如果HTTP(S)测试脚本记录器直接在存储样本的控制器内或任何其父控制器内找到启用的&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP_Request_Defaults"&gt;HTTP请求默认值&lt;/a&gt;，则记录的样本将对于您指定的默认值使用空字段。您可以通过在HTTP(S)测试脚本记录器中直接放置HTTP请求默认值元件来进一步控制此行为，其非空值将覆盖其他HTTP请求默认值中的值。有关详细信息，请参阅&lt;a href="http://jmeter.apache.org/usermanual/best-practices.html#proxy_server"&gt;HTTP(S)测试脚本记录器的最佳实践&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;用户定义的变量替换&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;用户定义的变量替换&lt;/h4&gt;
+
 &lt;p&gt;类似地，如果HTTP(S)测试脚本记录器直接在存储样本的控制器内或任何其父控制器内找到&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#User_Defined_Variables"&gt;用户定义的变量&lt;/a&gt;（UDV），则记录的样本将把任何这些变量值的出现由相应的变量替换。同样，您可以将用户定义变量直接放在HTTP(S)测试脚本记录器中，以覆盖要替换的值。有关详细信息，请参阅 &lt;a href="http://jmeter.apache.org/usermanual/best-practices.html#proxy_server"&gt;测试脚本记录器的最佳实践&lt;/a&gt;。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;请注意，匹配区分大小写。&lt;/p&gt;
@@ -8435,17 +8447,23 @@ proxy.binary.filesuffix=.binary
 &lt;p&gt;留意重叠的匹配器。例如，作为变量名为&lt;code&gt;regex&lt;/code&gt;的正则表达式的值&lt;code&gt;.*&lt;/code&gt;将部分匹配先前替换的变量，这将导致类似&lt;code&gt;${{regex}&lt;/code&gt;的内容，这很可能不是所需的结果。&lt;/p&gt;
 &lt;p&gt;如果将任何变量解释为模式存在任何问题，则会在&lt;code&gt;jmeter.log&lt;/code&gt;中报告这些问题，因此如果用户定义的变量未按预期工作，请务必检查此问题。&lt;/p&gt;
 &lt;p&gt;完成录制测试样本后，停止代理服务器（点击“&lt;code&gt;停止&lt;/code&gt;”按钮）。请记住重置浏览器的代理设置。现在，您可能希望对测试脚本进行排序和重新排序，添加定时器，监听器，cookie管理器等。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;我怎样才能同时记录服务器的响应？&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;我怎样才能同时记录服务器的响应？&lt;/h4&gt;
+
 &lt;p&gt;只需将&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#View_Results_Tree"&gt;查看结果树&lt;/a&gt;监听器作为HTTP(S)测试脚本记录器的子项放置，就会显示响应。您还可以添加&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#Save_Responses_to_a_file"&gt;保存响应到文件&lt;/a&gt;后置处理器来将响应保存到文件。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;将请求与响应相关联&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;将请求与响应相关联&lt;/h4&gt;
+
 &lt;p&gt;如果定义属性&lt;code&gt;proxy.number.requests=true&lt;/code&gt;， JMeter将为每个取样器和每个响应添加一个数字。注意如果使用了排除或包含，可能会有比取样器更多的响应。已被排除的响应将被包含在&lt;code&gt;[&lt;/code&gt;和&lt;code&gt;]&lt;/code&gt;标签中，例如&lt;code&gt;[23 /favicon.ico]&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Cookie管理器&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;Cookie管理器&lt;/h4&gt;
+
 &lt;p&gt;如果您要测试的服务器使用cookie，请记住在完成记录后将&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP_Cookie_Manager"&gt;HTTP Cookie管理器&lt;/a&gt;添加到测试计划中。在录制期间，浏览器会处理任何cookie，但JMeter需要Cookie管理器在测试运行期间处理cookie。JMeter代理服务器在记录期间传递浏览器发送的所有cookie，但不会将它们保存到测试计划中，因为它们每次运行时通常会变化。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;授权管理器&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;授权管理器&lt;/h4&gt;
+
 &lt;p&gt;HTTP(S)测试脚本记录器抓取“&lt;code&gt;Authentication&lt;/code&gt;”信息头，尝试计算身份验证策略。如果授权管理器手动添加到目标控制器，HTTP(S)测试脚本记录器将找到它并添加授权（匹配的将被删除）。否则，授权管理器将添加到具有授权对象的目标控制器。您可能必须在录制后修改自动计算的值。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;上传文件&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;上传文件&lt;/h4&gt;
+
 &lt;p&gt;某些浏览器（例如Firefox和Opera）在上传文件时不包含文件的全名。这可能导致JMeter代理服务器失败。一种解决方案是确保要上传的任何文件都在JMeter工作目录中，可以将文件复制到工作目录或在包含文件的目录中启动JMeter。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;记录JMeter中原生不支持的基于HTTP的非文本协议&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;记录JMeter中原生不支持的基于HTTP的非文本协议&lt;/h4&gt;
+
 &lt;p&gt;您可能要记录JMeter默认不处理的HTTP协议（自定义二进制协议，Adobe Flex，Microsoft Silverlight，...）。虽然JMeter不提供记录这些协议的原生代理实现，但您可以通过实现自定义&lt;code&gt;SamplerCreator&lt;/code&gt;来记录这些协议。此取样器生成器可以将二进制格式转换为可添加到JMeter测试用例的&lt;code&gt;HTTPSamplerBase&lt;/code&gt;子类。有关更多详细信息，请参阅“扩展JMeter”。&lt;/p&gt;
 &lt;p&gt;&lt;a href="#toc"&gt;【返回目录】&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="http_5"&gt;HTTP镜像服务器&lt;/h3&gt;

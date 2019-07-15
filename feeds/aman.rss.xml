@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Sat, 13 Jul 2019 00:00:00 +0800</lastBuildDate><item><title>JMeter文档翻译之18-组件参考（目录跳转未完成）</title><link>https://jlhxxxx.github.io/jmeter-doc-cn-18.html</link><description>&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html"&gt;http://jmeter.apache.org/usermanual/component_reference.html&lt;/a&gt;&lt;/p&gt;
+<rss version="2.0"><channel><title>AMAN's BLOG - Aman</title><link>https://jlhxxxx.github.io/</link><description></description><lastBuildDate>Sat, 13 Jul 2019 00:00:00 +0800</lastBuildDate><item><title>JMeter文档翻译之18-组件参考</title><link>https://jlhxxxx.github.io/jmeter-doc-cn-18.html</link><description>&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/component_reference.html"&gt;http://jmeter.apache.org/usermanual/component_reference.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;b id="toc"&gt;目录：&lt;/b&gt;&lt;/p&gt;
 &lt;div class="toc"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#18"&gt;18 导言&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#18"&gt;18 导言&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#181"&gt;18.1 取样器&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#ftp"&gt;FTP请求&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#http"&gt;HTTP请求&lt;/a&gt;&lt;/li&gt;
@@ -14,10 +14,7 @@
 &lt;li&gt;&lt;a href="#access-log-sampler"&gt;Access Log Sampler&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#beanshell"&gt;BeanShell取样器&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#jrs223"&gt;JRS223取样器&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#tcp"&gt;TCP取样器&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#prefixsuffix"&gt;使用前缀（prefix）和后缀（suffix）&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href="#tcp"&gt;TCP取样器&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#jms"&gt;JMS发布&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#jms_1"&gt;JMS订阅&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#jms_2"&gt;JMS点到点&lt;/a&gt;&lt;/li&gt;
@@ -37,7 +34,15 @@
 &lt;li&gt;&lt;a href="#_3"&gt;使用简单控制器&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#_4"&gt;循环控制器 …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Sat, 13 Jul 2019 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2019-07-13:/jmeter-doc-cn-18.html</guid><category>JMeter</category><category>Documentation</category><category>Translation</category></item><item><title>Appium环境搭建及自动化的一些参考</title><link>https://jlhxxxx.github.io/appium-base-01.html</link><description>&lt;h2 id="appium"&gt;Appium环境配置&lt;/h2&gt;
+&lt;li&gt;&lt;a href="#_4"&gt;循环控制器&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#_5"&gt;循环示例&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#_6"&gt;仅一次控制器&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#_7"&gt;仅一次示例&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#_8"&gt;交替控制器 …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Sat, 13 Jul 2019 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2019-07-13:/jmeter-doc-cn-18.html</guid><category>JMeter</category><category>Documentation</category><category>Translation</category></item><item><title>Appium环境搭建及自动化的一些参考</title><link>https://jlhxxxx.github.io/appium-base-01.html</link><description>&lt;h2 id="appium"&gt;Appium环境配置&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;本地环境&lt;/strong&gt;：win10_x64 + JDK8 + python3&lt;/p&gt;
 &lt;h3 id="appium-client"&gt;Appium-Client安装配置&lt;/h3&gt;
 &lt;p&gt;这里我们选用&lt;a href="https://github.com/appium/python-client"&gt;python-client&lt;/a&gt;，建议在虚拟环境下安装，命令如下：&lt;/p&gt;
