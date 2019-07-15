@@ -81,45 +81,45 @@
 &lt;p&gt;按新手推荐下载安装相应包之后，运行B4A AVD Manager，选择好屏幕尺寸和Platform，创建AVD后即可运行虚拟机。这里可配置的选项只有2个，但是没有关系，我们后面可以直接修改配置文件。&lt;/p&gt;
 &lt;p&gt;这里重点讲一下虚拟机配置文件，理解了之后就可以即不通过图形化界面也不通过命令行手动创建虚拟机。&lt;/p&gt;
 &lt;p&gt;AVD配置文件主目录在&lt;code&gt;C:\Users\xxx\.android\avd&lt;/code&gt;，其中&lt;code&gt;xxx&lt;/code&gt;为计算机名称，如果是通过Android AVD manager创建的虚拟机，在该目录下会有对应的一个虚拟机存放目录和一个目录配置文件，假设虚拟机名称为ad9，则有虚拟机存放目录&lt;code&gt;ad9\&lt;/code&gt;和配置文件&lt;code&gt;ad9.ini&lt;/code&gt;；如果是通过b4a AVD manager创建的虚拟机，虚拟机存放目录会被转移到&lt;code&gt;SDK\B4AEmulator\&lt;/code&gt;目录下，打开ini配置文件，内容大概有3行：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;avd.ini.encoding=UTF-8
-path=D:\SDK\B4AEmulator\ad9
-target=android-28
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;avd&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ini&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;encoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;UTF&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;
+&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;SDK&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;B4AEmulator&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;ad9&lt;/span&gt;
+&lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;28&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;其中&lt;code&gt;path&lt;/code&gt;配置的就是虚拟机存放目录。&lt;/p&gt;
 &lt;p&gt;再进入虚拟机存放目录下，会有一个&lt;code&gt;config.ini&lt;/code&gt;，这就是虚拟机的配置文件，下面以我的配置文件来说明一下：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;avd.ini.encoding=UTF-8                                  # 配置文件编码
-PlayStore.enabled=false                                 # 是否使用Google PlayStore
-abi.type=x86_64                                         # abi类型，见下文
-hw.accelerometer=yes                                    # 加速度计
-hw.audioInput=yes                                       # 音频
-hw.battery=yes                                          # 电池
-hw.camera.back=none                                     # 后置摄像头
-hw.camera.front=none                                    # 前置摄像头
-hw.cpu.arch=x86_64                                      # cpu架构
-hw.dPad=no                                              # 对应模拟器DPAD按键
-hw.device.hash2=MD5:fbd5143f5b48ba972391c87c302c0c69    # 设备hash值，可以不用
-hw.device.manufacturer=Generic                          # 设备厂家
-hw.device.name=Jackson                                  # 设备名称
-hw.gps=yes                                              # GPS
-hw.gpu.enabled=yes                                      # GPU加速，见下文
-hw.gpu.mode=auto
-hw.keyboard=yes                                         # 是否启用windows键盘支持
-hw.lcd.density=160                                      # lcd像素密度
-hw.lcd.height=800
-hw.lcd.width=480
-hw.mainKeys=yes                                         # 是否不显示底部导航栏
-hw.sdCard=no                                            # 是否使用sdCard，可以配置大小
-hw.sensors.orientation=yes                              # 方向传感器
-hw.sensors.proximity=yes                                # 距离传感器
-hw.trackBall=no                                         # 轨迹球
-image.sysdir.1=system-images\android-28\default\x86_64\ # 系统映像目录
-skin.dynamic=no                                         # 系统皮肤（带按键的）
-skin.name=480x800
-skin.path=480x800
-tag.display=Default                                     # 标签显示
-tag.id=default
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;avd&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ini&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;encoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;UTF&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;                                  &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;配置文件编码&lt;/span&gt;
+&lt;span class="n"&gt;PlayStore&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;false&lt;/span&gt;                                 &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;是否使用&lt;/span&gt;&lt;span class="n"&gt;Google&lt;/span&gt; &lt;span class="n"&gt;PlayStore&lt;/span&gt;
+&lt;span class="n"&gt;abi&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;                                         &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;abi类型&lt;/span&gt;&lt;span class="err"&gt;，见下文&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;accelerometer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;                                    &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;加速度计&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;audioInput&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;                                       &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;音频&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;battery&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;                                          &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;电池&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;camera&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;back&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;none&lt;/span&gt;                                     &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;后置摄像头&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;camera&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;front&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;none&lt;/span&gt;                                    &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;前置摄像头&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cpu&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;arch&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;                                      &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;cpu架构&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dPad&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;no&lt;/span&gt;                                              &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;对应模拟器&lt;/span&gt;&lt;span class="n"&gt;DPAD按键&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;device&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hash2&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;MD5&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;fbd5143f5b48ba972391c87c302c0c69&lt;/span&gt;    &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;设备&lt;/span&gt;&lt;span class="n"&gt;hash值&lt;/span&gt;&lt;span class="err"&gt;，可以不用&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;device&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;manufacturer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Generic&lt;/span&gt;                          &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;设备厂家&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;device&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Jackson&lt;/span&gt;                                  &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;设备名称&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gps&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;                                              &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;GPS&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gpu&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;                                      &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;GPU加速&lt;/span&gt;&lt;span class="err"&gt;，见下文&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gpu&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyboard&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;                                         &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;是否启用&lt;/span&gt;&lt;span class="n"&gt;windows键盘支持&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lcd&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;density&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;160&lt;/span&gt;                                      &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;lcd像素密度&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lcd&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;800&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lcd&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;480&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mainKeys&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;                                         &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;是否不显示底部导航栏&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sdCard&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;no&lt;/span&gt;                                            &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;是否使用&lt;/span&gt;&lt;span class="n"&gt;sdCard&lt;/span&gt;&lt;span class="err"&gt;，可以配置大小&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sensors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;orientation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;                              &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;方向传感器&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sensors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proximity&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;                                &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;距离传感器&lt;/span&gt;
+&lt;span class="n"&gt;hw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;trackBall&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;no&lt;/span&gt;                                         &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;轨迹球&lt;/span&gt;
+&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sysdir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;system&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;images&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;android&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;28&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;系统映像目录&lt;/span&gt;
+&lt;span class="n"&gt;skin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;dynamic&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;no&lt;/span&gt;                                         &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;系统皮肤（带按键的）&lt;/span&gt;
+&lt;span class="n"&gt;skin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;480&lt;/span&gt;&lt;span class="n"&gt;x800&lt;/span&gt;
+&lt;span class="n"&gt;skin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;480&lt;/span&gt;&lt;span class="n"&gt;x800&lt;/span&gt;
+&lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;Default&lt;/span&gt;                                     &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;标签显示&lt;/span&gt;
+&lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -134,13 +134,13 @@ tag.id=default
 &lt;h2 id="appium_1"&gt;Appium自动化相关&lt;/h2&gt;
 &lt;h4 id="apk"&gt;查询apk包信息&lt;/h4&gt;
 &lt;p&gt;使用&lt;code&gt;aapt&lt;/code&gt;（位于&lt;code&gt;sdk\build-tools\&lt;/code&gt;下）:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;aapt.exe dump badging D:\xxx\xxx.apk
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;aapt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exe&lt;/span&gt; &lt;span class="n"&gt;dump&lt;/span&gt; &lt;span class="n"&gt;badging&lt;/span&gt; &lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;xxx&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;xxx&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apk&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;其中：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;包名：  package: name=’xxx’ 
-入口类：launchable-activity: name=’xxx’
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;包名：&lt;/span&gt;  &lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="n"&gt;xxx&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt; 
+&lt;span class="err"&gt;入口类：&lt;/span&gt;&lt;span class="n"&gt;launchable&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;activity&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="n"&gt;xxx&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -151,8 +151,8 @@ tag.id=default
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;uiautomatorviewer.bat&lt;/strong&gt;：在&lt;code&gt;tools\bin\&lt;/code&gt;目录下，如果连接报错，通常需要重启adb：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;adb kill-server
-adb start-server
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;adb&lt;/span&gt; &lt;span class="n"&gt;kill&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
+&lt;span class="n"&gt;adb&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -316,12 +316,12 @@ WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛�
 
 
 &lt;p&gt;运行服务时如果报错&lt;code&gt;!!! no internal routing support, rebuild with pcre support !!!&lt;/code&gt;：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 先卸载
-$ pip uninstall uwsgi
-# 安装pcre支持库
-$ yum install pcre pcre-devel pcre-static
-# 重新安装uwsgi，不走pip缓存
-$ pip install uwsgi -I --no-cache-dir
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;先卸载&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;uninstall&lt;/span&gt; &lt;span class="n"&gt;uwsgi&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;安装&lt;/span&gt;&lt;span class="n"&gt;pcre支持库&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pcre&lt;/span&gt; &lt;span class="n"&gt;pcre&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;devel&lt;/span&gt; &lt;span class="n"&gt;pcre&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;static&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;重新安装&lt;/span&gt;&lt;span class="n"&gt;uwsgi&lt;/span&gt;&lt;span class="err"&gt;，不走&lt;/span&gt;&lt;span class="n"&gt;pip缓存&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;uwsgi&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="c1"&gt;--no-cache-dir&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -378,10 +378,10 @@ root     &lt;span class="m"&gt;16964&lt;/span&gt;     &lt;span class="m"&gt;1&lt
 
 
 &lt;p&gt;我们要修改的是&lt;code&gt;location&lt;/code&gt;选项，打开&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;，没有找到&lt;code&gt;location&lt;/code&gt;，但是有一行&lt;code&gt;include /etc/nginx/conf.d/*.conf&lt;/code&gt;，转到“include /etc/nginx/conf.d/”下，打开“default.conf”，找到&lt;code&gt;location&lt;/code&gt;，修改为：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:3031&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; {
+    &lt;span class="k"&gt;include&lt;/span&gt; &lt;span class="nv"&gt;uwsgi_params&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;:&lt;span class="mi"&gt;3031&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -405,10 +405,10 @@ $ uwsgi myapp.ini
 
 &lt;p&gt;访问”http://localhost”（Nginx默认使用&lt;code&gt;80&lt;/code&gt;端口，可以在“default.conf”修改），顺利的话我们会再次看到”Hello World!”。 &lt;/p&gt;
 &lt;p&gt;不顺利的话，继续往下看。如果打开网站什么都看不到，不要急，从“nginx.conf”找到日志文件目录“/var/log/nginx/”，打开“error.log”，先找到报错信息“connect() to 127.0.0.1:3031 failed (13: Permission denied) while connecting to upstream”，百度解决问题：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:3031&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; {
+    &lt;span class="k"&gt;include&lt;/span&gt; &lt;span class="nv"&gt;uwsgi_params&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;:&lt;span class="mi"&gt;3031&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -432,10 +432,10 @@ $ uwsgi myapp.ini
 
 
 &lt;p&gt;现在，我们的Flask应用就可以使用”app”作为对象名了 ：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:3031&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; {
+    &lt;span class="k"&gt;include&lt;/span&gt; &lt;span class="nv"&gt;uwsgi_params&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;:&lt;span class="mi"&gt;3031&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -448,11 +448,11 @@ $ uwsgi myapp.ini
 
 
 &lt;p&gt;一个Nginx中，可以同时运行多个应用，不一定是Python的应用。我们期望通过不同的路径来路由不同的应用，因此就不能像上例那样直接修改根目录的配置。假设我们希望通过”http://localhost/myapp”来访问我们的应用，首先要在Nginx的配置文件中，加入下面的内容：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myapp&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;uwsgi_param&lt;/span&gt; &lt;span class="err"&gt;SCRIPT_NAME&lt;/span&gt; &lt;span class="err"&gt;/myapp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:3031&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;myapp&lt;/span&gt; {
+    &lt;span class="k"&gt;include&lt;/span&gt; &lt;span class="nv"&gt;uwsgi_params&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;uwsgi_param&lt;/span&gt; &lt;span class="nv"&gt;SCRIPT_NAME&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;myapp&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;:&lt;span class="mi"&gt;3031&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -474,11 +474,11 @@ $ uwsgi myapp.ini
 
 
 &lt;p&gt;启动uWSGI服务器后，它会自动创建一个”/tmp/uwsgi.sock”文件。然后让我们修改Nginx配置文件，将”uwsgi_pass”配置项改为文件：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myapp&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;uwsgi_param&lt;/span&gt; &lt;span class="err"&gt;SCRIPT_NAME&lt;/span&gt; &lt;span class="err"&gt;/myapp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="n"&gt;unix&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;uwsgi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sock&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;myapp&lt;/span&gt; {
+    &lt;span class="k"&gt;include&lt;/span&gt; &lt;span class="nv"&gt;uwsgi_params&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;uwsgi_param&lt;/span&gt; &lt;span class="nv"&gt;SCRIPT_NAME&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;myapp&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="nv"&gt;unix&lt;/span&gt;:&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;uwsgi&lt;/span&gt;.&lt;span class="nv"&gt;sock&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -588,14 +588,13 @@ yum makecache
 &lt;/ul&gt;
 &lt;h2 id="_2"&gt;常用目录结构&lt;/h2&gt;
 &lt;p&gt;了解WebLogic常用目录结构，将大大提高管理与维护的工作效率 。这里以WebLogic 11g为例。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.                                      # 主目录
-│─ coherence_3.7                        # coherence集群相关
-│─ logs                                 # 日志文件，包括安装和运行%WL_HOME%\common\bin\下程序的日志
-│─ modules                             # 模块和插件目录
-│─ user_projects                         # 用户工程目录
-│  └─ domains                            # 域主目录
-│      └─ base_domain                     # DOMAIN_HOME，用户自建域主目录，默认名称为base_domain，以此为例
-│         │─ bin …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2 id="_1"&gt;基本概念&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;                                      &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;主目录&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;coherence_3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;                        &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;coherence集群相关&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;logs&lt;/span&gt;                                 &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;日志文件，包括安装和运行&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;WL_HOME&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;common&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="err"&gt;\下程序的日志&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;modules&lt;/span&gt;                             &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;模块和插件目录&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;user_projects&lt;/span&gt;                         &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;用户工程目录&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;  &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;domains&lt;/span&gt;                            &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;域主目录&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;      &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;base_domain&lt;/span&gt;                     &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;DOMAIN_HOME&lt;/span&gt;&lt;span class="err"&gt;，用户自建域主目录，默认名称为&lt;/span&gt;&lt;span class="n"&gt;base_domain&lt;/span&gt;&lt;span class="err"&gt;，以此为例 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2 id="_1"&gt;基本概念&lt;/h2&gt;
 &lt;p&gt;在正式部署项目之前，还是先了解下基本概念吧。最基本要掌握域（Domain）、集群（Cluster）、服务器（Server）（区分管理服务器和受管理服务器）、计算机（Machine）、节点管理器（Node Manager）。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参考文章&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
@@ -604,32 +603,32 @@ yum makecache
 &lt;/ul&gt;
 &lt;h2 id="_2"&gt;常用目录结构&lt;/h2&gt;
 &lt;p&gt;了解WebLogic常用目录结构，将大大提高管理与维护的工作效率 。这里以WebLogic 11g为例。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.                                      # 主目录
-│─ coherence_3.7                        # coherence集群相关
-│─ logs                                 # 日志文件，包括安装和运行%WL_HOME%\common\bin\下程序的日志
-│─ modules                             # 模块和插件目录
-│─ user_projects                         # 用户工程目录
-│  └─ domains                            # 域主目录
-│      └─ base_domain                     # DOMAIN_HOME，用户自建域主目录，默认名称为base_domain，以此为例
-│         │─ bin                          # 启动和停止域服务、设置域环境变量的相关命令文件
-│         │  └─ nodemanager               # 可以设置成当前域节点管理器配置目录，默认不使用
-│         │─ config                       # 配置文件
-│         │─ security                     # 用户口令验证相关文件
-│         └─ servers                      # 服务器相关文件
-│            └─ AdminServer               # 管理服务器，以此为例
-│               │─ logs                   # 日志文件
-│               │─ security
-│               │  └─ boot.properties     # 当前域登录信息文件，保存用户名和密码后可以免验证登录
-│               │─ stage                  # 存放当前域所部署项目部署包文件
-│               └─ tmp                    # 当前域所部署项目相关临时文件
-└─ wlserver_10.3                          # WL_HOME，WebLogic应用主目录
-   │─ common                              # 
-   │  │─ bin                              # WebLogic应用程序可执行命令目录
-   │  └─ nodemanager                      # 默认的节点管理器配置目录
-   │─ server
-   │  └─ bin                              # WebLogic服务器可执行命令目录
-   │     └─ startNodeManager.cmd          # 默认的启动节点管理器服务
-   └─ uninstall                           # 卸载相关命令文件目录
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;                                      &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;主目录&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;coherence_3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;                        &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;coherence集群相关&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;logs&lt;/span&gt;                                 &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;日志文件，包括安装和运行&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;WL_HOME&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;common&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="err"&gt;\下程序的日志&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;modules&lt;/span&gt;                             &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;模块和插件目录&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;user_projects&lt;/span&gt;                         &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;用户工程目录&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;  &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;domains&lt;/span&gt;                            &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;域主目录&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;      &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;base_domain&lt;/span&gt;                     &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;DOMAIN_HOME&lt;/span&gt;&lt;span class="err"&gt;，用户自建域主目录，默认名称为&lt;/span&gt;&lt;span class="n"&gt;base_domain&lt;/span&gt;&lt;span class="err"&gt;，以此为例&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;         &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;bin&lt;/span&gt;                          &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;启动和停止域服务、设置域环境变量的相关命令文件&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;         &lt;span class="err"&gt;│&lt;/span&gt;  &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;nodemanager&lt;/span&gt;               &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;可以设置成当前域节点管理器配置目录，默认不使用&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;         &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;                       &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;配置文件&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;         &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="k"&gt;security&lt;/span&gt;                     &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;用户口令验证相关文件&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;         &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;servers&lt;/span&gt;                      &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;服务器相关文件&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;            &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;AdminServer&lt;/span&gt;               &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;管理服务器，以此为例&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;               &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;logs&lt;/span&gt;                   &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;日志文件&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;               &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="k"&gt;security&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;               &lt;span class="err"&gt;│&lt;/span&gt;  &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;boot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;properties&lt;/span&gt;     &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;当前域登录信息文件，保存用户名和密码后可以免验证登录&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;               &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;stage&lt;/span&gt;                  &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;存放当前域所部署项目部署包文件&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;               &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;                    &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;当前域所部署项目相关临时文件&lt;/span&gt;
+&lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;wlserver_10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;                          &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;WL_HOME&lt;/span&gt;&lt;span class="err"&gt;，&lt;/span&gt;&lt;span class="n"&gt;WebLogic应用主目录&lt;/span&gt;
+   &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;common&lt;/span&gt;                              &lt;span class="o"&gt;#&lt;/span&gt; 
+   &lt;span class="err"&gt;│&lt;/span&gt;  &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;bin&lt;/span&gt;                              &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;WebLogic应用程序可执行命令目录&lt;/span&gt;
+   &lt;span class="err"&gt;│&lt;/span&gt;  &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;nodemanager&lt;/span&gt;                      &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;默认的节点管理器配置目录&lt;/span&gt;
+   &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;
+   &lt;span class="err"&gt;│&lt;/span&gt;  &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;bin&lt;/span&gt;                              &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;WebLogic服务器可执行命令目录&lt;/span&gt;
+   &lt;span class="err"&gt;│&lt;/span&gt;     &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;startNodeManager&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;          &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;默认的启动节点管理器服务&lt;/span&gt;
+   &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;uninstall&lt;/span&gt;                           &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;卸载相关命令文件目录&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -886,19 +885,19 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;安装virtualenv（可选）&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install virtualenv
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;virtualenv&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;为了使用virtualenv更方便，可以借助 virtualenvwrapper（可选）&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install virtualenvwrapper-win
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;virtualenvwrapper&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;win&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;配置虚拟环境目录，默认创建的虚拟环境位于&lt;strong&gt;C:\Users\username\&lt;/strong&gt;下，可以通过环境变量 &lt;code&gt;WORKON_HOME&lt;/code&gt; 来定制。&lt;/p&gt;
-&lt;p&gt;通过&lt;strong&gt;计算机--&amp;gt;属性-- …&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="github-pages"&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
+&lt;p&gt;通过&lt;strong&gt;计算机-- …&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="github-pages"&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;首先到GitHub进行账号注册：&lt;a href="https://github.com/"&gt;https://github.com/&lt;/a&gt;。&lt;/li&gt;
 &lt;li&gt;创建新仓库，不用新建readme.md，注意仓库名使用&lt;em&gt;username.github.io&lt;/em&gt;的格式，这里&lt;em&gt;username&lt;/em&gt;改成自己的用户名。&lt;/li&gt;
@@ -914,14 +913,14 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;安装virtualenv（可选）&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install virtualenv
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;virtualenv&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;为了使用virtualenv更方便，可以借助 virtualenvwrapper（可选）&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install virtualenvwrapper-win
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;virtualenvwrapper&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;win&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -930,28 +929,28 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;创建并激活虚拟环境（可选）&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkvirtualenv pelican
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mkvirtualenv&lt;/span&gt; &lt;span class="n"&gt;pelican&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;常用命令：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 激活虚拟环境
-workon {虚拟环境目录}
-# 停止虚拟环境
-deactivate
-# 进入虚拟环境目录
-cdvirtualenv
-# 列出所有虚拟环境
-lsvirtualenv
-# 检查虚拟环境是否激活（其他方法也可）
-pip list
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;激活虚拟环境&lt;/span&gt;
+&lt;span class="n"&gt;workon&lt;/span&gt; &lt;span class="err"&gt;{虚拟环境目录}&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;停止虚拟环境&lt;/span&gt;
+&lt;span class="n"&gt;deactivate&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;进入虚拟环境目录&lt;/span&gt;
+&lt;span class="n"&gt;cdvirtualenv&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;列出所有虚拟环境&lt;/span&gt;
+&lt;span class="n"&gt;lsvirtualenv&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;检查虚拟环境是否激活（其他方法也可）&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;安装pelican&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install pelican
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pelican&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -960,7 +959,7 @@ pip list
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;安装markdown&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install markdown
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;markdown&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1128,7 +1127,7 @@ pip list
 &lt;p&gt;为了让博客能在网上被搜索到，需要搜索引擎将网站收录，所以要添加Webmaster。这里我添加了Google和Bing收录，因为GitHub屏蔽了百度网站爬虫，所以除非你搭建在自己的服务器上，否则是没办法添加百度收录的。&lt;/p&gt;
 &lt;p&gt;下面以Bing收录为例，首先打开&lt;a href="https://www.bing.com/toolbox/webmaster/"&gt;Bing网站管理员工具&lt;/a&gt;，用Microsoft账号登录，都是中文界面，按照说明添加网站并验证通过。&lt;/p&gt;
 &lt;p&gt;然后准备sitemap，到博客主目录下，执行：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone git://github.com/getpelican/pelican-plugins.git
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;getpelican&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 

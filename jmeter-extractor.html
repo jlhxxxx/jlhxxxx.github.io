@@ -133,28 +133,28 @@
 
 
 <p>假设我们要提取<code>time</code>和<code>context</code>。提取器填写如下：</p>
-<div class="highlight"><pre><span></span>Name of created variable: data
-Regular Expression: &quot;time&quot;:&quot;(.*?)&quot;,&quot;ftime&quot;:&quot;(.*?)&quot;,&quot;context&quot;:&quot;(.*?)&quot;
-Template: $0$
-Match No.: -1
+<div class="highlight"><pre><span></span><span class="n">Name</span> <span class="k">of</span> <span class="n">created</span> <span class="k">variable</span><span class="p">:</span> <span class="k">data</span>
+<span class="n">Regular</span> <span class="n">Expression</span><span class="p">:</span> <span class="ss">&quot;time&quot;</span><span class="p">:</span><span class="ss">&quot;(.*?)&quot;</span><span class="p">,</span><span class="ss">&quot;ftime&quot;</span><span class="p">:</span><span class="ss">&quot;(.*?)&quot;</span><span class="p">,</span><span class="ss">&quot;context&quot;</span><span class="p">:</span><span class="ss">&quot;(.*?)&quot;</span>
+<span class="k">Template</span><span class="p">:</span> <span class="err">$</span><span class="mi">0</span><span class="err">$</span>
+<span class="k">Match</span> <span class="k">No</span><span class="p">.:</span> <span class="o">-</span><span class="mi">1</span>
 </pre></div>
 
 
 <p>使用Debug Sampler，获得变量名称和对应值如下：</p>
-<div class="highlight"><pre><span></span>data=
-data_1=&quot;time&quot;:&quot;2019-04-19 02:36:56&quot;,&quot;ftime&quot;:&quot;2019-04-19 02:36:56&quot;,&quot;context&quot;:&quot;[长沙市]到长沙市【长沙转运中心】&quot;
-data_1_g=3
-data_1_g0=&quot;time&quot;:&quot;2019-04-19 02:36:56&quot;,&quot;ftime&quot;:&quot;2019-04-19 02:36:56&quot;,&quot;context&quot;:&quot;[长沙市]到长沙市【长沙转运中心】&quot;
-data_1_g1=2019-04-19 02:36:56
-data_1_g2=2019-04-19 02:36:56
-data_1_g3=[长沙市]到长沙市【长沙转运中心】
-data_2=&quot;time&quot;:&quot;2019-04-18 19:32:26&quot;,&quot;ftime&quot;:&quot;2019-04-18 19:32:26&quot;,&quot;context&quot;:&quot;[武汉市]武汉市【武汉转运中心】，正发往【长沙转运中心】&quot;
-data_2_g=3
-data_2_g0=&quot;time&quot;:&quot;2019-04-18 19:32:26&quot;,&quot;ftime&quot;:&quot;2019-04-18 19:32:26&quot;,&quot;context&quot;:&quot;[武汉市]武汉市【武汉转运中心】，正发往【长沙转运中心】&quot;
-data_2_g1=2019-04-18 19:32:26
-data_2_g2=2019-04-18 19:32:26
-data_2_g3=[武汉市]武汉市【武汉转运中心】，正发往【长沙转运中心】
-data_matchNr=2
+<div class="highlight"><pre><span></span><span class="k">data</span><span class="o">=</span>
+<span class="n">data_1</span><span class="o">=</span><span class="ss">&quot;time&quot;</span><span class="p">:</span><span class="ss">&quot;2019-04-19 02:36:56&quot;</span><span class="p">,</span><span class="ss">&quot;ftime&quot;</span><span class="p">:</span><span class="ss">&quot;2019-04-19 02:36:56&quot;</span><span class="p">,</span><span class="ss">&quot;context&quot;</span><span class="p">:</span><span class="ss">&quot;[长沙市]到长沙市【长沙转运中心】&quot;</span>
+<span class="n">data_1_g</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">data_1_g0</span><span class="o">=</span><span class="ss">&quot;time&quot;</span><span class="p">:</span><span class="ss">&quot;2019-04-19 02:36:56&quot;</span><span class="p">,</span><span class="ss">&quot;ftime&quot;</span><span class="p">:</span><span class="ss">&quot;2019-04-19 02:36:56&quot;</span><span class="p">,</span><span class="ss">&quot;context&quot;</span><span class="p">:</span><span class="ss">&quot;[长沙市]到长沙市【长沙转运中心】&quot;</span>
+<span class="n">data_1_g1</span><span class="o">=</span><span class="mi">2019</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">19</span> <span class="mi">02</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">56</span>
+<span class="n">data_1_g2</span><span class="o">=</span><span class="mi">2019</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">19</span> <span class="mi">02</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">56</span>
+<span class="n">data_1_g3</span><span class="o">=</span><span class="p">[</span><span class="err">长沙市</span><span class="p">]</span><span class="err">到长沙市【长沙转运中心】</span>
+<span class="n">data_2</span><span class="o">=</span><span class="ss">&quot;time&quot;</span><span class="p">:</span><span class="ss">&quot;2019-04-18 19:32:26&quot;</span><span class="p">,</span><span class="ss">&quot;ftime&quot;</span><span class="p">:</span><span class="ss">&quot;2019-04-18 19:32:26&quot;</span><span class="p">,</span><span class="ss">&quot;context&quot;</span><span class="p">:</span><span class="ss">&quot;[武汉市]武汉市【武汉转运中心】，正发往【长沙转运中心】&quot;</span>
+<span class="n">data_2_g</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">data_2_g0</span><span class="o">=</span><span class="ss">&quot;time&quot;</span><span class="p">:</span><span class="ss">&quot;2019-04-18 19:32:26&quot;</span><span class="p">,</span><span class="ss">&quot;ftime&quot;</span><span class="p">:</span><span class="ss">&quot;2019-04-18 19:32:26&quot;</span><span class="p">,</span><span class="ss">&quot;context&quot;</span><span class="p">:</span><span class="ss">&quot;[武汉市]武汉市【武汉转运中心】，正发往【长沙转运中心】&quot;</span>
+<span class="n">data_2_g1</span><span class="o">=</span><span class="mi">2019</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">18</span> <span class="mi">19</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mi">26</span>
+<span class="n">data_2_g2</span><span class="o">=</span><span class="mi">2019</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">18</span> <span class="mi">19</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mi">26</span>
+<span class="n">data_2_g3</span><span class="o">=</span><span class="p">[</span><span class="err">武汉市</span><span class="p">]</span><span class="err">武汉市【武汉转运中心】，正发往【长沙转运中心】</span>
+<span class="n">data_matchNr</span><span class="o">=</span><span class="mi">2</span>
 </pre></div>
 
 
@@ -183,14 +183,14 @@ data_matchNr=2
 
 
 <p>获得变量名称和对应值如下：</p>
-<div class="highlight"><pre><span></span>context_1=[长沙市]到长沙市【长沙转运中心】
-context_2=[武汉市]武汉市【武汉转运中心】，正发往【长沙转运中心】
-context_ALL=[长沙市]到长沙市【长沙转运中心】,[武汉市]武汉市【武汉转运中心】，正发往【长沙转运中心】
-context_matchNr=2
-time_1=2019-04-19 02:36:56
-time_2=2019-04-18 19:32:26
-time_ALL=2019-04-19 02:36:56,2019-04-18 19:32:26
-time_matchNr=2
+<div class="highlight"><pre><span></span><span class="n">context_1</span><span class="o">=</span><span class="p">[</span><span class="err">长沙市</span><span class="p">]</span><span class="err">到长沙市【长沙转运中心】</span>
+<span class="n">context_2</span><span class="o">=</span><span class="p">[</span><span class="err">武汉市</span><span class="p">]</span><span class="err">武汉市【武汉转运中心】，正发往【长沙转运中心】</span>
+<span class="n">context_ALL</span><span class="o">=</span><span class="p">[</span><span class="err">长沙市</span><span class="p">]</span><span class="err">到长沙市【长沙转运中心】</span><span class="p">,[</span><span class="err">武汉市</span><span class="p">]</span><span class="err">武汉市【武汉转运中心】，正发往【长沙转运中心】</span>
+<span class="n">context_matchNr</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">time_1</span><span class="o">=</span><span class="mi">2019</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">19</span> <span class="mi">02</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">56</span>
+<span class="n">time_2</span><span class="o">=</span><span class="mi">2019</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">18</span> <span class="mi">19</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mi">26</span>
+<span class="n">time_ALL</span><span class="o">=</span><span class="mi">2019</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">19</span> <span class="mi">02</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">56</span><span class="p">,</span><span class="mi">2019</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">18</span> <span class="mi">19</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mi">26</span>
+<span class="n">time_matchNr</span><span class="o">=</span><span class="mi">2</span>
 </pre></div>
 
 
@@ -207,19 +207,19 @@ time_matchNr=2
 <li><strong>Attribute</strong>：从与选择器匹配的节点中提取的属性名称。如果为空，则返回此元素及其所有子元素的组合文本。</li>
 </ul>
 <p>这里以Redmine登录页面为例，提取器填写如下：</p>
-<div class="highlight"><pre><span></span>Name of created variables: input
-CSS/JQuery expression: #login-form &gt; form &gt; table &gt; tbody &gt; tr &gt; td &gt; input
-Attribute: name
-Match No.: -1
+<div class="highlight"><pre><span></span><span class="n">Name</span> <span class="k">of</span> <span class="n">created</span> <span class="n">variables</span><span class="p">:</span> <span class="k">input</span>
+<span class="n">CSS</span><span class="o">/</span><span class="n">JQuery</span> <span class="n">expression</span><span class="p">:</span> <span class="o">#</span><span class="n">login</span><span class="o">-</span><span class="n">form</span> <span class="o">&gt;</span> <span class="n">form</span> <span class="o">&gt;</span> <span class="k">table</span> <span class="o">&gt;</span> <span class="n">tbody</span> <span class="o">&gt;</span> <span class="n">tr</span> <span class="o">&gt;</span> <span class="n">td</span> <span class="o">&gt;</span> <span class="k">input</span>
+<span class="n">Attribute</span><span class="p">:</span> <span class="n">name</span>
+<span class="k">Match</span> <span class="k">No</span><span class="p">.:</span> <span class="o">-</span><span class="mi">1</span>
 </pre></div>
 
 
 <p>获得变量名称和对应值如下：</p>
-<div class="highlight"><pre><span></span>input=
-input_1=username
-input_2=password
-input_3=login
-input_matchNr=3
+<div class="highlight"><pre><span></span><span class="k">input</span><span class="o">=</span>
+<span class="n">input_1</span><span class="o">=</span><span class="n">username</span>
+<span class="n">input_2</span><span class="o">=</span><span class="n">password</span>
+<span class="n">input_3</span><span class="o">=</span><span class="n">login</span>
+<span class="n">input_matchNr</span><span class="o">=</span><span class="mi">3</span>
 </pre></div>
 
 
@@ -227,7 +227,7 @@ input_matchNr=3
 <ul>
 <li>
 <p>似乎有点bug，只能获取几个常见属性，像下面的<code>type</code>，<code>name</code>，<code>id</code>，<code>tabindex</code>，但<code>autocomplete</code>不行，但使用应该足够了。</p>
-<div class="highlight"><pre><span></span>&lt;input type=&quot;text&quot; name=&quot;username&quot; id=&quot;username&quot; tabindex=&quot;1&quot; autocomplete=&quot;off&quot;&gt;
+<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="k">input</span> <span class="k">type</span><span class="o">=</span><span class="ss">&quot;text&quot;</span> <span class="n">name</span><span class="o">=</span><span class="ss">&quot;username&quot;</span> <span class="n">id</span><span class="o">=</span><span class="ss">&quot;username&quot;</span> <span class="n">tabindex</span><span class="o">=</span><span class="ss">&quot;1&quot;</span> <span class="n">autocomplete</span><span class="o">=</span><span class="ss">&quot;off&quot;</span><span class="o">&gt;</span>
 </pre></div>
 
 
@@ -257,20 +257,20 @@ input_matchNr=3
 
 
 <p>提取器填写如下：</p>
-<div class="highlight"><pre><span></span>XML Parsing Options: 不勾选
-Name of created variables: city
-XPath query: //string
-Match No.: -1
+<div class="highlight"><pre><span></span><span class="n">XML</span> <span class="n">Parsing</span> <span class="k">Options</span><span class="p">:</span> <span class="err">不勾选</span>
+<span class="n">Name</span> <span class="k">of</span> <span class="n">created</span> <span class="n">variables</span><span class="p">:</span> <span class="n">city</span>
+<span class="n">XPath</span> <span class="n">query</span><span class="p">:</span> <span class="o">//</span><span class="n">string</span>
+<span class="k">Match</span> <span class="k">No</span><span class="p">.:</span> <span class="o">-</span><span class="mi">1</span>
 </pre></div>
 
 
 <p>获得变量名称和对应值如下：</p>
-<div class="highlight"><pre><span></span>city=北京 (54511)
-city_1=北京 (54511)
-city_2=上海 (58367)
-city_3=天津 (54517)
-city_4=重庆 (57516)
-city_matchNr=4
+<div class="highlight"><pre><span></span><span class="n">city</span><span class="o">=</span><span class="err">北京</span> <span class="p">(</span><span class="mi">54511</span><span class="p">)</span>
+<span class="n">city_1</span><span class="o">=</span><span class="err">北京</span> <span class="p">(</span><span class="mi">54511</span><span class="p">)</span>
+<span class="n">city_2</span><span class="o">=</span><span class="err">上海</span> <span class="p">(</span><span class="mi">58367</span><span class="p">)</span>
+<span class="n">city_3</span><span class="o">=</span><span class="err">天津</span> <span class="p">(</span><span class="mi">54517</span><span class="p">)</span>
+<span class="n">city_4</span><span class="o">=</span><span class="err">重庆</span> <span class="p">(</span><span class="mi">57516</span><span class="p">)</span>
+<span class="n">city_matchNr</span><span class="o">=</span><span class="mi">4</span>
 </pre></div>
 
 
@@ -293,12 +293,12 @@ city_matchNr=4
 
 
 <p>获得变量名称和对应值如下：</p>
-<div class="highlight"><pre><span></span>city=北京 (54511)
-city_1=北京 (54511)
-city_2=上海 (58367)
-city_3=天津 (54517)
-city_4=重庆 (57516)
-city_matchNr=4
+<div class="highlight"><pre><span></span><span class="n">city</span><span class="o">=</span><span class="err">北京</span> <span class="p">(</span><span class="mi">54511</span><span class="p">)</span>
+<span class="n">city_1</span><span class="o">=</span><span class="err">北京</span> <span class="p">(</span><span class="mi">54511</span><span class="p">)</span>
+<span class="n">city_2</span><span class="o">=</span><span class="err">上海</span> <span class="p">(</span><span class="mi">58367</span><span class="p">)</span>
+<span class="n">city_3</span><span class="o">=</span><span class="err">天津</span> <span class="p">(</span><span class="mi">54517</span><span class="p">)</span>
+<span class="n">city_4</span><span class="o">=</span><span class="err">重庆</span> <span class="p">(</span><span class="mi">57516</span><span class="p">)</span>
+<span class="n">city_matchNr</span><span class="o">=</span><span class="mi">4</span>
 </pre></div>
 
 
@@ -314,21 +314,21 @@ city_matchNr=4
 <li><strong>Right Boundary</strong>：右边界。</li>
 </ul>
 <p>用上面的例子，提取器填写如下：</p>
-<div class="highlight"><pre><span></span>Name of created variables: url
-Left Boundary: =&quot;
-Right Boundary: &quot;
-Match No.: -1
+<div class="highlight"><pre><span></span><span class="n">Name</span> <span class="k">of</span> <span class="n">created</span> <span class="n">variables</span><span class="p">:</span> <span class="n">url</span>
+<span class="k">Left</span> <span class="n">Boundary</span><span class="p">:</span> <span class="o">=</span><span class="ss">&quot;</span>
+<span class="ss">Right Boundary: &quot;</span>
+<span class="k">Match</span> <span class="k">No</span><span class="p">.:</span> <span class="o">-</span><span class="mi">1</span>
 </pre></div>
 
 
 <p>获得变量名称和对应值如下：</p>
-<div class="highlight"><pre><span></span>url=
-url_1=1.0
-url_2=utf-8
-url_3=http://www.w3.org/2001/XMLSchema-instance
-url_4=http://www.w3.org/2001/XMLSchema
-url_5=http://WebXml.com.cn/
-url_matchNr=5
+<div class="highlight"><pre><span></span><span class="n">url</span><span class="o">=</span>
+<span class="n">url_1</span><span class="o">=</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span>
+<span class="n">url_2</span><span class="o">=</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span>
+<span class="n">url_3</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">w3</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="mi">2001</span><span class="o">/</span><span class="n">XMLSchema</span><span class="o">-</span><span class="n">instance</span>
+<span class="n">url_4</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">w3</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="mi">2001</span><span class="o">/</span><span class="n">XMLSchema</span>
+<span class="n">url_5</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">WebXml</span><span class="p">.</span><span class="n">com</span><span class="p">.</span><span class="n">cn</span><span class="o">/</span>
+<span class="n">url_matchNr</span><span class="o">=</span><span class="mi">5</span>
 </pre></div>
 
 

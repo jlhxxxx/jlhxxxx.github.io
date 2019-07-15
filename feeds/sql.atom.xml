@@ -175,25 +175,25 @@ oracle   &lt;span class="m"&gt;22025&lt;/span&gt;     &lt;span class="m"&gt;1&lt
 &lt;p&gt;&lt;strong&gt;Linux下卸载&lt;/strong&gt;：todo&lt;/p&gt;
 &lt;h2 id="_4"&gt;常用目录结构&lt;/h2&gt;
 &lt;p&gt;了解Oracle常用目录结构，将大大提高数据库管理与维护的工作效率 。这里以oracle 11g为例。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.                                   # 主目录
-│─ cfgtoollogs                       # 存放当运行dbca，dbua，emca，netca等图形化配置程序时的log
-│─ flash_recovery_area                  # 存储并管理与备份和恢复有关的文件
-│─ oradata                              # 数据库文件缺省存储目录
-│   │─ dbf文件                        # 对应数据库中每个表空间
-│   │─ ctl文件                          # 控制文件
-│   └─ log文件                          # 对应重做日志文件组及其成员
-└─ product                              # 客户端主目录
-    └─ 11.2.0\dbhome_1
-            │─ bin                  # 主要包含用于数据库管理的各种命令
-            │─ css                  # 与Oracle Cluster Synchronization服务有关的文件
-            │─ database
-            │   └─ SPFILEORCL.ORA   # 服务器参数文件
-            │─ dbs                    # 存放数据库服务器端的参数文件Spfile
-            │─ demo                   # 存放数据库实例模式的脚本等
-            │─ install              # 用于存储ORACLE安装后的端口号,iSQL*Plus以及Enterprise Manager Database Control启动并登录的方式等,如该路径下的portlist.ini
-            │─ network/admin            # 有关监听器listener.ora和sqlnet.ora以及tnsnames.ora等
-            └─ sysman/config            # 用于与Oracle Enterprise Management有关的端口管理等
-                └─emkey.ora         # 加密密钥
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;                                   &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;主目录&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;cfgtoollogs&lt;/span&gt;                       &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;存放当运行&lt;/span&gt;&lt;span class="n"&gt;dbca&lt;/span&gt;&lt;span class="err"&gt;，&lt;/span&gt;&lt;span class="n"&gt;dbua&lt;/span&gt;&lt;span class="err"&gt;，&lt;/span&gt;&lt;span class="n"&gt;emca&lt;/span&gt;&lt;span class="err"&gt;，&lt;/span&gt;&lt;span class="n"&gt;netca等图形化配置程序时的log&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;flash_recovery_area&lt;/span&gt;                  &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;存储并管理与备份和恢复有关的文件&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;oradata&lt;/span&gt;                              &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;数据库文件缺省存储目录&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;dbf文件&lt;/span&gt;                        &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;对应数据库中每个表空间&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;ctl文件&lt;/span&gt;                          &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;控制文件&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;log文件&lt;/span&gt;                          &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;对应重做日志文件组及其成员&lt;/span&gt;
+&lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;product&lt;/span&gt;                              &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;客户端主目录&lt;/span&gt;
+    &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;dbhome_1&lt;/span&gt;
+            &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;bin&lt;/span&gt;                  &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;主要包含用于数据库管理的各种命令&lt;/span&gt;
+            &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;css&lt;/span&gt;                  &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;与&lt;/span&gt;&lt;span class="n"&gt;Oracle&lt;/span&gt; &lt;span class="k"&gt;Cluster&lt;/span&gt; &lt;span class="n"&gt;Synchronization服务有关的文件&lt;/span&gt;
+            &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="k"&gt;database&lt;/span&gt;
+            &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;SPFILEORCL&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ORA&lt;/span&gt;   &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;服务器参数文件&lt;/span&gt;
+            &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;dbs&lt;/span&gt;                    &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;存放数据库服务器端的参数文件&lt;/span&gt;&lt;span class="n"&gt;Spfile&lt;/span&gt;
+            &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;demo&lt;/span&gt;                   &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;存放数据库实例模式的脚本等&lt;/span&gt;
+            &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt;              &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;用于存储&lt;/span&gt;&lt;span class="n"&gt;ORACLE安装后的端口号&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;iSQL&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;Plus以及Enterprise&lt;/span&gt; &lt;span class="n"&gt;Manager&lt;/span&gt; &lt;span class="k"&gt;Database&lt;/span&gt; &lt;span class="n"&gt;Control启动并登录的方式等&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;如该路径下的&lt;/span&gt;&lt;span class="n"&gt;portlist&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ini&lt;/span&gt;
+            &lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;network&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;admin&lt;/span&gt;            &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;有关监听器&lt;/span&gt;&lt;span class="n"&gt;listener&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ora和sqlnet&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ora以及tnsnames&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ora等&lt;/span&gt;
+            &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;sysman&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;            &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;用于与&lt;/span&gt;&lt;span class="n"&gt;Oracle&lt;/span&gt; &lt;span class="n"&gt;Enterprise&lt;/span&gt; &lt;span class="n"&gt;Management有关的端口管理等&lt;/span&gt;
+                &lt;span class="err"&gt;└─&lt;/span&gt;&lt;span class="n"&gt;emkey&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ora&lt;/span&gt;         &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;加密密钥&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 

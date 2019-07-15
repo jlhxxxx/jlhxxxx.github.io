@@ -249,7 +249,7 @@
 
 
 <p>如果逗号没有被转义——例如 <code>${__javaScript(Math.max(2,5))}</code> ——你会得到像这样的错误信息：</p>
-<div class="highlight"><pre><span></span>ERROR - jmeter.functions …</pre></div>
+<div class="highlight"><pre><span></span><span class="n">ERROR</span> <span class="o">-</span> <span class="n">jmeter</span><span class="p">.</span><span class="n">functions …</span></pre></div>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/jmeter-doc-cn-20.html">Read more...</a>
                                 </p>
@@ -576,14 +576,13 @@ rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --no
 </ul>
 <h2 id="_2">常用目录结构</h2>
 <p>了解WebLogic常用目录结构，将大大提高管理与维护的工作效率 。这里以WebLogic 11g为例。</p>
-<div class="highlight"><pre><span></span>.                                      # 主目录
-│─ coherence_3.7                        # coherence集群相关
-│─ logs                                 # 日志文件，包括安装和运行%WL_HOME%\common\bin\下程序的日志
-│─ modules                             # 模块和插件目录
-│─ user_projects                         # 用户工程目录
-│  └─ domains                            # 域主目录
-│      └─ base_domain                     # DOMAIN_HOME，用户自建域主目录，默认名称为base_domain，以此为例
-│         │─ bin …</pre></div>
+<div class="highlight"><pre><span></span><span class="p">.</span>                                      <span class="o">#</span> <span class="err">主目录</span>
+<span class="err">│─</span> <span class="n">coherence_3</span><span class="p">.</span><span class="mi">7</span>                        <span class="o">#</span> <span class="n">coherence集群相关</span>
+<span class="err">│─</span> <span class="n">logs</span>                                 <span class="o">#</span> <span class="err">日志文件，包括安装和运行</span><span class="o">%</span><span class="n">WL_HOME</span><span class="o">%</span><span class="err">\</span><span class="n">common</span><span class="err">\</span><span class="n">bin</span><span class="err">\下程序的日志</span>
+<span class="err">│─</span> <span class="n">modules</span>                             <span class="o">#</span> <span class="err">模块和插件目录</span>
+<span class="err">│─</span> <span class="n">user_projects</span>                         <span class="o">#</span> <span class="err">用户工程目录</span>
+<span class="err">│</span>  <span class="err">└─</span> <span class="n">domains</span>                            <span class="o">#</span> <span class="err">域主目录</span>
+<span class="err">│</span>      <span class="err">└─</span> <span class="n">base_domain</span>                     <span class="o">#</span> <span class="n">DOMAIN_HOME</span><span class="err">，用户自建域主目录，默认名称为</span><span class="n">base_domain</span><span class="err">，以此为例 …</span></pre></div>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/weblogic-cluster.html">Read more...</a>
                                 </p>

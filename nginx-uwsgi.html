@@ -134,12 +134,12 @@ WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛�
 
 
 <p>运行服务时如果报错<code>!!! no internal routing support, rebuild with pcre support !!!</code>：</p>
-<div class="highlight"><pre><span></span># 先卸载
-$ pip uninstall uwsgi
-# 安装pcre支持库
-$ yum install pcre pcre-devel pcre-static
-# 重新安装uwsgi，不走pip缓存
-$ pip install uwsgi -I --no-cache-dir
+<div class="highlight"><pre><span></span><span class="o">#</span> <span class="err">先卸载</span>
+<span class="err">$</span> <span class="n">pip</span> <span class="n">uninstall</span> <span class="n">uwsgi</span>
+<span class="o">#</span> <span class="err">安装</span><span class="n">pcre支持库</span>
+<span class="err">$</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">pcre</span> <span class="n">pcre</span><span class="o">-</span><span class="n">devel</span> <span class="n">pcre</span><span class="o">-</span><span class="k">static</span>
+<span class="o">#</span> <span class="err">重新安装</span><span class="n">uwsgi</span><span class="err">，不走</span><span class="n">pip缓存</span>
+<span class="err">$</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">uwsgi</span> <span class="o">-</span><span class="n">I</span> <span class="c1">--no-cache-dir</span>
 </pre></div>
 
 
@@ -196,10 +196,10 @@ root     <span class="m">16964</span>     <span class="m">1</span>  <span class=
 
 
 <p>我们要修改的是<code>location</code>选项，打开<code>/etc/nginx/nginx.conf</code>，没有找到<code>location</code>，但是有一行<code>include /etc/nginx/conf.d/*.conf</code>，转到“include /etc/nginx/conf.d/”下，打开“default.conf”，找到<code>location</code>，修改为：</p>
-<div class="highlight"><pre><span></span><span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
-    <span class="err">include</span> <span class="err">uwsgi_params</span><span class="p">;</span>
-    <span class="err">uwsgi_pass</span> <span class="err">127.0.0.1:3031</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><span class="nv">location</span> <span class="o">/</span> {
+    <span class="k">include</span> <span class="nv">uwsgi_params</span><span class="c1">;</span>
+    <span class="nv">uwsgi_pass</span> <span class="mi">127</span>.<span class="mi">0</span>.<span class="mi">0</span>.<span class="mi">1</span>:<span class="mi">3031</span><span class="c1">;</span>
+}
 </pre></div>
 
 
@@ -223,10 +223,10 @@ $ uwsgi myapp.ini
 
 <p>访问”http://localhost”（Nginx默认使用<code>80</code>端口，可以在“default.conf”修改），顺利的话我们会再次看到”Hello World!”。 </p>
 <p>不顺利的话，继续往下看。如果打开网站什么都看不到，不要急，从“nginx.conf”找到日志文件目录“/var/log/nginx/”，打开“error.log”，先找到报错信息“connect() to 127.0.0.1:3031 failed (13: Permission denied) while connecting to upstream”，百度解决问题：</p>
-<div class="highlight"><pre><span></span><span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
-    <span class="err">include</span> <span class="err">uwsgi_params</span><span class="p">;</span>
-    <span class="err">uwsgi_pass</span> <span class="err">127.0.0.1:3031</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><span class="nv">location</span> <span class="o">/</span> {
+    <span class="k">include</span> <span class="nv">uwsgi_params</span><span class="c1">;</span>
+    <span class="nv">uwsgi_pass</span> <span class="mi">127</span>.<span class="mi">0</span>.<span class="mi">0</span>.<span class="mi">1</span>:<span class="mi">3031</span><span class="c1">;</span>
+}
 </pre></div>
 
 
@@ -250,10 +250,10 @@ $ uwsgi myapp.ini
 
 
 <p>现在，我们的Flask应用就可以使用”app”作为对象名了 ：</p>
-<div class="highlight"><pre><span></span><span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
-    <span class="err">include</span> <span class="err">uwsgi_params</span><span class="p">;</span>
-    <span class="err">uwsgi_pass</span> <span class="err">127.0.0.1:3031</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><span class="nv">location</span> <span class="o">/</span> {
+    <span class="k">include</span> <span class="nv">uwsgi_params</span><span class="c1">;</span>
+    <span class="nv">uwsgi_pass</span> <span class="mi">127</span>.<span class="mi">0</span>.<span class="mi">0</span>.<span class="mi">1</span>:<span class="mi">3031</span><span class="c1">;</span>
+}
 </pre></div>
 
 
@@ -266,11 +266,11 @@ $ uwsgi myapp.ini
 
 
 <p>一个Nginx中，可以同时运行多个应用，不一定是Python的应用。我们期望通过不同的路径来路由不同的应用，因此就不能像上例那样直接修改根目录的配置。假设我们希望通过”http://localhost/myapp”来访问我们的应用，首先要在Nginx的配置文件中，加入下面的内容：</p>
-<div class="highlight"><pre><span></span><span class="nt">location</span> <span class="o">/</span><span class="nt">myapp</span> <span class="p">{</span>
-    <span class="err">include</span> <span class="err">uwsgi_params</span><span class="p">;</span>
-    <span class="err">uwsgi_param</span> <span class="err">SCRIPT_NAME</span> <span class="err">/myapp</span><span class="p">;</span>
-    <span class="err">uwsgi_pass</span> <span class="err">127.0.0.1:3031</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><span class="nv">location</span> <span class="o">/</span><span class="nv">myapp</span> {
+    <span class="k">include</span> <span class="nv">uwsgi_params</span><span class="c1">;</span>
+    <span class="nv">uwsgi_param</span> <span class="nv">SCRIPT_NAME</span> <span class="o">/</span><span class="nv">myapp</span><span class="c1">;</span>
+    <span class="nv">uwsgi_pass</span> <span class="mi">127</span>.<span class="mi">0</span>.<span class="mi">0</span>.<span class="mi">1</span>:<span class="mi">3031</span><span class="c1">;</span>
+}
 </pre></div>
 
 
@@ -292,11 +292,11 @@ $ uwsgi myapp.ini
 
 
 <p>启动uWSGI服务器后，它会自动创建一个”/tmp/uwsgi.sock”文件。然后让我们修改Nginx配置文件，将”uwsgi_pass”配置项改为文件：</p>
-<div class="highlight"><pre><span></span><span class="nt">location</span> <span class="o">/</span><span class="nt">myapp</span> <span class="p">{</span>
-    <span class="err">include</span> <span class="err">uwsgi_params</span><span class="p">;</span>
-    <span class="err">uwsgi_param</span> <span class="err">SCRIPT_NAME</span> <span class="err">/myapp</span><span class="p">;</span>
-    <span class="err">uwsgi_pass</span> <span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">uwsgi</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><span class="nv">location</span> <span class="o">/</span><span class="nv">myapp</span> {
+    <span class="k">include</span> <span class="nv">uwsgi_params</span><span class="c1">;</span>
+    <span class="nv">uwsgi_param</span> <span class="nv">SCRIPT_NAME</span> <span class="o">/</span><span class="nv">myapp</span><span class="c1">;</span>
+    <span class="nv">uwsgi_pass</span> <span class="nv">unix</span>:<span class="o">/</span><span class="nv">tmp</span><span class="o">/</span><span class="nv">uwsgi</span>.<span class="nv">sock</span><span class="c1">;</span>
+}
 </pre></div>
 
 

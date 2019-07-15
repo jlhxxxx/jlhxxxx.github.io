@@ -124,25 +124,25 @@
 <p><strong>Linux下卸载</strong>：todo</p>
 <h2 id="_4">常用目录结构</h2>
 <p>了解Oracle常用目录结构，将大大提高数据库管理与维护的工作效率 。这里以oracle 11g为例。</p>
-<div class="highlight"><pre><span></span>.                                   # 主目录
-│─ cfgtoollogs                       # 存放当运行dbca，dbua，emca，netca等图形化配置程序时的log
-│─ flash_recovery_area                  # 存储并管理与备份和恢复有关的文件
-│─ oradata                              # 数据库文件缺省存储目录
-│   │─ dbf文件                        # 对应数据库中每个表空间
-│   │─ ctl文件                          # 控制文件
-│   └─ log文件                          # 对应重做日志文件组及其成员
-└─ product                              # 客户端主目录
-    └─ 11.2.0\dbhome_1
-            │─ bin                  # 主要包含用于数据库管理的各种命令
-            │─ css                  # 与Oracle Cluster Synchronization服务有关的文件
-            │─ database
-            │   └─ SPFILEORCL.ORA   # 服务器参数文件
-            │─ dbs                    # 存放数据库服务器端的参数文件Spfile
-            │─ demo                   # 存放数据库实例模式的脚本等
-            │─ install              # 用于存储ORACLE安装后的端口号,iSQL*Plus以及Enterprise Manager Database Control启动并登录的方式等,如该路径下的portlist.ini
-            │─ network/admin            # 有关监听器listener.ora和sqlnet.ora以及tnsnames.ora等
-            └─ sysman/config            # 用于与Oracle Enterprise Management有关的端口管理等
-                └─emkey.ora         # 加密密钥
+<div class="highlight"><pre><span></span><span class="p">.</span>                                   <span class="o">#</span> <span class="err">主目录</span>
+<span class="err">│─</span> <span class="n">cfgtoollogs</span>                       <span class="o">#</span> <span class="err">存放当运行</span><span class="n">dbca</span><span class="err">，</span><span class="n">dbua</span><span class="err">，</span><span class="n">emca</span><span class="err">，</span><span class="n">netca等图形化配置程序时的log</span>
+<span class="err">│─</span> <span class="n">flash_recovery_area</span>                  <span class="o">#</span> <span class="err">存储并管理与备份和恢复有关的文件</span>
+<span class="err">│─</span> <span class="n">oradata</span>                              <span class="o">#</span> <span class="err">数据库文件缺省存储目录</span>
+<span class="err">│</span>   <span class="err">│─</span> <span class="n">dbf文件</span>                        <span class="o">#</span> <span class="err">对应数据库中每个表空间</span>
+<span class="err">│</span>   <span class="err">│─</span> <span class="n">ctl文件</span>                          <span class="o">#</span> <span class="err">控制文件</span>
+<span class="err">│</span>   <span class="err">└─</span> <span class="n">log文件</span>                          <span class="o">#</span> <span class="err">对应重做日志文件组及其成员</span>
+<span class="err">└─</span> <span class="n">product</span>                              <span class="o">#</span> <span class="err">客户端主目录</span>
+    <span class="err">└─</span> <span class="mi">11</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="err">\</span><span class="n">dbhome_1</span>
+            <span class="err">│─</span> <span class="n">bin</span>                  <span class="o">#</span> <span class="err">主要包含用于数据库管理的各种命令</span>
+            <span class="err">│─</span> <span class="n">css</span>                  <span class="o">#</span> <span class="err">与</span><span class="n">Oracle</span> <span class="k">Cluster</span> <span class="n">Synchronization服务有关的文件</span>
+            <span class="err">│─</span> <span class="k">database</span>
+            <span class="err">│</span>   <span class="err">└─</span> <span class="n">SPFILEORCL</span><span class="p">.</span><span class="n">ORA</span>   <span class="o">#</span> <span class="err">服务器参数文件</span>
+            <span class="err">│─</span> <span class="n">dbs</span>                    <span class="o">#</span> <span class="err">存放数据库服务器端的参数文件</span><span class="n">Spfile</span>
+            <span class="err">│─</span> <span class="n">demo</span>                   <span class="o">#</span> <span class="err">存放数据库实例模式的脚本等</span>
+            <span class="err">│─</span> <span class="n">install</span>              <span class="o">#</span> <span class="err">用于存储</span><span class="n">ORACLE安装后的端口号</span><span class="p">,</span><span class="n">iSQL</span><span class="o">*</span><span class="n">Plus以及Enterprise</span> <span class="n">Manager</span> <span class="k">Database</span> <span class="n">Control启动并登录的方式等</span><span class="p">,</span><span class="err">如该路径下的</span><span class="n">portlist</span><span class="p">.</span><span class="n">ini</span>
+            <span class="err">│─</span> <span class="n">network</span><span class="o">/</span><span class="k">admin</span>            <span class="o">#</span> <span class="err">有关监听器</span><span class="n">listener</span><span class="p">.</span><span class="n">ora和sqlnet</span><span class="p">.</span><span class="n">ora以及tnsnames</span><span class="p">.</span><span class="n">ora等</span>
+            <span class="err">└─</span> <span class="n">sysman</span><span class="o">/</span><span class="n">config</span>            <span class="o">#</span> <span class="err">用于与</span><span class="n">Oracle</span> <span class="n">Enterprise</span> <span class="n">Management有关的端口管理等</span>
+                <span class="err">└─</span><span class="n">emkey</span><span class="p">.</span><span class="n">ora</span>         <span class="o">#</span> <span class="err">加密密钥</span>
 </pre></div>
 
 

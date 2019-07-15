@@ -77,7 +77,7 @@
 
 
 &lt;p&gt;如果逗号没有被转义——例如 &lt;code&gt;${__javaScript(Math.max(2,5))}&lt;/code&gt; ——你会得到像这样的错误信息：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ERROR - jmeter.functions …&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Tue, 07 May 2019 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2019-05-07:/jmeter-doc-cn-20.html</guid><category>JMeter</category><category>Documentation</category><category>Translation</category></item><item><title>JMeter文档翻译之21-正则表达式</title><link>https://jlhxxxx.github.io/jmeter-doc-cn-21.html</link><description>&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ERROR&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;jmeter&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;functions …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Tue, 07 May 2019 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2019-05-07:/jmeter-doc-cn-20.html</guid><category>JMeter</category><category>Documentation</category><category>Translation</category></item><item><title>JMeter文档翻译之21-正则表达式</title><link>https://jlhxxxx.github.io/jmeter-doc-cn-21.html</link><description>&lt;p&gt;英文文档地址：&lt;a href="http://jmeter.apache.org/usermanual/functions.html"&gt;http://jmeter.apache.org/usermanual/functions.html&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id="211"&gt;21.1 概述&lt;/h2&gt;
 &lt;p&gt;JMeter 包含模式匹配软件 &lt;a href="http://attic.apache.org/projects/jakarta-oro.html"&gt;Apache Jakarta ORO&lt;/a&gt; 。 
 在 Jakarta 网站上有一些相关文档，例如：&lt;a href="http://archimedes.fas.harvard.edu/scrapbook/jakarta-oro-2.0.6/docs/api/org/apache/oro/text/regex/package-summary.html"&gt;模式匹配字符摘要&lt;/a&gt;。  &lt;/p&gt;
@@ -165,14 +165,13 @@ rpm -qa&lt;span class="p"&gt;|&lt;/span&gt;grep yum&lt;span class="p"&gt;|&lt;/s
 &lt;/ul&gt;
 &lt;h2 id="_2"&gt;常用目录结构&lt;/h2&gt;
 &lt;p&gt;了解WebLogic常用目录结构，将大大提高管理与维护的工作效率 。这里以WebLogic 11g为例。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.                                      # 主目录
-│─ coherence_3.7                        # coherence集群相关
-│─ logs                                 # 日志文件，包括安装和运行%WL_HOME%\common\bin\下程序的日志
-│─ modules                             # 模块和插件目录
-│─ user_projects                         # 用户工程目录
-│  └─ domains                            # 域主目录
-│      └─ base_domain                     # DOMAIN_HOME，用户自建域主目录，默认名称为base_domain，以此为例
-│         │─ bin …&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Tue, 22 May 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-05-22:/weblogic-cluster.html</guid><category>WebLogic</category><category>Cluster</category></item><item><title>Oracle 十全大补汤</title><link>https://jlhxxxx.github.io/oracle-rudiment.html</link><description>&lt;h2 id="_1"&gt;安装卸载&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;                                      &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;主目录&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;coherence_3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;                        &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;coherence集群相关&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;logs&lt;/span&gt;                                 &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;日志文件，包括安装和运行&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;WL_HOME&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;common&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="err"&gt;\下程序的日志&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;modules&lt;/span&gt;                             &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;模块和插件目录&lt;/span&gt;
+&lt;span class="err"&gt;│─&lt;/span&gt; &lt;span class="n"&gt;user_projects&lt;/span&gt;                         &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;用户工程目录&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;  &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;domains&lt;/span&gt;                            &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;域主目录&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;      &lt;span class="err"&gt;└─&lt;/span&gt; &lt;span class="n"&gt;base_domain&lt;/span&gt;                     &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;DOMAIN_HOME&lt;/span&gt;&lt;span class="err"&gt;，用户自建域主目录，默认名称为&lt;/span&gt;&lt;span class="n"&gt;base_domain&lt;/span&gt;&lt;span class="err"&gt;，以此为例 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Tue, 22 May 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-05-22:/weblogic-cluster.html</guid><category>WebLogic</category><category>Cluster</category></item><item><title>Oracle 十全大补汤</title><link>https://jlhxxxx.github.io/oracle-rudiment.html</link><description>&lt;h2 id="_1"&gt;安装卸载&lt;/h2&gt;
 &lt;h4 id="_2"&gt;安装&lt;/h4&gt;
 &lt;p&gt;新手不建议安装发布不久的最新版本，一来新版本可能有一些新特性，但是网上相关的文章较少，入坑概率很大，老手尚需时间来适应，新手肯定更觉得难以上手了；二来旧版本相对比较稳定，各种文档丰富，常见BUG都有比较成熟的应对方法；三是要看使用环境了，兼容性是考虑重点，客户端和服务器端版本要尽量一致，这里的问题实在太多，几百M都讲不完，说多了都是眼泪。&lt;/p&gt;
 &lt;p&gt;Oracle下载地址：&lt;a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html"&gt;【英文地址】&lt;/a&gt;、&lt;a href="http://www.oracle.com/technetwork/cn/database/enterprise-edition/downloads/index.html"&gt;【中文地址】&lt;/a&gt;&lt;/p&gt;
@@ -304,19 +303,19 @@ rpm -qa&lt;span class="p"&gt;|&lt;/span&gt;grep yum&lt;span class="p"&gt;|&lt;/s
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;安装virtualenv（可选）&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install virtualenv
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;virtualenv&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;为了使用virtualenv更方便，可以借助 virtualenvwrapper（可选）&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install virtualenvwrapper-win
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;virtualenvwrapper&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;win&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;配置虚拟环境目录，默认创建的虚拟环境位于&lt;strong&gt;C:\Users\username\&lt;/strong&gt;下，可以通过环境变量 &lt;code&gt;WORKON_HOME&lt;/code&gt; 来定制。&lt;/p&gt;
-&lt;p&gt;通过&lt;strong&gt;计算机--&amp;gt;属性-- …&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 16 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-16:/pelican-github.html</guid><category>GitHub</category><category>Pelican</category><category>Blog</category></item><item><title>Postman入门第一坑：提取返回值</title><link>https://jlhxxxx.github.io/postman-start.html</link><description>&lt;p&gt;Postman是做接口测试的，但是很多接口并不是直接就能测，有的需要一些预处理。比如说身份认证，需要传递一个&lt;a href="https://zh.wikipedia.org/wiki/%E5%AE%89%E5%85%A8%E4%BB%A4%E7%89%8C"&gt;token&lt;/a&gt;。如果做网页测试，一般打开登陆界面的时候就会生成一个token，如果返回值是json格式，用Postman从中提取值是很简单的，在Tests中输入：&lt;/p&gt;
+&lt;p&gt;通过&lt;strong&gt;计算机-- …&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aman</dc:creator><pubDate>Mon, 16 Apr 2018 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:jlhxxxx.github.io,2018-04-16:/pelican-github.html</guid><category>GitHub</category><category>Pelican</category><category>Blog</category></item><item><title>Postman入门第一坑：提取返回值</title><link>https://jlhxxxx.github.io/postman-start.html</link><description>&lt;p&gt;Postman是做接口测试的，但是很多接口并不是直接就能测，有的需要一些预处理。比如说身份认证，需要传递一个&lt;a href="https://zh.wikipedia.org/wiki/%E5%AE%89%E5%85%A8%E4%BB%A4%E7%89%8C"&gt;token&lt;/a&gt;。如果做网页测试，一般打开登陆界面的时候就会生成一个token，如果返回值是json格式，用Postman从中提取值是很简单的，在Tests中输入：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;jsonData&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nx"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;responseBody&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="c1"&gt;//获取body中返回的所有参数&lt;/span&gt;
 &lt;span class="nx"&gt;pm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;environment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;appKey&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;jsonData&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="c1"&gt;//把返回参数中的keys设置为环境变量&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;

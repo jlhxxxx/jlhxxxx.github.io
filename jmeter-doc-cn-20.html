@@ -111,7 +111,7 @@
 
 
 <p>如果逗号没有被转义——例如 <code>${__javaScript(Math.max(2,5))}</code> ——你会得到像这样的错误信息：</p>
-<div class="highlight"><pre><span></span>ERROR - jmeter.functions.JavaScript: Error processing Javascript: [Math.max(2] org.mozilla.javascript.EvaluatorException: missing ) after argument list (&lt;cmd&gt;#1)
+<div class="highlight"><pre><span></span><span class="n">ERROR</span> <span class="o">-</span> <span class="n">jmeter</span><span class="p">.</span><span class="n">functions</span><span class="p">.</span><span class="n">JavaScript</span><span class="p">:</span> <span class="n">Error</span> <span class="n">processing</span> <span class="n">Javascript</span><span class="p">:</span> <span class="p">[</span><span class="n">Math</span><span class="p">.</span><span class="k">max</span><span class="p">(</span><span class="mi">2</span><span class="p">]</span> <span class="n">org</span><span class="p">.</span><span class="n">mozilla</span><span class="p">.</span><span class="n">javascript</span><span class="p">.</span><span class="n">EvaluatorException</span><span class="p">:</span> <span class="n">missing</span> <span class="p">)</span> <span class="k">after</span> <span class="n">argument</span> <span class="n">list</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">cmd</span><span class="o">&gt;#</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
 
@@ -479,7 +479,7 @@
 
 
 <p>换一种方法，你也可以将你的脚本定义为一个变量，例如在测试计划中定义：</p>
-<div class="highlight"><pre><span></span>SCRIPT          vars.put(&quot;name&quot;,&quot;value&quot;)
+<div class="highlight"><pre><span></span><span class="n">SCRIPT</span>          <span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="ss">&quot;name&quot;</span><span class="p">,</span><span class="ss">&quot;value&quot;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -602,7 +602,7 @@
 <p>threadNum 函数只是返回当前正在执行的线程编号。线程编号独立于线程组，这意味着从该函数的角度来看，一个线程组中的线程 #1 与另一个线程组中的线程 #1 是没有区别的。</p>
 <blockquote>
 <p>该函数返回一个介于1和最大运行线程数之间的数字。注意，如果您将JSR223代码与<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html">JMeterContext</a>对象（<code>ctx</code>变量）一起使用，则下面的代码返回一个介于0和（最大运行线程数减1）之间的数字</p>
-<div class="highlight"><pre><span></span>   ctx.getThreadNum（）
+<div class="highlight"><pre><span></span>   <span class="n">ctx</span><span class="p">.</span><span class="n">getThreadNum</span><span class="err">（）</span>
 </pre></div>
 
 
@@ -946,12 +946,12 @@
 
 
 <p>返回 <code>Sat Jan 09 2016 16:22:15 GMT+0100 (CET)</code> 并将其存储在变量 <code>MYDATE</code> 下 </p>
-<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__javaScript</span><span class="p">(</span><span class="n">Math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">Math</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">maxRandom</span><span class="cp">}</span>+1)),MYRESULT)}
+<div class="highlight"><pre><span></span>${<span class="nv">__javaScript</span><span class="ss">(</span><span class="nv">Math</span>.<span class="nv">floor</span><span class="ss">(</span><span class="nv">Math</span>.<span class="k">random</span><span class="ss">()</span><span class="o">*</span><span class="ss">(</span>${<span class="nv">maxRandom</span>}<span class="o">+</span><span class="mi">1</span><span class="ss">))</span>,<span class="nv">MYRESULT</span><span class="ss">)</span>}
 </pre></div>
 
 
 <p>使用 <code>maxRandom</code> 变量，返回 <code>0</code> 和 <code>maxRandom</code> 之间的随机值并将其存储在  <code>MYRESULT</code> 中</p>
-<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">__javaScript</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">minRandom</span><span class="cp">}</span>+Math.floor(Math.random()*(<span class="cp">${</span><span class="n">maxRandom</span><span class="cp">}</span>-<span class="cp">${</span><span class="n">minRandom</span><span class="cp">}</span>+1)),MYRESULT)}
+<div class="highlight"><pre><span></span>${<span class="nv">__javaScript</span><span class="ss">(</span>${<span class="nv">minRandom</span>}<span class="o">+</span><span class="nv">Math</span>.<span class="nv">floor</span><span class="ss">(</span><span class="nv">Math</span>.<span class="k">random</span><span class="ss">()</span><span class="o">*</span><span class="ss">(</span>${<span class="nv">maxRandom</span>}<span class="o">-</span>${<span class="nv">minRandom</span>}<span class="o">+</span><span class="mi">1</span><span class="ss">))</span>,<span class="nv">MYRESULT</span><span class="ss">)</span>}
 </pre></div>
 
 
@@ -1255,7 +1255,7 @@
 <p>这是一个简化的属性函数，用于在命令行中定义的属性。与<code>__property</code> 函数不同，没有选项可将值保存在变量中，如果未提供默认值，则假定为 1。选择 1 作为假定默认值是因为它对于常见测试变量如循环次数，线程数，加速等都有效。</p>
 <p>例如：</p>
 <p>定义属性值：</p>
-<div class="highlight"><pre><span></span>jmeter -Jgroup1.threads=7  -Jhostname1=www.realhost.edu
+<div class="highlight"><pre><span></span><span class="n">jmeter</span> <span class="o">-</span><span class="n">Jgroup1</span><span class="p">.</span><span class="n">threads</span><span class="o">=</span><span class="mi">7</span>  <span class="o">-</span><span class="n">Jhostname1</span><span class="o">=</span><span class="n">www</span><span class="p">.</span><span class="n">realhost</span><span class="p">.</span><span class="n">edu</span>
 </pre></div>
 
 
@@ -1696,14 +1696,14 @@
 <li><code>OUT</code> - System.out 例如：<code>OUT.println("message")</code></li>
 </ul>
 <p>Jexl 也可以创建类和调用其方法，例如：</p>
-<div class="highlight"><pre><span></span>Systemclass=log.class.forName(&quot;java.lang.System&quot;);
-now=Systemclass.currentTimeMillis();
+<div class="highlight"><pre><span></span><span class="n">Systemclass</span><span class="o">=</span><span class="n">log</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="n">forName</span><span class="p">(</span><span class="ss">&quot;java.lang.System&quot;</span><span class="p">);</span>
+<span class="n">now</span><span class="o">=</span><span class="n">Systemclass</span><span class="p">.</span><span class="n">currentTimeMillis</span><span class="p">();</span>
 </pre></div>
 
 
 <p>注意，网站上的 Jexl 文档错误地建议使用“<code>div</code>”做整数除法。实际上“<code>div</code>”和“<code>/</code>”都执行普通除法。下面的操作可以得到整数除法的效果：</p>
-<div class="highlight"><pre><span></span>i= 5 / 2;
-i.intValue(); // 或使用 i.longValue()
+<div class="highlight"><pre><span></span><span class="n">i</span><span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">i</span><span class="p">.</span><span class="n">intValue</span><span class="p">();</span> <span class="o">//</span> <span class="err">或使用</span> <span class="n">i</span><span class="p">.</span><span class="n">longValue</span><span class="p">()</span>
 </pre></div>
 
 
@@ -1753,14 +1753,14 @@ i.intValue(); // 或使用 i.longValue()
 <li><code>OUT</code> - System.out 例如：<code>OUT.println("message")</code></li>
 </ul>
 <p>Jexl 也可以创建类和调用其方法，例如：</p>
-<div class="highlight"><pre><span></span>Systemclass=log.class.forName(&quot;java.lang.System&quot;);
-now=Systemclass.currentTimeMillis();
+<div class="highlight"><pre><span></span><span class="n">Systemclass</span><span class="o">=</span><span class="n">log</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="n">forName</span><span class="p">(</span><span class="ss">&quot;java.lang.System&quot;</span><span class="p">);</span>
+<span class="n">now</span><span class="o">=</span><span class="n">Systemclass</span><span class="p">.</span><span class="n">currentTimeMillis</span><span class="p">();</span>
 </pre></div>
 
 
 <p>注意，网站上的 Jexl 文档错误地建议使用“<code>div</code>”做整数除法。实际上“<code>div</code>”和“<code>/</code>”都执行普通除法。下面的操作可以得到整数除法的效果：</p>
-<div class="highlight"><pre><span></span>i= 5 / 2;
-i.intValue(); // 或使用 i.longValue()
+<div class="highlight"><pre><span></span><span class="n">i</span><span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">i</span><span class="p">.</span><span class="n">intValue</span><span class="p">();</span> <span class="o">//</span> <span class="err">或使用</span> <span class="n">i</span><span class="p">.</span><span class="n">longValue</span><span class="p">()</span>
 </pre></div>
 
 

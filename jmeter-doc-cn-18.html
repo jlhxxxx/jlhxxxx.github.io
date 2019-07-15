@@ -673,12 +673,12 @@ httpclient4.request_sent_retry_enabled=true</code></p>
 <p>此取样器允许您将JDBC请求（SQL查询）发送到数据库。</p>
 <p>在使用之前，您需要设置<a href="http://jmeter.apache.org/usermanual/component_reference.html#JDBC_Connection_Configuration">JDBC Connection Configuration</a>配置元件。</p>
 <p>如果提供了“变量名称”列表，则对于Select语句返回的每一行，将使用相应列和对应的行数的值设置变量（如果提供变量名称）。例如，如果Select语句返回2行3列，并且变量列表是<code>A,,C</code>，则将设置以下变量：</p>
-<div class="highlight"><pre><span></span>A_#=2（行数）
-A_1=第1列，第1行
-A_2=第1列，第2行
-C_#=2（行数）
-C_1=第3列，第1行
-C_2=第3列，第2行
+<div class="highlight"><pre><span></span><span class="n">A_</span><span class="o">#=</span><span class="mi">2</span><span class="err">（行数）</span>
+<span class="n">A_1</span><span class="o">=</span><span class="err">第</span><span class="mi">1</span><span class="err">列，第</span><span class="mi">1</span><span class="err">行</span>
+<span class="n">A_2</span><span class="o">=</span><span class="err">第</span><span class="mi">1</span><span class="err">列，第</span><span class="mi">2</span><span class="err">行</span>
+<span class="n">C_</span><span class="o">#=</span><span class="mi">2</span><span class="err">（行数）</span>
+<span class="n">C_1</span><span class="o">=</span><span class="err">第</span><span class="mi">3</span><span class="err">列，第</span><span class="mi">1</span><span class="err">行</span>
+<span class="n">C_2</span><span class="o">=</span><span class="err">第</span><span class="mi">3</span><span class="err">列，第</span><span class="mi">2</span><span class="err">行</span>
 </pre></div>
 
 
@@ -1335,7 +1335,7 @@ C_2=第3列，第2行
 <h3 id="access-log-sampler">Access Log Sampler</h3>
 <p>AccessLogSampler旨在读取访问日志并生成http请求。对于那些不熟悉访问日志的人来说，它是Web服务器记录它接受的每个请求的日志。这意味着所有图像，CSS文件，JavaScript文件，html文件，......</p>
 <p>Tomcat的访问日志使用通用格式。这意味着使用通用日志格式的任何Web服务器都可以使用AccessLogSampler。使用通用日志格式的服务器包括：Tomcat，Resin，Weblogic和SunOne。常见的日志格式如下所示：</p>
-<div class="highlight"><pre><span></span>127.0.0.1 - - [21/Oct/2003:05:37:21 -0500] &quot;GET /index.jsp?%2Findex.jsp= HTTP/1.1&quot; 200 8343
+<div class="highlight"><pre><span></span><span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">-</span> <span class="o">-</span> <span class="p">[</span><span class="mi">21</span><span class="o">/</span><span class="n">Oct</span><span class="o">/</span><span class="mi">2003</span><span class="p">:</span><span class="mi">05</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">21</span> <span class="o">-</span><span class="mi">0500</span><span class="p">]</span> <span class="ss">&quot;GET /index.jsp?%2Findex.jsp= HTTP/1.1&quot;</span> <span class="mi">200</span> <span class="mi">8343</span>
 </pre></div>
 
 
@@ -1348,13 +1348,13 @@ C_2=第3列，第2行
 <li><code>org.apache.jmeter.protocol.http.util.accesslog.Generator</code></li>
 </ul>
 <p>AccessLogSampler的当前实现使用生成器来创建新的HTTP取样器。服务器名称，端口和获取图像由AccessLogSampler设置。然后，使用整数<code>1</code>调用解析器，告诉它解析1个条目。之后，调用<code>HTTPSampler.sample()</code>来发出请求。</p>
-<div class="highlight"><pre><span></span>samp = (HTTPSampler) GENERATOR.generateRequest();
-samp.setDomain(this.getDomain());
-samp.setPort(this.getPort());
-samp.setImageParser(this.isImageParser());
-PARSER.parse(1);
-res = samp.sample();
-res.setSampleLabel(samp.toString());
+<div class="highlight"><pre><span></span><span class="n">samp</span> <span class="o">=</span> <span class="p">(</span><span class="n">HTTPSampler</span><span class="p">)</span> <span class="n">GENERATOR</span><span class="p">.</span><span class="n">generateRequest</span><span class="p">();</span>
+<span class="n">samp</span><span class="p">.</span><span class="n">setDomain</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">getDomain</span><span class="p">());</span>
+<span class="n">samp</span><span class="p">.</span><span class="n">setPort</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">getPort</span><span class="p">());</span>
+<span class="n">samp</span><span class="p">.</span><span class="n">setImageParser</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">isImageParser</span><span class="p">());</span>
+<span class="n">PARSER</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">samp</span><span class="p">.</span><span class="n">sample</span><span class="p">();</span>
+<span class="n">res</span><span class="p">.</span><span class="n">setSampleLabel</span><span class="p">(</span><span class="n">samp</span><span class="p">.</span><span class="n">toString</span><span class="p">());</span>
 </pre></div>
 
 
@@ -1511,18 +1511,18 @@ res.setSampleLabel(samp.toString());
 </li>
 <li>
 <p><code>vars</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeter变量</a> - 例如：</p>
-<div class="highlight"><pre><span></span>vars.get(&quot;VAR1&quot;);
-vars.put(&quot;VAR2&quot;,&quot;value&quot;);
-vars.remove(&quot;VAR3&quot;);
-vars.putObject(&quot;OBJ1&quot;,new Object());
+<div class="highlight"><pre><span></span><span class="n">vars</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;VAR1&quot;</span><span class="p">);</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="ss">&quot;VAR2&quot;</span><span class="p">,</span><span class="ss">&quot;value&quot;</span><span class="p">);</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="ss">&quot;VAR3&quot;</span><span class="p">);</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">putObject</span><span class="p">(</span><span class="ss">&quot;OBJ1&quot;</span><span class="p">,</span><span class="k">new</span> <span class="k">Object</span><span class="p">());</span>
 </pre></div>
 
 
 </li>
 <li>
 <p><code>props</code> - JMeter属性（<code>java.util.Properties</code>类） - 例如：</p>
-<div class="highlight"><pre><span></span>props.get(&quot;START.HMS&quot;);
-props.put(&quot;PROP1&quot;,&quot;1234&quot;);
+<div class="highlight"><pre><span></span><span class="n">props</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;START.HMS&quot;</span><span class="p">);</span>
+<span class="n">props</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="ss">&quot;PROP1&quot;</span><span class="p">,</span><span class="ss">&quot;1234&quot;</span><span class="p">);</span>
 </pre></div>
 
 
@@ -1536,20 +1536,20 @@ props.put(&quot;PROP1&quot;,&quot;1234&quot;);
 </ul>
 <p>SampleResult和ResponseData根据脚本的返回值来设置。如果脚本返回<code>null</code>，则可以使用方法<code>SampleResult.setResponseData(data)</code>直接设置响应，其中data是String或byte数组。data类型默认为“<code>text</code>”，但可以通过<code>SampleResult.setDataType(SampleResult.BINARY)</code>方法设置为二进制值 。</p>
 <p><code>SampleResult</code>变量给予脚本对<code>SampleResult</code>内所有字段和方法完全的访问权限。例如，脚本可以访问<code>setStopThread(boolean)</code>和<code>setStopTest(boolean)</code>方法。这是一个简单的（不是很有用）示例脚本：</p>
-<div class="highlight"><pre><span></span>if (bsh.args[0].equalsIgnoreCase(&quot;StopThread&quot;)) {
-    log.info(&quot;Stop Thread detected!&quot;);
-    SampleResult.setStopThread(true);
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="ss">(</span><span class="nv">bsh</span>.<span class="nv">args</span>[<span class="mi">0</span>].<span class="nv">equalsIgnoreCase</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">StopThread</span><span class="s2">&quot;</span><span class="ss">))</span> {
+    <span class="nv">log</span>.<span class="nv">info</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Stop Thread detected!</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
+    <span class="nv">SampleResult</span>.<span class="nv">setStopThread</span><span class="ss">(</span><span class="nv">true</span><span class="ss">)</span><span class="c1">;</span>
 }
-return &quot;Data from sample with Label &quot;+Label;
-//or
-SampleResult.setResponseData(&quot;My data&quot;);
-return null;
+<span class="k">return</span> <span class="s2">&quot;</span><span class="s">Data from sample with Label </span><span class="s2">&quot;</span><span class="o">+</span><span class="nv">Label</span><span class="c1">;</span>
+<span class="o">//</span><span class="nv">or</span>
+<span class="nv">SampleResult</span>.<span class="nv">setResponseData</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">My data</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
+<span class="k">return</span> <span class="nv">null</span><span class="c1">;</span>
 </pre></div>
 
 
 <p>另一个例子：
 确保在<code>jmeter.properties</code>中定义属性<code>beanshell.sampler.init=BeanShellSampler.bshrc</code>。以下脚本将显示<code>ResponseData</code>字段中所有变量的值： </p>
-<div class="highlight"><pre><span></span>return getVariables();
+<div class="highlight"><pre><span></span><span class="k">return</span> <span class="nv">getVariables</span><span class="ss">()</span><span class="c1">;</span>
 </pre></div>
 
 
@@ -1559,7 +1559,7 @@ return null;
 <p>JSR223取样器允许使用JSR223脚本代码来执行一个样本或创建/更新变量所需的一些计算。</p>
 <blockquote>
 <p>如果您不想在运行此取样器时生成<a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html">SampleResult</a>，请调用以下方法：</p>
-<div class="highlight"><pre><span></span>   SampleResult.setIgnore();
+<div class="highlight"><pre><span></span>   <span class="n">SampleResult</span><span class="p">.</span><span class="n">setIgnore</span><span class="p">();</span>
 </pre></div>
 
 
@@ -1584,7 +1584,7 @@ return null;
 </li>
 </ul>
 <p>缓存大小由以下JMeter属性（<code>jmeter.properties</code>）控制：</p>
-<div class="highlight"><pre><span></span>jsr223.compiled_scripts_cache_size=100
+<div class="highlight"><pre><span></span><span class="n">jsr223</span><span class="p">.</span><span class="n">compiled_scripts_cache_size</span><span class="o">=</span><span class="mi">100</span>
 </pre></div>
 
 
@@ -1596,8 +1596,8 @@ return null;
 <em>JSR223取样器控制面板的截图</em></p>
 <blockquote>
 <p>在将脚本字段传递给解释器之前，JMeter处理函数和变量的引用，因此引用只会被解析一次。脚本文件中的变量和函数引用将逐字传递给解释器，这可能会导致语法错误。为了使用运行时变量，请使用适当的props方法，例如</p>
-<div class="highlight"><pre><span></span> props.get(&quot;START.HMS&quot;);
- props.put(&quot;PROP1&quot;,&quot;1234&quot;);
+<div class="highlight"><pre><span></span> <span class="n">props</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;START.HMS&quot;</span><span class="p">);</span>
+ <span class="n">props</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="ss">&quot;PROP1&quot;</span><span class="p">,</span><span class="ss">&quot;1234&quot;</span><span class="p">);</span>
 </pre></div>
 
 
@@ -1673,18 +1673,18 @@ return null;
 </li>
 <li>
 <p><code>vars</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeter变量</a> - 例如：</p>
-<div class="highlight"><pre><span></span>vars.get(&quot;VAR1&quot;);
-vars.put(&quot;VAR2&quot;,&quot;value&quot;);
-vars.remove(&quot;VAR3&quot;);
-vars.putObject(&quot;OBJ1&quot;,new Object());
+<div class="highlight"><pre><span></span><span class="n">vars</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;VAR1&quot;</span><span class="p">);</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="ss">&quot;VAR2&quot;</span><span class="p">,</span><span class="ss">&quot;value&quot;</span><span class="p">);</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="ss">&quot;VAR3&quot;</span><span class="p">);</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">putObject</span><span class="p">(</span><span class="ss">&quot;OBJ1&quot;</span><span class="p">,</span><span class="k">new</span> <span class="k">Object</span><span class="p">());</span>
 </pre></div>
 
 
 </li>
 <li>
 <p><code>props</code> - JMeter属性（<code>java.util.Properties</code>类） - 例如：</p>
-<div class="highlight"><pre><span></span>props.get(&quot;START.HMS&quot;);
-props.put(&quot;PROP1&quot;,&quot;1234&quot;);
+<div class="highlight"><pre><span></span><span class="n">props</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;START.HMS&quot;</span><span class="p">);</span>
+<span class="n">props</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="ss">&quot;PROP1&quot;</span><span class="p">,</span><span class="ss">&quot;1234&quot;</span><span class="p">);</span>
 </pre></div>
 
 
@@ -1969,8 +1969,8 @@ props.put(&quot;PROP1&quot;,&quot;1234&quot;);
 <li>对象字符串值</li>
 </ul>
 <p><code>valueOf(String)</code></p>
-<div class="highlight"><pre><span></span>name,String,Example
-size,Integer,1234
+<div class="highlight"><pre><span></span><span class="n">name</span><span class="p">,</span><span class="n">String</span><span class="p">,</span><span class="n">Example</span>
+<span class="k">size</span><span class="p">,</span><span class="nb">Integer</span><span class="p">,</span><span class="mi">1234</span>
 </pre></div>
 
 
@@ -2267,18 +2267,18 @@ size,Integer,1234
 <blockquote>
 <p><h4>JUnit构造函数</h4></p>
 <p>空构造函数：</p>
-<div class="highlight"><pre><span></span>    public class myTestCase {
-      public myTestCase() {}
-    }
+<div class="highlight"><pre><span></span>    <span class="k">public</span> <span class="k">class</span> <span class="n">myTestCase</span> <span class="err">{</span>
+      <span class="k">public</span> <span class="n">myTestCase</span><span class="p">()</span> <span class="err">{}</span>
+    <span class="err">}</span>
 </pre></div>
 
 
 <p>字符串构造函数：</p>
-<div class="highlight"><pre><span></span>    public class myTestCase {
-      public myTestCase(String text) {
-          super(text);
-      }
-    }
+<div class="highlight"><pre><span></span>    <span class="k">public</span> <span class="k">class</span> <span class="n">myTestCase</span> <span class="err">{</span>
+      <span class="k">public</span> <span class="n">myTestCase</span><span class="p">(</span><span class="n">String</span> <span class="nb">text</span><span class="p">)</span> <span class="err">{</span>
+          <span class="n">super</span><span class="p">(</span><span class="nb">text</span><span class="p">);</span>
+      <span class="err">}</span>
+    <span class="err">}</span>
 </pre></div>
 
 
@@ -3434,7 +3434,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <p>测试计划片段由控制器和其中包含的所有测试元件（取样器等）组成。片段可以位于任何线程组中。如果片段位于线程组中，则可以禁用其控制器以防止片段在模块控制器以外运行。或者，您可以将片段存储在虚拟线程组中，并禁用整个线程组。</p>
 <p>可以有多个片段，每个片段下面都有不同系列的取样器。然后，只需在模块控制器的下拉框中选择适当的控制器即可在这些多个测试用例之间轻松切换。这为快速轻松地运行许多备用测试计划提供了便利。</p>
 <p>片段名称由控制器名称及其所有父名称组成。例如：</p>
-<div class="highlight"><pre><span></span>Test Plan / Protocol: JDBC / Control / Interleave Controller (Module1)
+<div class="highlight"><pre><span></span><span class="n">Test</span> <span class="n">Plan</span> <span class="o">/</span> <span class="n">Protocol</span><span class="p">:</span> <span class="n">JDBC</span> <span class="o">/</span> <span class="n">Control</span> <span class="o">/</span> <span class="n">Interleave</span> <span class="n">Controller</span> <span class="p">(</span><span class="n">Module1</span><span class="p">)</span>
 </pre></div>
 
 
@@ -4124,9 +4124,9 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </li>
 <li>
 <p><code>vars</code> - (<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeter变量</a>) - 提供对变量的读/写访问：</p>
-<div class="highlight"><pre><span></span>    vars.get(key);
-    vars.put(key,val);
-    vars.putObject(&quot;OBJ1&quot;,new Object());
+<div class="highlight"><pre><span></span>    <span class="n">vars</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="k">key</span><span class="p">);</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">putObject</span><span class="p">(</span><span class="ss">&quot;OBJ1&quot;</span><span class="p">,</span><span class="k">new</span> <span class="k">Object</span><span class="p">());</span>
 </pre></div>
 
 
@@ -4308,10 +4308,10 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <li>
 <p><code>vars</code></p>
 <p>（<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a>） - 提供对变量的读/写访问权限：</p>
-<div class="highlight"><pre><span></span>vars.get(key);
-vars.put(key,val);
-vars.putObject(&quot;OBJ1&quot;,new Object());
-vars.getObject(&quot;OBJ2&quot;);
+<div class="highlight"><pre><span></span><span class="n">vars</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="k">key</span><span class="p">);</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">putObject</span><span class="p">(</span><span class="ss">&quot;OBJ1&quot;</span><span class="p">,</span><span class="k">new</span> <span class="k">Object</span><span class="p">());</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="ss">&quot;OBJ2&quot;</span><span class="p">);</span>
 </pre></div>
 
 
@@ -4341,43 +4341,43 @@ vars.getObject(&quot;OBJ2&quot;);
 <p><a href="#toc">【返回目录】</a></p>
 <h3 id="_25">生成概要结果</h3>
 <p>该测试元件可以放置在测试计划的任何位置。生成到目前为止测试运行的摘要到日志文件和/或标准输出。显示运行和差异总计。在适当的时间边界上每<code>n</code>秒（默认为30秒）生成输出，以便同步多个同时运行的测试。有关汇总器配置项，请参阅<code>jmeter.properties</code>文件：</p>
-<div class="highlight"><pre><span></span># Define the following property to automatically start a summariser with that name
-# (applies to CLI mode only)
-#summariser.name=summary
-#
-# interval between summaries (in seconds) default 3 minutes
-#summariser.interval=30
-#
-# Write messages to log file
-#summariser.log=true
-#
-# Write messages to System.out
-#summariser.out=true
+<div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">Define</span> <span class="n">the</span> <span class="n">following</span> <span class="n">property</span> <span class="k">to</span> <span class="n">automatically</span> <span class="k">start</span> <span class="n">a</span> <span class="n">summariser</span> <span class="k">with</span> <span class="n">that</span> <span class="n">name</span>
+<span class="o">#</span> <span class="p">(</span><span class="n">applies</span> <span class="k">to</span> <span class="n">CLI</span> <span class="k">mode</span> <span class="k">only</span><span class="p">)</span>
+<span class="o">#</span><span class="n">summariser</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="n">summary</span>
+<span class="o">#</span>
+<span class="o">#</span> <span class="nb">interval</span> <span class="k">between</span> <span class="n">summaries</span> <span class="p">(</span><span class="k">in</span> <span class="n">seconds</span><span class="p">)</span> <span class="k">default</span> <span class="mi">3</span> <span class="n">minutes</span>
+<span class="o">#</span><span class="n">summariser</span><span class="p">.</span><span class="nb">interval</span><span class="o">=</span><span class="mi">30</span>
+<span class="o">#</span>
+<span class="o">#</span> <span class="k">Write</span> <span class="n">messages</span> <span class="k">to</span> <span class="n">log</span> <span class="n">file</span>
+<span class="o">#</span><span class="n">summariser</span><span class="p">.</span><span class="n">log</span><span class="o">=</span><span class="k">true</span>
+<span class="o">#</span>
+<span class="o">#</span> <span class="k">Write</span> <span class="n">messages</span> <span class="k">to</span> <span class="k">System</span><span class="p">.</span><span class="k">out</span>
+<span class="o">#</span><span class="n">summariser</span><span class="p">.</span><span class="k">out</span><span class="o">=</span><span class="k">true</span>
 </pre></div>
 
 
 <p>该元件主要用于批处理（CLI）运行。输出如下所示：</p>
-<div class="highlight"><pre><span></span>label +     16 in 0:00:12 =    1.3/s Avg:  1608 Min:  1163 Max:  2009 Err:     0 (0.00%) Active: 5 Started: 5 Finished: 0
-label +     82 in 0:00:30 =    2.7/s Avg:  1518 Min:  1003 Max:  2020 Err:     0 (0.00%) Active: 5 Started: 5 Finished: 0
-label =     98 in 0:00:42 =    2.3/s Avg:  1533 Min:  1003 Max:  2020 Err:     0 (0.00%)
-label +     85 in 0:00:30 =    2.8/s Avg:  1505 Min:  1008 Max:  2005 Err:     0 (0.00%) Active: 5 Started: 5 Finished: 0
-label =    183 in 0:01:13 =    2.5/s Avg:  1520 Min:  1003 Max:  2020 Err:     0 (0.00%)
-label +     79 in 0:00:30 =    2.7/s Avg:  1578 Min:  1089 Max:  2012 Err:     0 (0.00%) Active: 5 Started: 5 Finished: 0
-label =    262 in 0:01:43 =    2.6/s Avg:  1538 Min:  1003 Max:  2020 Err:     0 (0.00%)
-label +     80 in 0:00:30 =    2.7/s Avg:  1531 Min:  1013 Max:  2014 Err:     0 (0.00%) Active: 5 Started: 5 Finished: 0
-label =    342 in 0:02:12 =    2.6/s Avg:  1536 Min:  1003 Max:  2020 Err:     0 (0.00%)
-label +     83 in 0:00:31 =    2.7/s Avg:  1512 Min:  1003 Max:  1982 Err:     0 (0.00%) Active: 5 Started: 5 Finished: 0
-label =    425 in 0:02:43 =    2.6/s Avg:  1531 Min:  1003 Max:  2020 Err:     0 (0.00%)
-label +     83 in 0:00:29 =    2.8/s Avg:  1487 Min:  1023 Max:  2013 Err:     0 (0.00%) Active: 5 Started: 5 Finished: 0
-label =    508 in 0:03:12 =    2.6/s Avg:  1524 Min:  1003 Max:  2020 Err:     0 (0.00%)
-label +     78 in 0:00:30 =    2.6/s Avg:  1594 Min:  1013 Max:  2016 Err:     0 (0.00%) Active: 5 Started: 5 Finished: 0
-label =    586 in 0:03:43 =    2.6/s Avg:  1533 Min:  1003 Max:  2020 Err:     0 (0.00%)
-label +     80 in 0:00:30 =    2.7/s Avg:  1516 Min:  1013 Max:  2005 Err:     0 (0.00%) Active: 5 Started: 5 Finished: 0
-label =    666 in 0:04:12 =    2.6/s Avg:  1531 Min:  1003 Max:  2020 Err:     0 (0.00%)
-label +     86 in 0:00:30 =    2.9/s Avg:  1449 Min:  1004 Max:  2017 Err:     0 (0.00%) Active: 5 Started: 5 Finished: 0
-label =    752 in 0:04:43 =    2.7/s Avg:  1522 Min:  1003 Max:  2020 Err:     0 (0.00%)
-label +     65 in 0:00:24 =    2.7/s Avg:  1579 Min:  1007 Max:  2003 Err:     0 (0.00%) Active: 0 Started: 5 Finished: 5
-label =    817 in 0:05:07 =    2.7/s Avg:  1526 Min:  1003 Max:  2020 Err:     0 (0.00%)
+<div class="highlight"><pre><span></span><span class="n">label</span> <span class="o">+</span>     <span class="mi">16</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">12</span> <span class="o">=</span>    <span class="mi">1</span><span class="p">.</span><span class="mi">3</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1608</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1163</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2009</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span> <span class="n">Active</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Started</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Finished</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">label</span> <span class="o">+</span>     <span class="mi">82</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">30</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">7</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1518</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1003</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2020</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span> <span class="n">Active</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Started</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Finished</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">label</span> <span class="o">=</span>     <span class="mi">98</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">42</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1533</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1003</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2020</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span>
+<span class="n">label</span> <span class="o">+</span>     <span class="mi">85</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">30</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">8</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1505</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1008</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2005</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span> <span class="n">Active</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Started</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Finished</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">label</span> <span class="o">=</span>    <span class="mi">183</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">13</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1520</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1003</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2020</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span>
+<span class="n">label</span> <span class="o">+</span>     <span class="mi">79</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">30</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">7</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1578</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1089</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2012</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span> <span class="n">Active</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Started</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Finished</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">label</span> <span class="o">=</span>    <span class="mi">262</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">43</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">6</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1538</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1003</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2020</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span>
+<span class="n">label</span> <span class="o">+</span>     <span class="mi">80</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">30</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">7</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1531</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1013</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2014</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span> <span class="n">Active</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Started</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Finished</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">label</span> <span class="o">=</span>    <span class="mi">342</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="mi">12</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">6</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1536</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1003</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2020</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span>
+<span class="n">label</span> <span class="o">+</span>     <span class="mi">83</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">31</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">7</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1512</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1003</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">1982</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span> <span class="n">Active</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Started</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Finished</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">label</span> <span class="o">=</span>    <span class="mi">425</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="mi">43</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">6</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1531</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1003</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2020</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span>
+<span class="n">label</span> <span class="o">+</span>     <span class="mi">83</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">29</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">8</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1487</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1023</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2013</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span> <span class="n">Active</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Started</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Finished</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">label</span> <span class="o">=</span>    <span class="mi">508</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">12</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">6</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1524</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1003</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2020</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span>
+<span class="n">label</span> <span class="o">+</span>     <span class="mi">78</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">30</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">6</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1594</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1013</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2016</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span> <span class="n">Active</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Started</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Finished</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">label</span> <span class="o">=</span>    <span class="mi">586</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">43</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">6</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1533</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1003</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2020</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span>
+<span class="n">label</span> <span class="o">+</span>     <span class="mi">80</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">30</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">7</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1516</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1013</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2005</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span> <span class="n">Active</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Started</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Finished</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">label</span> <span class="o">=</span>    <span class="mi">666</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">04</span><span class="p">:</span><span class="mi">12</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">6</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1531</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1003</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2020</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span>
+<span class="n">label</span> <span class="o">+</span>     <span class="mi">86</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">30</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1449</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1004</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2017</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span> <span class="n">Active</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Started</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Finished</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">label</span> <span class="o">=</span>    <span class="mi">752</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">04</span><span class="p">:</span><span class="mi">43</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">7</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1522</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1003</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2020</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span>
+<span class="n">label</span> <span class="o">+</span>     <span class="mi">65</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">24</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">7</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1579</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1007</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2003</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span> <span class="n">Active</span><span class="p">:</span> <span class="mi">0</span> <span class="n">Started</span><span class="p">:</span> <span class="mi">5</span> <span class="n">Finished</span><span class="p">:</span> <span class="mi">5</span>
+<span class="n">label</span> <span class="o">=</span>    <span class="mi">817</span> <span class="k">in</span> <span class="mi">0</span><span class="p">:</span><span class="mi">05</span><span class="p">:</span><span class="mi">07</span> <span class="o">=</span>    <span class="mi">2</span><span class="p">.</span><span class="mi">7</span><span class="o">/</span><span class="n">s</span> <span class="k">Avg</span><span class="p">:</span>  <span class="mi">1526</span> <span class="k">Min</span><span class="p">:</span>  <span class="mi">1003</span> <span class="k">Max</span><span class="p">:</span>  <span class="mi">2020</span> <span class="n">Err</span><span class="p">:</span>     <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="o">%</span><span class="p">)</span>
 </pre></div>
 
 
@@ -4597,10 +4597,10 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <p>CSV 数据文件设置用于从文件中读取行，并将它们拆分为变量。它比<a href="http://jmeter.apache.org/usermanual/functions.html#__CSVRead">__CSVRead()</a>和<strong><a href="http://jmeter.apache.org/usermanual/functions.html#__StringFromFile">__StringFromFile()</a></strong>函数更容易使用。它非常适合处理大量变量，对于使用“随机”和唯一值进行测试也很有用。</p>
 <p>在运行时生成唯一的随机值在CPU和内存消耗方面是很大的，因此最好在测试之前创建数据。如有必要，文件中的“随机”数据可以与运行时参数一起使用，以便在每次运行中创建不同的值集 - 例如使用级联 - 这比在运行时生成所有内容消耗的资源小得多。</p>
 <p>JMeter允许引用值；这允许值包含分隔符。如果启用“<code>是否允许带引号</code>”，则可以用双引号括起值。双引号在引用时会被删除。要在引用字段中包含双引号，请使用两个双引号。例如：</p>
-<div class="highlight"><pre><span></span>1,&quot;2,3&quot;,&quot;4&quot;&quot;5&quot; =&gt;
-1
-2,3
-4&quot;5
+<div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">,</span><span class="ss">&quot;2,3&quot;</span><span class="p">,</span><span class="ss">&quot;4&quot;&quot;5&quot;</span> <span class="o">=&gt;</span>
+<span class="mi">1</span>
+<span class="mi">2</span><span class="p">,</span><span class="mi">3</span>
+<span class="mi">4</span><span class="err">&quot;</span><span class="mi">5</span>
 </pre></div>
 
 
@@ -6004,17 +6004,17 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </li>
 <li>
 <p><code>vars</code> - <a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a> - 例如</p>
-<div class="highlight"><pre><span></span>    vars.get(&quot;VAR1&quot;);
-        vars.put(&quot;VAR2&quot;,&quot;value&quot;);
-        vars.putObject(&quot;OBJ1&quot;,new Object());
+<div class="highlight"><pre><span></span>    <span class="n">vars</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;VAR1&quot;</span><span class="p">);</span>
+        <span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="ss">&quot;VAR2&quot;</span><span class="p">,</span><span class="ss">&quot;value&quot;</span><span class="p">);</span>
+        <span class="n">vars</span><span class="p">.</span><span class="n">putObject</span><span class="p">(</span><span class="ss">&quot;OBJ1&quot;</span><span class="p">,</span><span class="k">new</span> <span class="k">Object</span><span class="p">());</span>
 </pre></div>
 
 
 </li>
 <li>
 <p><code>props</code> - JMeterProperties（<code>java.util.Properties</code>类） - 例如</p>
-<div class="highlight"><pre><span></span>    props.get(&quot;START.HMS&quot;);
-        props.put(&quot;PROP1&quot;,&quot;1234&quot;);
+<div class="highlight"><pre><span></span>    <span class="n">props</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;START.HMS&quot;</span><span class="p">);</span>
+        <span class="n">props</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="ss">&quot;PROP1&quot;</span><span class="p">,</span><span class="ss">&quot;1234&quot;</span><span class="p">);</span>
 </pre></div>
 
 
@@ -6190,16 +6190,16 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <ul>
 <li>
 <p>提供一个属性文件（例如，如果您的文件名为namespaces.properties），其中包含名称空间前缀的映射：</p>
-<div class="highlight"><pre><span></span>    prefix1=http\://foo.apache.org
-        prefix2=http\://toto.apache.org
-    …
+<div class="highlight"><pre><span></span>    <span class="n">prefix1</span><span class="o">=</span><span class="n">http</span><span class="err">\</span><span class="p">:</span><span class="o">//</span><span class="n">foo</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">org</span>
+        <span class="n">prefix2</span><span class="o">=</span><span class="n">http</span><span class="err">\</span><span class="p">:</span><span class="o">//</span><span class="n">toto</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">org</span>
+    <span class="err">…</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>使用如下属性在<code>user.properties</code>文件中引用此文件：</p>
-<div class="highlight"><pre><span></span>    xpath.namespace.config=namespaces.properties
+<div class="highlight"><pre><span></span>    <span class="n">xpath</span><span class="p">.</span><span class="n">namespace</span><span class="p">.</span><span class="n">config</span><span class="o">=</span><span class="n">namespaces</span><span class="p">.</span><span class="n">properties</span>
 </pre></div>
 
 
@@ -6300,18 +6300,18 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </li>
 <li>
 <p><code>vars</code> - （<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a>） - 提供对变量的读/写访问：</p>
-<div class="highlight"><pre><span></span>    vars.get(key);
-    vars.put(key,val);
-    vars.putObject(&quot;OBJ1&quot;,new Object());
-    vars.getObject(&quot;OBJ2&quot;);
+<div class="highlight"><pre><span></span>    <span class="n">vars</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="k">key</span><span class="p">);</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">putObject</span><span class="p">(</span><span class="ss">&quot;OBJ1&quot;</span><span class="p">,</span><span class="k">new</span> <span class="k">Object</span><span class="p">());</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="ss">&quot;OBJ2&quot;</span><span class="p">);</span>
 </pre></div>
 
 
 </li>
 <li>
 <p><code>props</code> - （JMeterProperties - <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html">java.util.Properties</a>类） - 例如</p>
-<div class="highlight"><pre><span></span>    props.get(&quot;START.HMS&quot;);
-        props.put(&quot;PROP1&quot;,&quot;1234&quot;);
+<div class="highlight"><pre><span></span>    <span class="n">props</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;START.HMS&quot;</span><span class="p">);</span>
+        <span class="n">props</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="ss">&quot;PROP1&quot;</span><span class="p">,</span><span class="ss">&quot;1234&quot;</span><span class="p">);</span>
 </pre></div>
 
 
@@ -6834,9 +6834,9 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </li>
 <li>
 <p><code>vars</code> - (<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a>) - 提供对变量的读/写访问：</p>
-<div class="highlight"><pre><span></span>    vars.get(key);
-    vars.put(key,val);
-    vars.putObject(&quot;OBJ1&quot;,new Object());
+<div class="highlight"><pre><span></span>    <span class="n">vars</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="k">key</span><span class="p">);</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">putObject</span><span class="p">(</span><span class="ss">&quot;OBJ1&quot;</span><span class="p">,</span><span class="k">new</span> <span class="k">Object</span><span class="p">());</span>
 </pre></div>
 
 
@@ -6905,9 +6905,9 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </li>
 <li>
 <p><code>vars</code> - （<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a>） - 提供对变量的读/写访问权限：</p>
-<div class="highlight"><pre><span></span>    vars.get(key);
-    vars.put(key,val);
-    vars.putObject(&quot;OBJ1&quot;,new Object());
+<div class="highlight"><pre><span></span>    <span class="n">vars</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="k">key</span><span class="p">);</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">putObject</span><span class="p">(</span><span class="ss">&quot;OBJ1&quot;</span><span class="p">,</span><span class="k">new</span> <span class="k">Object</span><span class="p">());</span>
 </pre></div>
 
 
@@ -7125,9 +7125,9 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </li>
 <li>
 <p><code>vars</code> - (<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a>) - 提供对变量的读/写访问：</p>
-<div class="highlight"><pre><span></span>    vars.get(key);
-    vars.put(key,val);
-    vars.putObject(&quot;OBJ1&quot;,new Object());
+<div class="highlight"><pre><span></span>    <span class="n">vars</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="k">key</span><span class="p">);</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">putObject</span><span class="p">(</span><span class="ss">&quot;OBJ1&quot;</span><span class="p">,</span><span class="k">new</span> <span class="k">Object</span><span class="p">());</span>
 </pre></div>
 
 
@@ -7211,10 +7211,10 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </li>
 <li>
 <p><code>vars</code> - （<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a>） - 提供对变量的读/写访问权限：</p>
-<div class="highlight"><pre><span></span>vars.get(key);
-vars.put(key,val);
-vars.putObject(&quot;OBJ1&quot;,new Object());
-vars.getObject(&quot;OBJ2&quot;);
+<div class="highlight"><pre><span></span><span class="n">vars</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="k">key</span><span class="p">);</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">putObject</span><span class="p">(</span><span class="ss">&quot;OBJ1&quot;</span><span class="p">,</span><span class="k">new</span> <span class="k">Object</span><span class="p">());</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="ss">&quot;OBJ2&quot;</span><span class="p">);</span>
 </pre></div>
 
 
@@ -7708,25 +7708,25 @@ AJP，BeanShell，FTP，HTTP，Soap，AccessLog，邮件阅读者，JMS订阅，
 <ul>
 <li>
 <p>提供一个属性文件（例如，如果您的文件名为namespaces.properties），其中包含名称空间前缀的映射：</p>
-<div class="highlight"><pre><span></span> prefix1=http\://foo.apache.org
- prefix2=http\://toto.apache.org
- …
+<div class="highlight"><pre><span></span> <span class="n">prefix1</span><span class="o">=</span><span class="n">http</span><span class="err">\</span><span class="p">:</span><span class="o">//</span><span class="n">foo</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">org</span>
+ <span class="n">prefix2</span><span class="o">=</span><span class="n">http</span><span class="err">\</span><span class="p">:</span><span class="o">//</span><span class="n">toto</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">org</span>
+ <span class="err">…</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>通过在<code>user.properties</code>文件中引用此文件来使用属性：</p>
-<div class="highlight"><pre><span></span> xpath.namespace.config=namespaces.properties
+<div class="highlight"><pre><span></span> <span class="n">xpath</span><span class="p">.</span><span class="n">namespace</span><span class="p">.</span><span class="n">config</span><span class="o">=</span><span class="n">namespaces</span><span class="p">.</span><span class="n">properties</span>
 </pre></div>
 
 
 </li>
 </ul>
 </blockquote>
-<div class="highlight"><pre><span></span>//mynamespace:tagname
+<div class="highlight"><pre><span></span><span class="o">//</span><span class="nv">mynamespace</span>:<span class="nv">tagname</span>
 
-//*[local-name()=&#39;tagname&#39; and namespace-uri()=&#39;uri-for-namespace&#39;]
+<span class="o">//*</span>[<span class="nv">local</span><span class="o">-</span><span class="nv">name</span><span class="ss">()</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">tagname</span><span class="s1">&#39;</span> <span class="nv">and</span> <span class="nv">namespace</span><span class="o">-</span><span class="nv">uri</span><span class="ss">()</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">uri-for-namespace</span><span class="s1">&#39;</span>]
 </pre></div>
 
 
@@ -7816,9 +7816,9 @@ AJP，BeanShell，FTP，HTTP，Soap，AccessLog，邮件阅读者，JMS订阅，
 </li>
 <li>
 <p><code>vars</code> - (<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a>) - 提供对变量的读/写访问：</p>
-<div class="highlight"><pre><span></span>    vars.get(key);
-    vars.put(key,val);
-    vars.putObject(&quot;OBJ1&quot;,new Object());
+<div class="highlight"><pre><span></span>    <span class="n">vars</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="k">key</span><span class="p">);</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">vars</span><span class="p">.</span><span class="n">putObject</span><span class="p">(</span><span class="ss">&quot;OBJ1&quot;</span><span class="p">,</span><span class="k">new</span> <span class="k">Object</span><span class="p">());</span>
 </pre></div>
 
 
@@ -7902,10 +7902,10 @@ AJP，BeanShell，FTP，HTTP，Soap，AccessLog，邮件阅读者，JMS订阅，
 </li>
 <li>
 <p><code>vars</code> - （<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a>） - 提供对变量的读/写访问权限：</p>
-<div class="highlight"><pre><span></span>vars.get(key);
-vars.put(key,val);
-vars.putObject(&quot;OBJ1&quot;,new Object());
-vars.getObject(&quot;OBJ2&quot;);
+<div class="highlight"><pre><span></span><span class="n">vars</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="k">key</span><span class="p">);</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">putObject</span><span class="p">(</span><span class="ss">&quot;OBJ1&quot;</span><span class="p">,</span><span class="k">new</span> <span class="k">Object</span><span class="p">());</span>
+<span class="n">vars</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="ss">&quot;OBJ2&quot;</span><span class="p">);</span>
 </pre></div>
 
 
@@ -8205,10 +8205,10 @@ vars.getObject(&quot;OBJ2&quot;);
 <ul>
 <li>
 <p>浏览器应显示一个对话框，询问您是否要接受证书。例如：</p>
-<div class="highlight"><pre><span></span>    1）服务器名称“www.example.com”与证书名称不匹配
-       “JMeter Proxy (DO NOT TRUST)”。有人可能会试图窃听你。
-    2）“JMeter Proxy (DO NOT TRUST)”的证书由未知证书颁发机构签署
-       “JMeter Proxy (DO NOT TRUST)”。无法验证这是否是有效证书。
+<div class="highlight"><pre><span></span>    <span class="mi">1</span>）服务器名称“<span class="nv">www</span>.<span class="nv">example</span>.<span class="nv">com</span>”与证书名称不匹配
+       “<span class="nv">JMeter</span> <span class="nv">Proxy</span> <span class="ss">(</span><span class="k">DO</span> <span class="nv">NOT</span> <span class="nv">TRUST</span><span class="ss">)</span>”。有人可能会试图窃听你。
+    <span class="mi">2</span>）“<span class="nv">JMeter</span> <span class="nv">Proxy</span> <span class="ss">(</span><span class="k">DO</span> <span class="nv">NOT</span> <span class="nv">TRUST</span><span class="ss">)</span>”的证书由未知证书颁发机构签署
+       “<span class="nv">JMeter</span> <span class="nv">Proxy</span> <span class="ss">(</span><span class="k">DO</span> <span class="nv">NOT</span> <span class="nv">TRUST</span><span class="ss">)</span>”。无法验证这是否是有效证书。
 </pre></div>
 
 
@@ -8414,12 +8414,12 @@ vars.getObject(&quot;OBJ2&quot;);
 <h4>捕获二进制POST数据</h4>
 
 <p>JMeter能够捕获二进制POST数据。要配置将哪些<code>content-types</code>视为二进制，请更新JMeter属性<code>proxy.binary.types</code>。默认设置如下：</p>
-<div class="highlight"><pre><span></span>＃这些content-types将通过将请求保存在文件中来处理：
-proxy.binary.types=application/x-amf,application/x-java-serialized-object
-＃文件将保存在此目录中：
-proxy.binary.directory=user.dir
-＃将使用此文件filesuffix创建文件：
-proxy.binary.filesuffix=.binary
+<div class="highlight"><pre><span></span><span class="err">＃这些</span><span class="n">content</span><span class="o">-</span><span class="n">types将通过将请求保存在文件中来处理</span><span class="err">：</span>
+<span class="n">proxy</span><span class="p">.</span><span class="nb">binary</span><span class="p">.</span><span class="n">types</span><span class="o">=</span><span class="n">application</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">amf</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">java</span><span class="o">-</span><span class="n">serialized</span><span class="o">-</span><span class="k">object</span>
+<span class="err">＃文件将保存在此目录中：</span>
+<span class="n">proxy</span><span class="p">.</span><span class="nb">binary</span><span class="p">.</span><span class="n">directory</span><span class="o">=</span><span class="k">user</span><span class="p">.</span><span class="n">dir</span>
+<span class="err">＃将使用此文件</span><span class="n">filesuffix创建文件</span><span class="err">：</span>
+<span class="n">proxy</span><span class="p">.</span><span class="nb">binary</span><span class="p">.</span><span class="n">filesuffix</span><span class="o">=</span><span class="p">.</span><span class="nb">binary</span>
 </pre></div>
 
 
