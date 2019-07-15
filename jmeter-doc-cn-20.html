@@ -431,7 +431,7 @@
 </tr>
 </tbody>
 </table>
-<h2>20.1 函数可以做什么</h2>
+<h2 id="201">20.1 函数可以做什么</h2>
 <p>JMeter 有两种函数：用户定义的静态值（或变量）和内建函数。<br>
 用户定义的静态值允许用户在编译或者运行测试树时，使用自定义变量来替换静态值。这种替换只在测试运行的开始阶段执行一次。例如，可以用自定义变量来替换所有 HTTP 请求的 DOMAIN 域，这样就使得在不同服务器下执行相同测试的测试变更成为一件简单的事情。</p>
 <p>注意，目前变量不支持嵌套，例如 <code>${Var${N}}</code> 是无效的，但是可以使用函数 <code>__V(variable)</code> 来实现嵌套变量的目的：<code>${__V(Var${N})}</code>。同样可以用 <code>${__BeanShell(vars.get("Var${N}")}</code> 来实现。</p>
@@ -440,7 +440,7 @@
 <blockquote>
 <p>函数被线程共享。在测试计划中每次函数的调用，都由一个单独的函数实例来处理。</p>
 </blockquote>
-<h2>20.2 函数和变量可以用在哪？</h2>
+<h2 id="202">20.2 函数和变量可以用在哪？</h2>
 <p>函数和变量可以用在任何测试元件的任何输入域中（除了测试计划——见下文）。有些输入域只接受数字而不支持字符串，因此它们也不支持函数。然而，大多数输入域还是支持函数的。</p>
 <p>在测试计划中使用函数是有限制的。当函数被调用时，JMeter 线程变量并没有完全初始化，因此变量名称作为参数传递时也没有初始化，变量会引用失败，所以 <code>split()</code> 和 <code>regex()</code> 和变量赋值函数都不能正常工作。<code>threadNum()</code> 函数也不会工作（它在测试计划层也没有意义）。下面是可以在测试计划中使用的的函数：</p>
 <ul>
@@ -470,7 +470,7 @@
 
 <p>（除非 <code>VAR</code> 本身包含引号）</p>
 </blockquote>
-<h2>20.3 如何引用变量和函数</h2>
+<h2 id="203">20.3 如何引用变量和函数</h2>
 <p>在测试元件中引用一个变量可以通过使用 <code>${</code> 和 <code>}</code> 将变量名称括起来实现。</p>
 <p>函数引用的方法相同，但是按照惯例，函数名称以“<code>__</code>”开头来和变量名称区分开。一些函数带参数，参数放在圆括号中，用逗号分隔。如果函数不带参数，可以省略圆括号。</p>
 <p><strong>如果参数本身带逗号，必须将其转义。可以使用‘<code>\,</code>’来转义。</strong> 这适用于例如脚本函数 - Javascript，Beanshell，Jexl，groovy - 有必要对所有脚本函数调用中的逗号加以转义，例如：</p>
@@ -498,13 +498,13 @@
 <blockquote>
 <p>如果用和内建函数同样的名称定义一个用户静态变量，那么定义的静态变量将覆盖同名内建函数。</p>
 </blockquote>
-<h2>20.4 函数助手对话框</h2>
+<h2 id="204">20.4 函数助手对话框</h2>
 <p>函数助手对话框可以在 JMeter 的工具菜单中找到。</p>
 <p><img alt="Function Helper Dialog" src="http://jmeter.apache.org/images/screenshots/function_helper_dialog.png">  </p>
 <p><em>函数助手对话框</em></p>
 <p>使用函数助手，可以从下拉列表中选择一个函数，并给它的参数赋值。表格左列是参数的简要说明，表格的右列填入相应参数的值。不同的函数有不同的参数。</p>
 <p>上述操作完成之后，点击“生成（Generate）”按钮，相应调用函数的字符串就生成了，你可以复制-粘贴到测试计划中的任何地方。</p>
-<h2>20.5 函数</h2>
+<h2 id="205">20.5 函数</h2>
 <h3 id="regexFunction">__regexFunction</h3>
 
 <p>regexFunction 函数可以使用任意正则表达式（用户提供的）来解析之前的服务器响应（或变量值）。函数返回填充了变量值的模版字符串。</p>
@@ -2403,14 +2403,14 @@ i.intValue(); // 或使用 i.longValue()
 
 <p>将返回<code>Omnibus viis romam pervenitur</code></p>
 <p><a href="#functions_list">【返回函数列表】</a></p>
-<h2>20.6 预定义变量</h2>
+<h2 id="206">20.6 预定义变量</h2>
 <p>大多数变量都是通过调用函数或者用户定义的变量等测试元件来设置的；在这种情况下，用户对所使用的变量名称有完整的控制权。但是有些变量是 JMeter 内部定义的。这些在下面列出：</p>
 <ul>
 <li><code>COOKIE_cookiename</code> - 包含 cookie 的值（请参阅 <a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP_Cookie_Manager">HTTP Cookie 管理器</a>）</li>
 <li><code>JMeterThread.last_sample_ok</code> - 不管最后一个采样是否可用 - <code>true/false</code>。注意：它会在后置处理器和断言运行后更新。</li>
 <li><code>START</code> 变量（参见下一节）</li>
 </ul>
-<h2>20.7 预定义属性</h2>
+<h2 id="207">20.7 预定义属性</h2>
 <p>JMeter 属性集是在 JMeter 启动时通过系统属性定义来初始化的；附加的 JMeter 属性在 <code>jmeter.properties</code>，<code>user.properties</code> 或命令行中定义。</p>
 <p>一些内置属性由 JMeter 定义。这些在下面列出。为方便起见，<code>START</code> 属性也被复制到具有相同名称的变量中。</p>
 <ul>

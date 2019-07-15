@@ -264,6 +264,11 @@
 </blockquote>
 <h2 id="samplers">18.1 取样器</h1>
 
+<div class="highlight"><pre><span></span>test
+</pre></div>
+
+
+
 取样器执行JMeter实际的工作。每个取样器（[测试活动](http://jmeter.apache.org/usermanual/component_reference.html#Flow_Control_Action)除外）生成一个或多个样本结果。样本结果具有各种属性（成功/失败，经过时间，数据大小等），并且可以在各种监听器中查看。
 
 <h3 id="FTP_Request">FTP请求</h2>
@@ -767,7 +772,7 @@ C_2=第3列，第2行
 <p>确保变量名称在测试计划中是唯一的。</p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>Java请求</h3>
+<h3 id="java">Java请求</h3>
 <p>此取样器允许您控制实现<code>org.apache.jmeter.protocol.java.sampler.JavaSamplerClient</code>接口的java类  。通过编写您自己的此接口实现，您可以用JMeter来控制多个线程，输入参数控制和数据收集。</p>
 <p>下拉菜单提供了JMeter在其classpath中找到的所有此类实现的列表。可以在下面的表中指定参数 - 由您的实现定义。JMeter提供了两个简单示例（<code>JavaTest</code>和<code>SleepTest</code>）。 </p>
 <p><code>JavaTest</code>示例取样器对检查测试计划非常有用，因为它允许在几乎所有的字段设置值。这些可以被断言等使用。这些字段允许使用变量，因此可以很容易地看到这些变量的值。 </p>
@@ -871,7 +876,7 @@ C_2=第3列，第2行
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>LDAP请求</h3>
+<h3 id="ldap">LDAP请求</h3>
 <p>此取样器允许您向LDAP服务器发送不同的LDAP请求（<code>添加</code>，<code>修改</code>，<code>删除</code>和<code>搜索</code>）。     </p>
 <p>如果要将多个请求发送到同一LDAP服务器，请考虑使用<a href="http://jmeter.apache.org/usermanual/component_reference.html#LDAP_Request_Defaults">LDAP默认请求</a>配置元件，这样您就不必为每个LDAP请求输入相同的信息。</p>
 <p><a href="http://jmeter.apache.org/usermanual/component_reference.html#Login_Config_Element">登录配置元件</a>也使用同样的方法发送用户名和密码。</p>
@@ -1015,7 +1020,7 @@ C_2=第3列，第2行
 <li><a href="http://jmeter.apache.org/usermanual/component_reference.html#LDAP_Request_Defaults">LDAP默认请求</a> </li>
 </ul>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>LDAP扩展请求</h3>
+<h3 id="ldap_1">LDAP扩展请求</h3>
 <p>此取样器可以将所有8个不同的LDAP请求发送到LDAP服务器。它是LDAP取样器的扩展版本，因此配置起来比较困难，但可以更接近真实的LDAP会话。     </p>
 <p>如果要将多个请求发送到同一LDAP服务器，请考虑使用<a href="http://jmeter.apache.org/usermanual/component_reference.html#LDAP_Extended_Request_Defaults">LDAP扩展请求默认值</a>配置元件，这样您就不必为每个LDAP请求输入相同的信息。</p>
 <p><img alt="Screenshot for Control-Panel of LDAP Extended Request" src="http://jmeter.apache.org/images/screenshots/ldapext_request.png"><br>
@@ -1338,7 +1343,7 @@ C_2=第3列，第2行
 <li><a href="http://jmeter.apache.org/usermanual/component_reference.html#LDAP_Extended_Request_Defaults">LDAP扩展请求默认值</a> </li>
 </ul>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>Access Log Sampler</h3>
+<h3 id="access-log-sampler">Access Log Sampler</h3>
 <p>AccessLogSampler旨在读取访问日志并生成http请求。对于那些不熟悉访问日志的人来说，它是Web服务器记录它接受的每个请求的日志。这意味着所有图像，CSS文件，JavaScript文件，html文件，......</p>
 <p>Tomcat的访问日志使用通用格式。这意味着使用通用日志格式的任何Web服务器都可以使用AccessLogSampler。使用通用日志格式的服务器包括：Tomcat，Resin，Weblogic和SunOne。常见的日志格式如下所示：</p>
 <div class="highlight"><pre><span></span>127.0.0.1 - - [21/Oct/2003:05:37:21 -0500] &quot;GET /index.jsp?%2Findex.jsp= HTTP/1.1&quot; 200 8343
@@ -1425,7 +1430,7 @@ res.setSampleLabel(samp.toString());
 <p><code>SessionFilter</code>旨在跨线程处理cookies。它不会过滤掉任何条目，但会修改cookie管理器，以便一次一个线程处理给定IP的cookies。如果两个线程尝试处理来自相同客户端IP地址的样本，则将强制一个线程等待直到另一个线程完成。 </p>
 <p><code>LogFilter</code>旨在允许通过文件名和正则表达式来过滤访问日志条目，以及允许替换文件扩展名。但是，目前无法通过GUI进行配置，因此无法真正使用它。 </p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>BeanShell取样器</h3>
+<h3 id="beanshell">BeanShell取样器</h3>
 <p>此取样器允许您使用BeanShell脚本语言编写取样器。 </p>
 <p><strong>有关使用BeanShell的完整详细信息，请参阅<a href="http://www.beanshell.org/">BeanShell网站</a>。</strong>  </p>
 <blockquote>
@@ -1561,7 +1566,7 @@ return null;
 
 <p>有关各种类可用方法的详细信息（<a href="http://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a>，<a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html">SampleResult</a>等），请查阅Javadoc或源代码。但要注意，滥用任何方法都可能导致难以发现的细微错误。 </p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JRS223取样器</h3>
+<h3 id="jrs223">JRS223取样器</h3>
 <p>JSR223取样器允许使用JSR223脚本代码来执行一个样本或创建/更新变量所需的一些计算。</p>
 <blockquote>
 <p>如果您不想在运行此取样器时生成<a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html">SampleResult</a>，请调用以下方法：</p>
@@ -1708,7 +1713,7 @@ props.put(&quot;PROP1&quot;,&quot;1234&quot;);
 <li><code>SampleResult.setResponseMessage("message")</code></li>
 </ul>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>TCP取样器</h3>
+<h3 id="tcp">TCP取样器</h3>
 <p>TCP取样器打开与指定服务器的TCP/IP连接。然后发送文本，并等待响应。</p>
 <p>如果选中“<code>Re-use connection</code>”，则在同一线程中的取样器之间共享连接，前提是使用完全相同的主机名称和端口。不同的主机/端口组合将使用不同的连接，不同的线程也是如此。如果同时选中“ <code>Re-use connection</code> ”和“<code>Close connection</code>”，则运行取样器后将关闭套接字。在下一个取样器上，将创建另一个套接字。您可能希望在每个线程循环结束时关闭套接字。</p>
 <p>如果检测到错误 - 或未选中“<code>Re-use connection</code>” - 则关闭套接字。下一个样本将打开另一个套接字。</p>
@@ -1762,7 +1767,7 @@ props.put(&quot;PROP1&quot;,&quot;1234&quot;);
 <p><strong>响应处理</strong></p>
 <p>如果定义了<code>tcp.status.prefix</code>，则会在响应消息中从此开始搜索文本，直到后缀结束。如果找到任何此类文本，则用于设置响应代码。然后从属性文件（如果提供）中获取响应消息。</p>
 <blockquote>
-<h4>使用前缀（prefix）和后缀（suffix）</h4>
+<h4 id="prefixsuffix">使用前缀（prefix）和后缀（suffix）</h4>
 <p>例如，如果prefix = “ <code>[</code>“和suffix =“<code>]</code>”，则下面的响应：</p>
 <div class="highlight"><pre><span></span>   [J28] XI123,23,GBP,CR
 </pre></div>
@@ -1862,7 +1867,7 @@ props.put(&quot;PROP1&quot;,&quot;1234&quot;);
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JMS发布</h3>
+<h3 id="jms">JMS发布</h3>
 <p>JMS发布将消息发布到给定目标（主题/队列）。对于那些不熟悉JMS的人来说，它是用于消息传递的J2EE规范。市场上有许多JMS服务器，还有一些是开源的。</p>
 <blockquote>
 <p>JMeter不包含任何JMS实现jar；必须从JMS提供方下载并放入lib目录</p>
@@ -2030,7 +2035,7 @@ size,Integer,1234
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JMS订阅</h3>
+<h3 id="jms_1">JMS订阅</h3>
 <p>JMS订阅将订阅给定目标（主题或队列）中的消息。对于那些不熟悉JMS的人来说，它是用于消息传递的J2EE规范。市场上有许多JMS服务器，还有一些是开源的。</p>
 <blockquote>
 <p>JMeter不包含任何JMS实现jar；必须从JMS提供方下载并放入lib目录</p>
@@ -2150,7 +2155,7 @@ size,Integer,1234
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JMS点到点</h3>
+<h3 id="jms_2">JMS点到点</h3>
 <p>此取样器通过点到点连接（队列）发送并可选地接收JMS消息。与发布/订阅消息不同，它通常用于处理事务。</p>
 <p><code>request_only</code>通常用于对JMS系统产生负载。
 <code>request_reply</code>这个模式将等待此服务发送的回复队列的响应，所以可以用于测试处理发送到请求队列消息的JMS服务的响应时间。<br>
@@ -2261,7 +2266,7 @@ size,Integer,1234
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JUnit请求</h3>
+<h3 id="junit">JUnit请求</h3>
 <p>当前实现支持标准JUnit约定和扩展。它还包括<code>oneTimeSetUp</code>和<code>oneTimeTearDown</code>等扩展。取样器的工作方式与<a href="http://jmeter.apache.org/usermanual/component_reference.html#Java_Request">Java请求</a>类似，但 存在一些差异。</p>
 <ul>
 <li>与使用JMeter的测试接口不同，它会扫描jar文件以寻找扩展JUnit<code>TestCase</code>类的类。这包括任何类或子类。</li>
@@ -2274,7 +2279,7 @@ size,Integer,1234
 </ul>
 <p>取样器的当前实现将尝试首先使用字符串构造函数创建实例。如果测试类没有声明字符串构造函数，则取样器将查找空构造函数。示例如下：</p>
 <blockquote>
-<h4>JUnit构造函数</h4>
+<h4 id="junit_1">JUnit构造函数</h4>
 <p>空构造函数：</p>
 <div class="highlight"><pre><span></span>    public class myTestCase {
       public myTestCase() {}
@@ -2420,7 +2425,7 @@ size,Integer,1234
 <p>注意，当前版本JMeter直接运行测试方法，而不是将其留给JUnit。这是为了可以从采样时间中排除<code>setUp</code>/<code>tearDown</code>方法。因此，取样器时间排除了调用<code>setUp</code>/<code>tearDown</code>方法及基于其注释的替代方法所花费的时间。</p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>邮件阅读者取样器</h3>
+<h3 id="_1">邮件阅读者取样器</h3>
 <p>邮件阅读者取样器可以使用POP3(S)或IMAP(S)协议读取（可选删除）邮件消息。</p>
 <p><img alt="Screenshot for Control-Panel of Mail Reader Sampler" src="http://jmeter.apache.org/images/screenshots/mailreader_sampler.png"><br>
 <em>邮件阅读者取样器控制面板的截图</em></p>
@@ -2533,7 +2538,7 @@ size,Integer,1234
 <p><strong>关于<code>file</code>协议的特殊处理：</strong> 
 JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<code>server</code>字段用于指定路径的父<code>folder</code>。应使用名称<code>n.msg</code>存储单个消息文件，其中<code>n</code>为消息编号。或者，<code>server</code>字段可以是包含单个消息的文件的名称。此实现非常基础，主要用于调试目的。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>测试活动（Flow Control Action）</h3>
+<h3 id="flow-control-action">测试活动（Flow Control Action）</h3>
 <p>测试活动取样器是一个适用于条件控制器的取样器。测试元件不是生成样本，而是暂停或停止所选目标。</p>
 <p>此取样器也可以与事务控制器结合使用，因为它允许包含暂停而无需生成样本。对于可变延迟，将暂停时间设置为零，并将定时器添加为子级。</p>
 <p>完成正在进行的任何样本后 ，“<code>stop</code>”操作将停止线程或测试。“<code>Stop Now</code>”操作将停止测试，而无需等待样本完成; 它会中断任何活动样本。如果某些线程未能在5秒的时间限制内停止，则将在GUI模式下显示一条消息。您可以使用<code>Stop</code>命令尝试停止线程，如果不能停止，可以手动退出JMeter。在CLI模式下，如果某些线程未能在5秒的时间限制内停止，JMeter将退出。</p>
@@ -2575,7 +2580,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>SMTP取样器</h3>
+<h3 id="smtp">SMTP取样器</h3>
 <p>SMTP取样器可以使用SMTP/SMTPS协议发送邮件。可以为连接（SSL和TLS）以及用户身份认证设置安全协议。如果使用安全协议，则将对服务器证书进行验证。<br>
 有两种方法可以处理此验证：</p>
 <ul>
@@ -2756,7 +2761,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>OS进程取样器</h3>
+<h3 id="os">OS进程取样器</h3>
 <p>OS进程取样器是一个可用于在本地计算机上执行命令的取样器。<br>
 它应该允许执行可以从命令行运行的任何命令。<br>
 可以启用返回代码的验证，并可以指定预期的返回代码。</p>
@@ -2849,12 +2854,12 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>MongoDB脚本（已弃用）</h3>
+<h3 id="mongodb">MongoDB脚本（已弃用）</h3>
 <p>略</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h2>18.2 逻辑控制器</h2>
+<h2 id="182">18.2 逻辑控制器</h2>
 <p>逻辑控制器决定取样器的处理顺序。</p>
-<h3>简单控制器</h3>
+<h3 id="_2">简单控制器</h3>
 <p>简单逻辑控制器允许您组织取样器和其他逻辑控制器。与其他逻辑控制器不同，该控制器不提供超出存储设备的功能。</p>
 <p><img alt="Screenshot for Control-Panel of Simple Controller" src="http://jmeter.apache.org/images/screenshots/logic-controller/simple-controller.png"><br>
 <em>简单控制器控制面板的截图</em></p>
@@ -2876,14 +2881,14 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <blockquote>
-<h4>使用简单控制器</h4>
+<h4 id="_3">使用简单控制器</h4>
 <p><a href="http://jmeter.apache.org/demos/SimpleTestPlan.jmx">下载</a>此示例（参见图6）。在此示例中，我们创建了一个测试计划，该计划发送两个Ant HTTP请求和两个Log4J HTTP请求。我们通过把Ant和Log4J请求放在简单逻辑控制器中将它们分组。请记住，简单逻辑控制器对JMeter如何处理您添加到其中的控制器没有影响。因此，在此示例中，JMeter按以下顺序发送请求：Ant Home Page，Ant News Page，Log4J Home Page， Log4J History Page。</p>
 <p>注意，File Reporter配置为将结果存储在当前目录中名为“<code>simple-test.dat</code>”的文件中。</p>
 <p><img alt="Figure 6 Simple Controller Example" src="http://jmeter.apache.org/images/screenshots/logic-controller/simple-example.png"><br>
 <em>图6 - 简单控制器示例</em></p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>循环控制器</h3>
+<h3 id="_4">循环控制器</h3>
 <p>如果将生成器或逻辑控制器添加到循环控制器，除了为线程组指定的循环次数外，JMeter还将循环它们一定次数。例如，如果将一个HTTP请求添加到循环计数为2的循环控制器，并将线程组循环计数配置为3，则JMeter将发送总共<code>2 * 3 = 6</code>个 HTTP请求。</p>
 <blockquote>
 <p>JMeter将循环索引公开为名为<code>__jm__&lt;Name of your element&gt;__idx</code>的变量。因此，例如，假设您的循环控制器名称为LC，那么您可以通过<code>${__jm__LC__idx}</code>访问循环索引。索引从0开始</p>
@@ -2913,7 +2918,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <blockquote>
-<h4>循环示例</h4>
+<h4 id="_5">循环示例</h4>
 <p><a href="http://jmeter.apache.org/demos/LoopTestPlan.jmx">下载</a>此示例（参见图4）。在此示例中，我们创建了一个测试计划，该计划发送一个HTTP请求1次，并发送另一个HTTP请求5次。</p>
 <p><img alt="Figure 4 - Loop Controller Example" src="http://jmeter.apache.org/images/screenshots/logic-controller/loop-example.png"><br>
 <em>图4 - 循环控制器示例</em></p>
@@ -2924,7 +2929,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </blockquote>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>仅一次控制器</h3>
+<h3 id="_6">仅一次控制器</h3>
 <p>仅一次逻辑控制器告诉JMeter每个线程只处理一次其内部的控制器，并在测试计划之后的迭代期间执行其后的所有请求。</p>
 <p>仅一次控制器现在将始终在任何循环父控制器的第一次迭代期间执行。因此，如果将仅一次控制器放置在指定循环5次的循环控制器下，那么仅一次控制器将仅在循环控制器第一次迭代时执行（即每5次）。</p>
 <p>注意这意味着如果将它置于一个线程组（每个线程每次测试只运行一次），那么仅一次控制器仍然会像预期的那样运行，但现在用户可以更灵活地使用仅一次控制器。</p>
@@ -2949,7 +2954,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <blockquote>
-<h4>仅一次示例</h4>
+<h4 id="_7">仅一次示例</h4>
 <p><a href="http://jmeter.apache.org/demos/OnceOnlyTestPlan.jmx">下载</a>此示例（参见图5）。在此示例中，我们创建了一个测试计划，其中包含两个发送HTTP请求的线程。每个线程向Home Page发送一次请求，然后向Bug Page发送三次请求。虽然我们将线程组配置为迭代三次，但每个JMeter线程只向Home Page发送一次请求，因为此请求位于仅一次控制器内。</p>
 <p><img alt="Figure 5. Once Only Controller Example" src="http://jmeter.apache.org/images/screenshots/logic-controller/once-only-example.png"><br>
 <em>图5 - 仅一次控制器示例</em></p>
@@ -2957,7 +2962,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <p>注意，File Reporter配置为将结果存储在当前目录中名为“<code>loop-test.dat</code>”的文件中。</p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>交替控制器</h3>
+<h3 id="_8">交替控制器</h3>
 <p>如果将生成器或逻辑控制器添加到交替控制器，则JMeter每次循环迭代时将在每个其他控制器之间交替进行。</p>
 <p><img alt="Screenshot for Control-Panel of Interleave Controller" src="http://jmeter.apache.org/images/screenshots/logic-controller/interleave-controller.png"><br>
 <em>交替控制器控制面板的截图</em></p>
@@ -2989,7 +2994,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <blockquote>
-<h4>简单交替示例</h4>
+<h4 id="_9">简单交替示例</h4>
 <p><a href="http://jmeter.apache.org/demos/InterleaveTestPlan.jmx">下载</a>此示例（参见图1）。在此示例中，我们将线程组配置为具有两个线程且循环次数为5，每个线程总共10个请求。请参阅下表，了解JMeter发送HTTP请求的顺序。</p>
 <p><img alt="Figure 1 - Interleave Controller Example 1" src="http://jmeter.apache.org/images/screenshots/logic-controller/interleave.png"><br>
 <em>图1 - 交替控制器示例1</em></p>
@@ -3043,7 +3048,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tr>
 </tbody>
 </table>
-<h4>有用的交替示例</h4>
+<h4 id="_10">有用的交替示例</h4>
 <p><a href="http://jmeter.apache.org/demos/InterleaveTestPlan2.jmx">下载</a>另一个示例（参见图2）。在此示例中，我们将线程组配置为具有1个线程且循环次数为8。请注意，测试计划有一个外部交替控制器，其下有两个交替控制器。</p>
 <p><img alt="Figure 2 - Interleave Controller Example 2 " src="http://jmeter.apache.org/images/screenshots/logic-controller/interleave2.png">
 <em>图2 - 交替控制器示例2</em></p>
@@ -3055,7 +3060,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <p>但是，如果在主交替控制器上选中了“<code>忽略子控制器块</code>”，那么顺序将是：Home Page，Interleaved，Bug Page，Interleaved，CVS Page，Interleaved，和FAQ Page，Interleaved。</p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>随机控制器</h3>
+<h3 id="_11">随机控制器</h3>
 <p>随机逻辑控制器的作用类似于交替控制器，不同之处在于它通过其子控制器和取样器时不是按排列顺序，而是在每次通过时随机选取一个。</p>
 <blockquote>
 <p>多个控制器之间的交互可以产生复杂的行为。随机控制器尤其如此。请在假设任何给定的交互产生的结果之前进行实验</p>
@@ -3085,7 +3090,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>随机顺序控制器</h3>
+<h3 id="_12">随机顺序控制器</h3>
 <p>随机顺序控制器很像简单控制器，因为它的每个子元件最多只执行一次，但节点的执行顺序是随机的。</p>
 <p><img alt="Screenshot for Control-Panel of Random Order Controller" src="http://jmeter.apache.org/images/screenshots/randomordercontroller.png"><br>
 <em>随机顺序控制器控制面板的截图</em></p>
@@ -3107,7 +3112,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>吞吐量控制器</h3>
+<h3 id="_13">吞吐量控制器</h3>
 <p>吞吐量控制器允许用户控制执行的频率。有两种模式：</p>
 <ul>
 <li>Percent executions</li>
@@ -3159,7 +3164,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>Runtime控制器</h3>
+<h3 id="runtime">Runtime控制器</h3>
 <p>Runtime控制器控制其子节点运行多长时间。控制器将运行其子项，直到超出配置的<code>Runtime(s)</code>。</p>
 <p><img alt="Screenshot for Control-Panel of Runtime Controller" src="http://jmeter.apache.org/images/screenshots/runtimecontroller.png"><br>
 <em>Runtime控制器控制面板的截图</em></p>
@@ -3186,7 +3191,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>如果（If）控制器</h3>
+<h3 id="if">如果（If）控制器</h3>
 <p>If控制器允许用户控制其下方的测试元件（其子元件）是否运行。</p>
 <p>默认情况下，条件仅在初始条目时计算一次，但您可以选择对控制器中包含的每个可运行元件进行计算。</p>
 <p>If控制器将在内部使用javascript来计算条件，但这会导致性能下降。</p>
@@ -3257,7 +3262,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <blockquote>
-<h4>示例（JavaScript）</h4>
+<h4 id="javascript">示例（JavaScript）</h4>
 <ul>
 <li><code>${COUNT} &lt; 10</code></li>
 <li><code>"${VAR}" == "abcd"</code></li>
@@ -3267,7 +3272,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <p>注意，性能测试中建议避免使用JavaScript模式。</p>
 <p>使用<a href="http://jmeter.apache.org/usermanual/functions.html#__groovy">__groovy</a>时请注意不要在字符串中使用变量替换，因为使用更改脚本的变量会无法缓存。应该使用<code>vars.get("myVar")</code>获取变量<strong>。</strong> 请参阅下面的Groovy示例。  </p>
 </blockquote>
-<h4>示例（变量表达式）</h4>
+<h4 id="_14">示例（变量表达式）</h4>
 <ul>
 <li><code>${__groovy(vars.get("myVar") != "Invalid" )}</code> (Groovy检查myVar是否不等于Invalid)</li>
 <li><code>${__groovy(vars.get("myInt").toInteger() &lt;=4 )}</code> (Groovy 检查myInt是否小于或等于4)</li>
@@ -3278,7 +3283,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </ul>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>While控制器</h3>
+<h3 id="while">While控制器</h3>
 <p>While控制器运行其子项，直到条件为“<code>false</code>”时停止。</p>
 <blockquote>
 <p>JMeter将循环索引公开为名为<code>__jm__&lt;Name of your element&gt;__idx</code>的变量。因此，例如，如果您的While控制器名为WC，那么您可以通过<code>${__jm__WC__idx}</code>访问循环索引。索引从0开始</p>
@@ -3325,7 +3330,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>Switch控制器</h3>
+<h3 id="switch">Switch控制器</h3>
 <p>Switch控制器的作用类似于<a href="http://jmeter.apache.org/usermanual/component_reference.html#Interleave_Controller">交替控制器</a>，它在每次迭代时运行一个子元件，但控制器运行顺序不是按排列顺序，而是按switch value定义。</p>
 <blockquote>
 <p>switch value也可以是名称。</p>
@@ -3357,7 +3362,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>ForEach控制器</h3>
+<h3 id="foreach">ForEach控制器</h3>
 <p>ForEach控制器循环遍历一组相关变量的值。将取样器（或控制器）添加到ForEach控制器时，每个取样器（或控制器）执行一次或多次，在每个循环期间变量会有新值。输入应包含多个变量，每个变量都用下划线和数字扩展。每个这样的变量都必须有一个值。因此，例如当输入变量的名称为<code>inputVar</code>时，应该定义以下变量：</p>
 <ul>
 <li><code>inputVar_1 = wendy</code></li>
@@ -3419,14 +3424,14 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <blockquote>
-<h4>ForEach示例</h4>
+<h4 id="foreach_1">ForEach示例</h4>
 <p><a href="http://jmeter.apache.org/demos/forEachTestPlan.jmx">下载</a>此示例（参见图7）。在此示例中，我们创建了一个测试计划，该计划仅发送一次特定的HTTP请求，并将另一个HTTP请求发送到页面上可找到的每个链接。</p>
 <p><img alt="Figure 7 - ForEach Controller Example" src="http://jmeter.apache.org/images/screenshots/logic-controller/foreach-example.png"><br>
 <em>图7 - ForEach控制器示例</em></p>
 <p>我们为单个线程配置了线程组，并将循环次数配置为1。您可以看到我们向线程组添加了一个HTTP请求，并向ForEach控制器添加了另一个HTTP请求。</p>
 <p>在第一个HTTP请求之后，添加了一个正则表达式提取器，它从返回页面中提取所有html链接并将它们放在<code>inputVar</code>变量中</p>
 <p>在ForEach循环中，添加了一个HTTP取样器，它请求从第一个返回的HTML页面中提取的所有链接。</p>
-<h4>ForEach示例</h4>
+<h4 id="foreach_2">ForEach示例</h4>
 <p>这是您可以下载的<a href="http://jmeter.apache.org/demos/ForEachTest2.jmx">另一个示例</a>。这有两个正则表达式和ForEach控制器。第一个正则有匹配，第二个没有匹配，因此第二个ForEach控制器不运行任何样本</p>
 <p><img alt="Figure 8 - ForEach Controller Example 2" src="http://jmeter.apache.org/images/screenshots/logic-controller/foreach-example2.png"><br>
 <em>图8 - ForEach控制器示例2</em></p>
@@ -3438,7 +3443,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <p><code>Sample 2</code>，<code>Regex 2</code>和<code>For 2</code>几乎相同，只是正则表达式变成“<code>(\w)\sx</code>”，这显然无法获得任何匹配。因此<code>For 2</code>样本将不会运行。</p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>模块控制器</h3>
+<h3 id="_15">模块控制器</h3>
 <p>模块控制器提供了一种在运行时将测试计划片段替换为当前测试计划的机制。</p>
 <p>测试计划片段由控制器和其中包含的所有测试元件（取样器等）组成。片段可以位于任何线程组中。如果片段位于线程组中，则可以禁用其控制器以防止片段在模块控制器以外运行。或者，您可以将片段存储在虚拟线程组中，并禁用整个线程组。</p>
 <p>可以有多个片段，每个片段下面都有不同系列的取样器。然后，只需在模块控制器的下拉框中选择适当的控制器即可在这些多个测试用例之间轻松切换。这为快速轻松地运行许多备用测试计划提供了便利。</p>
@@ -3473,7 +3478,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>Include控制器</h3>
+<h3 id="include">Include控制器</h3>
 <p>Include控制器旨在使用外部JMX文件。要使用它，在测试计划下创建一个测试片段，并在其下面添加任何所需的取样器，控制器等。然后保存测试计划。该文件现在可以作为其他测试计划的一部分包含在内。</p>
 <p>为方便起见，还可以在外部JMX文件中添加<a href="http://jmeter.apache.org/usermanual/component_reference.html#Thread_Group">线程组</a>以进行调试。<a href="http://jmeter.apache.org/usermanual/component_reference.html#Module_Controller">模块控制器</a>可用于引用试验片段。该<a href="http://jmeter.apache.org/usermanual/component_reference.html#Thread_Group">线程组</a>在include进程中将被忽略。</p>
 <p>如果测试使用Cookie管理器或用户定义的变量，则应将这些变量放在顶级测试计划中，而不是include的文件中，否则无法保证它们正常工作。</p>
@@ -3508,7 +3513,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>事务控制器</h3>
+<h3 id="_16">事务控制器</h3>
 <p>事务控制器生成一个额外的样本，用于测量执行嵌套测试元件所花费的总时间。</p>
 <blockquote>
 <p>注意：如果选中“<code>Include duration of timer and pre-post processors in generated sample</code>”复选框，则时间包括控制器范围内的所有处理，而不仅仅是样本执行时间。</p>
@@ -3554,7 +3559,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>录制控制器</h3>
+<h3 id="_17">录制控制器</h3>
 <p>记录控制器是指示代理服务器录制样本位置的占位符。在测试运行期间，它没有任何效果，类似于简单控制器。但在使用<a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP(S)_Test_Script_Recorder">HTTP代理服务器</a>录制时，所有录制的样本将默认保存在录制控制器下。</p>
 <p><img alt="Screenshot for Control-Panel of Recording Controller" src="http://jmeter.apache.org/images/screenshots/logic-controller/recording-controller.png"><br>
 <em>录制控制器控制面板的截图</em>  </p>
@@ -3576,7 +3581,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>临界部分控制器</h3>
+<h3 id="_18">临界部分控制器</h3>
 <p>临界部分控制器确保其子元件（取样器/控制器等）将仅由一个线程执行，在执行控制器的子节点之前将执行命名锁定。</p>
 <p><img alt="Screenshot for Control-Panel of Critical Section Controller" src="http://jmeter.apache.org/images/screenshots/logic-controller/critical-section-controller.png"><br>
 <em>临界部分控制器控制面板的截图</em></p>
@@ -3617,7 +3622,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <p>临界部分控制器仅在一个JVM中获取锁，因此如果使用分布式测试，请确保您的用例不依赖于所有JVM阻塞的所有线程。</p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h2>18.3 监听器</h2>
+<h2 id="183">18.3 监听器</h2>
 <p>除了“监听”测试结果之外，大多数监听器扮演多种角色。它们还提供查看，保存和读取已保存测试结果的方法。</p>
 <p>注意，监听器在找到它们的范围的最后处理。</p>
 <p>测试结果的保存和读取是通用功能。各种监听器都有一个面板，用户可以指定要写入（或读取）结果的文件。默认情况下，结果存储为XML文件，通常带有“<code>.jtl</code>”扩展名。存储为CSV是最有效的选项，但不如XML（另一个可用选项）详细。</p>
@@ -3696,13 +3701,13 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tr>
 </tbody>
 </table>
-<h3>样本结果保存配置</h3>
+<h3 id="_19">样本结果保存配置</h3>
 <p>监听器可以通过配置弹窗将不同的选项保存到结果日志文件（JTL），如下所示。默认值的定义如<a href="http://jmeter.apache.org/usermanual/listeners.html#defaults">监听器默认配置</a>文档中所述。后面带有（<code>CSV</code>）的选项仅适用于CSV格式；带有（<code>XML</code>）的选项仅适用于XML格式。目前CSV格式无法用于保存包含换行符的任何选项。</p>
 <p>注意，cookie、方法和查询字符串将保存为“<code>Sampler Data</code>”选项的一部分。</p>
 <p><img alt="Screenshot for Control-Panel of Sample Result Save Configuration" src="http://jmeter.apache.org/images/screenshots/sample_result_config.png"><br>
 <em>样本结果保存配置控制面板的截图</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>图形结果</h3>
+<h3 id="_20">图形结果</h3>
 <blockquote>
 <p>在压力测试期间不得使用图形结果，因为它消耗了大量资源（内存和CPU）。仅用于功能测试或测试计划调试和验证期间。</p>
 </blockquote>
@@ -3721,7 +3726,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <p>显示屏底部的各个数字是当前值。“<code>最新样本</code>”是当前经过的采样时间，在图表上显示为“<code>数据</code>”。</p>
 <p>图表左上角显示的值是响应时间第90百分位数的最大值。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>断言结果</h3>
+<h3 id="_21">断言结果</h3>
 <blockquote>
 <p>在压力测试期间不得使用断言结果，因为它消耗了大量资源（内存和CPU）。仅用于功能测试或测试计划调试和验证期间。</p>
 </blockquote>
@@ -3733,7 +3738,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <li><a href="http://jmeter.apache.org/usermanual/component_reference.html#Response_Assertion">响应断言</a></li>
 </ul>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>查看结果树</h3>
+<h3 id="_22">查看结果树</h3>
 <blockquote>
 <p>在压力测试期间不得使用查看结果树，因为它消耗了大量资源（内存和CPU）。仅用于功能测试或测试计划调试和验证期间。</p>
 </blockquote>
@@ -3819,7 +3824,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <p><img alt="Figure 9b Sample Document (here PDF) display" src="http://jmeter.apache.org/images/screenshots/view_results_tree_document.png">
 <em>图9b - Document（此处为PDF）样本显示</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>聚合报告</h3>
+<h3 id="_23">聚合报告</h3>
 <p>聚合报告为测试中的每个不同命名的请求创建一个表行。对于每个请求，它总计响应信息并提供请求计数，最小值，最大值，平均值，异常率，近似吞吐量（请求/秒）和每秒千字节吞吐量。测试完成后，吞吐量是整个测试期间的实际吞吐量。</p>
 <p>吞吐量是从取样器目标（例如，HTTP样本的远程服务器）的角度计算的。JMeter考虑了生成请求的总时间。如果其他取样器和定时器位于同一线程中，则会增加总时间，从而降低吞吐量值。因此，具有不同名称的两个相同的取样器将具有两个具有相同名称的取样器的吞吐量的一半。正确选择取样器名称以从聚合报告中获得最佳结果非常重要。</p>
 <p>计算<a href="http://jmeter.apache.org/usermanual/glossary.html#Median">中位数</a>和90％线（第90<a href="http://jmeter.apache.org/usermanual/glossary.html#Percentile">百分位数</a>）值需要额外的内存。JMeter现在将相同经过时间的样本相结合，因此使用的内存更少。但是，对于花费时间超过几秒的样本，或者另一种可能性是很少的样本具有相同的时间，在这种情况下需要更多的内存。注意您可以使用此监听器在测试结束后重新加载CSV或XML结果文件，这是避免性能影响的推荐方法。请参阅<a href="http://jmeter.apache.org/usermanual/component_reference.html#Summary_Report">汇总报告</a>了解类似的监听器，它不存储单个样本，因此需要恒定的内存。</p>
@@ -3853,18 +3858,18 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <p><img alt="Sample &quot;" src="http://jmeter.apache.org/images/screenshots/aggregate_report_grouped.png">
 <em>“<code>在标签中包含组名称？</code>”样本显示</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>用表格查看结果</h3>
+<h3 id="_24">用表格查看结果</h3>
 <p>此可视化工具为每个样本结果创建一行。像<a href="http://jmeter.apache.org/usermanual/component_reference.html#View_Results_Tree">查看结果树</a>一样，此可视化工具使用大量内存。</p>
 <p>默认情况下，它只显示主（父）样本；它不显示子样本。JMeter有一个“<code>Child Samples?</code>”复选框。如果选择此选项，则显示子样本而不是主样本。</p>
 <p><img alt="Screenshot for Control-Panel of View Results in Table" src="http://jmeter.apache.org/images/screenshots/table_results.png"><br>
 <em>用表格查看结果控制面板的截图</em>  </p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>简单数据写入器</h3>
+<h3 id="_25">简单数据写入器</h3>
 <p>此监听器可以将结果记录到文件中，但不能记录到UI。它旨在通过消除GUI开销来提供记录数据的有效方法。在CLI模式下运行时，<code>-l</code>标志可用于创建数据文件。要保存的字段由JMeter属性定义。有关详细信息，请参阅<code>jmeter.properties</code>文件。</p>
 <p><img alt="Screenshot for Control-Panel of Simple Data Writer" src="http://jmeter.apache.org/images/screenshots/simpledatawriter.png"><br>
 <em>简单数据写入器控制面板的截图</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>汇总图</h3>
+<h3 id="_26">汇总图</h3>
 <p>汇总图与聚合报告类似。主要区别在于汇总图提供了一种生成条形图并将图形保存为PNG文件的简便方法。</p>
 <p><img alt="Screenshot for Control-Panel of Aggregate Graph" src="http://jmeter.apache.org/images/screenshots/aggregate_graph.png"><br>
 <em>汇总图控制面板的截图</em></p>
@@ -3922,7 +3927,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>响应时间图</h3>
+<h3 id="_27">响应时间图</h3>
 <p>响应时间图绘制了一个折线图，显示了测试期间每个标记请求的响应时间的演变。如果对于相同的时间戳存在许多样本，则显示平均值。</p>
 <p><img alt="Screenshot for Control-Panel of Response Time Graph" src="http://jmeter.apache.org/images/screenshots/response_time_graph.png"><br>
 <em>响应时间图控制面板的截图</em></p>
@@ -3990,7 +3995,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>邮件观察仪</h3>
+<h3 id="_28">邮件观察仪</h3>
 <p>如果测试运行从服务器收到太多失败的响应，可以设置使用邮件观察仪发送电子邮件。</p>
 <p><img alt="Screenshot for Control-Panel of Mailer Visualizer" src="http://jmeter.apache.org/images/screenshots/mailervisualizer.png"><br>
 <em>邮件观察仪控制面板的截图</em></p>
@@ -4077,7 +4082,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>BeanShell监听器</h3>
+<h3 id="beanshell_1">BeanShell监听器</h3>
 <p>BeanShell监听器允许使用BeanShell处理样本以保存等。</p>
 <p><strong>有关使用BeanShell的完整详细信息，请参阅<a href="http://www.beanshell.org/">BeanShell网站</a>。</strong></p>
 <blockquote>
@@ -4153,7 +4158,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <p>有关上述每个变量的所有可用方法的详细信息，请查看Javadoc。</p>
 <p>如果定义了属性<code>beanshell.listener.init</code>，则用于加载初始化文件，该文件可用于定义在BeanShell脚本中使用的方法等。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>汇总报告</h3>
+<h3 id="_29">汇总报告</h3>
 <p>汇总报告为测试中的每个不同命名的请求创建一个表行。这与<a href="http://jmeter.apache.org/usermanual/component_reference.html#Aggregate_Report">聚合报告</a>类似，只是它使用更少的内存。</p>
 <p>吞吐量是从取样器目标（例如，HTTP样本的远程服务器）的角度计算的。JMeter考虑了生成请求的总时间。如果其他取样器和定时器位于同一线程中，则会增加总时间，从而降低吞吐量值。因此，具有不同名称的两个相同的取样器将具有两个具有相同名称的取样器的吞吐量的一半。正确选择取样器标签以从报告中获得最佳结果非常重要。</p>
 <ul>
@@ -4176,7 +4181,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 <p><img alt="Sample &quot;" src="http://jmeter.apache.org/images/screenshots/summary_report_grouped.png">
 <em>“<code>包含组名称</code>”样本显示</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>保存响应到文件</h3>
+<h3 id="_30">保存响应到文件</h3>
 <p>该测试元件可以放置在测试计划的任何位置。对于其范围内的每个样本，它都会创建响应数据的文件。这个的主要用途是创建功能测试，但在响应太大而无法在<a href="http://jmeter.apache.org/usermanual/component_reference.html#View_Results_Tree">查看结果树</a>监听器中显示的情况下，它也很有用 。文件名是根据指定的前缀和数字（除非禁用此参数，请参见下文）创建的。如果文档类型已知，则从文档类型创建文件扩展名。如果未知，则文件扩展名设置为“<code>unknown</code>”。如果禁用编号，并且禁用添加后缀，则将文件前缀作为整个文件名。这允许在需要时生成固定文件名。生成的文件名存储在样本响应中，如果需要，可以保存在测试日志输出文件中。</p>
 <p>首先保存当前样本，然后保存任何子样本。如果提供了变量名称，则文件名将按子样本的显示顺序保存。见下文。</p>
 <p><img alt="Screenshot for Control-Panel of Save Responses to a file" src="http://jmeter.apache.org/images/screenshots/savetofile.png"><br>
@@ -4244,7 +4249,7 @@ JavaMail中<code>file</code>提供者可用于从文件中读取原始邮件。<
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JSR223监听器</h3>
+<h3 id="jsr223">JSR223监听器</h3>
 <p>JSR223 监听器允许将JSR223脚本代码应用于样本结果。</p>
 <p><strong>参数</strong></p>
 <table>
@@ -4348,7 +4353,7 @@ vars.getObject(&quot;OBJ2&quot;);
 </ul>
 <p>有关上述每个变量的所有可用方法的详细信息，请查看Javadoc</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>生成概要结果</h3>
+<h3 id="_31">生成概要结果</h3>
 <p>该测试元件可以放置在测试计划的任何位置。生成到目前为止测试运行的摘要到日志文件和/或标准输出。显示运行和差异总计。在适当的时间边界上每<code>n</code>秒（默认为30秒）生成输出，以便同步多个同时运行的测试。有关汇总器配置项，请参阅<code>jmeter.properties</code>文件：</p>
 <div class="highlight"><pre><span></span># Define the following property to automatically start a summariser with that name
 # (applies to CLI mode only)
@@ -4421,7 +4426,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>比较断言可视化器</h3>
+<h3 id="_32">比较断言可视化器</h3>
 <p>比较断言可视化器显示任何<a href="http://jmeter.apache.org/usermanual/component_reference.html#Compare_Assertion">比较断言</a>元件的结果。</p>
 <p><img alt="Screenshot for Control-Panel of Comparison Assertion Visualizer" src="http://jmeter.apache.org/images/screenshots/comparison_assertion_visualizer.png"><br>
 <em>比较断言可视化器控制面板的截图</em></p>
@@ -4443,7 +4448,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>后端监听器</h3>
+<h3 id="_33">后端监听器</h3>
 <p>后端监听器是一个异步监听器，允许您插入<a href="http://jmeter.apache.org/api/org/apache/jmeter/visualizers/backend/BackendListenerClient.html">BackendListenerClient</a>的自定义实现。默认情况下，提供Graphite实现。</p>
 <p><img alt="Screenshot for Control-Panel of Backend Listener" src="http://jmeter.apache.org/images/screenshots/backend_listener.png"><br>
 <em>后端监听器控制面板的屏幕截图</em></p>
@@ -4600,9 +4605,9 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </table>
 <p>有关更多详细信息，另请参阅<a href="http://jmeter.apache.org/usermanual/realtime-results.html">实时结果</a>和<a href="http://docs.grafana.org/reference/annotations/#influxdb-annotations">Grafana中的Influxdb注释</a>。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h2>18.4 配置元件</h2>
+<h2 id="184">18.4 配置元件</h2>
 <p>配置元件可用于设置默认值和变量，供后续取样器使用。注意这些元件在它们范围开始处处理，即在相同范围内的任何取样器之前处理。 </p>
-<h3>CSV 数据文件设置</h3>
+<h3 id="csv">CSV 数据文件设置</h3>
 <p>CSV 数据文件设置用于从文件中读取行，并将它们拆分为变量。它比<a href="http://jmeter.apache.org/usermanual/functions.html#__CSVRead">__CSVRead()</a>和<strong><a href="http://jmeter.apache.org/usermanual/functions.html#__StringFromFile">__StringFromFile()</a></strong>函数更容易使用。它非常适合处理大量变量，对于使用“随机”和唯一值进行测试也很有用。</p>
 <p>在运行时生成唯一的随机值在CPU和内存消耗方面是很大的，因此最好在测试之前创建数据。如有必要，文件中的“随机”数据可以与运行时参数一起使用，以便在每次运行中创建不同的值集 - 例如使用级联 - 这比在运行时生成所有内容消耗的资源小得多。</p>
 <p>JMeter允许引用值；这允许值包含分隔符。如果启用“<code>是否允许带引号</code>”，则可以用双引号括起值。双引号在引用时会被删除。要在引用字段中包含双引号，请使用两个双引号。例如：</p>
@@ -4689,15 +4694,15 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>FTP请求默认值</h3>
+<h3 id="ftp">FTP请求默认值</h3>
 <p><img alt="Screenshot for Control-Panel of FTP Request Defaults" src="http://jmeter.apache.org/images/screenshots/ftp-config/ftp-request-defaults.png"><br>
 <em>FTP请求默认值控制面板的截图</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>DNS缓存管理器</h3>
+<h3 id="dns">DNS缓存管理器</h3>
 <p>当用户从不同的IP接收内容时，DNS缓存管理器元件允许测试在负载平衡器（CDN等）后面有多个服务器的应用程序。默认情况下，JMeter使用JVM DNS缓存。这就是集群中只有一台服务器接收负载的原因。DNS缓存管理器在每次迭代时分别解析每个线程的名称，并将解析结果保存到其内部DNS缓存中，该缓存独立于JVM和系统DNS缓存。</p>
 <p>静态主机的映射可用于模拟<code>/etc/hosts</code>文件之类的。这些条目将优先于自定义解析程序。如果要使用此映射，则必须启用<code>Use custom DNS resolver</code>。</p>
 <blockquote>
-<h4>静态主机表的用法</h4>
+<h4 id="_34">静态主机表的用法</h4>
 <p>比如，您有一个测试服务器，您希望使用名称来访问，该名称尚未在您的DNS服务器中设置。在我们的例子中，服务器名称是<code>www.example.com</code>，您希望通过服务器的IP地址<code>a123.another.example.org</code>来访问。</p>
 <p>您可以更改工作站并在<code>/etc/hosts</code>文件中添加条目- 或者等效于在您的操作系统中，在DNS缓存管理器的静态主机表中添加条目。</p>
 <p>您可以在第一列（<code>Host</code>）中键入<code>www.example.com</code>， 在第二列（<code>Hostname or IP address</code>）中键入<code>a123.another.example.org</code>。正如第二列的名称所暗示的那样，您甚至可以使用测试服务器的IP地址。 </p>
@@ -4773,7 +4778,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>HTTP授权管理器</h3>
+<h3 id="http">HTTP授权管理器</h3>
 <p>授权管理器允许您为使用服务器身份认证限制的网页指定一个或多个用户登录。当您使用浏览器访问受限页面时，您会看到此类型的身份认证，并且浏览器会显示登录对话框。JMeter在遇到此类页面时会传输登录信息。</p>
 <p>授权信息头可能不会显示在树视图监听器“<code>请求</code>”选项卡中。Java实现会执行抢先认证，但在JMeter获取信息头时它不会返回授权信息头。HttpComponents（HC 4.5.X）实现从3.2版本之后默认执行抢先认证，并且显示信息头。要禁用此功能，请按下面方式设置值，在这种情况下，只有响应质询时会执行身份认证。</p>
 <p>在<code>jmeter.properties</code>文件中设置<code>httpclient4.auth.preemptive=false</code></p>
@@ -4875,7 +4880,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </blockquote>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>HTTP缓存管理器</h3>
+<h3 id="http_1">HTTP缓存管理器</h3>
 <p>HTTP缓存管理器用于向其范围内的HTTP请求添加缓存功能，以模拟浏览器缓存功能。每个虚拟用户线程都有自己的缓存。默认情况下，缓存管理器将使用LRU算法在每个虚拟用户线程的缓存中存储多达5000个项目。使用属性“<code>maxSize</code>”修改此值。注意，此值增加越多，HTTP缓存管理器消耗的内存也越多，因此请务必相应地调整<code>-Xmx</code>JVM选项。</p>
 <p>如果样本成功（即响应代码为<code>2xx</code>），则会为URL保存<code>Last-Modified</code>和<code>Etag</code>（以及相关的<code>Expired</code>）值。在执行下一个样本之前，取样器会检查缓存中是否有条目，如果是，则为请求设置<code>If-Last-Modified</code>和<code>If-None-Match</code>条件信息头。</p>
 <p>此外，如果选择“<code>Use Cache-Control/Expires header</code>”选项，则会根据当前时间检查<code>Cache-Control/Expires</code>值。如果请求是<code>GET</code>请求，并且时间戳是将来的，则取样器会立即返回，而不从远程服务器请求URL。这旨在模拟浏览器行为。请注意，如果<code>Cache-Control</code>信息头为“<code>no-cache</code>”，则响应将作为预过期存储在缓存中，因此将生成条件<code>GET</code>请求。如果<code>Cache-Control</code>有任何其他值，则“<code>max-age</code>“到期选项将会执行以计算条目生存期，如果丢失则将使用expire信息，如果还缺失条目将按照<a href="https://tools.ietf.org/html/2616#section-13.2.4">RFC 2616第13.2.4节</a>中的规定使用<code>Last-Modified</code>时间和响应日期进行缓存。</p>
@@ -4917,7 +4922,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>HTTP Cookie管理器</h3>
+<h3 id="http-cookie">HTTP Cookie管理器</h3>
 <p>Cookie管理器元件有两个功能：
 首先，它像Web浏览器一样存储和发送Cookie。如果您有HTTP请求并且响应包含cookie，则Cookie管理器会自动存储该cookie，并将其用于之后对该特定网站的所有请求。每个JMeter线程都有自己的“cookie存储区”。因此，如果您正在测试使用cookie存储会话信息的网站，则每个JMeter线程都将拥有自己的会话。注意这样的Cookie不会显示在Cookie管理器显示屏上，但可以使用“<a href="http://jmeter.apache.org/usermanual/component_reference.html#View_Results_Tree">查看结果树</a>监听器”查看它们。</p>
 <p>JMeter检查收到的cookie是否对URL有效。这意味着不存储跨域cookie。如果您有窃听行为或希望使用跨域cookie，请定义JMeter属性“<code>CookieManager.check.cookies=false</code>”。</p>
@@ -4988,7 +4993,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>HTTP请求默认值</h3>
+<h3 id="http_2">HTTP请求默认值</h3>
 <p>此元件允许您设置HTTP请求控制器使用的默认值。例如，如果要创建具有25个HTTP请求控制器的测试计划并且所有请求都发送到同一服务器，则可以添加单个HTTP请求默认值元件，并填写“<code>服务器名称或IP</code>”字段。然后，当您添加25个HTTP请求控制器时，请将“<code>服务器名称或IP</code>”字段留空。控制器将从HTTP请求默认值元件继承此字段值。</p>
 <blockquote>
 <p>所有端口的值也同样处理；未指定端口的取样器将使用HTTP请求默认值里的端口号（如果提供了端口）。</p>
@@ -5103,7 +5108,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <p>注意：单选按钮只有两种状态 - 开或关。这使得无法一致地覆盖设置 - 关闭意味着关闭，还是意味着使用当前默认设置？JMeter使用后者（否则默认值根本不起作用）。因此，如果按钮关闭，则后面的元件可以将其设置为打开，但如果按钮处于打开状态，则后面的元件无法将其设置为关闭。</p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>HTTP信息头管理器</h3>
+<h3 id="http_3">HTTP信息头管理器</h3>
 <p>信息头管理器允许您添加或覆盖HTTP请求信息头。</p>
 <p><strong>JMeter现在支持多个信息头管理器</strong>。合并信息头条目以形成取样器的列表。如果要合并的条目与现有信息头名称匹配，则它将替换先前的条目。这允许您设置一组默认信息头，并对特定取样器应用调整。注意信息头的空值不会删除现有信息头，只是替换其值。</p>
 <p><img alt="Screenshot for Control-Panel of HTTP Header Manager" src="http://jmeter.apache.org/images/screenshots/http-config/http-header-manager.png"><br>
@@ -5156,7 +5161,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <blockquote>
-<h4>信息头管理器示例</h4>
+<h4 id="_35">信息头管理器示例</h4>
 <p><a href="http://jmeter.apache.org/demos/HeaderManagerTestPlan.jmx">下载</a>此示例。在此示例中，我们创建了一个测试计划，告诉JMeter覆盖默认的“<code>User-Agent</code>”请求信息头，并使用特定的Internet Explorer代理字符串。（见图12和13）。</p>
 <p><img alt="Figure 12 - Test Plan" src="http://jmeter.apache.org/images/screenshots/http-config/header-manager-example1a.png">
 <em>图12 - 测试计划</em></p>
@@ -5164,12 +5169,12 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <em>图13 - 信息头管理器控制面板</em></p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>Java默认请求</h3>
+<h3 id="java_1">Java默认请求</h3>
 <p>Java默认请求组件允许您为Java测试设置默认值。请参阅<a href="http://jmeter.apache.org/usermanual/component_reference.html#Java_Request">Java请求</a>。</p>
 <p><img alt="Screenshot for Control-Panel of Java Request Defaults" src="http://jmeter.apache.org/images/screenshots/java_defaults.png"><br>
 <em>Java默认请求控制面板的截图</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JDBC连接配置</h3>
+<h3 id="jdbc">JDBC连接配置</h3>
 <p>从支持的JDBC连接设置创建数据库连接（提供给<a href="http://jmeter.apache.org/usermanual/component_reference.html#JDBC_Request">JDBC请求</a>取样器使用）。可以在线程之间随意建立连接池连接，也可以让每个线程单独连接。JDBC取样器通过连接配置名称来选择适当的连接。使用的连接池是DBCP，请参阅<a href="https://commons.apache.org/proper/commons-dbcp/configuration.html">BasicDataSource配置参数</a>。</p>
 <p><img alt="Screenshot for Control-Panel of JDBC Connection Configuration" src="http://jmeter.apache.org/images/screenshots/jdbc-config/jdbc-conn-config.png"><br>
 <em>JDBC连接配置控制面板的截图</em></p>
@@ -5339,7 +5344,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <p>以上可能不正确 - 请查看相关的JDBC驱动程序文档。</p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>密钥库配置</h3>
+<h3 id="_36">密钥库配置</h3>
 <p>密钥库配置元件允许您配置密钥库的加载方式以及它将使用的密钥。此组件通常用于您不希望在响应时间中考虑密钥库初始化时间的HTTPS方案中。</p>
 <p>要使用此元件，您需要首先使用要测试的客户端证书设置Java密钥库，以执行此操作：</p>
 <ol>
@@ -5404,7 +5409,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </ul>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>登录配置元件</h3>
+<h3 id="_37">登录配置元件</h3>
 <p>登录配置元件允许您在使用用户名和密码作为其设置的一部分的取样器中添加或覆盖用户名和密码设置。</p>
 <p><img alt="Screenshot for Control-Panel of Login Config Element" src="http://jmeter.apache.org/images/screenshots/login-config.png"><br>
 <em>登录配置元件控制面板的截图</em></p>
@@ -5436,17 +5441,17 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>LDAP默认请求</h3>
+<h3 id="ldap_2">LDAP默认请求</h3>
 <p>LDAP默认请求组件允许您为LDAP测试设置默认值。请参阅<a href="http://jmeter.apache.org/usermanual/component_reference.html#LDAP_Request">LDAP请求</a>。</p>
 <p><img alt="Screenshot for Control-Panel of LDAP Request Defaults" src="http://jmeter.apache.org/images/screenshots/ldap_defaults.png"><br>
 <em>LDAP默认请求控制面板的截图</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>LDAP扩展请求默认值</h3>
+<h3 id="ldap_3">LDAP扩展请求默认值</h3>
 <p>LDAP扩展请求默认值组件允许您为LDAP扩展测试设置默认值。请参阅<a href="http://jmeter.apache.org/usermanual/component_reference.html#LDAP_Extended_Request">LDAP扩展请求</a>。</p>
 <p><img alt="Screenshot for Control-Panel of LDAP Extended Request Defaults" src="http://jmeter.apache.org/images/screenshots/ldapext_defaults.png"><br>
 <em>LDAP扩展请求默认值控制面板的截图</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>TCP取样器配置</h3>
+<h3 id="tcp_1">TCP取样器配置</h3>
 <p>TCP取样器配置为TCP取样器提供默认数据。</p>
 <p><img alt="Screenshot for Control-Panel of TCP Sampler Config" src="http://jmeter.apache.org/images/screenshots/tcpsamplerconfig.png"><br>
 <em>TCP取样器配置控制面板的截图</em></p>
@@ -5523,7 +5528,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>用户定义的变量</h3>
+<h3 id="_38">用户定义的变量</h3>
 <p>用户定义的变量元件允许您定义一组<strong>初始变量</strong>，就像在<a href="http://jmeter.apache.org/usermanual/component_reference.html#Test_Plan">测试计划</a>中一样。</p>
 <blockquote>
 <p>注意，测试计划中的所有用户定义的变量元件 - 无论它们在何处 - 都会在开始时进行处理。 </p>
@@ -5567,7 +5572,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>随机变量</h3>
+<h3 id="_39">随机变量</h3>
 <p>随机变量配置元件用于生成随机数字符串并将它们存储在变量中以供以后使用。它比使用<a href="http://jmeter.apache.org/usermanual/component_reference.html#User_Defined_Variables">用户定义的变量</a>和<a href="http://jmeter.apache.org/usermanual/functions.html#__Random">__Random()</a>函数更简单。 </p>
 <p>使用随机数生成器构造输出变量，然后使用格式字符串格式化结果数字。数字的计算使用公式<code>minimum+Random.nextInt(maximum-minimum+1)</code>。<code>Random.nextInt()</code>需要一个正整数。这意味着<code>最大值-最小值</code> - 即范围 - 必须小于<code>2147483647</code>，但是只要在范围内，<code>最小值</code>和<code>最大值</code>可以是任何<code>long</code>值。 </p>
 <blockquote>
@@ -5623,7 +5628,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>计数器</h3>
+<h3 id="_40">计数器</h3>
 <p>允许用户创建可在线程组中的任何位置引用的计数器。计数器配置允许用户配置起始值，最大值和递增值。计数器将从起始循环到最大，然后从起始重新开始，继续这样直到测试结束。  </p>
 <p>计数器使用long类型来存储值，因此范围从<code>-2^63</code>到<code>2^63-1</code>。</p>
 <p><img alt="Screenshot for Control-Panel of Counter" src="http://jmeter.apache.org/images/screenshots/counter.png"><br>
@@ -5681,7 +5686,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>简单配置元件</h3>
+<h3 id="_41">简单配置元件</h3>
 <p>简单配置元件允许您在取样器中添加或覆盖任意值。您可以选择值的名称和值本身。虽然一些有冒险精神的用户可能会发现这个元件的用途，但它主要是供开发人员在开发新的JMeter组件时使用的基本GUI。</p>
 <p><img alt="Screenshot for Control-Panel of Simple Config Element" src="http://jmeter.apache.org/images/screenshots/simple_config_element.png"><br>
 <em>简单配置元件控件面板的截图</em></p>
@@ -5713,9 +5718,9 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>MongoDB源配置（已弃用）</h3>
+<h3 id="mongodb_1">MongoDB源配置（已弃用）</h3>
 <p><a href="#toc">【返回目录】</a></p>
-<h2>18.5 断言</h2>
+<h2 id="185">18.5 断言</h2>
 <p>断言用于对取样器执行附加检查，并在同一范围内的<strong>每个取样器</strong>之后进行处理。要确保仅将断言应用于特定取样器，请将其添加为取样器的子级。</p>
 <blockquote>
 <p>注意：除非另有说明，否则断言不适用于子样本 - 仅适用于父样本。对于JSR223和BeanShell断言，脚本可以使用<code>prev.getSubResults()</code>方法检索子样本，该方法返回取样结果数组。如果没有结果，则数组将为空。</p>
@@ -5730,7 +5735,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <blockquote>
 <p>在运行了取样器的所有断言之后，变量<code>JMeterThread.last_sample_ok</code>将更新为“<code>true</code>”或“<code>false</code>”。      </p>
 </blockquote>
-<h3>响应断言</h3>
+<h3 id="_42">响应断言</h3>
 <p>响应断言控制面板允许您添加模式字符串来和请求或响应的各个字段进行比较。模式字符串是：     </p>
 <ul>
 <li><code>包括</code>，<code>匹配</code>：Perl5风格的正则表达式</li>
@@ -5820,7 +5825,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </table>
 <p>该模式是Perl5样式的正则表达式，但没有括号。</p>
 <blockquote>
-<h4>断言实例</h4>
+<h4 id="_43">断言实例</h4>
 <p><img alt="Figure 14 - Test Plan" src="http://jmeter.apache.org/images/screenshots/assertion/example1a.png">
 <em>图14 - 测试计划</em></p>
 <p><img alt="Figure 15 - Assertion Control Panel with Pattern" src="http://jmeter.apache.org/images/screenshots/assertion/example1b.png">
@@ -5831,7 +5836,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <em>图17 - 断言监听器结果（失败）</em></p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>断言持续时间</h3>
+<h3 id="_44">断言持续时间</h3>
 <p>断言持续时间测试在给定的时间内收到每个响应。任何花费超过给定毫秒数（由用户指定）的响应都会标记为失败的响应。</p>
 <p><img alt="Screenshot for Control-Panel of Duration Assertion" src="http://jmeter.apache.org/images/screenshots/duration_assertion.png"><br>
 <em>断言持续时间控制面板的截图</em></p>
@@ -5858,7 +5863,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>大小断言</h3>
+<h3 id="_45">大小断言</h3>
 <p>大小断言测试每个响应中包含正确的字节数。您可以指定大小等于，大于，小于或不等于给定的字节数。</p>
 <blockquote>
 <p>空响应被视为0字节而不是报告为错误。</p>
@@ -5898,7 +5903,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>XML断言</h3>
+<h3 id="xml">XML断言</h3>
 <p>XML断言测试响应数据由正式的XML文档组成。它不会基于DTD或模式来验证XML，也不会进行任何进一步的验证。</p>
 <p><img alt="Screenshot for Control-Panel of XML Assertion" src="http://jmeter.apache.org/images/screenshots/xml_assertion.png"><br>
 <em>XML断言控件面板的截图</em></p>
@@ -5920,7 +5925,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>BeanShell断言</h3>
+<h3 id="beanshell_2">BeanShell断言</h3>
 <p>BeanShell断言允许用户使用BeanShell脚本执行断言检查。</p>
 <p><strong>有关使用BeanShell的完整详细信息，请参阅<a href="http://www.beanshell.org/">BeanShell网站</a>。</strong>  </p>
 <blockquote>
@@ -6037,7 +6042,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <li><code>setSampleLabel(String)</code></li>
 </ul>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>MD5Hex断言</h3>
+<h3 id="md5hex">MD5Hex断言</h3>
 <p>MD5Hex断言允许用户检查响应数据的MD5哈希值。</p>
 <p><img alt="Screenshot for Control-Panel of MD5Hex Assertion" src="http://jmeter.apache.org/images/screenshots/assertion/MD5HexAssertion.png"><br>
 <em>MD5Hex断言控制面板的截图</em></p>
@@ -6064,7 +6069,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>HTML断言</h3>
+<h3 id="html">HTML断言</h3>
 <p>HTML断言允许用户使用JTidy检查响应数据的HTML语法。</p>
 <p><img alt="Screenshot for Control-Panel of HTML Assertion" src="http://jmeter.apache.org/images/screenshots/assertion/HTMLAssertion.png"><br>
 <em>HTML断言控制面板的截图</em></p>
@@ -6116,7 +6121,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>XPath断言</h3>
+<h3 id="xpath">XPath断言</h3>
 <p>XPath断言测试文档的格式是否良好，可以选择验证DTD，或者通过JTidy转换文档并测试XPath。如果该XPath存在，则断言为真。使用“<code>/</code>”将匹配任何格式良好的文档，并且是默认的XPath表达式。断言还支持布尔表达式，例如“<code>count(//*error)=2</code>”。有关XPath的更多信息，请参见<a href="http://www.w3.org/TR/xpath">http://www.w3.org/TR/xpath</a>。</p>
 <p>一些示例表达式：</p>
 <ul>
@@ -6216,7 +6221,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </ul>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>XML Schema断言</h3>
+<h3 id="xml-schema">XML Schema断言</h3>
 <p>XML Schema断言允许用户验证针对XML Schema的响应。</p>
 <p><img alt="Screenshot for Control-Panel of XML Schema Assertion" src="http://jmeter.apache.org/images/screenshots/assertion/XMLSchemaAssertion.png"><br>
 <em>XML Schema断言控制面板的截图</em></p>
@@ -6243,7 +6248,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JSR223断言</h3>
+<h3 id="jsr223_1">JSR223断言</h3>
 <p>JSR223断言允许使用JSR223脚本代码来检查上一个样本的状态。</p>
 <p><strong>参数</strong></p>
 <table>
@@ -6341,7 +6346,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <p>该脚本可以检查<a href="http://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html">SampleResult</a>的各个方面。如果检测到错误，脚本应使用<code>AssertionResult.setFailureMessage("message")</code>和<code>AssertionResult.setFailure(true)</code>。</p>
 <p>有关上述每个变量的所有可用方法的更多详细信息，请查看Javadoc。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>比较断言</h3>
+<h3 id="_46">比较断言</h3>
 <blockquote>
 <p>在压力测试期间<strong>不得使用</strong>比较断言，因为它会消耗大量资源（内存和CPU）。仅用于功能测试或测试计划调试和验证期间。</p>
 </blockquote>
@@ -6381,7 +6386,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>SMIME断言</h3>
+<h3 id="smime">SMIME断言</h3>
 <p>SMIME断言可用于评估邮件阅读者取样器的样本结果。此断言验证mime消息的正文是否已签名。还可以针对特定签署者证书来验证签名。由于这是大多数用户不一定需要的功能，因此需要下载额外的jar并将其添加到<code>JMETER_HOME/lib</code>：</p>
 <ul>
 <li><code>bcmail-xxx.jar</code>（BouncyCastle SMIME/CMS）</li>
@@ -6429,7 +6434,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JSON断言</h3>
+<h3 id="json">JSON断言</h3>
 <p>此组件允许您执行JSON文档的验证。首先，如果数据不是JSON格式，它将解析失败。其次，它将使用<a href="https://github.com/jayway/JsonPath">Jayway JsonPath 1.2.0</a>的语法搜索指定的路径。如果找不到路径，则会失败。第三，如果在文档中找到JSON路径，并且请求了对期望值的验证，则它将执行验证。对于<code>null</code>值，GUI中有特殊复选框。注意，如果路径返回数组对象，则对其进行迭代；如果找到预期值，则断言将成功。验证空数组使用字符串<code>[]</code>。此外，如果patch返回字典对象，它将在比较之前转换为字符串。</p>
 <p><img alt="Screenshot for Control-Panel of JSON Assertion" src="http://jmeter.apache.org/images/screenshots/assertion/json_assertion.png"><br>
 <em>JSON断言控制面板的截图</em></p>
@@ -6481,7 +6486,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h2>18.6 定时器</h2>
+<h2 id="186">18.6 定时器</h2>
 <blockquote>
 <p>从3.1版本开始，一个新的特性（Beta模式下，从JMeter3.1开始后续可能会有变更）已经被实现，它提供下列特性。</p>
 <p>您可以通过设置属性<code>timer.factor=float number</code>来对随机定时器计算的睡眠延迟应用乘法因子，其中float number是十进制正数。</p>
@@ -6495,7 +6500,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <p>定时器仅与取样器一起处理。与取样器不在同一范围内的定时器不会被处理。 </p>
 <p>要将定时器应用于单个取样器，请将定时器添加为取样器的子元件。定时器将在执行取样器之前应用。要在取样器之后应用计时器，请将其添加到下一个取样器，或将其添加为<a href="http://jmeter.apache.org/usermanual/component_reference.html#Flow_Control_Action">测试活动</a>取样器的子级。 </p>
 </blockquote>
-<h3>固定定时器</h3>
+<h3 id="_47">固定定时器</h3>
 <p>如果要让每个线程在请求之间暂停相同的时间，请使用此定时器。</p>
 <p><img alt="Screenshot for Control-Panel of Constant Timer" src="http://jmeter.apache.org/images/screenshots/timers/constant_timer.png"><br>
 <em>固定定时器控制面板的截图</em></p>
@@ -6522,7 +6527,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>高斯随机定时器</h3>
+<h3 id="_48">高斯随机定时器</h3>
 <p>该定时器暂停每个线程请求一段随机时间，大部分时间间隔发生在特定值附近。总延迟是高斯分布值（平均值为<code>0.0</code>，标准差为<code>1.0</code>）乘以指定偏差值，再加上偏移值之和。另一种解释是，在高斯随机定时器中，固定偏移周围的变化具有高斯曲线分布。</p>
 <p><img alt="Screenshot for Control-Panel of Gaussian Random Timer" src="http://jmeter.apache.org/images/screenshots/timers/gauss_random_timer.png"><br>
 <em>高斯随机定时器控制面板的截图</em></p>
@@ -6554,7 +6559,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>统一随机定时器</h3>
+<h3 id="_49">统一随机定时器</h3>
 <p>该定时器暂停每个线程请求一段随机时间，每个时间间隔具有相同的发生概率。总延迟是随机值和偏移值之和。</p>
 <p><img alt="Screenshot for Control-Panel of Uniform Random Timer" src="http://jmeter.apache.org/images/screenshots/timers/uniform_random_timer.png"><br>
 <em>统一随机定时器控制面板的截图</em></p>
@@ -6586,7 +6591,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>常数吞吐量定时器</h3>
+<h3 id="_50">常数吞吐量定时器</h3>
 <p>该定时器引入可变暂停，计算以使总吞吐量（以每分钟样本数计）尽可能接近给定数字。当然，如果服务器无法处理它，或者如果其他定时器或耗时的测试元件阻止它，吞吐量将会降低。</p>
 <p>注意虽然定时器被称为常数吞吐量定时器，但吞吐量值不需要是常量。它可以根据变量或函数调用来定义，并且可以在测试期间更改该值。可以通过各种方式更改值：</p>
 <ul>
@@ -6633,22 +6638,22 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 非共享算法应该跨线程生成更均匀的事务传播。</p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>准确的吞吐量定时器</h3>
+<h3 id="_51">准确的吞吐量定时器</h3>
 <p>该定时器引入可变暂停，计算以保持总吞吐量（例如，以每分钟样本计）尽可能接近给定数字。当然，如果服务器无法处理它，或者其他定时器影响，或者没有足够的线程，或者耗时的测试元件阻止它，吞吐量都会降低。</p>
 <p>虽然定时器被称为准确的吞吐量定时器，但它的目的并不是在测试期间以每秒的间隔产生相同数量精确的样本。</p>
 <p>定时器最适合工作在36000请求/小时以下的频率，但您的总请求可能会有所不同（如果您的目标差别很大，请参阅下面的监控部分）。</p>
-<h4>测试计划中准确的吞吐量定时器的最佳位置</h4>
+<h4 id="_52">测试计划中准确的吞吐量定时器的最佳位置</h4>
 <p>您可能知道，定时器是被所有兄弟姐妹及其子元件继承的。这就是为什么<code>准确的吞吐量定时器</code>的最佳位置之一是在测试循环中的第一个元件之下。例如，您可以在开头添加一个虚拟取样器，并将定时器放在该虚拟取样器下。</p>
-<h4>生成调度</h4>
+<h4 id="_53">生成调度</h4>
 <p><code>准确的吞吐量定时器</code>模拟<a href="https://en.wikipedia.org/wiki/Poisson_point_process">泊松到达</a>调度。该调度通常发生在现实生活中，因此将其用于压力测试是有意义的。例如，它自然可能生成靠近的样本，因此能够会揭示并发问题。即使您设法使用<a href="http://jmeter.apache.org/usermanual/component_reference.html#Poisson_Random_Timer">泊松随机定时器</a>生成泊松到达，它也会受到下面列出的问题的影响。例如，真正的泊松到达可能会无限期地暂停，这对于压力测试是不实际的。例如，速率为每秒1个的“常规”泊松到达可能在60秒长测试中结束50个样本。</p>
 <p><a href="http://jmeter.apache.org/usermanual/component_reference.html#Constant_Throughput_Timer">常数吞吐量定时器</a>收敛到指定的速率，但它倾向于以均匀的间隔产生采样。</p>
-<h4>加速和启动峰值</h4>
+<h4 id="_54">加速和启动峰值</h4>
 <p>您可以使用“加速”或类似方法来避免测试开始时出现尖峰。例如，如果将<a href="http://jmeter.apache.org/usermanual/component_reference.html#Thread_Group">线程组</a>配置为具有100个线程，并将<code>Ramp-up时间</code>设置为0（或者设置为较小的数字），那么所有线程将同时启动，并且会产生不必要的负载峰值。最重要的是，如果将<code>Ramp-up时间</code>设置得太高，可能会导致“太少”线程在一开始可用，达不到所需的负载。</p>
 <p><code>准确的吞吐量定时器</code>以随机方式调度执行，因此可用于生成恒定负载，建议将<code>Ramp-up时间</code>和<code>延迟</code>设置为<code>0</code>。</p>
-<h4>多个线程组同时启动</h4>
+<h4 id="_55">多个线程组同时启动</h4>
 <p>当<a href="http://jmeter.apache.org/usermanual/component_reference.html#Test_Plan">测试计划</a>包含多个<a href="http://jmeter.apache.org/usermanual/component_reference.html#Thead_Group">线程组</a>时，可能会出现<code>Ramp-up</code>问题的变体。为了缓解该问题，通常会向每个<a href="http://jmeter.apache.org/usermanual/component_reference.html#Thead_Group">线程组</a>添加“随机”延迟，以便线程在不同时间启动。</p>
 <p><code>准确的吞吐量定时器</code>避免了这个问题，因为它以随机方式安排执行。您无需添加额外的随机延迟来缓解启动峰值。</p>
-<h4>每小时的迭代次数</h4>
+<h4 id="_56">每小时的迭代次数</h4>
 <p>其中一个基本要求是每M分钟发出N个样本。让它每小时执行60次迭代。如果您使用57次执行（仅因为次数是随机的）报告负载测试结果，会使业务客户无法理解。为了每小时生成60次迭代，您需要配置如下（其他参数可以保留其默认值）</p>
 <ul>
 <li><code>目标吞吐量（样本）</code>：60</li>
@@ -6657,27 +6662,27 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </ul>
 <p>前两个选项设置吞吐量。尽管60/3600,30/1800和120/7200表示完全相同的负载水平，但请选择能够更好地表示业务需求的负载水平。例如，如果要求测试“每小时60个样本”，则设置60/3600。如果要求测试“每分钟1个样本”，则设置1/60。</p>
 <p><code>测试持续时间（秒）</code>确保定时器在给定测试持续时间执行确切样本数。<code>准确的吞吐量定时器</code>在测试启动时为样本创建调度。例如，如果您希望以每小时60个吞吐量执行5分钟测试，则可以将<code>测试持续时间（秒）</code>设置为300。这样可以以业务友好的方式配置吞吐量。注：<code>测试持续时间（秒</code>）并<strong>没有</strong>限制测试时间。这只是定时器的一个提示。</p>
-<h4>线程数和思考时间</h4>
+<h4 id="_57">线程数和思考时间</h4>
 <p>其中一个常见的误区是调整线程数和思考时间，以便最终获得所需的吞吐量。即使它可能有效，但这种方法会导致在测试运行上花费大量时间。当测试新的应用程序版本时，可能需要再次调整线程和延迟。</p>
 <p><code>准确的吞吐量定时器</code>可以设置吞吐量目标，无论应用程序执行得多好，都可以使用它。为了做到这一点，<code>准确的吞吐量定时器</code>在测试启动时创建一个调度，然后它使用该调度来释放线程。思考时间和线程数的主要驱动因素应该是业务需求，而不是以某种方式匹配吞吐量的愿望。</p>
 <p>例如，如果您的应用程序由呼叫中心的支持工程师使用。假设呼叫中心有2名工程师，目标吞吐量为每分钟1。假设工程师需要4分钟才能阅读和查看网页。在这种情况下，您应该在组中设置2个线程，使用4分钟进行思考时间延迟，并在<code>准确的吞吐量定时器</code>指定每分钟1个。当然，它会生成大约2个样本/4分钟=每分钟0.5个这样的结果，这样的测试结果意味着“您需要更多支持工程师在呼叫中心”或“您需要减少工程师完成任务所需的时间”。</p>
-<h4>测试低速率和可重复测试</h4>
+<h4 id="_58">测试低速率和可重复测试</h4>
 <p>低速率测试（例如每小时60次）需要知道所需的测试配置。例如，如果您需要以均匀间隔（例如介于60秒之间）注入负载，那么您最好使用<a href="http://jmeter.apache.org/usermanual/component_reference.html#Constant_Throughput_Timer">常数吞吐量定时器</a>。但是，如果您需要随机调度（例如，为执行报告的真实用户建模），那么<code>准确的吞吐量定时器</code>就是您的朋友。</p>
 <p>在比较多个压力测试的结果时，能够重复完全相同的测试配置文件非常有用。例如，如果在测试开始5分钟后调用操作X（例如“利润报告”），那么为后续测试执行复制该模式会很好。复制相同的负载模式简化了测试结果的分析（例如CPU％图表）。</p>
 <p><code>随机种子（从0变为随机）</code>可以控制<code>准确的吞吐量定时器</code>使用的种子值。默认情况下，它初始化为<code>0</code>，这意味着使用随机种子用于每次测试执行。如果您需要具有可重复的加载模式，则将<code>随机种子</code>更改为 一些随机值。一般建议是使用非零种子，“0默认情况下”是实现限制。</p>
 <p>注意：当使用具有相同吞吐率和相同非零种子的多个线程组时，可能会导致不必要的同时触发样本。</p>
-<h4>测试高速率和/或长持续时间测试</h4>
+<h4 id="_59">测试高速率和/或长持续时间测试</h4>
 <p>当样本数量很大（例如，它超过10,000）时，由于<code>准确的吞吐量定时器</code>试图产生确切数量的样本，因此调度生成可能需要花费显著的时间（例如，数秒）。还有内存消耗，但是它应该不太重要，因为调度中的每个项目只消耗8个字节。为了减少调度生成开销，<code>准确的吞吐量定时器</code>在生成长调度时允许一些松弛。它由<code>生成延迟的准确性</code>属性控制 。默认情况下，当样本数超过10,000时，允许不精确的调度。</p>
 <p>如果您想以每小时5'000的速度进行为期2周的测试，则无需为该2周创建调度。您可以将计时器的<code>测试持续时间（秒）</code>属性设置为1小时。计时器将创建一个小时的5'000个样本的调度，并且当调度用尽时，计时器将生成下一个小时的调度。</p>
-<h4>突发负载</h4>
+<h4 id="_60">突发负载</h4>
 <p>可能存在所有样本成对，成三等出现的的情况。某些情况可能通过<a href="http://jmeter.apache.org/usermanual/component_reference.html#Synchronizing_Timer">同步定时器</a>来解决，但<code>准确的吞吐量定时器</code>具有本地方式来以包的形式发出请求。默认情况下禁用此行为，并使用“批处理离开”设置进行控制</p>
 <ul>
 <li><code>批处理中的线程数（线程）</code>。指定批次中的样本数。注意样本的总数仍将与<code>目标吞吐量</code>一致</li>
 <li><code>批处理中的线程之间的延迟（ms）</code>。例如，如果设置为42，批量大小为3，则线程将在x，x + 42ms，x + 84ms处离开</li>
 </ul>
-<h4>可变负载率</h4>
+<h4 id="_61">可变负载率</h4>
 <p>尽管可以通过表达式定义属性值（例如吞吐量），但建议通过测试使值或多或少保持相同，因为重新计算新计划以适应新值需要时间。</p>
-<h4>监控</h4>
+<h4 id="_62">监控</h4>
 <p>当生成下一个调度时，<code>准确的吞吐量定时器</code>将消息记录到<code>jmeter.log</code>：<code>2018-01-04 17:34:03,635 INFO o.a.j.t.ConstantPoissonProcessGenerator: Generated 21 timings (... 20 required, rate 1.0, duration 20, exact lim 20000, i21) in 0 ms, restart was issued 3 times. First 15 events will be fired at: 1.1869653574244292 (+1.1869653574244292), 1.4691340403043207 (+0.2821686828798915), 3.638151706179226 (+2.169017665874905), 3.836357090410566 (+0.19820538423134026), 4.709330071408575 (+0.8729729809980085), 5.61330076999953 (+0.903970698590955), ...</code></p>
 <p>这表明调度生成花了0毫秒，它显示了以秒为单位的绝对时间戳。在上面的情况中，速率设置为每秒1，实际时间戳变为1.2秒，1.5秒，3.6秒，3.8秒，4.7秒，依此类推。</p>
 <p><img alt="Screenshot for Control-Panel of Precise Throughput Timer" src="http://jmeter.apache.org/images/screenshots/timers/precise_throughput_timer.png"><br>
@@ -6740,7 +6745,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>同步定时器</h3>
+<h3 id="_63">同步定时器</h3>
 <p>同步定时器的目的是阻塞线程，直到X个线程被阻塞，然后它们全部被同时释放。因此，同步定时器可以在测试计划的各个点创建大的即时负载。</p>
 <p><img alt="Screenshot for Control-Panel of Synchronizing Timer" src="http://jmeter.apache.org/images/screenshots/timers/sync_timer.png"><br>
 <em>同步定时器控制面板的截图</em></p>
@@ -6776,7 +6781,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <p>同步定时器阻塞仅在一个JVM内，因此如果使用分布式测试，请确保永远不要将“<code>模拟用户组的数量</code>”设置为大于其包含的线程组（仅考虑1个注入器）的用户数的值。</p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>BeanShell定时器</h3>
+<h3 id="beanshell_3">BeanShell定时器</h3>
 <p>BeanShell定时器可用于生成延迟。</p>
 <p><strong>有关使用BeanShell的完整详细信息，请参阅<a href="http://www.beanshell.org/">BeanShell网站</a>。</strong>  </p>
 <blockquote>
@@ -6849,7 +6854,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <p>有关上述每个变量的所有可用方法的详细信息，请查看Javadoc。</p>
 <p>如果定义了属性<code>beanshell.listener.init</code>，则用于加载初始化文件，该文件可用于定义在BeanShell脚本中使用的方法等。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JSR223定时器</h3>
+<h3 id="jsr223_2">JSR223定时器</h3>
 <p>JSR223定时器可使用JSR223脚本语言生成延迟。</p>
 <p><strong>参数</strong></p>
 <table>
@@ -6928,7 +6933,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </ul>
 <p>有关上述每个变量的所有可用方法的详细信息，请查看Javadoc。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>泊松随机定时器</h3>
+<h3 id="_64">泊松随机定时器</h3>
 <p>该定时器暂停每个线程请求一段随机时间，大部分时间间隔发生在特定值附近。总延迟是泊松分布值和偏移值之和。</p>
 <p>注意：如果要对泊松到达进行建模，请考虑使用<a href="http://jmeter.apache.org/usermanual/component_reference.html#Precise_Throughput_Timer">准确的吞吐量定时器</a>。</p>
 <p><img alt="Screenshot for Control-Panel of Poisson Random Timer" src="http://jmeter.apache.org/images/screenshots/timers/poisson_random_timer.png"><br>
@@ -6961,18 +6966,18 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h2>18.7 前置处理器</h2>
+<h2 id="187">18.7 前置处理器</h2>
 <p>前置处理器用于修饰其范围内的取样器。 </p>
-<h3>HTML链接解析器</h3>
+<h3 id="html_1">HTML链接解析器</h3>
 <p>此修饰器解析来自服务器的HTML响应并提取链接和表单。将检查通过此修饰器的URL测试样本，以查看它是否“匹配”从前一个响应中提取的任何链接或表单。然后，它将使用匹配的链接或表单中的适当值替换URL测试样本中的值。Perl类型的正则表达式可用于查找匹配项。</p>
 <p><img alt="Screenshot for Control-Panel of HTML Link Parser" src="http://jmeter.apache.org/images/screenshots/html_link_parser.png"><br>
 <em>HTML链接解析器控制面板的截图</em></p>
 <blockquote>
 <p>使用<code>协议</code>，<code>主机</code>，<code>路径</code>和<code>参数名称</code>执行匹配。目标取样器不能包含不在响应链接中的参数。</p>
 <p>如果使用分布式测试，请切换模式（请参阅<code>jmeter.properties</code>）以确保其不在剥离模式下，请参阅<a href="https://bz.apache.org/bugzilla/show_bug.cgi?id=56376">Bug 56376</a>。</p>
-<h4>爬虫示例</h4>
+<h4 id="_65">爬虫示例</h4>
 <p>考虑一个简单的例子：假设您希望JMeter爬取您的站点，在从服务器返回的HTML解析链接后点击链接（这实际上不是最有用的事情，但它是一个很好的例子） 。您将创建一个<a href="http://jmeter.apache.org/usermanual/component_reference.html#Simple_Controller">简单控制器</a>，并对其添加“HTML链接解析器”。然后，创建一个HTTP请求，将域设置为“<code>.*</code>”，并将路径设置为同样。这将使您的测试样本与返回页面上找到的任何链接相匹配。如果要将抓取内容限制为特定域，请将域值更改为所需的域值。然后，将仅遵循指向该域的链接。</p>
-<h4>轮询示例</h4>
+<h4 id="_66">轮询示例</h4>
 <p>一个更有用的示例：给定一个Web轮询应用程序，您可能会有一个页面包含多个轮询选项的单选按钮供用户选择。假设轮询选项的值非常动态 - 可能是用户生成的。如果您希望JMeter测试轮询，您可以创建选择了硬编码值的测试样本，也可以让HTML链接解析器解析表单，并在URL测试样本中插入随机轮询选项。为此，请按照上面的示例进行操作，但在配置Web测试控制器的URL选项时，请务必选择“<code>POST</code>”方法。为<code>域</code>，<code>路径</code>和任何其他表单参数输入硬编码值。然后，对于实际的单选按钮参数，输入名称（让我们假设它为"<code>poll_choice</code>“），然后”<code>.*</code>“表示该参数的值。当修饰器检查此URL测试样本时，它会发现它”匹配“轮询表单（并且它不应该匹配任何其他表单，因为您已经指定了URL测试示例的所有其他方面），它将使用表单中的匹配参数替换您的表单参数。由于正则表达式“<code>.*</code>”将与任何内容匹配，因此修饰符可能会有一个单选按钮列表可供选择。它将随机选择，并替换URL测试样本中的值。每次通过测试，将选择一个新的随机值。</p>
 <p><img alt="Figure 18 - Online Poll Example" src="http://jmeter.apache.org/images/screenshots/modification.png">
 <em>图18 - 在线轮询示例</em></p>
@@ -6980,7 +6985,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <p>需要记住的一件重要事情是，您必须在返回HTML页面之前立即创建一个测试样本，其中包含与动态测试样本相关的链接和表单。</p>
 </blockquote>
 </blockquote>
-<h3>HTTP URL 重写修饰符</h3>
+<h3 id="http-url">HTTP URL 重写修饰符</h3>
 <p>此修饰器与HTML链接分析器的工作方式类似，不同之处在于它具有比HTML链接分析器更易于使用的特定目的，并且效率更高。对于使用URL重写来存储会话ID而不是cookie的Web应用程序，可以在线程组级别附加此元件，就像<a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP_Cookie_Manager">HTTP Cookie管理器</a>一样。只需为其指定会话ID参数的名称，它就会在页面上找到它并将参数添加到该线程组的每个请求中。</p>
 <p>或者，此修饰器可以附加到选择请求，它只会修改它们。聪明的用户甚至可以使用此修饰器获取<a href="http://jmeter.apache.org/usermanual/component_reference.html#HTML_Link_Parser">HTML链接解析器</a>没有获取到的值。</p>
 <p><img alt="Screenshot for Control-Panel of HTTP URL Re-writing Modifier" src="http://jmeter.apache.org/images/screenshots/url_rewriter.png"><br>
@@ -7036,7 +7041,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <p>如果使用分布式测试，请切换模式（请参阅<code>jmeter.properties</code>）以确保其不在剥离模式下，请参阅<a href="https://bz.apache.org/bugzilla/show_bug.cgi?id=56376">Bug 56376</a>。</p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>用户参数</h3>
+<h3 id="_67">用户参数</h3>
 <p>允许用户指定特定于各个线程的用户变量的值。</p>
 <p>用户变量也可以在测试计划中指定，但不是特定于各个线程。此面板允许您为任何用户变量指定一系列值。对于每个线程，将根据序列中的一个值为变量分配一个值。如果线程数多于值，则重新使用这些值。例如，这可以用于分配每个线程使用的不同用户ID。用户变量可以在任何JMeter组件的任何字段中引用。</p>
 <p>通过单击面板底部的“<code>添加变量</code>”按钮并在“<code>名称：</code>”列中填写变量名称来指定变量。要向系列添加新值，请单击“<code>添加用户</code>”按钮，然后在新添加的列中填写所需的值。</p>
@@ -7067,7 +7072,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>BeanShell预处理程序</h3>
+<h3 id="beanshell_4">BeanShell预处理程序</h3>
 <p>BeanShell预处理程序允许在采样之前应用任意代码。</p>
 <p><strong>有关使用BeanShell的完整详细信息，请参阅<a href="http://www.beanshell.org/">BeanShell网站</a>。</strong>  </p>
 <blockquote>
@@ -7143,7 +7148,7 @@ JMeter日志文件中的条目还包括时间戳。例如“<code>817 in 0:05:07
 <p>有关上述每个变量的所有可用方法的详细信息，请查看Javadoc。</p>
 <p>如果定义了属性<code>beanshell.listener.init</code>，则用于加载初始化文件，该文件可用于定义在BeanShell脚本中使用的方法等。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JSR223预处理程序</h3>
+<h3 id="jsr223_3">JSR223预处理程序</h3>
 <p>JSR223预处理程序允许在采样之前应用JSR223脚本代码。</p>
 <p><strong>参数</strong></p>
 <table>
@@ -7229,7 +7234,7 @@ vars.getObject(&quot;OBJ2&quot;);
 </ul>
 <p>有关上述每个变量的所有可用方法的详细信息，请查看Javadoc</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JDBC预处理程序</h3>
+<h3 id="jdbc_1">JDBC预处理程序</h3>
 <p>JDBC预处理程序使您可以在样本运行之前运行一些SQL语句。如果JDBC样本需要某些数据位于数据库中，并且无法在初始化线程组中计算此数据，则此选项非常有用。有关详细信息，请参阅<a href="http://jmeter.apache.org/usermanual/component_reference.html#JDBC_Request">JDBC请求</a>。</p>
 <p>请参阅以下测试计划：</p>
 <p><strong>另请参阅：</strong></p>
@@ -7240,7 +7245,7 @@ vars.getObject(&quot;OBJ2&quot;);
 <p><img alt="Create Price Cut-Off Preprocessor" src="http://jmeter.apache.org/images/screenshots/jdbc-pre-processor.png">
 <em>Create Price Cut-Off预处理程序</em> </p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>正则表达式用户参数</h3>
+<h3 id="_68">正则表达式用户参数</h3>
 <p>允许使用正则表达式从一个HTTP请求中提取指定动态值并传递到另一个HTTP参数。正则表达式用户参数特定于各个线程。</p>
 <p>此组件允许您指定提取HTTP请求参数的名称和值的正则表达式的引用名称。必须为参数名称和参数值指定正则表达式组编号。仅对使用此名称匹配的正则表达式用户参数的取样器中的参数进行替换。</p>
 <p><img alt="Screenshot for Control-Panel of RegEx User Parameters" src="http://jmeter.apache.org/images/screenshots/regex_user_params.png"><br>
@@ -7278,7 +7283,7 @@ vars.getObject(&quot;OBJ2&quot;);
 </tbody>
 </table>
 <blockquote>
-<h4>正则表达式示例</h4>
+<h4 id="_69">正则表达式示例</h4>
 <p>假设我们有一个返回带有3个输入参数的表单的请求，我们想要提取其中2个的值，以便在下一个请求中注入它们</p>
 <ol>
 <li>为第一个HTTP请求创建正则表达式后置处理器<ul>
@@ -7303,7 +7308,7 @@ vars.getObject(&quot;OBJ2&quot;);
 <li><a href="http://jmeter.apache.org/demos/RegEx-User-Parameters.jmx">展示如何使用正则表达式用户参数的测试计划</a></li>
 </ul>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>取样器超时</h3>
+<h3 id="_70">取样器超时</h3>
 <p>如果完成时间过长，此前置处理器会调度计时器任务以中断样本。如果超时为零或为负，则忽略超时。为此，取样器必须实现可中断。已知以下取样器可实现：
 AJP，BeanShell，FTP，HTTP，Soap，AccessLog，邮件阅读者，JMS订阅，TCP取样器，测试活动，Java取样器</p>
 <p>此测试元件适用于连接超时或响应超时等单个超时不足或取样器不支持超时的情况。超时应设置得足够长，以使在正常测试中不会被触发，同时要足够短以使它会能中断被卡住的样本。</p>
@@ -7333,13 +7338,13 @@ AJP，BeanShell，FTP，HTTP，Soap，AccessLog，邮件阅读者，JMS订阅，
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h2>18.8 后置处理器</h2>
+<h2 id="188">18.8 后置处理器</h2>
 <p>顾名思义，后置处理器适用于取样器之后。请注意，它们适用于同一范围内的<strong>所有</strong>取样器，因此要确保后置处理器仅应用于特定取样器，请将其添加为取样器的子级。</p>
 <blockquote>
 <p>注意：除非另有说明，否则后置处理器不适用于子样本 - 仅适用于父样本。对于JSR223和BeanShell后置处理器，脚本可以使用<code>prev.getSubResults()</code>方法检索子样本，该方法返回SampleResults数组。如果没有，则数组将为空。</p>
 </blockquote>
 <p>后置处理器在断言之前运行，因此它们无法访问任何断言结果，样本状态也不会反映任何断言的结果。如果您需要访问断言结果，请尝试使用监听器。另请注意，在运行所有断言后，变量<code>JMeterThread.last_sample_ok</code>设置为“<code>true</code>”或“<code>false</code>”。</p>
-<h3>正则表达式提取器</h3>
+<h3 id="_71">正则表达式提取器</h3>
 <p>允许用户使用Perl类型的正则表达式从服务器响应中提取值。作为后置处理器，此元件将在其范围内的每个样本请求之后执行，应用正则表达式，提取请求的值，生成模板字符串，并将结果存储到给定的变量名称中。</p>
 <p><img alt="Screenshot for Control-Panel of Regular Expression Extractor" src="http://jmeter.apache.org/images/screenshots/regex_extractor.png"><br>
 <em>正则表达式提取器控制面板的截图</em></p>
@@ -7423,7 +7428,7 @@ AJP，BeanShell，FTP，HTTP，Soap，AccessLog，邮件阅读者，JMS订阅，
 <p>注意在这种情况下，<code>refName</code>变量始终设置为默认值，并且未设置关联的组变量。</p>
 <p>有关如何指定修饰符及<a href="http://jmeter.apache.org/usermanual/regular_expressions.html">关于JMeter正则表达式的更多信息</a>，请参阅<a href="http://jmeter.apache.org/usermanual/component_reference.html#Response_Assertion">响应断言</a>。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>CSS选择器提取器（即：CSS/JQuery提取器）</h3>
+<h3 id="csscssjquery">CSS选择器提取器（即：CSS/JQuery提取器）</h3>
 <p>允许用户使用CSS选择器语法从服务器HTML响应中提取值。作为后置处理器，此元件将在其范围内的每个样本请求之后执行，应用CSS/JQuery表达式，提取所请求的节点，将节点提取为文本或属性值并将结果存储到给定的变量名称中。</p>
 <p><img alt="Screenshot for Control-Panel of CSS Selector Extractor" src="http://jmeter.apache.org/images/screenshots/css_extractor_attr.png"><br>
 <em>CSS选择器提取器控制面板的截图</em></p>
@@ -7497,7 +7502,7 @@ AJP，BeanShell，FTP，HTTP，Soap，AccessLog，邮件阅读者，JMS订阅，
 </ul>
 <p>请注意，在这种情况下，<code>refName</code>变量始终设置为默认值。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>XPath2 Extractor</h3>
+<h3 id="xpath2-extractor">XPath2 Extractor</h3>
 <p>此测试元件允许用户使用XPath2查询语言从结构化响应（XML或(X)HTML）中提取值。</p>
 <p><img alt="Screenshot for Control-Panel of XPath2 Extractor" src="http://jmeter.apache.org/images/screenshots/xpath2_extractor.png"><br>
 <em>XPath2 Extractor控制面板的截图</em></p>
@@ -7572,7 +7577,7 @@ AJP，BeanShell，FTP，HTTP，Soap，AccessLog，邮件阅读者，JMS订阅，
 </ul>
 <p>要查看有关函数的更多信息，请参阅<a href="http://saxon.sourceforge.net/saxon7.9.1/functions.html">xPath2函数</a>。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>XPath提取器</h3>
+<h3 id="xpath_1">XPath提取器</h3>
 <p>此测试元件允许用户使用XPath查询语言从结构化响应（XML或(X)HTML）中提取值。</p>
 <blockquote>
 <p>从JMeter 5.0开始，您应该使用<a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath2_Extractor">XPath2 Extractor</a>，因为它提供了更好，更简单的命名空间管理，更好的性能和对XPath 2.0的支持</p>
@@ -7730,7 +7735,7 @@ AJP，BeanShell，FTP，HTTP，Soap，AccessLog，邮件阅读者，JMS订阅，
 
 <p><code>uri-for-namespace</code> <code>mynamespace</code></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>结果状态处理器</h3>
+<h3 id="_72">结果状态处理器</h3>
 <p>此测试元件允许用户在相关取样器发生故障后停止线程或整个测试。</p>
 <p><img alt="Screenshot for Control-Panel of Result Status Action Handler" src="http://jmeter.apache.org/images/screenshots/resultstatusactionhandler.png"><br>
 <em>结果状态处理器控制面板的截图</em></p>
@@ -7757,7 +7762,7 @@ AJP，BeanShell，FTP，HTTP，Soap，AccessLog，邮件阅读者，JMS订阅，
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>BeanShell后置处理程序</h3>
+<h3 id="beanshell_5">BeanShell后置处理程序</h3>
 <p>BeanShell预处理程器允许在采集样本后应用任意代码。</p>
 <p>BeanShell后置处理程器不再忽略具有零长度结果数据的样本。</p>
 <p><strong>有关使用BeanShell的完整详细信息，请参阅<a href="http://www.beanshell.org/">BeanShell网站</a>。</strong>  </p>
@@ -7834,7 +7839,7 @@ AJP，BeanShell，FTP，HTTP，Soap，AccessLog，邮件阅读者，JMS订阅，
 <p>有关上述每个变量的所有可用方法的详细信息，请查看Javadoc。</p>
 <p>如果定义了属性<code>beanshell.listener.init</code>，则用于加载初始化文件，该文件可用于定义在BeanShell脚本中使用的方法等。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JSR223后置处理程序</h3>
+<h3 id="jsr223_4">JSR223后置处理程序</h3>
 <p>JSR223后置处理程序允许在获取样本后应用JSR223脚本代码。</p>
 <p><strong>参数</strong></p>
 <table>
@@ -7923,7 +7928,7 @@ vars.getObject(&quot;OBJ2&quot;);
 </ul>
 <p>有关上述每个变量的所有可用方法的详细信息，请查看Javadoc</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JDBC后置处理程序</h3>
+<h3 id="jdbc_2">JDBC后置处理程序</h3>
 <p>JDBC后置处理程序使您可以在样本运行后立即运行一些SQL语句。如果JDBC样本更改了某些数据，并且您希望将状态重置为JDBC样本运行之前的状态，那么这将非常有用。</p>
 <p><strong>另请参阅：</strong></p>
 <ul>
@@ -7933,7 +7938,7 @@ vars.getObject(&quot;OBJ2&quot;);
 <p><img alt="JDBC PostProcessor" src="http://jmeter.apache.org/images/screenshots/jdbc-post-processor.png">
 <em>JDBC后置处理程序</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>JSON提取器</h3>
+<h3 id="json_1">JSON提取器</h3>
 <p>JSON后置处理程序使您可以使用JSON-PATH语法从JSON响应中提取数据。此后处理器与正则表达式提取器非常相似。它必须作为HTTP取样器或具有响应的其他任何取样器的子项放置。它将允许您以非常简单的方式提取文本内容，请参阅<a href="http://goessner.net/articles/JsonPath/">JSON Path语法</a>。</p>
 <p><strong>参数</strong></p>
 <table>
@@ -7980,7 +7985,7 @@ vars.getObject(&quot;OBJ2&quot;);
 <p><img alt="JSON PostProcessor" src="http://jmeter.apache.org/images/screenshots/json-post-processor.png">
 <em>JSON后置处理程序</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>边界提取器</h3>
+<h3 id="_73">边界提取器</h3>
 <p>允许用户使用左右边界从服务器响应中提取值。作为后置处理器，此元件将在其范围内的每个样本请求之后执行，测试边界，提取请求的值，生成模板字符串，并将结果存储到给定的变量名称中。</p>
 <p><img alt="Screenshot for Control-Panel of Boundary Extractor" src="http://jmeter.apache.org/images/screenshots/extractor/boundary_extractor.png"><br>
 <em>边界提取器控制面板的截图</em></p>
@@ -8050,8 +8055,8 @@ vars.getObject(&quot;OBJ2&quot;);
 </ul>
 <p>注意在这种情况下，<code>refName</code>变量始终设置为默认值，并且未设置关联的组变量。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h2>18.9 其他功能</h2>
-<h3>测试计划</h3>
+<h2 id="189">18.9 其他功能</h2>
+<h3 id="_74">测试计划</h3>
 <p>测试计划是指定测试总体设置的位置。</p>
 <p>可以为整个测试中重复的值定义静态变量，例如服务器名称。例如，变量<code>SERVER</code>可以定义为<code>www.example.com</code>，测试计划的其余部分可以使用<code>${SERVER}</code>来引用它。这简化了以后改名的过程。</p>
 <p>如果在一个或多个<a href="http://jmeter.apache.org/usermanual/component_reference.html#User_Defined_Variables">用户定义的变量</a>配置元件上重用相同的变量名称 ，则该值将被测试计划中最后一个定义（从上到下读取）所设置。此类变量应用于可能在测试运行之间更改但在测试运行期间保持不变的项目。</p>
@@ -8074,7 +8079,7 @@ vars.getObject(&quot;OBJ2&quot;);
 <p><img alt="Screenshot for Control-Panel of Test Plan" src="http://jmeter.apache.org/images/screenshots/testplan.png"><br>
 <em>测试计划控制面板的截图</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>线程组</h3>
+<h3 id="_75">线程组</h3>
 <p>线程组定义了一个用户池，它将针对您的服务器执行特定的测试用例。在线程组GUI中，您可以控制模拟的用户数（线程数），ramp-up时间（启动所有线程所需的时间），执行测试的次数以及可选的启动和停止测试的时间。</p>
 <p>另请参见<a href="http://jmeter.apache.org/usermanual/component_reference.html#tearDown_Thread_Group">tearDown线程组</a>和<a href="http://jmeter.apache.org/usermanual/component_reference.html#setUp_Thread_Group">setUp线程组</a>。</p>
 <p>使用调度器时，JMeter会运行线程组，直到达到循环次数或达到持续时间/结束时间 - 以先发生者为准。请注意，仅在样本之间检查条件；当达到结束条件时，该线程将停止。JMeter不会中断等待响应的取样器，因此结束时间可能会被任意延迟。</p>
@@ -8155,9 +8160,9 @@ vars.getObject(&quot;OBJ2&quot;);
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>工作台</h3>
+<h3 id="_76">工作台</h3>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>SSL管理器</h3>
+<h3 id="ssl">SSL管理器</h3>
 <p>SSL管理器是一种选择客户端证书的方法，以便您可以测试使用公钥基础结构（PKI）的应用程序。仅在尚未设置相应的系统属性时才需要它。</p>
 <blockquote>
 <p>如果要测试客户端证书身份验证，请参阅<a href="http://jmeter.apache.org/usermanual/component_reference.html#Keystore_Configuration">密钥库配置</a></p>
@@ -8170,7 +8175,7 @@ vars.getObject(&quot;OBJ2&quot;);
 <p><strong>值得关注的事情</strong></p>
 <p>如果没有JDK附带的五个CA证书之一的签名，则必须正确安装证书颁发机构（CA）的证书。安装它的一种方法是将CA证书导入JKS文件，并将JKS文件命名为“<code>jssecacerts</code>”。将文件放在JRE的<code>lib/security</code>文件夹下。此文件将在同一目录中的“<code>cacerts</code>”文件之前读取。请记住，只要存在“<code>jssecacerts</code>”文件，就不会使用“<code>cacerts</code>”中安装的证书。这可能会给您带来麻烦。如果您不介意将CA证书导入“<code>cacerts</code>“文件，您可以对安装的所有CA证书进行身份验证。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>HTTP(S)测试脚本录制器 （即：HTTP代理服务器）</h3>
+<h3 id="https-http">HTTP(S)测试脚本录制器 （即：HTTP代理服务器）</h3>
 <p>HTTP(S)测试脚本记录器允许JMeter在您使用普通浏览器浏览Web应用程序时拦截和记录您的操作。JMeter将创建测试样本对象并将其直接存储到您的测试计划中（因此您可以在制作样本时以交互方式查看样本）。<br>
 确保您阅读此<a href="https://wiki.apache.org/jmeter/TestRecording210">Wiki页面</a>以正确设置JMeter。</p>
 <p>要使用记录器，请<em>添加</em> HTTP(S)测试脚本记录器元件。右键单击测试计划元件以获取添加菜单：( <em>添加</em>  →  <em>非测试元件</em>  →  <em>HTTP代理服务器</em> ）。</p>
@@ -8179,7 +8184,7 @@ vars.getObject(&quot;OBJ2&quot;);
 <p>不要将JMeter用作任何其他请求类型的代理 - FTP等 - 因为JMeter无法处理它们。</p>
 </blockquote>
 <p>理想情况下，在录制会话时使用隐私浏览模式。这将确保浏览器在没有存储cookie的情况下启动，并防止保存某些更改。例如，Firefox不允许永久保存证书覆盖。</p>
-<h4>HTTPS录制和证书</h4>
+<h4 id="https">HTTPS录制和证书</h4>
 <p>HTTPS连接使用证书来验证浏览器和Web服务器之间的连接。通过HTTPS连接时，服务器会将证书提供给浏览器。为了验证证书，浏览器检查服务器证书是否由链接到其内置根CA之一的证书颁发机构（CA）签名。</p>
 <blockquote>
 <p>浏览器还会检查证书是否适用于正确的主机或域，并且证书有效且未过期。</p>
@@ -8229,7 +8234,7 @@ vars.getObject(&quot;OBJ2&quot;);
 <blockquote>
 <p>如果您的浏览器当前使用代理（例如公司内部网可以通过代理路由所有外部请求），那么您需要在启动JMeter之前使用<a href="http://jmeter.apache.org/usermanual/get-started.html#options">命令行选项</a><code>-H</code>和<code>-P</code><a href="http://jmeter.apache.org/usermanual/get-started.html#proxy_server">告诉JMeter使用此代理</a>。运行生成的测试计划时也需要此设置。</p>
 </blockquote>
-<h4>安装用于HTTPS录制的JMeter CA证书</h4>
+<h4 id="httpsjmeter-ca">安装用于HTTPS录制的JMeter CA证书</h4>
 <p>如上所述，在Java 8下运行时，JMeter可以为每个服务器生成证书。为了使其顺利运行，JMeter使用的根CA签名证书需要得到浏览器的信任。第一次启动录制器时，它将在必要时生成证书。根CA证书将导出到当前启动目录中名为<code>ApacheJMeterTemporaryRootCA</code>的文件中。设置证书后，JMeter将显示一个包含当前证书详细信息的对话框。此时，可以按照以下说明将证书导入浏览器。</p>
 <p>请注意，一旦将根CA证书安装为可信CA，浏览器将信任由其签名的任何证书。在证书过期或证书从浏览器中删除之前，它不会警告用户证书正在被依赖。因此，任何能够获取密钥库和密码的人都可以使用证书生成这些将被任何信任JMeter根CA证书的浏览器接受的证书。因此，随机生成密钥库和私钥的密码，并使用短的有效期。密码存储在本地首选项区域中。请确保只有受信任的用户才能访问具有密钥库的主机。</p>
 <blockquote>
@@ -8238,7 +8243,7 @@ vars.getObject(&quot;OBJ2&quot;);
 <em>记录器安装证书弹窗</em></p>
 <p>只需单击“OK”然后继续。</p>
 </blockquote>
-<h5>在Firefox中安装证书</h5>
+<h5 id="firefox">在Firefox中安装证书</h5>
 <p>选择以下选项：</p>
 <ul>
 <li><code>工具/选项</code></li>
@@ -8251,14 +8256,14 @@ vars.getObject(&quot;OBJ2&quot;);
 <li>如果正常，请选择“<code>信任此CA以识别网站</code>”，然后点击<code>确定</code></li>
 <li>根据需要点击“<code>确定</code>”关闭对话框</li>
 </ul>
-<h5>在Chrome或Internet Explorer中安装证书</h5>
+<h5 id="chromeinternet-explorer">在Chrome或Internet Explorer中安装证书</h5>
 <p>Chrome和Internet Explorer都使用相同的信任存储区来存储证书。</p>
 <ul>
 <li>浏览到JMeter启动目录，然后单击<code>ApacheJMeterTemporaryRootCA.crt</code>文件，并将其打开</li>
 <li>单击“<code>详细信息</code>”选项卡，检查证书详细信息是否与JMeter测试脚本记录器显示的一致</li>
 <li>如果确定，请返回“<code>常规</code>”选项卡，然后单击“<code>安装证书...</code>”并按照向导提示进行操作</li>
 </ul>
-<h5>在Opera中安装证书</h5>
+<h5 id="opera">在Opera中安装证书</h5>
 <ul>
 <li><code>工具/偏好/高级/安全</code></li>
 <li><code>管理证书...</code></li>
@@ -8389,20 +8394,20 @@ vars.getObject(&quot;OBJ2&quot;);
 </tr>
 </tbody>
 </table>
-<h4>录制和重定向</h4>
+<h4 id="_77">录制和重定向</h4>
 <p>在录制过程中，浏览器将遵循重定向响应并生成额外的请求。代理将记录原始请求和重定向请求（取决于配置的任何排除）。生成的样本默认选择“<code>跟随重定向</code>”，因为这通常更好。</p>
 <blockquote>
 <p>重定向可能取决于原始请求，因此重复原始记录的样本可能并不总是有效。</p>
 </blockquote>
 <p>现在，如果JMeter设置为在重放期间跟随重定向，它将发出原始请求，然后重播已记录的重定向请求。为了避免这种重复重放，JMeter尝试检测样本是否是之前重定向的结果。如果当前响应是重定向，JMeter将保存重定向URL。收到下一个请求时，会将其与保存的重定向URL进行比较，如果匹配，JMeter将禁用生成的样本。它还为重定向链添加了注释。这假设重定向链中的所有请求将在没有任何干预请求的情况下相互跟随。要禁用重定向检测，请设置属性<code>proxy.redirect.disabling=false</code></p>
-<h4>包含和排除</h4>
+<h4 id="_78">包含和排除</h4>
 <p><strong>包含和排除模式</strong>被视为正则表达式（使用Jakarta ORO）。它们将与每个浏览器请求的主机名，端口（实际或隐含），路径和查询（如果有）进行匹配。如果您正在浏览的URL是“<code>http://localhost/jmeter/index.html?username=xxxx</code>”，那么针对此字符串测试正则表达式：“<code>localhost:80/jmeter/index.html?username=xxxx</code>”。因此，如果要包含所有<code>.html</code>文件，如果你知道没有查询字符串或者你只想要不带查询字符串的html页面，正则表达式可以如下所示："<code>.*\.html(\?.*)?</code>"或者"<code>.*\.html</code>"。</p>
 <p>如果存在任何包含模式，则URL<strong>必须至少与其中一个</strong>模式<strong>匹配</strong>，否则将不会记录。如果存在任何排除模式，则URL<strong>必须与任何</strong>模式<strong>都不匹配</strong>，否则将不会记录。使用包含和排除的组合，您应该能够记录您感兴趣的内容并跳过您不感兴趣的内容。</p>
 <blockquote>
 <p>注意，正则表达式匹配的字符串必须与<strong>整个</strong>主机+路径字符串相同。
 因此“<code>\.html</code>” 与<code>localhost:80/index.html</code><strong>不</strong>匹配</p>
 </blockquote>
-<h4>捕获二进制POST数据</h4>
+<h4 id="post">捕获二进制POST数据</h4>
 <p>JMeter能够捕获二进制POST数据。要配置将哪些<code>content-types</code>视为二进制，请更新JMeter属性<code>proxy.binary.types</code>。默认设置如下：</p>
 <div class="highlight"><pre><span></span>＃这些content-types将通过将请求保存在文件中来处理：
 proxy.binary.types=application/x-amf,application/x-java-serialized-object
@@ -8413,18 +8418,18 @@ proxy.binary.filesuffix=.binary
 </pre></div>
 
 
-<h4>添加定时器</h4>
+<h4 id="_79">添加定时器</h4>
 <p>也可以让代理向记录的脚本添加定时器。为此，请直接在HTTP(S)测试脚本记录器组件中创建定时器。代理会将此定时器的副本放入其记录的每个样本中，如果您正在使用分组，则将其放入每个组的第一个样本中。然后将扫描该副本以查找其属性中变量<code>${T}</code>的出现，并且任何此类出现将被前一个样本记录的的时间间隔（以毫秒为单位）替换。</p>
 <p>当您准备开始时，点击“<code>启动</code>”。</p>
 <blockquote>
 <p>您需要编辑浏览器的代理设置以指向相应的服务器和端口，其中服务器是运行JMeter的机器，端口＃来自上面显示的代理控制面板。</p>
 </blockquote>
-<h4>样本在何处被记录？</h4>
+<h4 id="_80">样本在何处被记录？</h4>
 <p>JMeter将记录的样本放入您选择的目标控制器中。如果选择默认选项“<code>使用录制控制器</code>”，它们将存储在测试对象树中找到的第一个录制控制器中（因此请务必在开始录制之前添加录制控制器）。</p>
 <p>如果代理似乎没有记录任何样本，这可能是因为浏览器实际上没有使用代理。要检查是否是这种情况，请尝试停止代理。如果浏览器仍然可以下载页面，则它没有通过代理发送请求。请再次检查浏览器选项。如果您尝试从运行在同一主机上的服务器进行录制，请检查浏览器是否没有设置为“<code>对于本地地址不使用代理服务器</code>”（此示例来自IE7，但其他浏览器也有类似的选项）。如果JMeter不记录浏览器URL，例如<code>http://localhost/</code>或<code>http://127.0.0.1/</code>，请尝试使用非环回主机名或IP地址，例如<code>http://myhost/</code>或<code>http://192.168.0.2/</code>。</p>
-<h4>处理HTTP请求默认值</h4>
+<h4 id="http_4">处理HTTP请求默认值</h4>
 <p>如果HTTP(S)测试脚本记录器直接在存储样本的控制器内或任何其父控制器内找到启用的<a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP_Request_Defaults">HTTP请求默认值</a>，则记录的样本将对于您指定的默认值使用空字段。您可以通过在HTTP(S)测试脚本记录器中直接放置HTTP请求默认值元件来进一步控制此行为，其非空值将覆盖其他HTTP请求默认值中的值。有关详细信息，请参阅<a href="http://jmeter.apache.org/usermanual/best-practices.html#proxy_server">HTTP(S)测试脚本记录器的最佳实践</a>。</p>
-<h4>用户定义的变量替换</h4>
+<h4 id="_81">用户定义的变量替换</h4>
 <p>类似地，如果HTTP(S)测试脚本记录器直接在存储样本的控制器内或任何其父控制器内找到<a href="http://jmeter.apache.org/usermanual/component_reference.html#User_Defined_Variables">用户定义的变量</a>（UDV），则记录的样本将把任何这些变量值的出现由相应的变量替换。同样，您可以将用户定义变量直接放在HTTP(S)测试脚本记录器中，以覆盖要替换的值。有关详细信息，请参阅 <a href="http://jmeter.apache.org/usermanual/best-practices.html#proxy_server">测试脚本记录器的最佳实践</a>。</p>
 <blockquote>
 <p>请注意，匹配区分大小写。</p>
@@ -8446,20 +8451,20 @@ proxy.binary.filesuffix=.binary
 <p>留意重叠的匹配器。例如，作为变量名为<code>regex</code>的正则表达式的值<code>.*</code>将部分匹配先前替换的变量，这将导致类似<code>${{regex}</code>的内容，这很可能不是所需的结果。</p>
 <p>如果将任何变量解释为模式存在任何问题，则会在<code>jmeter.log</code>中报告这些问题，因此如果用户定义的变量未按预期工作，请务必检查此问题。</p>
 <p>完成录制测试样本后，停止代理服务器（点击“<code>停止</code>”按钮）。请记住重置浏览器的代理设置。现在，您可能希望对测试脚本进行排序和重新排序，添加定时器，监听器，cookie管理器等。</p>
-<h4>我怎样才能同时记录服务器的响应？</h4>
+<h4 id="_82">我怎样才能同时记录服务器的响应？</h4>
 <p>只需将<a href="http://jmeter.apache.org/usermanual/component_reference.html#View_Results_Tree">查看结果树</a>监听器作为HTTP(S)测试脚本记录器的子项放置，就会显示响应。您还可以添加<a href="http://jmeter.apache.org/usermanual/component_reference.html#Save_Responses_to_a_file">保存响应到文件</a>后置处理器来将响应保存到文件。</p>
-<h4>将请求与响应相关联</h4>
+<h4 id="_83">将请求与响应相关联</h4>
 <p>如果定义属性<code>proxy.number.requests=true</code>， JMeter将为每个取样器和每个响应添加一个数字。注意如果使用了排除或包含，可能会有比取样器更多的响应。已被排除的响应将被包含在<code>[</code>和<code>]</code>标签中，例如<code>[23 /favicon.ico]</code>。</p>
-<h4>Cookie管理器</h4>
+<h4 id="cookie">Cookie管理器</h4>
 <p>如果您要测试的服务器使用cookie，请记住在完成记录后将<a href="http://jmeter.apache.org/usermanual/component_reference.html#HTTP_Cookie_Manager">HTTP Cookie管理器</a>添加到测试计划中。在录制期间，浏览器会处理任何cookie，但JMeter需要Cookie管理器在测试运行期间处理cookie。JMeter代理服务器在记录期间传递浏览器发送的所有cookie，但不会将它们保存到测试计划中，因为它们每次运行时通常会变化。</p>
-<h4>授权管理器</h4>
+<h4 id="_84">授权管理器</h4>
 <p>HTTP(S)测试脚本记录器抓取“<code>Authentication</code>”信息头，尝试计算身份验证策略。如果授权管理器手动添加到目标控制器，HTTP(S)测试脚本记录器将找到它并添加授权（匹配的将被删除）。否则，授权管理器将添加到具有授权对象的目标控制器。您可能必须在录制后修改自动计算的值。</p>
-<h4>上传文件</h4>
+<h4 id="_85">上传文件</h4>
 <p>某些浏览器（例如Firefox和Opera）在上传文件时不包含文件的全名。这可能导致JMeter代理服务器失败。一种解决方案是确保要上传的任何文件都在JMeter工作目录中，可以将文件复制到工作目录或在包含文件的目录中启动JMeter。</p>
-<h4>记录JMeter中原生不支持的基于HTTP的非文本协议</h4>
+<h4 id="jmeterhttp">记录JMeter中原生不支持的基于HTTP的非文本协议</h4>
 <p>您可能要记录JMeter默认不处理的HTTP协议（自定义二进制协议，Adobe Flex，Microsoft Silverlight，...）。虽然JMeter不提供记录这些协议的原生代理实现，但您可以通过实现自定义<code>SamplerCreator</code>来记录这些协议。此取样器生成器可以将二进制格式转换为可添加到JMeter测试用例的<code>HTTPSamplerBase</code>子类。有关更多详细信息，请参阅“扩展JMeter”。</p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>HTTP镜像服务器</h3>
+<h3 id="http_5">HTTP镜像服务器</h3>
 <p>HTTP镜像服务器是一个非常简单的HTTP服务器 - 它只是镜像发送给它的数据。这对于检查HTTP请求的内容很有用。</p>
 <p>它使用默认端口为<code>8081</code>。</p>
 <p><img alt="Screenshot for Control-Panel of HTTP Mirror Server" src="http://jmeter.apache.org/images/screenshots/mirrorserver.png"><br>
@@ -8565,7 +8570,7 @@ proxy.binary.filesuffix=.binary
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>属性显示</h3>
+<h3 id="_86">属性显示</h3>
 <p>属性显示显示系统或JMeter属性的值。可以通过在“值”列中输入新文本来更改值。</p>
 <p><img alt="Screenshot for Control-Panel of Property Display" src="http://jmeter.apache.org/images/screenshots/property_display.png"><br>
 <em>属性显示控制面板的截图</em></p>
@@ -8587,7 +8592,7 @@ proxy.binary.filesuffix=.binary
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>调试取样器</h3>
+<h3 id="_87">调试取样器</h3>
 <p>调试取样器生成一个包含所有JMeter变量和/或属性值的样本。</p>
 <p>可以在<a href="http://jmeter.apache.org/usermanual/component_reference.html#View_Results_Tree">查看结果树</a>监听器响应数据窗格中查看这些值。</p>
 <p><img alt="Screenshot for Control-Panel of Debug Sampler" src="http://jmeter.apache.org/images/screenshots/debug_sampler.png"><br>
@@ -8625,7 +8630,7 @@ proxy.binary.filesuffix=.binary
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>调试后置处理程序</h3>
+<h3 id="_88">调试后置处理程序</h3>
 <p>调试后置处理程序创建一个子样本，其中包含之前取样器属性，JMeter变量，属性和/或系统属性的详细信息。</p>
 <p>可以在<a href="http://jmeter.apache.org/usermanual/component_reference.html#View_Results_Tree">查看结果树</a>监听器响应数据窗格中查看这些值。</p>
 <p><img alt="Screenshot for Control-Panel of Debug PostProcessor" src="http://jmeter.apache.org/images/screenshots/debug_postprocessor.png"><br>
@@ -8668,7 +8673,7 @@ proxy.binary.filesuffix=.binary
 </tbody>
 </table>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>测试片段</h3>
+<h3 id="_89">测试片段</h3>
 <p>测试片段与<a href="http://jmeter.apache.org/usermanual/component_reference.html#Include_Controller">Include控制器</a>和<a href="http://jmeter.apache.org/usermanual/component_reference.html#Module_Controller">模块控制器</a>一起使用。</p>
 <p><img alt="Screenshot for Control-Panel of Test Fragment" src="http://jmeter.apache.org/images/screenshots/test_fragment.png"><br>
 <em>测试片段控制面板的截图</em></p>
@@ -8693,12 +8698,12 @@ proxy.binary.filesuffix=.binary
 <p>将测试片段与<a href="http://jmeter.apache.org/usermanual/component_reference.html#Module_Controller">模块控制器</a>一起使用时，请确保禁用测试片段以防止执行测试片段本身。JMeter 2.13之后默认禁用。</p>
 </blockquote>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>setUp线程组</h3>
+<h3 id="setup">setUp线程组</h3>
 <p>一种特殊类型的线程组，可用于执行测试预操作。这些线程的行为与普通的<a href="http://jmeter.apache.org/usermanual/component_reference.html#Thread_Group">线程组</a>元件完全相同。不同之处在于这些类型的线程在测试过程中在常规线程组执行之前执行。</p>
 <p><img alt="Screenshot for Control-Panel of setUp Thread Group" src="http://jmeter.apache.org/images/screenshots/setup_thread_group.png"><br>
 <em>setUp线程组控制面板的截图</em></p>
 <p><a href="#toc">【返回目录】</a></p>
-<h3>tearDown线程组</h3>
+<h3 id="teardown">tearDown线程组</h3>
 <p>一种特殊类型的线程组，可用于执行测试后操作。这些线程的行为与普通的<a href="http://jmeter.apache.org/usermanual/component_reference.html#Thread_Group">线程组</a>元件完全相同。不同之处在于这些类型的线程在测试过程中在常规线程组执行后执行。</p>
 <p><img alt="Screenshot for Control-Panel of tearDown Thread Group" src="http://jmeter.apache.org/images/screenshots/teardown_thread_group.png"><br>
 <em>tearDown线程组控制面板的截图</em></p>

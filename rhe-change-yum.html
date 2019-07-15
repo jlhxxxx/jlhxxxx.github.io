@@ -99,7 +99,7 @@
     
 </footer><!-- /.post-info -->
 
-        <h2>确定Red Hat Enterprise和CentOS对应版本</h2>
+        <h2 id="red-hat-enterprisecentos">确定Red Hat Enterprise和CentOS对应版本</h2>
 <p>查看当前系统版本</p>
 <div class="highlight"><pre><span></span>cat /etc/issue     <span class="c1"># 查看系统版本</span>
 cat /proc/version  <span class="c1"># 查看内核版本</span>
@@ -110,14 +110,14 @@ cat /proc/version  <span class="c1"># 查看内核版本</span>
 <li><a href="https://zh.wikipedia.org/zh-cn/CentOS">CentOS</a></li>
 <li><a href="https://www.linuxidc.com/Linux/2016-07/133000.htm">CentOS和RedHat发行版与Linux内核版本的对应关系</a></li>
 </ul>
-<h2>备份和卸载本地yum源</h2>
+<h2 id="yum">备份和卸载本地yum源</h2>
 <div class="highlight"><pre><span></span>rpm -qa<span class="p">|</span>grep yum　　                                          <span class="c1"># 查看本地yum</span>
 mv /etc/yum.repos.d/your.repo  /etc/yum.repos.d/your.repo.bak   <span class="c1"># your替换成本地repo名称</span>
 rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --nodeps　　                    <span class="c1"># 不检查依赖性，卸载yum程序</span>
 </pre></div>
 
 
-<h2>下载新的yum安装包</h2>
+<h2 id="yum_1">下载新的yum安装包</h2>
 <p>这里采用163的镜像，我们要下的是这几个包：<code>python-iniparse-xxx.noarch.rpm</code>、<code>yum.xxx.centos.noarch.rpm</code>、<code>yum-plugin-fastestmirror-xxx.noarch.rpm</code>、<code>yum-metadata-parser-xxx.rpm</code>（其中xxx为版本等相关信息）</p>
 <p>也可以用命令下载：</p>
 <div class="highlight"><pre><span></span>wget http://mirrors.163.com/centos/6/os/x86_64/Packages/python-iniparse-0.3.1-2.1.el6.noarch.rpm
@@ -127,7 +127,7 @@ wget http://mirrors.163.com/centos/6/os/x86_64/Packages/yum-metadata-parser-1.1.
 </pre></div>
 
 
-<h2>安装</h2>
+<h2 id="_1">安装</h2>
 <div class="highlight"><pre><span></span>rpm -ivh python-iniparse-0.3.1-2.1.el6.noarch.rpm
 rpm -ivh yum-3.2.29-81.el6.centos.noarch.rpm yum-plugin-fastestmirror-1.1.30-40.el6.noarch.rpm yum-metadata-parser-1.1.2-16.el6.x86_64.rpm             <span class="c1"># 3个一起，免得它们相互依赖</span>
 </pre></div>
@@ -147,7 +147,7 @@ rpm -ivh python-urlgrabber-3.9.1-11.el6.noarch.rpm
 
 </li>
 </ul>
-<h2>配置并使用CentOS yum源</h2>
+<h2 id="centos-yum">配置并使用CentOS yum源</h2>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> /etc/yum.repos.d/　　<span class="c1">#进入到yum配置文件目录</span>
 wget http://mirrors.163.com/.help/CentOS6-Base-163.repo　　<span class="c1">#下载CentOS配置文件</span>
 </pre></div>
@@ -160,7 +160,7 @@ yum makecache
 </pre></div>
 
 
-<h3>参考文章</h3>
+<h3 id="_2">参考文章</h3>
 <ul>
 <li><a href="https://www.cnblogs.com/wutengbiao/p/4188986.html">RedHat6使用CentOS yum源 换yum</a></li>
 <li><a href="https://blog.csdn.net/wangzhjj/article/details/53980727">RHEL6解决无法使用YUM源问题</a></li>

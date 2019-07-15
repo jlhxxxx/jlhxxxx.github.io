@@ -99,8 +99,8 @@
     
 </footer><!-- /.post-info -->
 
-        <h2>安装卸载</h2>
-<h4>安装</h4>
+        <h2 id="_1">安装卸载</h2>
+<h4 id="_2">安装</h4>
 <p>新手不建议安装发布不久的最新版本，一来新版本可能有一些新特性，但是网上相关的文章较少，入坑概率很大，老手尚需时间来适应，新手肯定更觉得难以上手了；二来旧版本相对比较稳定，各种文档丰富，常见BUG都有比较成熟的应对方法；三是要看使用环境了，兼容性是考虑重点，客户端和服务器端版本要尽量一致，这里的问题实在太多，几百M都讲不完，说多了都是眼泪。</p>
 <p>Oracle下载地址：<a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html">【英文地址】</a>、<a href="http://www.oracle.com/technetwork/cn/database/enterprise-edition/downloads/index.html">【中文地址】</a></p>
 <p><strong>Windows下安装教程</strong>：<a href="https://blog.csdn.net/anxpp/article/details/51345074"> Oracle 12c Windows安装、介绍及简单使用(图文) </a></p>
@@ -118,11 +118,11 @@
 <p>查看失败内容，如果是“预期值：N/A，实际值：N/A”这样的，是因为操作系统未开启默认共享，导致Oracle无法检查环境的可用性 ，这种情况直接点击右上角的全部忽略，就可以进行下一步安装了；如果确实某方面配置不达标，就不建议继续安装了，装个PL/SQL连服务器上的库玩就好了。</p>
 </li>
 </ul>
-<h4>卸载</h4>
+<h4 id="_3">卸载</h4>
 <p>新手导错库或者初始化配置错误不知道还原的方法怎么办，简单，卸载重装。^_^ 装装卸卸多了，就变成熟手了。这个有现成的教程，亲测好用：</p>
 <p><strong>Windows下卸载</strong>：<a href="https://blog.csdn.net/Devin_LiuYM/article/details/59539020">彻底的卸载干净oracle 11g</a></p>
 <p><strong>Linux下卸载</strong>：todo</p>
-<h2>常用目录结构</h2>
+<h2 id="_4">常用目录结构</h2>
 <p>了解Oracle常用目录结构，将大大提高数据库管理与维护的工作效率 。这里以oracle 11g为例。</p>
 <div class="highlight"><pre><span></span>.                                   # 主目录
 │─ cfgtoollogs                       # 存放当运行dbca，dbua，emca，netca等图形化配置程序时的log
@@ -149,7 +149,7 @@
 <ul>
 <li><a href="https://blog.csdn.net/leshami/article/details/5633093">Oracle 常用目录结构(10g) </a></li>
 </ul>
-<h2>监听/别名配置</h2>
+<h2 id="_5">监听/别名配置</h2>
 <p>Oracle只有在<strong>服务器端配置监听是必须</strong>的，在<strong>客户端可以不用配置</strong>；而且一般服务器端都是监听本地，默认配置都有，不需要另外配置；只有监听其他地址才需要另外配置。网上很多配置监听的教程都是修改\oracle\product\11.2.0\dbhome_1\NETWORK\ADMIN\目录下tnsname.ora文件 ,其实是错误的，监听配置文件是同一目录下listener.ora文件，下面三篇文章感觉写的比较深入，但没有具体实践对比过。</p>
 <ul>
 <li><a href="https://blog.csdn.net/nixiangxiren/article/details/6293880">oracle监听器配置</a></li>
@@ -168,7 +168,7 @@
 </pre></div>
 
 
-<h2>cmd命令</h2>
+<h2 id="cmd">cmd命令</h2>
 <p>前提是本地安装了Oracle客户端，打开cmd，输入命令。由于帮助文档是中文的，所以不展开。</p>
 <ul>
 <li>
@@ -185,9 +185,9 @@
 </li>
 </ul>
 <p>其他命令还有很多，都在\oracle\product\11.2.0\dbhome_1\BIN\目录下，Windows下可执行命令为exe文件。</p>
-<h2>数据库初始化</h2>
+<h2 id="_6">数据库初始化</h2>
 <p>数据库初始化主要分三步：创建表空间，建立用户和用户授权。</p>
-<h4>创建表空间</h4>
+<h4 id="_7">创建表空间</h4>
 <p>在创建表空间之前，首先要知道什么是表空间，并且要清楚临时表空间、永久表空间、默认表空间、UNDO表空间之间的区别，这里有几篇文章可以好好看下：</p>
 <ul>
 <li>
@@ -287,7 +287,7 @@
 </pre></div>
 
 
-<h4>建立用户</h4>
+<h4 id="_8">建立用户</h4>
 <p>在建立用户之前，最好也先查询一下：</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">username</span> <span class="k">FROM</span> <span class="n">dba_users</span><span class="p">;</span>
 </pre></div>
@@ -309,7 +309,7 @@
 <blockquote>
 <p>Oracle12中建立本地用户需要在用户名前加<code>C##</code>，我试用了一下就卸载了。T_T</p>
 </blockquote>
-<h4>授权用户</h4>
+<h4 id="_9">授权用户</h4>
 <p>当然首先了解下用户权限相关概念，初始化这里的授权一般只是授予用户的系统权限。</p>
 <ul>
 <li><a href="https://blog.csdn.net/junmail/article/details/4381287">Oracle用户、权限、角色管理</a></li>
@@ -336,7 +336,7 @@
 </pre></div>
 
 
-<h4>删除表空间和用户</h4>
+<h4 id="_10">删除表空间和用户</h4>
 <div class="highlight"><pre><span></span><span class="c1">--删除表空间</span>
 <span class="k">DROP</span> <span class="n">TABLESPACE</span> <span class="n">tablespace_name</span> <span class="k">INCLUDING</span> <span class="n">CONTENTS</span> <span class="k">AND</span> <span class="n">DATAFILES</span><span class="p">;</span>
 
@@ -345,10 +345,10 @@
 </pre></div>
 
 
-<h2>导出/导入数据</h2>
+<h2 id="_11">导出/导入数据</h2>
 <p><strong>前提</strong>：我们导出/导入数据，肯定是要通过Oracle自带的可执行程序来完成数据的导入导出工作，所以要安装Oracle客户端；同时导出/导入的用户必须要有导出/导入的权限才行。</p>
 <p>导出/导入一般有两种方法：</p>
-<h4>1. 以cmd命令操作符导入导出</h4>
+<h4 id="1-cmd">1. 以cmd命令操作符导入导出</h4>
 <p>导出/导入的<strong>基本语法</strong>如下：</p>
 <div class="highlight"><pre><span></span><span class="n">EXP</span> <span class="k">user</span><span class="o">/</span><span class="n">passwd</span><span class="o">@</span><span class="n">dbname</span> <span class="n">KEYWORD</span><span class="o">=</span><span class="n">value</span><span class="p">...</span>
 <span class="n">IMP</span> <span class="k">user</span><span class="o">/</span><span class="n">passwd</span><span class="o">@</span><span class="n">dbname</span> <span class="n">KEYWORD</span><span class="o">=</span><span class="n">value</span><span class="p">...</span>
@@ -370,7 +370,7 @@
 <li>如果导入的用户和导出的用户不一致，记得加上<code>fromuser</code>和<code>touser</code>。</li>
 <li>导出/导入最好最好加上<code>log</code>选项，方便查看过程中遇到的错误，如果有哪张表有问题，可以另外单独处理。最可怕的就是你不知道库没导全。</li>
 </ul>
-<h4>2. 用PL/SQL Developer工具导出/导入</h4>
+<h4 id="2-plsql-developer">2. 用PL/SQL Developer工具导出/导入</h4>
 <p>PL/SQL连上数据库后，也可以进行数据库的导出/导入，但是这里要注意PL/SQL的导出有两部分内容：</p>
 <ul>
 <li><strong>tools-&gt;export user objects</strong>：导出的.sql文件是建表语句（包括存储结构、函数、包等内容，<strong>不包含表数据</strong>，<strong>不包含dblink</strong>）</li>
@@ -395,11 +395,11 @@
 <p><strong>PL/SQL Developer</strong>：用PL/SQL自带工具导出/导入，导出为.pde格式 ，效率最低（没试过），好处是不需要安装客户端，应该适合少量数据。</p>
 </li>
 </ul>
-<h4>总结</h4>
+<h4 id="_12">总结</h4>
 <p>从效率上来说，用EXP/IMP最好，最好的导出/导入方法是在服务器本地导出/导入，这样的好处一是导出/导入的客户端版本和服务器版本一致，不存在兼容性问题（只是单纯的导出或者导入操作不存在兼容性问题，如果导出的服务器和导入的服务器版本不一致，还是有可能有兼容性问题）；二是服务器本地导出速度更快；三是个人电脑关机不影响服务器操作。而且使用EXP/IMP比较方便，一个命令就解决了，但是遇到兼容性问题不太好处理。</p>
 <p>从通用性来说，用PL/SQL的SQL插入比较好，而且不容易出现兼容性问题，即使出现了，直接修改SQL语句也比较方便。但是使用PL/SQL容易导不全，需要仔细检查。</p>
 <p>如果数据量大的话，建议不要一次性导出/导入，分开导出/导入更安全。</p>
-<h4>数据导出/导入完整流程</h4>
+<h4 id="_13">数据导出/导入完整流程</h4>
 <ol>
 <li><strong>了解</strong>要导出和导入的数据库情况，包括Oracle版本，用户权限，需要导出的数据的大致大小，有无特殊数据类型，有没有依赖其他库的东西，dblink链接密码等，要是能确定具体导哪些表哪些存储过程最好，这样一是导出数据量比较小，二是可以排除其他无效数据的影响；</li>
 <li><strong>导出</strong>时对照HELP文档检查导出语句，确保需要配置的KEYWORD都有且正确，记得加上日志选项，导出完毕查看日志，若有报错可能需要单独处理；</li>
@@ -407,7 +407,7 @@
 <li><strong>检查</strong>数据是否正确导入，是否有遗漏项；没有问题后编译无效对象，PL/SQL有个按钮直接就能执行，编译完毕后如果仍存在无效对象，检查原库对象是否有效，若是也无效就不用管了（毕竟可能有一些遗留问题），否则需要排查问题；</li>
 <li><strong>整理</strong>导出导入过程相关资料，这样下一次重复工作就变得简单了。</li>
 </ol>
-<h4>曾经遇到的问题</h4>
+<h4 id="_14">曾经遇到的问题</h4>
 <ul>
 <li>
 <p>导出报错：数据库链接口令无效</p>
@@ -418,8 +418,8 @@
 <p>这个只有新手才会犯的错误，搞清楚概念就不会发生了。</p>
 </li>
 </ul>
-<h2>OEM创建</h2>
-<h4>todo</h4>
+<h2 id="oem">OEM创建</h2>
+<h4 id="todo">todo</h4>
 <p>question 1：oem是个what？</p>
 <p>question 2：why should we build oem？</p>
 <p>question 3：how to？</p>

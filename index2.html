@@ -101,8 +101,8 @@
 
 
     
-</footer><!-- /.post-info -->                                <h2>安装卸载</h2>
-<h4>安装</h4>
+</footer><!-- /.post-info -->                                <h2 id="_1">安装卸载</h2>
+<h4 id="_2">安装</h4>
 <p>新手不建议安装发布不久的最新版本，一来新版本可能有一些新特性，但是网上相关的文章较少，入坑概率很大，老手尚需时间来适应，新手肯定更觉得难以上手了；二来旧版本相对比较稳定，各种文档丰富，常见BUG都有比较成熟的应对方法；三是要看使用环境了，兼容性是考虑重点，客户端和服务器端版本要尽量一致，这里的问题实在太多，几百M都讲不完，说多了都是眼泪。</p>
 <p>Oracle下载地址：<a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html">【英文地址】</a>、<a href="http://www.oracle.com/technetwork/cn/database/enterprise-edition/downloads/index.html">【中文地址】</a></p>
 <p><strong>Windows下安装教程</strong>：<a href="https://blog.csdn.net/anxpp/article/details/51345074"> Oracle 12c Windows安装、介绍及简单使用(图文) </a></p>
@@ -153,7 +153,7 @@
     
 </footer><!-- /.post-info -->                                <p>用惯了Windows，但是要学Linux，所以决定装个双系统。一开始装的是Ubuntu，傻瓜式安装，界面也漂亮，但是装软件时出现了依赖性问题，网上搜的方法大部分就一个<code>sudo apt-get -f install</code>解决，但是我输完命令又出现校验和不符无法安装的问题，没有找到很好的解决办法（虽然我觉得可能是服务器的问题，当然我也没有很用力去找，只尝试了一晚上就放弃了）。一怒之下决定换个系统，Liunx系统那么多，总有一个适合自己的。</p>
 <p>百度了下，Linux系统大致分两类：一类是RedHat系列，包括RedHat、CentOS、Fedora等，包管理工具yum；另一类是Debian系列，包括Debian、Ubuntu等，包管理工具apt-get 。由于公司服务器用的是RedHat的，所以不想浪费时间，我决定找个RedHat系列的，其中CentOS稳定性最好，是大部分服务器的配置，那就尝试下吧。下面进入正题：</p>
-<h2>第一步：下载镜像文件</h2>
+<h2 id="_1">第一步：下载镜像文件</h2>
 <p>CentOS官方下载地址：<a href="https://www.centos.org/download/">https://www.centos.org/download/</a></p>
 <p>CentOS官网上，提供了三种ISO镜像文件的下载：</p>
 <ul>
@@ -192,7 +192,7 @@
 
     
 </footer><!-- /.post-info -->                                <p>本文基本全文转载，原文链接：<a href="http://www.cnblogs.com/Richardzhu/p/3455806.html">Oracle PL/SQL之LOOP循环控制语句</a>。作者写的看着很舒服，所以收藏起来自己用。主要是一些语法格式，适合新手对照练习。</p>
-<h2>一、基本的LOOP语句</h2>
+<h2 id="loop">一、基本的LOOP语句</h2>
 <p>LOOP语句的基本语法结构如下：</p>
 <div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;&lt;</span><span class="n">label_name</span><span class="o">&gt;&gt;</span><span class="p">]</span>
 <span class="n">LOOP</span>
@@ -208,7 +208,7 @@
 <li><code>statement</code>：LOOP语句中循环执行的语句序列。</li>
 <li><code>END LOOP</code>：LOOP循环结束标志，可以添加LOOP结构的标签。</li>
 </ul>
-<h4>实例一： 利用EXIT...WHEN结束循环操作</h4>
+<h4 id="exitwhen">实例一： 利用EXIT...WHEN结束循环操作</h4>
 <div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&gt;</span> <span class="k">set</span> <span class="n">serveroutput</span> <span class="k">on</span><span class="p">;</span>
 <span class="k">SQL</span><span class="o">&gt;</span> <span class="c1">--exit when</span>
 <span class="k">SQL</span><span class="o">&gt;</span> <span class="k">declare</span>
@@ -251,7 +251,7 @@
 
     
 </footer><!-- /.post-info -->                                <p>序列(SEQUENCE)是序列号生成器，可以为表中的行自动生成序列号，产生一组等间隔的数值(类型为数字)。序列主要用于生成主键。</p>
-<h2>建立序列</h2>
+<h2 id="_1">建立序列</h2>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="n">SEQUENCE</span> <span class="n">sequence_name</span> 
 <span class="p">[</span><span class="k">INCREMENT</span> <span class="k">BY</span> <span class="n">n</span><span class="p">]</span> 
 <span class="p">[</span><span class="k">START</span> <span class="k">WITH</span> <span class="n">n</span><span class="p">]</span> 
@@ -299,7 +299,7 @@
 
     
 </footer><!-- /.post-info -->                                <p>之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，现在我更注重效率，尽量在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，加上优惠码，折合人民币每个月10块钱，十块钱，买不了吃亏买不了上当，还因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。</p>
-<h2>一、套餐选购</h2>
+<h2 id="_1">一、套餐选购</h2>
 <p>搬瓦工主页：<a href="https://bwh1.net/">地址1</a>、<a href="https://bandwagonhost.com/">地址2</a></p>
 <ul>
 <li>
@@ -314,7 +314,7 @@
 </ul>
 <p>注意如果是未注册用户，不要先注册再购买，因为新注册的时候需要输入验证码，而验证码是需要翻墙才能看到的，直接购买就能顺便注册。除了邮箱和密码，其他信息随便填就好了。</p>
 <p>购买之后邮箱里会收到几封邮件，告诉你IP address，SSH Port，和初始密码，不过都不需要记，IP和Port进入服务器控制面板就能看到，密码可以随时重新生成。</p>
-<h2>二、安装Shadowsocks</h2>
+<h2 id="shadowsocks">二、安装Shadowsocks</h2>
 <p>参考教程：<a href="https://www.cnlinode.com/ban_wa_gong_qu_xiao_le_yi_jian_an_zhuang_shadowsocks_zui_xin_ban_wa_gong_ss_jiao_cheng/">搬瓦工取消了一键安装Shadowsocks，最新搬瓦工SS教程</a>第二步方法二 …</p>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/banwagong-ss.html">Read more...</a>
@@ -421,13 +421,13 @@
 
 
     
-</footer><!-- /.post-info -->                                <h2>一、使用GitHub Pages创建个人博客页面</h2>
+</footer><!-- /.post-info -->                                <h2 id="github-pages">一、使用GitHub Pages创建个人博客页面</h2>
 <ol>
 <li>首先到GitHub进行账号注册：<a href="https://github.com/">https://github.com/</a>。</li>
 <li>创建新仓库，不用新建readme.md，注意仓库名使用<em>username.github.io</em>的格式，这里<em>username</em>改成自己的用户名。</li>
 <li>创建SSH密钥并上传到GitHub。</li>
 </ol>
-<h2>二、安装Python、Pelican、Markdown和make</h2>
+<h2 id="pythonpelicanmarkdownmake">二、安装Python、Pelican、Markdown和make</h2>
 <ol>
 <li>
 <p>安装Python。</p>
@@ -539,7 +539,7 @@
 
 
     
-</footer><!-- /.post-info -->                                <h2>SELECT 1 FROM DUAL</h2>
+</footer><!-- /.post-info -->                                <h2 id="select-1-from-dual">SELECT 1 FROM DUAL</h2>
 <p>用PLSQL执行数据查询的时候，FROM子句是必须的，当不想查具体的表时，可以使用虚拟表dual。</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="mi">1</span><span class="o">+</span><span class="mi">1</span> <span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
 <span class="k">SELECT</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="n">dual</span> <span class="k">WHERE</span> <span class="k">NULL</span> <span class="k">IS</span> <span class="k">NULL</span><span class="p">;</span>
@@ -548,7 +548,7 @@
 </pre></div>
 
 
-<h2>CASE语句</h2>
+<h2 id="case">CASE语句</h2>
 <p>CASE表达式有两种形式：</p>
 <div class="highlight"><pre><span></span><span class="k">CASE</span> <span class="n">AAC004</span>  
 <span class="k">WHEN</span> <span class="s1">&#39;1&#39;</span> <span class="k">THEN</span> <span class="s1">&#39;MALE&#39;</span>  

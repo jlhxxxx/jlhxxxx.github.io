@@ -98,7 +98,7 @@
     
 </footer><!-- /.post-info -->
 
-        <h2>安装</h2>
+        <h2 id="_1">安装</h2>
 <p><strong>安装库</strong></p>
 <div class="highlight"><pre><span></span>$ pip install Pillow
 $ pip install pytesseract
@@ -113,9 +113,9 @@ $ yum install tesseract-langpack-deu
 </pre></div>
 
 
-<h2>验证码识别</h2>
+<h2 id="_2">验证码识别</h2>
 <p>核心只有一个函数<code>pytesseract.image_to_string</code>。</p>
-<h3>简单的验证码识别</h3>
+<h3 id="_3">简单的验证码识别</h3>
 <p><img alt="pytesseract-code1.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code1.jpg?raw=true">  </p>
 <p><img alt="pytesseract-code2.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code2.jpg?raw=true"></p>
 <p>图片不需要任何处理：</p>
@@ -128,7 +128,7 @@ $ yum install tesseract-langpack-deu
 </pre></div>
 
 
-<h3>需要降噪的验证码识别</h3>
+<h3 id="_4">需要降噪的验证码识别</h3>
 <p><img alt="pytesseract-code3.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code3.png?raw=true"></p>
 <p>这类验证码直接识别正确率太低。仔细观察图片，发现验证码有效内容均为黑色，所以考虑将非黑色都转成白色，代码稍微修改即可：</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -146,7 +146,7 @@ $ yum install tesseract-langpack-deu
 </pre></div>
 
 
-<h3>延申阅读</h3>
+<h3 id="_5">延申阅读</h3>
 <ul>
 <li><a href="https://www.cnblogs.com/beer/p/5672678.html">字符型图片验证码识别完整过程及Python实现</a></li>
 <li><a href="https://www.cnblogs.com/qqandfqr/p/7866650.html">Python验证码识别</a></li>

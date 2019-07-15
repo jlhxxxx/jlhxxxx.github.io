@@ -170,18 +170,18 @@
 
 
     
-</footer><!-- /.post-info -->                                <h2>Appium环境配置</h2>
+</footer><!-- /.post-info -->                                <h2 id="appium">Appium环境配置</h2>
 <p><strong>本地环境</strong>：win10_x64 + JDK8 + python3</p>
-<h3>Appium-Client安装配置</h3>
+<h3 id="appium-client">Appium-Client安装配置</h3>
 <p>这里我们选用<a href="https://github.com/appium/python-client">python-client</a>，建议在虚拟环境下安装，命令如下：</p>
 <div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Appium</span><span class="o">-</span><span class="n">Python</span><span class="o">-</span><span class="n">Client</span>
 </pre></div>
 
 
-<h3>Appium-Server安装配置</h3>
+<h3 id="appium-server">Appium-Server安装配置</h3>
 <p>推荐使用<a href="https://github.com/appium/appium-desktop">appium-desktop</a>，图形化界面，自带Inspector，非常好用。</p>
-<h3>Android SDK安装配置</h3>
-<h4>设置SDK环境变量</h4>
+<h3 id="android-sdk">Android SDK安装配置</h3>
+<h4 id="sdk">设置SDK环境变量</h4>
 <p>这里只讲不使用Android Studio情况下安装SDK，首先新建一个SDK主目录（空文件夹即可），假设是<code>D:\SDK</code>。配置相应环境变量：</p>
 <table>
 <thead>
@@ -201,7 +201,7 @@
 </tr>
 </tbody>
 </table>
-<h4>下载SDK tools并安装其他工具</h4>
+<h4 id="sdk-tools">下载SDK tools并安装其他工具</h4>
 <p>官方地址：<a href="https://developer.android.com/studio">https://developer.android.com/studio …</a></p>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/appium-base-01.html">Read more...</a>
@@ -284,7 +284,7 @@
 
     
 </footer><!-- /.post-info -->                                <p>英文文档地址：<a href="http://jmeter.apache.org/usermanual/functions.html">http://jmeter.apache.org/usermanual/functions.html</a></p>
-<h2>21.1 概述</h2>
+<h2 id="211">21.1 概述</h2>
 <p>JMeter 包含模式匹配软件 <a href="http://attic.apache.org/projects/jakarta-oro.html">Apache Jakarta ORO</a> 。 
 在 Jakarta 网站上有一些相关文档，例如：<a href="http://archimedes.fas.harvard.edu/scrapbook/jakarta-oro-2.0.6/docs/api/org/apache/oro/text/regex/package-summary.html">模式匹配字符摘要</a>。  </p>
 <p>在 <a href="http://www.savarese.org/oro/docs/OROMatcher/index.html">OROMatcher 用户指南</a>上还有关于该产品旧版本的文档 ，也许会有些用处。  </p>
@@ -324,7 +324,7 @@
 
 
     
-</footer><!-- /.post-info -->                                <h2>正则表达式提取器</h2>
+</footer><!-- /.post-info -->                                <h2 id="_1">正则表达式提取器</h2>
 <ul>
 <li><strong>Name of created variable</strong>：用于存储结果的变量名称</li>
 <li><strong>Regular Expression</strong>：正则表达式</li>
@@ -371,7 +371,7 @@
 
 
     
-</footer><!-- /.post-info -->                                <h2>安装</h2>
+</footer><!-- /.post-info -->                                <h2 id="_1">安装</h2>
 <p><strong>安装库</strong></p>
 <div class="highlight"><pre><span></span>$ pip install Pillow
 $ pip install pytesseract
@@ -386,9 +386,9 @@ $ yum install tesseract-langpack-deu
 </pre></div>
 
 
-<h2>验证码识别</h2>
+<h2 id="_2">验证码识别</h2>
 <p>核心只有一个函数<code>pytesseract.image_to_string</code>。</p>
-<h3>简单的验证码识别</h3>
+<h3 id="_3">简单的验证码识别</h3>
 <p><img alt="pytesseract-code1.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code1.jpg?raw=true">  </p>
 <p><img alt="pytesseract-code2.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code2.jpg?raw=true"></p>
 <p>图片不需要任何处理：</p>
@@ -431,13 +431,13 @@ $ yum install tesseract-langpack-deu
 
 
     
-</footer><!-- /.post-info -->                                <h2>原理</h2>
-<h3>WIGS(Web Server Gateway Interface)服务器网关接口</h3>
+</footer><!-- /.post-info -->                                <h2 id="_1">原理</h2>
+<h3 id="wigsweb-server-gateway-interface">WIGS(Web Server Gateway Interface)服务器网关接口</h3>
 <p>是Python应用程序或框架和Web服务器之间的一种接口，已经被广泛接受, 它已基本达成它的可移植性方面的目标。 
 WSGI 没有官方的实现，因为WSGI更像一个协议。只要遵照这些协议，WSGI应用(Application)都可以在任何服务器(Server)上运行，反之亦然。 
 WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛使用的django框架。</p>
 <p><strong>所以说WIGS是一种标准</strong></p>
-<h3>uWIGS</h3>
+<h3 id="uwigs">uWIGS</h3>
 <p>可以看作是一个应用程序，帮助我们实现WSGI协议，Http协议，这样我们可以不再关注网络通信的底层实现，将精力更多放在处理HTTP请求数据，返回HTML。利用uWIGS可以使我们的web应用得到更强的并发能力，uWIGS也可以返回静态文件(css，js，img…)，但是很笨拙，一般静态文件都交由Nginx进行传输，所以配置中一般不配置static-map，如果直接由uWIGS接受HTTP请求则需要设置http:xxxx，如果只需要与反向代理服务器进行交互则只需要接受socket，uWIGS与Nginx交互相当于两个进程间交互，一般使用的是.sock文件或者指定端口接受socket。指定端口时再使用浏览器访问相应端口，uWIGS会提示skip，跳过该HTTP请求 …</p>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/nginx-uwsgi.html">Read more...</a>
@@ -513,7 +513,7 @@ oracle   <span class="m">22025</span>     <span class="m">1</span>  <span class=
 
 
     
-</footer><!-- /.post-info -->                                <h2>确定Red Hat Enterprise和CentOS对应版本</h2>
+</footer><!-- /.post-info -->                                <h2 id="red-hat-enterprisecentos">确定Red Hat Enterprise和CentOS对应版本</h2>
 <p>查看当前系统版本</p>
 <div class="highlight"><pre><span></span>cat /etc/issue     <span class="c1"># 查看系统版本</span>
 cat /proc/version  <span class="c1"># 查看内核版本</span>
@@ -524,14 +524,14 @@ cat /proc/version  <span class="c1"># 查看内核版本</span>
 <li><a href="https://zh.wikipedia.org/zh-cn/CentOS">CentOS</a></li>
 <li><a href="https://www.linuxidc.com/Linux/2016-07/133000.htm">CentOS和RedHat发行版与Linux内核版本的对应关系</a></li>
 </ul>
-<h2>备份和卸载本地yum源</h2>
+<h2 id="yum">备份和卸载本地yum源</h2>
 <div class="highlight"><pre><span></span>rpm -qa<span class="p">|</span>grep yum　　                                          <span class="c1"># 查看本地yum</span>
 mv /etc/yum.repos.d/your.repo  /etc/yum.repos.d/your.repo.bak   <span class="c1"># your替换成本地repo名称</span>
 rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --nodeps　　                    <span class="c1"># 不检查依赖性，卸载yum程序</span>
 </pre></div>
 
 
-<h2>下载新的yum安装包</h2>
+<h2 id="yum_1">下载新的yum安装包</h2>
 <p>这里采用163的镜像，我们要下的是这几个包：<code>python-iniparse-xxx.noarch …</code></p>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/rhe-change-yum.html">Read more...</a>
@@ -566,14 +566,14 @@ rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --no
 
 
     
-</footer><!-- /.post-info -->                                <h2>基本概念</h2>
+</footer><!-- /.post-info -->                                <h2 id="_1">基本概念</h2>
 <p>在正式部署项目之前，还是先了解下基本概念吧。最基本要掌握域（Domain）、集群（Cluster）、服务器（Server）（区分管理服务器和受管理服务器）、计算机（Machine）、节点管理器（Node Manager）。</p>
 <p><strong>参考文章</strong>：</p>
 <ul>
 <li><a href="http://langgufu.iteye.com/blog/1700388">weblogic 域，管理服务器，受管服务器，集群和机器的基本知识</a></li>
 <li><a href="http://www.cnblogs.com/cocowool/archive/2012/04/01/2428861.html">WebLogic中的一些基本概念</a></li>
 </ul>
-<h2>常用目录结构</h2>
+<h2 id="_2">常用目录结构</h2>
 <p>了解WebLogic常用目录结构，将大大提高管理与维护的工作效率 。这里以WebLogic 11g为例。</p>
 <div class="highlight"><pre><span></span>.                                      # 主目录
 │─ coherence_3.7                        # coherence集群相关

@@ -100,7 +100,7 @@
 </footer><!-- /.post-info -->
 
         <p>本文基本全文转载，原文链接：<a href="http://www.cnblogs.com/Richardzhu/p/3455806.html">Oracle PL/SQL之LOOP循环控制语句</a>。作者写的看着很舒服，所以收藏起来自己用。主要是一些语法格式，适合新手对照练习。</p>
-<h2>一、基本的LOOP语句</h2>
+<h2 id="loop">一、基本的LOOP语句</h2>
 <p>LOOP语句的基本语法结构如下：</p>
 <div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;&lt;</span><span class="n">label_name</span><span class="o">&gt;&gt;</span><span class="p">]</span>
 <span class="n">LOOP</span>
@@ -116,7 +116,7 @@
 <li><code>statement</code>：LOOP语句中循环执行的语句序列。</li>
 <li><code>END LOOP</code>：LOOP循环结束标志，可以添加LOOP结构的标签。</li>
 </ul>
-<h4>实例一： 利用EXIT...WHEN结束循环操作</h4>
+<h4 id="exitwhen">实例一： 利用EXIT...WHEN结束循环操作</h4>
 <div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&gt;</span> <span class="k">set</span> <span class="n">serveroutput</span> <span class="k">on</span><span class="p">;</span>
 <span class="k">SQL</span><span class="o">&gt;</span> <span class="c1">--exit when</span>
 <span class="k">SQL</span><span class="o">&gt;</span> <span class="k">declare</span>
@@ -143,7 +143,7 @@
 </pre></div>
 
 
-<h4>实例二： 利用IF...EXIT语句结束循环</h4>
+<h4 id="ifexit">实例二： 利用IF...EXIT语句结束循环</h4>
 <div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&gt;</span> <span class="c1">--if exit</span>
 <span class="k">SQL</span><span class="o">&gt;</span> <span class="k">declare</span>
    <span class="n">v_rlt</span> <span class="nb">number</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span><span class="o">=-</span><span class="mi">3</span><span class="p">;</span>
@@ -173,7 +173,7 @@
 </pre></div>
 
 
-<h2>二、WHILE...LOOP结构</h2>
+<h2 id="whileloop">二、WHILE...LOOP结构</h2>
 <p>WHILE...LOOP结构和基本的LOOP语句不同，它本身可以结束LOOP循环。WHILE关键词后面需要有布尔表达式，当WHILE后面的布尔表达式为TRUE时，则循环体重的语句序列被执行1次，然后会重新判断WHILE后面的表达式是否为TRUE，只有当WHILE后的布尔表达式为FALSE时，才结束整个LOOP循环。</p>
 <p>该语句结构的相关语法如下：</p>
 <div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;&lt;</span><span class="n">label_name</span><span class="o">&gt;&gt;</span><span class="p">]</span>
@@ -189,7 +189,7 @@
 <li><code>boolean_expression</code>：布尔表达式。</li>
 <li><code>statement</code>：语句序列，当<code>boolean_expression</code>为<code>TRUE</code>时，该语句序列可获得执行权。</li>
 </ul>
-<h4>实例</h4>
+<h4 id="_1">实例</h4>
 <div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&gt;</span> <span class="c1">--while...loop</span>
 <span class="k">SQL</span><span class="o">&gt;</span> <span class="k">declare</span>
    <span class="n">v_rlt</span> <span class="nb">number</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span><span class="o">=-</span><span class="mi">3</span><span class="p">;</span>
@@ -215,7 +215,7 @@
 </pre></div>
 
 
-<h2>三、FOR...LOOP结构</h2>
+<h2 id="forloop">三、FOR...LOOP结构</h2>
 <p>FOR...LOOP语句可以遍历某个范围的整数，该范围被FOR和LOOP关键词封闭。首次进入循环时，循环范围将被确定，并且以后不会再次计算。每循环一次，循环指数将会自动增加1。</p>
 <p>FOR...LOOP语句的语法结构如下：</p>
 <div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;&lt;</span><span class="n">label_name</span><span class="o">&gt;&gt;</span><span class="p">]</span>
@@ -236,7 +236,7 @@
 <li><code>upper_bound</code>：循环范围的上边界。</li>
 <li>下边界和上边界之间的"<code>..</code>"不能省略。</li>
 </ul>
-<h4>实例</h4>
+<h4 id="_2">实例</h4>
 <div class="highlight"><pre><span></span><span class="k">SQL</span><span class="o">&gt;</span> <span class="c1">--for..loop</span>
 <span class="k">SQL</span><span class="o">&gt;</span> <span class="k">begin</span>
     <span class="k">for</span> <span class="n">v_rlt</span> <span class="k">in</span> <span class="o">-</span><span class="mi">3</span><span class="p">..</span><span class="mi">3</span> <span class="n">loop</span>

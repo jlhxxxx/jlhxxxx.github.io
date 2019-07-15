@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Software</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/software.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-07-08T00:00:00+08:00</updated><entry><title>Appium环境搭建及自动化的一些参考</title><link href="https://jlhxxxx.github.io/appium-base-01.html" rel="alternate"></link><published>2019-07-08T00:00:00+08:00</published><updated>2019-07-08T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-07-08:/appium-base-01.html</id><summary type="html">&lt;h2&gt;Appium环境配置&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Software</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/software.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-07-08T00:00:00+08:00</updated><entry><title>Appium环境搭建及自动化的一些参考</title><link href="https://jlhxxxx.github.io/appium-base-01.html" rel="alternate"></link><published>2019-07-08T00:00:00+08:00</published><updated>2019-07-08T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-07-08:/appium-base-01.html</id><summary type="html">&lt;h2 id="appium"&gt;Appium环境配置&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;本地环境&lt;/strong&gt;：win10_x64 + JDK8 + python3&lt;/p&gt;
-&lt;h3&gt;Appium-Client安装配置&lt;/h3&gt;
+&lt;h3 id="appium-client"&gt;Appium-Client安装配置&lt;/h3&gt;
 &lt;p&gt;这里我们选用&lt;a href="https://github.com/appium/python-client"&gt;python-client&lt;/a&gt;，建议在虚拟环境下安装，命令如下：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Appium&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Client&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;Appium-Server安装配置&lt;/h3&gt;
+&lt;h3 id="appium-server"&gt;Appium-Server安装配置&lt;/h3&gt;
 &lt;p&gt;推荐使用&lt;a href="https://github.com/appium/appium-desktop"&gt;appium-desktop&lt;/a&gt;，图形化界面，自带Inspector，非常好用。&lt;/p&gt;
-&lt;h3&gt;Android SDK安装配置&lt;/h3&gt;
-&lt;h4&gt;设置SDK环境变量&lt;/h4&gt;
+&lt;h3 id="android-sdk"&gt;Android SDK安装配置&lt;/h3&gt;
+&lt;h4 id="sdk"&gt;设置SDK环境变量&lt;/h4&gt;
 &lt;p&gt;这里只讲不使用Android Studio情况下安装SDK，首先新建一个SDK主目录（空文件夹即可），假设是&lt;code&gt;D:\SDK&lt;/code&gt;。配置相应环境变量：&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -30,19 +30,19 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h4&gt;下载SDK tools并安装其他工具&lt;/h4&gt;
-&lt;p&gt;官方地址：&lt;a href="https://developer.android.com/studio"&gt;https://developer.android.com/studio …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Appium环境配置&lt;/h2&gt;
+&lt;h4 id="sdk-tools"&gt;下载SDK tools并安装其他工具&lt;/h4&gt;
+&lt;p&gt;官方地址：&lt;a href="https://developer.android.com/studio"&gt;https://developer.android.com/studio …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;h2 id="appium"&gt;Appium环境配置&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;本地环境&lt;/strong&gt;：win10_x64 + JDK8 + python3&lt;/p&gt;
-&lt;h3&gt;Appium-Client安装配置&lt;/h3&gt;
+&lt;h3 id="appium-client"&gt;Appium-Client安装配置&lt;/h3&gt;
 &lt;p&gt;这里我们选用&lt;a href="https://github.com/appium/python-client"&gt;python-client&lt;/a&gt;，建议在虚拟环境下安装，命令如下：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Appium&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Client&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;Appium-Server安装配置&lt;/h3&gt;
+&lt;h3 id="appium-server"&gt;Appium-Server安装配置&lt;/h3&gt;
 &lt;p&gt;推荐使用&lt;a href="https://github.com/appium/appium-desktop"&gt;appium-desktop&lt;/a&gt;，图形化界面，自带Inspector，非常好用。&lt;/p&gt;
-&lt;h3&gt;Android SDK安装配置&lt;/h3&gt;
-&lt;h4&gt;设置SDK环境变量&lt;/h4&gt;
+&lt;h3 id="android-sdk"&gt;Android SDK安装配置&lt;/h3&gt;
+&lt;h4 id="sdk"&gt;设置SDK环境变量&lt;/h4&gt;
 &lt;p&gt;这里只讲不使用Android Studio情况下安装SDK，首先新建一个SDK主目录（空文件夹即可），假设是&lt;code&gt;D:\SDK&lt;/code&gt;。配置相应环境变量：&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -62,7 +62,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h4&gt;下载SDK tools并安装其他工具&lt;/h4&gt;
+&lt;h4 id="sdk-tools"&gt;下载SDK tools并安装其他工具&lt;/h4&gt;
 &lt;p&gt;官方地址：&lt;a href="https://developer.android.com/studio"&gt;https://developer.android.com/studio&lt;/a&gt;。拉到最下面&lt;strong&gt;Command line tools only&lt;/strong&gt;处，下载Windows版本，目前版本为：&lt;code&gt;sdk-tools-windows-4333796.zip&lt;/code&gt;。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;有必要说明一下，支持图形化界面的SDK manager和AVD manager的SDK tools最高版本为25.2.5，只支持Android-25（即Android 7.1.1）及以下版本的虚拟机运行。&lt;/p&gt;
@@ -77,7 +77,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;关于&lt;strong&gt;Intel HAXM&lt;/strong&gt;，大致就是使用基于Intel(R) Virtualization Technology (VT) 的硬件加速，提高Android模拟器的响应速度。下载后需要单独安装。官方GITHUB地址：&lt;a href="https://github.com/intel/haxm"&gt;https://github.com/intel/haxm&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4&gt;配置并运行虚拟机&lt;/h4&gt;
+&lt;h4 id="_1"&gt;配置并运行虚拟机&lt;/h4&gt;
 &lt;p&gt;按新手推荐下载安装相应包之后，运行B4A AVD Manager，选择好屏幕尺寸和Platform，创建AVD后即可运行虚拟机。这里可配置的选项只有2个，但是没有关系，我们后面可以直接修改配置文件。&lt;/p&gt;
 &lt;p&gt;这里重点讲一下虚拟机配置文件，理解了之后就可以即不通过图形化界面也不通过命令行手动创建虚拟机。&lt;/p&gt;
 &lt;p&gt;AVD配置文件主目录在&lt;code&gt;C:\Users\xxx\.android\avd&lt;/code&gt;，其中&lt;code&gt;xxx&lt;/code&gt;为计算机名称，如果是通过Android AVD manager创建的虚拟机，在该目录下会有对应的一个虚拟机存放目录和一个目录配置文件，假设虚拟机名称为ad9，则有虚拟机存放目录&lt;code&gt;ad9\&lt;/code&gt;和配置文件&lt;code&gt;ad9.ini&lt;/code&gt;；如果是通过b4a AVD manager创建的虚拟机，虚拟机存放目录会被转移到&lt;code&gt;SDK\B4AEmulator\&lt;/code&gt;目录下，打开ini配置文件，内容大概有3行：&lt;/p&gt;
@@ -131,8 +131,8 @@ tag.id=default
 &lt;p&gt;&lt;strong&gt;通过命令行启动虚拟机&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;虚拟机创建好后，可以进入&lt;code&gt;SDK\emulator\&lt;/code&gt;目录下，在命令提示符下输入&lt;code&gt;emulator @name&lt;/code&gt;命令即可启动虚拟机，其中&lt;code&gt;name&lt;/code&gt;为虚拟机名称。为了更方便启用，可以将&lt;code&gt;%ANDROID_HOME%\emulator;&lt;/code&gt;添加到Path环境变量，但是要注意放到&lt;code&gt;%ANDROID_HOME%\tools;&lt;/code&gt;之前，因为tools目录下也有emulator.exe，用它启动虚拟机会报错。&lt;/p&gt;
 &lt;p&gt;启动的附加命令，请参考&lt;a href="https://developer.android.com/studio/run/emulator-commandline"&gt;Start the emulator from the command line&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;Appium自动化相关&lt;/h2&gt;
-&lt;h4&gt;查询apk包信息&lt;/h4&gt;
+&lt;h2 id="appium_1"&gt;Appium自动化相关&lt;/h2&gt;
+&lt;h4 id="apk"&gt;查询apk包信息&lt;/h4&gt;
 &lt;p&gt;使用&lt;code&gt;aapt&lt;/code&gt;（位于&lt;code&gt;sdk\build-tools\&lt;/code&gt;下）:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;aapt.exe dump badging D:\xxx\xxx.apk
 &lt;/pre&gt;&lt;/div&gt;
@@ -144,7 +144,7 @@ tag.id=default
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h4&gt;常用Inspect工具&lt;/h4&gt;
+&lt;h4 id="inspect"&gt;常用Inspect工具&lt;/h4&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Appium Desktop Inspector（推荐）&lt;/strong&gt;：稳定且好用，还有录制功能。需要配置Desired Capabilities，具体使用参考&lt;a href="https://github.com/appium/appium-desktop#the-inspector"&gt;Appium Desktop官方文档&lt;/a&gt;。&lt;/p&gt;
@@ -161,7 +161,7 @@ adb start-server
 &lt;p&gt;&lt;strong&gt;Chrome inspector&lt;/strong&gt;：只能解析webview元素，且需要翻墙，逼格很高。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h4&gt;无法定位到元素的问题&lt;/h4&gt;
+&lt;h4 id="_2"&gt;无法定位到元素的问题&lt;/h4&gt;
 &lt;p&gt;如果定位不到&lt;strong&gt;native&lt;/strong&gt;元素，可以尝试在Desired Capabilities增加一行：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;desired_caps&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;automationName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;uiautomator2&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -180,13 +180,13 @@ adb start-server
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h4&gt;切换webview报Chrome version错误&lt;/h4&gt;
+&lt;h4 id="webviewchrome-version"&gt;切换webview报Chrome version错误&lt;/h4&gt;
 &lt;p&gt;官方文档&lt;a href="http://appium.io/docs/cn/advanced-concepts/chromedriver/"&gt;Chromedriver&lt;/a&gt;给出了解释：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;每次 Chromedriver 升级，支持的 Chrome 的最小版本都会升级，这就导致了老设备上经常无法在绑定的版本上自动化。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;查看Appium Desktop日志，到官方文档上下载相应版本的Chromedriver并替换最新版即可。&lt;/p&gt;
-&lt;h3&gt;参考文章：&lt;/h3&gt;
+&lt;h3 id="_3"&gt;参考文章：&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;简洁明晰版本：&lt;a href="https://testerhome.com/topics/11318"&gt;浅谈自动化测试工具 Appium&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;较详细版本：&lt;a href="http://www.testclass.net/appium"&gt;Appium 简明教程&lt;/a&gt;&lt;/li&gt;
@@ -198,7 +198,7 @@ adb start-server
 &lt;li&gt;&lt;a href="https://www.cnblogs.com/yoyoketang/p/9009209.html"&gt;appium+python自动化41-切换webview时候报chromedriver版本问题&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="Appium"></category><category term="Automated"></category></entry><entry><title>Python pytesseract识别验证码</title><link href="https://jlhxxxx.github.io/pytesseract.html" rel="alternate"></link><published>2018-08-22T00:00:00+08:00</published><updated>2018-08-22T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-08-22:/pytesseract.html</id><summary type="html">&lt;h2&gt;安装&lt;/h2&gt;
+&lt;/ul&gt;</content><category term="Appium"></category><category term="Automated"></category></entry><entry><title>Python pytesseract识别验证码</title><link href="https://jlhxxxx.github.io/pytesseract.html" rel="alternate"></link><published>2018-08-22T00:00:00+08:00</published><updated>2018-08-22T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-08-22:/pytesseract.html</id><summary type="html">&lt;h2 id="_1"&gt;安装&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;安装库&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip install Pillow
 $ pip install pytesseract
@@ -213,9 +213,9 @@ $ yum install tesseract-langpack-deu
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;验证码识别&lt;/h2&gt;
+&lt;h2 id="_2"&gt;验证码识别&lt;/h2&gt;
 &lt;p&gt;核心只有一个函数&lt;code&gt;pytesseract.image_to_string&lt;/code&gt;。&lt;/p&gt;
-&lt;h3&gt;简单的验证码识别&lt;/h3&gt;
+&lt;h3 id="_3"&gt;简单的验证码识别&lt;/h3&gt;
 &lt;p&gt;&lt;img alt="pytesseract-code1.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code1.jpg?raw=true"&gt;  &lt;/p&gt;
 &lt;p&gt;&lt;img alt="pytesseract-code2.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code2.jpg?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;图片不需要任何处理：&lt;/p&gt;
@@ -223,7 +223,7 @@ $ yum install tesseract-langpack-deu
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pytesseract&lt;/span&gt;
 
 &lt;span class="n"&gt;img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;code.png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;vcode&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;pytesseract&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image_to_string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;eng …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;安装&lt;/h2&gt;
+&lt;span class="n"&gt;vcode&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;pytesseract&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image_to_string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;eng …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2 id="_1"&gt;安装&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;安装库&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip install Pillow
 $ pip install pytesseract
@@ -238,9 +238,9 @@ $ yum install tesseract-langpack-deu
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;验证码识别&lt;/h2&gt;
+&lt;h2 id="_2"&gt;验证码识别&lt;/h2&gt;
 &lt;p&gt;核心只有一个函数&lt;code&gt;pytesseract.image_to_string&lt;/code&gt;。&lt;/p&gt;
-&lt;h3&gt;简单的验证码识别&lt;/h3&gt;
+&lt;h3 id="_3"&gt;简单的验证码识别&lt;/h3&gt;
 &lt;p&gt;&lt;img alt="pytesseract-code1.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code1.jpg?raw=true"&gt;  &lt;/p&gt;
 &lt;p&gt;&lt;img alt="pytesseract-code2.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code2.jpg?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;图片不需要任何处理：&lt;/p&gt;
@@ -253,7 +253,7 @@ $ yum install tesseract-langpack-deu
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;需要降噪的验证码识别&lt;/h3&gt;
+&lt;h3 id="_4"&gt;需要降噪的验证码识别&lt;/h3&gt;
 &lt;p&gt;&lt;img alt="pytesseract-code3.jpg" src="https://github.com/jlhxxxx/imgur/blob/master/blog/pytesseract-code3.png?raw=true"&gt;&lt;/p&gt;
 &lt;p&gt;这类验证码直接识别正确率太低。仔细观察图片，发现验证码有效内容均为黑色，所以考虑将非黑色都转成白色，代码稍微修改即可：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;PIL&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Image&lt;/span&gt;
@@ -271,28 +271,28 @@ $ yum install tesseract-langpack-deu
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;延申阅读&lt;/h3&gt;
+&lt;h3 id="_5"&gt;延申阅读&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.cnblogs.com/beer/p/5672678.html"&gt;字符型图片验证码识别完整过程及Python实现&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.cnblogs.com/qqandfqr/p/7866650.html"&gt;Python验证码识别&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="pytesseract"></category></entry><entry><title>使用Nginx+uWSGI+Flask部署应用</title><link href="https://jlhxxxx.github.io/nginx-uwsgi.html" rel="alternate"></link><published>2018-08-21T00:00:00+08:00</published><updated>2018-08-21T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-08-21:/nginx-uwsgi.html</id><summary type="html">&lt;h2&gt;原理&lt;/h2&gt;
-&lt;h3&gt;WIGS(Web Server Gateway Interface)服务器网关接口&lt;/h3&gt;
+&lt;/ul&gt;</content><category term="pytesseract"></category></entry><entry><title>使用Nginx+uWSGI+Flask部署应用</title><link href="https://jlhxxxx.github.io/nginx-uwsgi.html" rel="alternate"></link><published>2018-08-21T00:00:00+08:00</published><updated>2018-08-21T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-08-21:/nginx-uwsgi.html</id><summary type="html">&lt;h2 id="_1"&gt;原理&lt;/h2&gt;
+&lt;h3 id="wigsweb-server-gateway-interface"&gt;WIGS(Web Server Gateway Interface)服务器网关接口&lt;/h3&gt;
 &lt;p&gt;是Python应用程序或框架和Web服务器之间的一种接口，已经被广泛接受, 它已基本达成它的可移植性方面的目标。 
 WSGI 没有官方的实现，因为WSGI更像一个协议。只要遵照这些协议，WSGI应用(Application)都可以在任何服务器(Server)上运行，反之亦然。 
 WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛使用的django框架。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;所以说WIGS是一种标准&lt;/strong&gt;&lt;/p&gt;
-&lt;h3&gt;uWIGS&lt;/h3&gt;
-&lt;p&gt;可以看作是一个应用程序，帮助我们实现WSGI协议，Http协议，这样我们可以不再关注网络通信的底层实现，将精力更多放在处理HTTP请求数据，返回HTML。利用uWIGS可以使我们的web应用得到更强的并发能力，uWIGS也可以返回静态文件(css，js，img…)，但是很笨拙，一般静态文件都交由Nginx进行传输，所以配置中一般不配置static-map，如果直接由uWIGS接受HTTP请求则需要设置http:xxxx，如果只需要与反向代理服务器进行交互则只需要接受socket，uWIGS与Nginx交互相当于两个进程间交互，一般使用的是.sock文件或者指定端口接受socket。指定端口时再使用浏览器访问相应端口，uWIGS会提示skip，跳过该HTTP请求 …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;原理&lt;/h2&gt;
-&lt;h3&gt;WIGS(Web Server Gateway Interface)服务器网关接口&lt;/h3&gt;
+&lt;h3 id="uwigs"&gt;uWIGS&lt;/h3&gt;
+&lt;p&gt;可以看作是一个应用程序，帮助我们实现WSGI协议，Http协议，这样我们可以不再关注网络通信的底层实现，将精力更多放在处理HTTP请求数据，返回HTML。利用uWIGS可以使我们的web应用得到更强的并发能力，uWIGS也可以返回静态文件(css，js，img…)，但是很笨拙，一般静态文件都交由Nginx进行传输，所以配置中一般不配置static-map，如果直接由uWIGS接受HTTP请求则需要设置http:xxxx，如果只需要与反向代理服务器进行交互则只需要接受socket，uWIGS与Nginx交互相当于两个进程间交互，一般使用的是.sock文件或者指定端口接受socket。指定端口时再使用浏览器访问相应端口，uWIGS会提示skip，跳过该HTTP请求 …&lt;/p&gt;</summary><content type="html">&lt;h2 id="_1"&gt;原理&lt;/h2&gt;
+&lt;h3 id="wigsweb-server-gateway-interface"&gt;WIGS(Web Server Gateway Interface)服务器网关接口&lt;/h3&gt;
 &lt;p&gt;是Python应用程序或框架和Web服务器之间的一种接口，已经被广泛接受, 它已基本达成它的可移植性方面的目标。 
 WSGI 没有官方的实现，因为WSGI更像一个协议。只要遵照这些协议，WSGI应用(Application)都可以在任何服务器(Server)上运行，反之亦然。 
 WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛使用的django框架。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;所以说WIGS是一种标准&lt;/strong&gt;&lt;/p&gt;
-&lt;h3&gt;uWIGS&lt;/h3&gt;
+&lt;h3 id="uwigs"&gt;uWIGS&lt;/h3&gt;
 &lt;p&gt;可以看作是一个应用程序，帮助我们实现WSGI协议，Http协议，这样我们可以不再关注网络通信的底层实现，将精力更多放在处理HTTP请求数据，返回HTML。利用uWIGS可以使我们的web应用得到更强的并发能力，uWIGS也可以返回静态文件(css，js，img…)，但是很笨拙，一般静态文件都交由Nginx进行传输，所以配置中一般不配置static-map，如果直接由uWIGS接受HTTP请求则需要设置http:xxxx，如果只需要与反向代理服务器进行交互则只需要接受socket，uWIGS与Nginx交互相当于两个进程间交互，一般使用的是.sock文件或者指定端口接受socket。指定端口时再使用浏览器访问相应端口，uWIGS会提示skip，跳过该HTTP请求。&lt;/p&gt;
-&lt;h3&gt;代理服务器(Proxy Server)&lt;/h3&gt;
+&lt;h3 id="proxy-server"&gt;代理服务器(Proxy Server)&lt;/h3&gt;
 &lt;p&gt;是一种特殊的网络服务，允许一个网络终端（一般为客户端）通过这个服务与另一个网络终端（一般为服务器）进行非直接的连接。一些网关、路由器等网络设备具备网络代理功能。一般认为代理服务有利于保障网络终端的隐私或安全，防止攻击。 &lt;/p&gt;
-&lt;h3&gt;反向代理服务器(Reverse Proxy)&lt;/h3&gt;
+&lt;h3 id="reverse-proxy"&gt;反向代理服务器(Reverse Proxy)&lt;/h3&gt;
 &lt;p&gt;反向代理，故名思意就是将代理服务器做出逆转，它主要的功能是代理服务器接收客户端发来的Http请求，转发到内部网络服务器，并返回Response给客户端。 
 反向代理的作用：&lt;/p&gt;
 &lt;ol&gt;
@@ -300,12 +300,12 @@ WSGI标准在 PEP 333 中定义并被许多框架实现，其中包括现广泛�
 &lt;li&gt;负载均衡，通过反向代理服务器来优化网站的负载&lt;/li&gt;
 &lt;li&gt;缓存静态资源，加快访问速度&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3&gt;Nginx(engine x)&lt;/h3&gt;
+&lt;h3 id="nginxengine-x"&gt;Nginx(engine x)&lt;/h3&gt;
 &lt;p&gt;Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。其特点是占有内存少，并发能力强。&lt;/p&gt;
 &lt;p&gt;它具有反向代理服务器的所有特点，并且配置简单，支持对大于1kb的文件进行压缩，静态文件缓存，可以大大提高访问效率。Nginx接受来自客户端的Http请求发送给uWSGI，uWSGI处理请求并将关键信息传递给web应用(django，flask等)，应用返回Response经由uWSGI发送给Nginx，Nginx再发送给客户端。 &lt;/p&gt;
-&lt;h2&gt;实践&lt;/h2&gt;
+&lt;h2 id="_2"&gt;实践&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;本文实践部分基于CentOS6和Python3&lt;/strong&gt;&lt;/p&gt;
-&lt;h3&gt;安装uWSGI&lt;/h3&gt;
+&lt;h3 id="uwsgi"&gt;安装uWSGI&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip install uwsgi
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -365,7 +365,7 @@ $ pip install uwsgi -I --no-cache-dir
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;安装及配置Nginx&lt;/h3&gt;
+&lt;h3 id="nginx"&gt;安装及配置Nginx&lt;/h3&gt;
 &lt;p&gt;安装：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;nginx&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -413,7 +413,7 @@ $ uwsgi myapp.ini
 
 
 &lt;p&gt;重启Nginx，并启动uWSGI服务器，终于可以看到”Hello World!”。&lt;/p&gt;
-&lt;h3&gt;运行Flask应用&lt;/h3&gt;
+&lt;h3 id="flask"&gt;运行Flask应用&lt;/h3&gt;
 &lt;p&gt;其实很简单，只要将上例中"server.py"的内容改为Flask应用即可，当然你需要先把Flask包安装好。 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;
 &lt;span class="n"&gt;application&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -439,7 +439,7 @@ $ uwsgi myapp.ini
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;使用Python虚拟环境&lt;/h3&gt;
+&lt;h3 id="python"&gt;使用Python虚拟环境&lt;/h3&gt;
 &lt;p&gt;虚拟环境的安装见文末参考文章。采用虚拟环境来避免应用间冲突，uWSGI可以非常容易做到这点，就是在配置文件中加上”virtualenv”项：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[uwsgi]&lt;/span&gt;
 &lt;span class="na"&gt;...&lt;/span&gt;
@@ -465,7 +465,7 @@ $ uwsgi myapp.ini
 
 
 &lt;p&gt;&lt;code&gt;mount&lt;/code&gt;参数表示将&lt;code&gt;/myapp&lt;/code&gt;地址路由到”server.py”中，&lt;code&gt;manage-script-name&lt;/code&gt;参数表示启用之前在Nginx里配置的”SCRIPT_NAME”参数。再次重启Nginx和uWSGI，你就可以通过”http://localhost/myapp”来访问应用了。&lt;/p&gt;
-&lt;h3&gt;端口优化&lt;/h3&gt;
+&lt;h3 id="_3"&gt;端口优化&lt;/h3&gt;
 &lt;p&gt;上面例子中，我们是通过”127.0.0.1:3031″Socket端口来连接Nginx和uWSGI的，其实我们也可以采用socket文件的方式，这样可以不用写死端口。在uWSGI的启动配置中，我们要修改”socket”项：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[uwsgi]&lt;/span&gt;
 &lt;span class="na"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/tmp/uwsgi.sock&lt;/span&gt;
@@ -483,7 +483,7 @@ $ uwsgi myapp.ini
 
 
 &lt;p&gt;重启Nginx服务器即可。这里要注意Nginx的用户必须要有“uwsgi.sock”文件的读写的权限。&lt;/p&gt;
-&lt;h3&gt;参考文章：&lt;/h3&gt;
+&lt;h3 id="_4"&gt;参考文章：&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;本文原理部分来自：&lt;a href="https://blog.csdn.net/shu_8708/article/details/79068581"&gt;浅谈uWSGI和Nginx&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;实践部分来自：&lt;a href="http://www.bjhee.com/nginx-uwsgi.html"&gt;思诚之道——使用Nginx和uWSGI来运行Python应用&lt;/a&gt; &lt;/li&gt;
@@ -494,7 +494,7 @@ $ uwsgi myapp.ini
 &lt;li&gt;&lt;a href="https://www.cnblogs.com/asmer-stone/p/5470144.html"&gt;virtualenvwrapper 的安装和使用&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="Nginx"></category><category term="uWSGI"></category><category term="Flask"></category></entry><entry><title>Red Hat Enterprise更换CentOS Yum源</title><link href="https://jlhxxxx.github.io/rhe-change-yum.html" rel="alternate"></link><published>2018-05-28T00:00:00+08:00</published><updated>2018-05-28T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-28:/rhe-change-yum.html</id><summary type="html">&lt;h2&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h2&gt;
+&lt;/ul&gt;</content><category term="Nginx"></category><category term="uWSGI"></category><category term="Flask"></category></entry><entry><title>Red Hat Enterprise更换CentOS Yum源</title><link href="https://jlhxxxx.github.io/rhe-change-yum.html" rel="alternate"></link><published>2018-05-28T00:00:00+08:00</published><updated>2018-05-28T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-28:/rhe-change-yum.html</id><summary type="html">&lt;h2 id="red-hat-enterprisecentos"&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h2&gt;
 &lt;p&gt;查看当前系统版本&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat /etc/issue     &lt;span class="c1"&gt;# 查看系统版本&lt;/span&gt;
 cat /proc/version  &lt;span class="c1"&gt;# 查看内核版本&lt;/span&gt;
@@ -505,15 +505,15 @@ cat /proc/version  &lt;span class="c1"&gt;# 查看内核版本&lt;/span&gt;
 &lt;li&gt;&lt;a href="https://zh.wikipedia.org/zh-cn/CentOS"&gt;CentOS&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.linuxidc.com/Linux/2016-07/133000.htm"&gt;CentOS和RedHat发行版与Linux内核版本的对应关系&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;备份和卸载本地yum源&lt;/h2&gt;
+&lt;h2 id="yum"&gt;备份和卸载本地yum源&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rpm -qa&lt;span class="p"&gt;|&lt;/span&gt;grep yum　　                                          &lt;span class="c1"&gt;# 查看本地yum&lt;/span&gt;
 mv /etc/yum.repos.d/your.repo  /etc/yum.repos.d/your.repo.bak   &lt;span class="c1"&gt;# your替换成本地repo名称&lt;/span&gt;
 rpm -qa&lt;span class="p"&gt;|&lt;/span&gt;grep yum&lt;span class="p"&gt;|&lt;/span&gt;xargs rpm -e --nodeps　　                    &lt;span class="c1"&gt;# 不检查依赖性，卸载yum程序&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;下载新的yum安装包&lt;/h2&gt;
-&lt;p&gt;这里采用163的镜像，我们要下的是这几个包：&lt;code&gt;python-iniparse-xxx.noarch …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;h2&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h2&gt;
+&lt;h2 id="yum_1"&gt;下载新的yum安装包&lt;/h2&gt;
+&lt;p&gt;这里采用163的镜像，我们要下的是这几个包：&lt;code&gt;python-iniparse-xxx.noarch …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;h2 id="red-hat-enterprisecentos"&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h2&gt;
 &lt;p&gt;查看当前系统版本&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat /etc/issue     &lt;span class="c1"&gt;# 查看系统版本&lt;/span&gt;
 cat /proc/version  &lt;span class="c1"&gt;# 查看内核版本&lt;/span&gt;
@@ -524,14 +524,14 @@ cat /proc/version  &lt;span class="c1"&gt;# 查看内核版本&lt;/span&gt;
 &lt;li&gt;&lt;a href="https://zh.wikipedia.org/zh-cn/CentOS"&gt;CentOS&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.linuxidc.com/Linux/2016-07/133000.htm"&gt;CentOS和RedHat发行版与Linux内核版本的对应关系&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;备份和卸载本地yum源&lt;/h2&gt;
+&lt;h2 id="yum"&gt;备份和卸载本地yum源&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rpm -qa&lt;span class="p"&gt;|&lt;/span&gt;grep yum　　                                          &lt;span class="c1"&gt;# 查看本地yum&lt;/span&gt;
 mv /etc/yum.repos.d/your.repo  /etc/yum.repos.d/your.repo.bak   &lt;span class="c1"&gt;# your替换成本地repo名称&lt;/span&gt;
 rpm -qa&lt;span class="p"&gt;|&lt;/span&gt;grep yum&lt;span class="p"&gt;|&lt;/span&gt;xargs rpm -e --nodeps　　                    &lt;span class="c1"&gt;# 不检查依赖性，卸载yum程序&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;下载新的yum安装包&lt;/h2&gt;
+&lt;h2 id="yum_1"&gt;下载新的yum安装包&lt;/h2&gt;
 &lt;p&gt;这里采用163的镜像，我们要下的是这几个包：&lt;code&gt;python-iniparse-xxx.noarch.rpm&lt;/code&gt;、&lt;code&gt;yum.xxx.centos.noarch.rpm&lt;/code&gt;、&lt;code&gt;yum-plugin-fastestmirror-xxx.noarch.rpm&lt;/code&gt;、&lt;code&gt;yum-metadata-parser-xxx.rpm&lt;/code&gt;（其中xxx为版本等相关信息）&lt;/p&gt;
 &lt;p&gt;也可以用命令下载：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget http://mirrors.163.com/centos/6/os/x86_64/Packages/python-iniparse-0.3.1-2.1.el6.noarch.rpm
@@ -541,7 +541,7 @@ wget http://mirrors.163.com/centos/6/os/x86_64/Packages/yum-metadata-parser-1.1.
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;安装&lt;/h2&gt;
+&lt;h2 id="_1"&gt;安装&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rpm -ivh python-iniparse-0.3.1-2.1.el6.noarch.rpm
 rpm -ivh yum-3.2.29-81.el6.centos.noarch.rpm yum-plugin-fastestmirror-1.1.30-40.el6.noarch.rpm yum-metadata-parser-1.1.2-16.el6.x86_64.rpm             &lt;span class="c1"&gt;# 3个一起，免得它们相互依赖&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -561,7 +561,7 @@ rpm -ivh python-urlgrabber-3.9.1-11.el6.noarch.rpm
 
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;配置并使用CentOS yum源&lt;/h2&gt;
+&lt;h2 id="centos-yum"&gt;配置并使用CentOS yum源&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/yum.repos.d/　　&lt;span class="c1"&gt;#进入到yum配置文件目录&lt;/span&gt;
 wget http://mirrors.163.com/.help/CentOS6-Base-163.repo　　&lt;span class="c1"&gt;#下载CentOS配置文件&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -574,19 +574,19 @@ yum makecache
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;参考文章&lt;/h3&gt;
+&lt;h3 id="_2"&gt;参考文章&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.cnblogs.com/wutengbiao/p/4188986.html"&gt;RedHat6使用CentOS yum源 换yum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://blog.csdn.net/wangzhjj/article/details/53980727"&gt;RHEL6解决无法使用YUM源问题&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://mirrors.163.com/.help/centos.html"&gt;CentOS镜像使用帮助&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="Linux"></category><category term="yum"></category></entry><entry><title>Windows下WebLogic安装及集群配置</title><link href="https://jlhxxxx.github.io/weblogic-cluster.html" rel="alternate"></link><published>2018-05-22T00:00:00+08:00</published><updated>2018-05-22T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-22:/weblogic-cluster.html</id><summary type="html">&lt;h2&gt;基本概念&lt;/h2&gt;
+&lt;/ul&gt;</content><category term="Linux"></category><category term="yum"></category></entry><entry><title>Windows下WebLogic安装及集群配置</title><link href="https://jlhxxxx.github.io/weblogic-cluster.html" rel="alternate"></link><published>2018-05-22T00:00:00+08:00</published><updated>2018-05-22T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-22:/weblogic-cluster.html</id><summary type="html">&lt;h2 id="_1"&gt;基本概念&lt;/h2&gt;
 &lt;p&gt;在正式部署项目之前，还是先了解下基本概念吧。最基本要掌握域（Domain）、集群（Cluster）、服务器（Server）（区分管理服务器和受管理服务器）、计算机（Machine）、节点管理器（Node Manager）。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参考文章&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://langgufu.iteye.com/blog/1700388"&gt;weblogic 域，管理服务器，受管服务器，集群和机器的基本知识&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.cnblogs.com/cocowool/archive/2012/04/01/2428861.html"&gt;WebLogic中的一些基本概念&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;常用目录结构&lt;/h2&gt;
+&lt;h2 id="_2"&gt;常用目录结构&lt;/h2&gt;
 &lt;p&gt;了解WebLogic常用目录结构，将大大提高管理与维护的工作效率 。这里以WebLogic 11g为例。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.                                      # 主目录
 │─ coherence_3.7                        # coherence集群相关
@@ -595,14 +595,14 @@ yum makecache
 │─ user_projects                         # 用户工程目录
 │  └─ domains                            # 域主目录
 │      └─ base_domain                     # DOMAIN_HOME，用户自建域主目录，默认名称为base_domain，以此为例
-│         │─ bin …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;基本概念&lt;/h2&gt;
+│         │─ bin …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2 id="_1"&gt;基本概念&lt;/h2&gt;
 &lt;p&gt;在正式部署项目之前，还是先了解下基本概念吧。最基本要掌握域（Domain）、集群（Cluster）、服务器（Server）（区分管理服务器和受管理服务器）、计算机（Machine）、节点管理器（Node Manager）。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参考文章&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://langgufu.iteye.com/blog/1700388"&gt;weblogic 域，管理服务器，受管服务器，集群和机器的基本知识&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.cnblogs.com/cocowool/archive/2012/04/01/2428861.html"&gt;WebLogic中的一些基本概念&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;常用目录结构&lt;/h2&gt;
+&lt;h2 id="_2"&gt;常用目录结构&lt;/h2&gt;
 &lt;p&gt;了解WebLogic常用目录结构，将大大提高管理与维护的工作效率 。这里以WebLogic 11g为例。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.                                      # 主目录
 │─ coherence_3.7                        # coherence集群相关
@@ -636,13 +636,13 @@ yum makecache
 &lt;blockquote&gt;
 &lt;p&gt;注：本文档所有&lt;code&gt;%WL_HOME%&lt;/code&gt;，均指上面的wlserver_10.3目录；&lt;code&gt;%DOMAIN_HOME%&lt;/code&gt;指自建域的主目录，例如上面的base_domain目录，对应域的环境变量可以查看&lt;code&gt;%DOMAIN_HOME%\bin\setDomainEnv.cmd&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;集群的安装及配置&lt;/h2&gt;
+&lt;h2 id="_3"&gt;集群的安装及配置&lt;/h2&gt;
 &lt;p&gt;安装WebLogic之前，先要安装Java环境。本人电脑上安装了几套Java环境，WebLogic用到的有两个&lt;a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-jrockit-2192437.html?ssSourceSiteId=otncn"&gt;JRockit 6 - R28.2.7&lt;/a&gt;和&lt;a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html"&gt;Java7u80&lt;/a&gt;，JRockit是原BEA公司的产品，现已被Oracle收购，是传说中最快的JVM，理论上来说使用JRockit性能会有明显的提升。不过JRockit最高只有1.6版本的，而目前WebLogic12c最低支持Java8，所以要想使用JRockit要安装WebLogic11g以下的版本。而我们通常所说的Java环境指的都是Sun公司JDK（也被Oracle收购了^_^）即Oracle Java（为什么要说这些，因为手动配置Java环境的时候需要知道Sun和BEA区别）。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;教程1&lt;/strong&gt;：&lt;a href="http://blog.itpub.net/28536251/viewspace-1718232/"&gt;Windows下Weblogic 11G集群安装与配置&lt;/a&gt; &lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;教程2&lt;/strong&gt;：&lt;a href="https://blog.csdn.net/blvyoucan/article/details/78507100"&gt;Weblogic12c (12.2.1.3)集群环境搭建 两台物理机&lt;/a&gt;&lt;/p&gt;
-&lt;h4&gt;安装WebLogic&lt;/h4&gt;
+&lt;h4 id="weblogic"&gt;安装WebLogic&lt;/h4&gt;
 &lt;p&gt;教程1很详细了，如果已经安装了Java环境，可以跳过第2步，直接到&lt;strong&gt;3.1 安装Weblogic软件&lt;/strong&gt;。&lt;/p&gt;
-&lt;h4&gt;创建WebLogic域及集群&lt;/h4&gt;
+&lt;h4 id="weblogic_1"&gt;创建WebLogic域及集群&lt;/h4&gt;
 &lt;p&gt;创建域使用QuickStart即可，配置集群有两种方法：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -657,7 +657,7 @@ yum makecache
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4&gt;受管理服务器域的配置&lt;/h4&gt;
+&lt;h4 id="_4"&gt;受管理服务器域的配置&lt;/h4&gt;
 &lt;p&gt;如果受管理服务器和管理服务器都在同一台计算机上，不需要此步骤。这里配置的是另一台计算机上的受管理服务器。也有两种方法：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -677,7 +677,7 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;blockquote&gt;
 &lt;p&gt;注意&lt;strong&gt;多台计算机WebLogic版本应一致，JDK根据部署的项目可以不一致&lt;/strong&gt;。简单的集群使用第一种方法更便捷，复杂的集群推荐使用第二种方法。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4&gt;启动管理服务器和受管理服务器&lt;/h4&gt;
+&lt;h4 id="_5"&gt;启动管理服务器和受管理服务器&lt;/h4&gt;
 &lt;p&gt;首先&lt;strong&gt;启动管理服务器&lt;/strong&gt;，参考&lt;strong&gt;教程1-5.1 启动节点1的管理服务器&lt;/strong&gt;或&lt;strong&gt;教程2-4.7.1。&lt;/strong&gt;为了不在每次启动时输入用户名和密码，可以在&lt;code&gt;%DOMAIN_HOME%\servers\AdminServer\security\&lt;/code&gt;下新建&lt;strong&gt;boot.properties&lt;/strong&gt;文件，内容为：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;username&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;域登录名
 &lt;span class="nv"&gt;password&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;对应密码
@@ -726,9 +726,9 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;总结&lt;/strong&gt;：&lt;strong&gt;直接启动&lt;/strong&gt;受管理服务器是没有办法通过控制台重启服务器的（可以关闭），所以建议&lt;strong&gt;通过节点管理器启动&lt;/strong&gt;。整体流程就是：启动管理服务器--启动受管理服务器的节点管理器-通过控制台启动受管理服务器。&lt;/p&gt;
-&lt;h4&gt;节点管理器随Windows启动&lt;/h4&gt;
+&lt;h4 id="windows"&gt;节点管理器随Windows启动&lt;/h4&gt;
 &lt;p&gt;参考&lt;strong&gt;教程2-5&lt;/strong&gt;，修改&lt;code&gt;%WL_HOME%\server\bin\&lt;/code&gt;目录下&lt;strong&gt;installNodeMgrSvc.cmd&lt;/strong&gt;的相应配置，执行即可。取消执行&lt;strong&gt;uninstallNodeMgrSvc.cmd&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2&gt;部署项目注意事项&lt;/h2&gt;
+&lt;h2 id="_6"&gt;部署项目注意事项&lt;/h2&gt;
 &lt;p&gt;部署项目参考&lt;strong&gt;教程1-6. 部署应用进行测试&lt;/strong&gt;，具体的应用各不相同，配置也不尽相同。可能遇到各种各样的问题，需要注意的是：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -740,13 +740,13 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;/li&gt;
 &lt;/ul&gt;</content><category term="WebLogic"></category><category term="Cluster"></category></entry><entry><title>win10下安装CentOS双系统</title><link href="https://jlhxxxx.github.io/win-install-centos.html" rel="alternate"></link><published>2018-05-02T00:00:00+08:00</published><updated>2018-05-02T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-02:/win-install-centos.html</id><summary type="html">&lt;p&gt;用惯了Windows，但是要学Linux，所以决定装个双系统。一开始装的是Ubuntu，傻瓜式安装，界面也漂亮，但是装软件时出现了依赖性问题，网上搜的方法大部分就一个&lt;code&gt;sudo apt-get -f install&lt;/code&gt;解决，但是我输完命令又出现校验和不符无法安装的问题，没有找到很好的解决办法（虽然我觉得可能是服务器的问题，当然我也没有很用力去找，只尝试了一晚上就放弃了）。一怒之下决定换个系统，Liunx系统那么多，总有一个适合自己的。&lt;/p&gt;
 &lt;p&gt;百度了下，Linux系统大致分两类：一类是RedHat系列，包括RedHat、CentOS、Fedora等，包管理工具yum；另一类是Debian系列，包括Debian、Ubuntu等，包管理工具apt-get 。由于公司服务器用的是RedHat的，所以不想浪费时间，我决定找个RedHat系列的，其中CentOS稳定性最好，是大部分服务器的配置，那就尝试下吧。下面进入正题：&lt;/p&gt;
-&lt;h2&gt;第一步：下载镜像文件&lt;/h2&gt;
+&lt;h2 id="_1"&gt;第一步：下载镜像文件&lt;/h2&gt;
 &lt;p&gt;CentOS官方下载地址：&lt;a href="https://www.centos.org/download/"&gt;https://www.centos.org/download/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;CentOS官网上，提供了三种ISO镜像文件的下载：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;DVD …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;用惯了Windows，但是要学Linux，所以决定装个双系统。一开始装的是Ubuntu，傻瓜式安装，界面也漂亮，但是装软件时出现了依赖性问题，网上搜的方法大部分就一个&lt;code&gt;sudo apt-get -f install&lt;/code&gt;解决，但是我输完命令又出现校验和不符无法安装的问题，没有找到很好的解决办法（虽然我觉得可能是服务器的问题，当然我也没有很用力去找，只尝试了一晚上就放弃了）。一怒之下决定换个系统，Liunx系统那么多，总有一个适合自己的。&lt;/p&gt;
 &lt;p&gt;百度了下，Linux系统大致分两类：一类是RedHat系列，包括RedHat、CentOS、Fedora等，包管理工具yum；另一类是Debian系列，包括Debian、Ubuntu等，包管理工具apt-get 。由于公司服务器用的是RedHat的，所以不想浪费时间，我决定找个RedHat系列的，其中CentOS稳定性最好，是大部分服务器的配置，那就尝试下吧。下面进入正题：&lt;/p&gt;
-&lt;h2&gt;第一步：下载镜像文件&lt;/h2&gt;
+&lt;h2 id="_1"&gt;第一步：下载镜像文件&lt;/h2&gt;
 &lt;p&gt;CentOS官方下载地址：&lt;a href="https://www.centos.org/download/"&gt;https://www.centos.org/download/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;CentOS官网上，提供了三种ISO镜像文件的下载：&lt;/p&gt;
 &lt;ul&gt;
@@ -754,14 +754,14 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;li&gt;Everything ISO：对完整版安装盘的软件进行补充，集成所有软件（包含CentOS7的一套完整的软件包，可以用来安装系统或者填充本地镜像）&lt;/li&gt;
 &lt;li&gt;Minimal ISO：迷你版，小巧、安装快速、自带的软件少&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;第二步：在Windows中为Linux分出磁盘空间&lt;/h2&gt;
+&lt;h2 id="windowslinux"&gt;第二步：在Windows中为Linux分出磁盘空间&lt;/h2&gt;
 &lt;p&gt;这个不做详细介绍，方法很多。可以用DiskGenius拆分原系统分区，之后删除要分给Linux的分区即可，不需要格式化。我的是500G固态硬盘，分了200G给Linux。&lt;/p&gt;
-&lt;h2&gt;第三步：制作U盘启动盘&lt;/h2&gt;
+&lt;h2 id="u"&gt;第三步：制作U盘启动盘&lt;/h2&gt;
 &lt;p&gt;这里推荐使用UltraISO，首先&lt;strong&gt;打开&lt;/strong&gt;镜像文件，然后&lt;strong&gt;启动--写入硬盘映像&lt;/strong&gt;，选择U盘，写入方式默认的&lt;strong&gt;USB-HDD+&lt;/strong&gt;即可，然后执行&lt;strong&gt;写入&lt;/strong&gt;。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;之前我用的是Universal-USB-Installer，可能兼容性不太好，在安装的时候出现&lt;strong&gt;设置基础软件仓库时出错&lt;/strong&gt;，换成UltraISO问题解决。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;第四步：利用U盘引导（重点）&lt;/h2&gt;
+&lt;h2 id="u_1"&gt;第四步：利用U盘引导（重点）&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;重启电脑后，进入boot界面，选择USB启动，进入CentOS初始界面：&lt;/p&gt;
@@ -799,7 +799,7 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;p&gt;接下来按&lt;code&gt;Ctrl+x&lt;/code&gt;执行，进入安装界面。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;第四步：安装系统（重点）&lt;/h2&gt;
+&lt;h2 id="_2"&gt;第四步：安装系统（重点）&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;安装界面如图，这里最好选择英文，这样系统装好之后才不会出现&lt;code&gt;桌面&lt;/code&gt;、&lt;code&gt;下载&lt;/code&gt;等中文名称的目录，装好系统之后再改成中文就好。&lt;/p&gt;
@@ -819,12 +819,12 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;p&gt;配置好后，开始安装，安装完毕设置下root账户密码，再创建个用户就好。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;第五步：配置启动项&lt;/h2&gt;
-&lt;h3&gt;参考文章&lt;/h3&gt;
+&lt;h2 id="_3"&gt;第五步：配置启动项&lt;/h2&gt;
+&lt;h3 id="_4"&gt;参考文章&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.linuxidc.com/Linux/2016-06/132051.htm"&gt;Win10下安装CentOS 7双系统详解&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><category term="Linux"></category><category term="CentOS"></category></entry><entry><title>搬瓦工SS教程</title><link href="https://jlhxxxx.github.io/banwagong-ss.html" rel="alternate"></link><published>2018-04-25T00:00:00+08:00</published><updated>2018-04-25T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-25:/banwagong-ss.html</id><summary type="html">&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，现在我更注重效率，尽量在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，加上优惠码，折合人民币每个月10块钱，十块钱，买不了吃亏买不了上当，还因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
-&lt;h2&gt;一、套餐选购&lt;/h2&gt;
+&lt;h2 id="_1"&gt;一、套餐选购&lt;/h2&gt;
 &lt;p&gt;搬瓦工主页：&lt;a href="https://bwh1.net/"&gt;地址1&lt;/a&gt;、&lt;a href="https://bandwagonhost.com/"&gt;地址2&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -839,9 +839,9 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;/ul&gt;
 &lt;p&gt;注意如果是未注册用户，不要先注册再购买，因为新注册的时候需要输入验证码，而验证码是需要翻墙才能看到的，直接购买就能顺便注册。除了邮箱和密码，其他信息随便填就好了。&lt;/p&gt;
 &lt;p&gt;购买之后邮箱里会收到几封邮件，告诉你IP address，SSH Port，和初始密码，不过都不需要记，IP和Port进入服务器控制面板就能看到，密码可以随时重新生成。&lt;/p&gt;
-&lt;h2&gt;二、安装Shadowsocks&lt;/h2&gt;
+&lt;h2 id="shadowsocks"&gt;二、安装Shadowsocks&lt;/h2&gt;
 &lt;p&gt;参考教程：&lt;a href="https://www.cnlinode.com/ban_wa_gong_qu_xiao_le_yi_jian_an_zhuang_shadowsocks_zui_xin_ban_wa_gong_ss_jiao_cheng/"&gt;搬瓦工取消了一键安装Shadowsocks，最新搬瓦工SS教程&lt;/a&gt;第二步方法二 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，现在我更注重效率，尽量在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，加上优惠码，折合人民币每个月10块钱，十块钱，买不了吃亏买不了上当，还因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
-&lt;h2&gt;一、套餐选购&lt;/h2&gt;
+&lt;h2 id="_1"&gt;一、套餐选购&lt;/h2&gt;
 &lt;p&gt;搬瓦工主页：&lt;a href="https://bwh1.net/"&gt;地址1&lt;/a&gt;、&lt;a href="https://bandwagonhost.com/"&gt;地址2&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -856,12 +856,12 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;/ul&gt;
 &lt;p&gt;注意如果是未注册用户，不要先注册再购买，因为新注册的时候需要输入验证码，而验证码是需要翻墙才能看到的，直接购买就能顺便注册。除了邮箱和密码，其他信息随便填就好了。&lt;/p&gt;
 &lt;p&gt;购买之后邮箱里会收到几封邮件，告诉你IP address，SSH Port，和初始密码，不过都不需要记，IP和Port进入服务器控制面板就能看到，密码可以随时重新生成。&lt;/p&gt;
-&lt;h2&gt;二、安装Shadowsocks&lt;/h2&gt;
+&lt;h2 id="shadowsocks"&gt;二、安装Shadowsocks&lt;/h2&gt;
 &lt;p&gt;参考教程：&lt;a href="https://www.cnlinode.com/ban_wa_gong_qu_xiao_le_yi_jian_an_zhuang_shadowsocks_zui_xin_ban_wa_gong_ss_jiao_cheng/"&gt;搬瓦工取消了一键安装Shadowsocks，最新搬瓦工SS教程&lt;/a&gt;第二步方法二。&lt;/p&gt;
 &lt;p&gt;登录网站后，地址栏输入&lt;code&gt;https://kiwivm.64clouds.com/preloader.php?load=/main-exec.php?mode=extras_shadowsocks&lt;/code&gt;进入隐藏的Shadowsocks Server，傻瓜式一键安装，安装好之后页面会显示Shadowsocks的参数及软件下载地址。&lt;/p&gt;
 &lt;p&gt;下载对应系统的Shadowsocks，配置好相应服务器参数，&lt;strong&gt;启用系统代理&lt;/strong&gt;，系统代理选择&lt;strong&gt;pac模式&lt;/strong&gt;。如果想更专业一点，还可以配合SwitchyOmega使用，具体教程参考&lt;a href="https://blog.csdn.net/shouldnotappearcalm/article/details/77900399"&gt;shadowsocks配合chrome插件SwitchyOmega&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;这里要注意如果你已经安装了SwitchyOmega并且有相应配置，一定不要直接导入配置（会覆盖），手动配置也很简单，主要就是配一个规则列表地址：&lt;code&gt;https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt&lt;/code&gt;。&lt;/p&gt;
-&lt;h2&gt;三、优化&lt;/h2&gt;
+&lt;h2 id="_2"&gt;三、优化&lt;/h2&gt;
 &lt;p&gt;到第二步已经可以访问外网了，如果觉得访问速度比较慢，还有一些优化办法。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;切换机房（注意购买的套餐必须是可以切换机房的）&lt;/li&gt;
@@ -870,13 +870,13 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;ul&gt;
 &lt;li&gt;安装BBR&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;a href="https://www.bandwagonhost.net/268.html"&gt;搬瓦工 VPS 安装并开启 Google BBR 教程（KVM / OpenVZ）&lt;/a&gt;&lt;/p&gt;</content><category term="Shadowsocks"></category><category term="Bandwagon"></category></entry><entry><title>windows下用Pelican+GitHub搭建静态博客</title><link href="https://jlhxxxx.github.io/pelican-github.html" rel="alternate"></link><published>2018-04-16T00:00:00+08:00</published><updated>2018-04-16T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-16:/pelican-github.html</id><summary type="html">&lt;h2&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.bandwagonhost.net/268.html"&gt;搬瓦工 VPS 安装并开启 Google BBR 教程（KVM / OpenVZ）&lt;/a&gt;&lt;/p&gt;</content><category term="Shadowsocks"></category><category term="Bandwagon"></category></entry><entry><title>windows下用Pelican+GitHub搭建静态博客</title><link href="https://jlhxxxx.github.io/pelican-github.html" rel="alternate"></link><published>2018-04-16T00:00:00+08:00</published><updated>2018-04-16T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-16:/pelican-github.html</id><summary type="html">&lt;h2 id="github-pages"&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;首先到GitHub进行账号注册：&lt;a href="https://github.com/"&gt;https://github.com/&lt;/a&gt;。&lt;/li&gt;
 &lt;li&gt;创建新仓库，不用新建readme.md，注意仓库名使用&lt;em&gt;username.github.io&lt;/em&gt;的格式，这里&lt;em&gt;username&lt;/em&gt;改成自己的用户名。&lt;/li&gt;
 &lt;li&gt;创建SSH密钥并上传到GitHub。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2&gt;二、安装Python、Pelican、Markdown和make&lt;/h2&gt;
+&lt;h2 id="pythonpelicanmarkdownmake"&gt;二、安装Python、Pelican、Markdown和make&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;安装Python。&lt;/p&gt;
@@ -898,13 +898,13 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 
 
 &lt;p&gt;配置虚拟环境目录，默认创建的虚拟环境位于&lt;strong&gt;C:\Users\username\&lt;/strong&gt;下，可以通过环境变量 &lt;code&gt;WORKON_HOME&lt;/code&gt; 来定制。&lt;/p&gt;
-&lt;p&gt;通过&lt;strong&gt;计算机--&amp;gt;属性-- …&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
+&lt;p&gt;通过&lt;strong&gt;计算机--&amp;gt;属性-- …&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="github-pages"&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;首先到GitHub进行账号注册：&lt;a href="https://github.com/"&gt;https://github.com/&lt;/a&gt;。&lt;/li&gt;
 &lt;li&gt;创建新仓库，不用新建readme.md，注意仓库名使用&lt;em&gt;username.github.io&lt;/em&gt;的格式，这里&lt;em&gt;username&lt;/em&gt;改成自己的用户名。&lt;/li&gt;
 &lt;li&gt;创建SSH密钥并上传到GitHub。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2&gt;二、安装Python、Pelican、Markdown和make&lt;/h2&gt;
+&lt;h2 id="pythonpelicanmarkdownmake"&gt;二、安装Python、Pelican、Markdown和make&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;安装Python。&lt;/p&gt;
@@ -969,7 +969,7 @@ pip list
 &lt;p&gt;安装make并设置好环境变量&lt;a href="http://gnuwin32.sourceforge.net/packages/make.htm"&gt;下载地址&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2&gt;三、创建博客骨架&lt;/h2&gt;
+&lt;h2 id="_1"&gt;三、创建博客骨架&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;搭建博客目录（若使用虚拟环境必须在激活虚拟环境前提下执行下列命令，blog文件夹不需要在虚拟环境文件夹下）：&lt;/p&gt;
@@ -1017,7 +1017,7 @@ pip list
 
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2&gt;四、通过Markdown试写博文并上传GitHub发布&lt;/h2&gt;
+&lt;h2 id="markdowngithub"&gt;四、通过Markdown试写博文并上传GitHub发布&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;创建一个页面：这里以创建 About页面为例。在content目录创建pages子目录：&lt;/p&gt;
@@ -1053,14 +1053,14 @@ pip list
 
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2&gt;五、安装主题&lt;/h2&gt;
+&lt;h2 id="_2"&gt;五、安装主题&lt;/h2&gt;
 &lt;p&gt;主题下载好后，对应在在pelicanconf.py中添加主题选择条目，&lt;a href="https://github.com/getpelican/pelican-themes"&gt;主题下载地址&lt;/a&gt;，这里我选用的是&lt;a href="https://github.com/jsliang/pelican-fresh/tree/ce1afc067931bb571a0f5970366a2e7d733d0d6a"&gt;fresh&lt;/a&gt;主题。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;主题目录（相对或绝对路径）&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;推荐主题：&lt;a href="https://github.com/talha131/pelican-elegant/tree/44c8fbcfe631784f84c8b92b7273280b3c956182"&gt;elegant&lt;/a&gt;，&lt;a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3"&gt;pelican-bootstrap3&lt;/a&gt; ，&lt;a href="https://github.com/jsliang/pelican-fresh/tree/ce1afc067931bb571a0f5970366a2e7d733d0d6a"&gt;fresh&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;六、添加第三方评论系统&lt;/h2&gt;
+&lt;h2 id="_3"&gt;六、添加第三方评论系统&lt;/h2&gt;
 &lt;p&gt;由于Disqus需要翻墙，而国内又没有什么比较好的第三方评论系统，网上搜了一堆，最后决定用github issues来实现。本来想用&lt;a href="https://github.com/imsun/gitment"&gt;gitment&lt;/a&gt;的，但是不知道哪里配置问题，无法初始化issue，然后用的是&lt;a href="https://github.com/gitalk/gitalk"&gt;gitalk&lt;/a&gt;，界面也比gitment好看。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1124,7 +1124,7 @@ pip list
 &lt;p&gt;然后修改article.html，同gitalk一样，在&lt;code&gt;&amp;lt;h2&amp;gt;Comments&amp;lt;/h2&amp;gt;&lt;/code&gt;后加上一行&lt;code&gt;{% include 'disqus.html' %}&lt;/code&gt;。最后只需在pelicanconf.py文件中配置&lt;code&gt;DISQUS_SITENAME = 'shortname'&lt;/code&gt;即可启用disqus。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;七、添加Webmaster&lt;/h2&gt;
+&lt;h2 id="webmaster"&gt;七、添加Webmaster&lt;/h2&gt;
 &lt;p&gt;为了让博客能在网上被搜索到，需要搜索引擎将网站收录，所以要添加Webmaster。这里我添加了Google和Bing收录，因为GitHub屏蔽了百度网站爬虫，所以除非你搭建在自己的服务器上，否则是没办法添加百度收录的。&lt;/p&gt;
 &lt;p&gt;下面以Bing收录为例，首先打开&lt;a href="https://www.bing.com/toolbox/webmaster/"&gt;Bing网站管理员工具&lt;/a&gt;，用Microsoft账号登录，都是中文界面，按照说明添加网站并验证通过。&lt;/p&gt;
 &lt;p&gt;然后准备sitemap，到博客主目录下，执行：&lt;/p&gt;
@@ -1152,7 +1152,7 @@ pip list
 
 
 &lt;p&gt;然后&lt;code&gt;make html&lt;/code&gt;在output目录下可以看到已经生成了网站的sitemap；&lt;code&gt;make github&lt;/code&gt;后，提交网站sitemap地址到到Bing Webmaster：&lt;code&gt;https://username.github.io/sitemap.xml&lt;/code&gt;。&lt;/p&gt;
-&lt;h2&gt;八、添加站内搜索&lt;/h2&gt;
+&lt;h2 id="_4"&gt;八、添加站内搜索&lt;/h2&gt;
 &lt;p&gt;这一步必须建立在第七步前提下，否则是搜不到东西的。以添加Bing站内搜索为例：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;打开&lt;a href="https://www.customsearch.ai/"&gt;Bing Custom Search&lt;/a&gt;，选择&lt;strong&gt;New Instance；&lt;/strong&gt;&lt;/li&gt;
@@ -1165,23 +1165,23 @@ pip list
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;九、添加分享按钮&lt;/h2&gt;
+&lt;h2 id="_5"&gt;九、添加分享按钮&lt;/h2&gt;
 &lt;p&gt;fresh主题自带&lt;a href="http://www.sharethis.com/"&gt;ShareThis&lt;/a&gt;分享功能，申请账号并将ShareThis Pub Key添加到pelicanconf.py中就可以使用，具体参考&lt;a href="https://github.com/jsliang/pelican-fresh/tree/ce1afc067931bb571a0f5970366a2e7d733d0d6a"&gt;官方文档&lt;/a&gt;。添加第三方的跟添加其他插件类似。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;SHARETHIS_PUB_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;your ShareThis Pub Key&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;添加了分享按钮之后，网站加载速度变得很慢，所以最后我把这个功能关掉了，本来也用不上。对我来说，必要的功能有，其他越简单越好。&lt;/p&gt;
-&lt;h2&gt;十、最重要的事&lt;/h2&gt;
+&lt;h2 id="_6"&gt;十、最重要的事&lt;/h2&gt;
 &lt;p&gt;为了看起来完美，所以加了第十条。不过这确实也是最重要的，我觉得应该关心博客的内容而不是样式。&lt;/p&gt;
-&lt;h2&gt;PS：更新补丁&lt;/h2&gt;
+&lt;h2 id="ps"&gt;PS：更新补丁&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;【20190505】由于主题年久失修，已经跟不上Pelican的更新了，在执行构建时报错：&lt;code&gt;CRITICAL: TypeError: not all arguments converted during string formatting&lt;/code&gt;，解决方法如下：&lt;/p&gt;
 &lt;p&gt;从&lt;a href="https://github.com/getpelican/pelican/issues/2487"&gt;On fresh install: "simple" theme build error using publishconf.py&lt;/a&gt;跳转到&lt;a href="https://github.com/getpelican/pelican/pull/2494"&gt;Fall back to the old feed settings if using an older theme #2494&lt;/a&gt;，再跳转到&lt;a href="https://github.com/getpelican/pelican/pull/2494/commits/f995e6d3b9bd2e4bfebfa184c310f96a6c1cc850"&gt;Fall back to the old feed settings for older theme&lt;/a&gt;，修改&lt;a href="https://github.com/getpelican/pelican/pull/2494/commits/f995e6d3b9bd2e4bfebfa184c310f96a6c1cc850#diff-7695706f16562cf5ca9c5f3354c146d1"&gt;pelican/writers.py&lt;/a&gt;解决问题。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;参考文章&lt;/h3&gt;
+&lt;h3 id="_7"&gt;参考文章&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://www.cnblogs.com/suke99/p/5355894.html"&gt;windows下安装Python虚拟环境virtualenvwrapper-win&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.cnblogs.com/cciejh/p/blog_building.html"&gt;Pelican＋GitHub博客搭建详细教程&lt;/a&gt; &lt;/li&gt;
