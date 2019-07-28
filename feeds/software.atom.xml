@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Software</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/software.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-07-08T00:00:00+08:00</updated><entry><title>Appium环境搭建及自动化的一些参考</title><link href="https://jlhxxxx.github.io/appium-base-01.html" rel="alternate"></link><published>2019-07-08T00:00:00+08:00</published><updated>2019-07-08T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-07-08:/appium-base-01.html</id><summary type="html">&lt;h2 id="appium"&gt;Appium环境配置&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG - Software</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io%5Cfeeds/software.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-07-08T00:00:00+08:00</updated><entry><title>Appium环境搭建及自动化的一些参考</title><link href="https://jlhxxxx.github.io%5Cappium-base-01.html" rel="alternate"></link><published>2019-07-08T00:00:00+08:00</published><updated>2019-07-08T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io\appium-base-01.html,2019-07-08:</id><summary type="html">&lt;h2 id="appium"&gt;Appium环境配置&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;本地环境&lt;/strong&gt;：win10_x64 + JDK8 + python3&lt;/p&gt;
 &lt;h3 id="appium-client"&gt;Appium-Client安装配置&lt;/h3&gt;
 &lt;p&gt;这里我们选用&lt;a href="https://github.com/appium/python-client"&gt;python-client&lt;/a&gt;，建议在虚拟环境下安装，命令如下：&lt;/p&gt;
@@ -198,7 +198,7 @@
 &lt;li&gt;&lt;a href="https://www.cnblogs.com/yoyoketang/p/9009209.html"&gt;appium+python自动化41-切换webview时候报chromedriver版本问题&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="Appium"></category><category term="Automated"></category></entry><entry><title>Python pytesseract识别验证码</title><link href="https://jlhxxxx.github.io/pytesseract.html" rel="alternate"></link><published>2018-08-22T00:00:00+08:00</published><updated>2018-08-22T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-08-22:/pytesseract.html</id><summary type="html">&lt;h2 id="_1"&gt;安装&lt;/h2&gt;
+&lt;/ul&gt;</content><category term="Appium"></category><category term="Automated"></category></entry><entry><title>Python pytesseract识别验证码</title><link href="https://jlhxxxx.github.io%5Cpytesseract.html" rel="alternate"></link><published>2018-08-22T00:00:00+08:00</published><updated>2018-08-22T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io\pytesseract.html,2018-08-22:</id><summary type="html">&lt;h2 id="_1"&gt;安装&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;安装库&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip install Pillow
 $ pip install pytesseract
@@ -275,7 +275,7 @@ $ yum install tesseract-langpack-deu
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.cnblogs.com/beer/p/5672678.html"&gt;字符型图片验证码识别完整过程及Python实现&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.cnblogs.com/qqandfqr/p/7866650.html"&gt;Python验证码识别&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="pytesseract"></category></entry><entry><title>使用Nginx+uWSGI+Flask部署应用</title><link href="https://jlhxxxx.github.io/nginx-uwsgi.html" rel="alternate"></link><published>2018-08-21T00:00:00+08:00</published><updated>2018-08-21T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-08-21:/nginx-uwsgi.html</id><summary type="html">&lt;h2 id="_1"&gt;原理&lt;/h2&gt;
+&lt;/ul&gt;</content><category term="pytesseract"></category></entry><entry><title>使用Nginx+uWSGI+Flask部署应用</title><link href="https://jlhxxxx.github.io%5Cnginx-uwsgi.html" rel="alternate"></link><published>2018-08-21T00:00:00+08:00</published><updated>2018-08-21T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io\nginx-uwsgi.html,2018-08-21:</id><summary type="html">&lt;h2 id="_1"&gt;原理&lt;/h2&gt;
 &lt;h3 id="wigsweb-server-gateway-interface"&gt;WIGS(Web Server Gateway Interface)服务器网关接口&lt;/h3&gt;
 &lt;p&gt;是Python应用程序或框架和Web服务器之间的一种接口，已经被广泛接受, 它已基本达成它的可移植性方面的目标。 
 WSGI 没有官方的实现，因为WSGI更像一个协议。只要遵照这些协议，WSGI应用(Application)都可以在任何服务器(Server)上运行，反之亦然。 
@@ -494,7 +494,7 @@ $ uwsgi myapp.ini
 &lt;li&gt;&lt;a href="https://www.cnblogs.com/asmer-stone/p/5470144.html"&gt;virtualenvwrapper 的安装和使用&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="Nginx"></category><category term="uWSGI"></category><category term="Flask"></category></entry><entry><title>Red Hat Enterprise更换CentOS Yum源</title><link href="https://jlhxxxx.github.io/rhe-change-yum.html" rel="alternate"></link><published>2018-05-28T00:00:00+08:00</published><updated>2018-05-28T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-28:/rhe-change-yum.html</id><summary type="html">&lt;h2 id="red-hat-enterprisecentos"&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h2&gt;
+&lt;/ul&gt;</content><category term="Nginx"></category><category term="uWSGI"></category><category term="Flask"></category></entry><entry><title>Red Hat Enterprise更换CentOS Yum源</title><link href="https://jlhxxxx.github.io%5Crhe-change-yum.html" rel="alternate"></link><published>2018-05-28T00:00:00+08:00</published><updated>2018-05-28T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io\rhe-change-yum.html,2018-05-28:</id><summary type="html">&lt;h2 id="red-hat-enterprisecentos"&gt;确定Red Hat Enterprise和CentOS对应版本&lt;/h2&gt;
 &lt;p&gt;查看当前系统版本&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat /etc/issue     &lt;span class="c1"&gt;# 查看系统版本&lt;/span&gt;
 cat /proc/version  &lt;span class="c1"&gt;# 查看内核版本&lt;/span&gt;
@@ -579,7 +579,7 @@ yum makecache
 &lt;li&gt;&lt;a href="https://www.cnblogs.com/wutengbiao/p/4188986.html"&gt;RedHat6使用CentOS yum源 换yum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://blog.csdn.net/wangzhjj/article/details/53980727"&gt;RHEL6解决无法使用YUM源问题&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://mirrors.163.com/.help/centos.html"&gt;CentOS镜像使用帮助&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="Linux"></category><category term="yum"></category></entry><entry><title>Windows下WebLogic安装及集群配置</title><link href="https://jlhxxxx.github.io/weblogic-cluster.html" rel="alternate"></link><published>2018-05-22T00:00:00+08:00</published><updated>2018-05-22T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-22:/weblogic-cluster.html</id><summary type="html">&lt;h2 id="_1"&gt;基本概念&lt;/h2&gt;
+&lt;/ul&gt;</content><category term="Linux"></category><category term="yum"></category></entry><entry><title>Windows下WebLogic安装及集群配置</title><link href="https://jlhxxxx.github.io%5Cweblogic-cluster.html" rel="alternate"></link><published>2018-05-22T00:00:00+08:00</published><updated>2018-05-22T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io\weblogic-cluster.html,2018-05-22:</id><summary type="html">&lt;h2 id="_1"&gt;基本概念&lt;/h2&gt;
 &lt;p&gt;在正式部署项目之前，还是先了解下基本概念吧。最基本要掌握域（Domain）、集群（Cluster）、服务器（Server）（区分管理服务器和受管理服务器）、计算机（Machine）、节点管理器（Node Manager）。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参考文章&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
@@ -737,7 +737,7 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;li&gt;
 &lt;p&gt;遇到报错多查看日志，帮助文档，百度谷歌，同事前辈亲朋好友。。。头发掉光都解决不了就算了。&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="WebLogic"></category><category term="Cluster"></category></entry><entry><title>win10下安装CentOS双系统</title><link href="https://jlhxxxx.github.io/win-install-centos.html" rel="alternate"></link><published>2018-05-02T00:00:00+08:00</published><updated>2018-05-02T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-05-02:/win-install-centos.html</id><summary type="html">&lt;p&gt;用惯了Windows，但是要学Linux，所以决定装个双系统。一开始装的是Ubuntu，傻瓜式安装，界面也漂亮，但是装软件时出现了依赖性问题，网上搜的方法大部分就一个&lt;code&gt;sudo apt-get -f install&lt;/code&gt;解决，但是我输完命令又出现校验和不符无法安装的问题，没有找到很好的解决办法（虽然我觉得可能是服务器的问题，当然我也没有很用力去找，只尝试了一晚上就放弃了）。一怒之下决定换个系统，Liunx系统那么多，总有一个适合自己的。&lt;/p&gt;
+&lt;/ul&gt;</content><category term="WebLogic"></category><category term="Cluster"></category></entry><entry><title>win10下安装CentOS双系统</title><link href="https://jlhxxxx.github.io%5Cwin-install-centos.html" rel="alternate"></link><published>2018-05-02T00:00:00+08:00</published><updated>2018-05-02T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io\win-install-centos.html,2018-05-02:</id><summary type="html">&lt;p&gt;用惯了Windows，但是要学Linux，所以决定装个双系统。一开始装的是Ubuntu，傻瓜式安装，界面也漂亮，但是装软件时出现了依赖性问题，网上搜的方法大部分就一个&lt;code&gt;sudo apt-get -f install&lt;/code&gt;解决，但是我输完命令又出现校验和不符无法安装的问题，没有找到很好的解决办法（虽然我觉得可能是服务器的问题，当然我也没有很用力去找，只尝试了一晚上就放弃了）。一怒之下决定换个系统，Liunx系统那么多，总有一个适合自己的。&lt;/p&gt;
 &lt;p&gt;百度了下，Linux系统大致分两类：一类是RedHat系列，包括RedHat、CentOS、Fedora等，包管理工具yum；另一类是Debian系列，包括Debian、Ubuntu等，包管理工具apt-get 。由于公司服务器用的是RedHat的，所以不想浪费时间，我决定找个RedHat系列的，其中CentOS稳定性最好，是大部分服务器的配置，那就尝试下吧。下面进入正题：&lt;/p&gt;
 &lt;h2 id="_1"&gt;第一步：下载镜像文件&lt;/h2&gt;
 &lt;p&gt;CentOS官方下载地址：&lt;a href="https://www.centos.org/download/"&gt;https://www.centos.org/download/&lt;/a&gt;&lt;/p&gt;
@@ -822,7 +822,7 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;h3 id="_4"&gt;参考文章&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.linuxidc.com/Linux/2016-06/132051.htm"&gt;Win10下安装CentOS 7双系统详解&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="Linux"></category><category term="CentOS"></category></entry><entry><title>搬瓦工SS教程</title><link href="https://jlhxxxx.github.io/banwagong-ss.html" rel="alternate"></link><published>2018-04-25T00:00:00+08:00</published><updated>2018-04-25T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-25:/banwagong-ss.html</id><summary type="html">&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，现在我更注重效率，尽量在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，加上优惠码，折合人民币每个月10块钱，十块钱，买不了吃亏买不了上当，还因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
+&lt;/ul&gt;</content><category term="Linux"></category><category term="CentOS"></category></entry><entry><title>搬瓦工SS教程</title><link href="https://jlhxxxx.github.io%5Cbanwagong-ss.html" rel="alternate"></link><published>2018-04-25T00:00:00+08:00</published><updated>2018-04-25T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io\banwagong-ss.html,2018-04-25:</id><summary type="html">&lt;p&gt;之前一直折腾免费的翻墙软件，免费软件唯一的优点就是免费。但是从另一种角度来说，免费软件其实也蛮贵的。商业社会，时间宝贵，现在我更注重效率，尽量在时间和金钱上取一个平衡吧。由于首次操作，所以试了下年付$19.9最便宜的套餐，加上优惠码，折合人民币每个月10块钱，十块钱，买不了吃亏买不了上当，还因为可以用支付宝付款，挺方便的。切换CN2机房后年流量为188G，我觉得对于非视频用户来说应该是够用了。&lt;/p&gt;
 &lt;h2 id="_1"&gt;一、套餐选购&lt;/h2&gt;
 &lt;p&gt;搬瓦工主页：&lt;a href="https://bwh1.net/"&gt;地址1&lt;/a&gt;、&lt;a href="https://bandwagonhost.com/"&gt;地址2&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -869,7 +869,7 @@ unpack -domain&lt;span class="o"&gt;=&lt;/span&gt;d:&lt;span class="se"&gt;\w&lt
 &lt;ul&gt;
 &lt;li&gt;安装BBR&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;a href="https://www.bandwagonhost.net/268.html"&gt;搬瓦工 VPS 安装并开启 Google BBR 教程（KVM / OpenVZ）&lt;/a&gt;&lt;/p&gt;</content><category term="Shadowsocks"></category><category term="Bandwagon"></category></entry><entry><title>windows下用Pelican+GitHub搭建静态博客</title><link href="https://jlhxxxx.github.io/pelican-github.html" rel="alternate"></link><published>2018-04-16T00:00:00+08:00</published><updated>2018-04-16T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2018-04-16:/pelican-github.html</id><summary type="html">&lt;h2 id="github-pages"&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.bandwagonhost.net/268.html"&gt;搬瓦工 VPS 安装并开启 Google BBR 教程（KVM / OpenVZ）&lt;/a&gt;&lt;/p&gt;</content><category term="Shadowsocks"></category><category term="Bandwagon"></category></entry><entry><title>windows下用Pelican+GitHub搭建静态博客</title><link href="https://jlhxxxx.github.io%5Cpelican-github.html" rel="alternate"></link><published>2018-04-16T00:00:00+08:00</published><updated>2018-04-16T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io\pelican-github.html,2018-04-16:</id><summary type="html">&lt;h2 id="github-pages"&gt;一、使用GitHub Pages创建个人博客页面&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;首先到GitHub进行账号注册：&lt;a href="https://github.com/"&gt;https://github.com/&lt;/a&gt;。&lt;/li&gt;
 &lt;li&gt;创建新仓库，不用新建readme.md，注意仓库名使用&lt;em&gt;username.github.io&lt;/em&gt;的格式，这里&lt;em&gt;username&lt;/em&gt;改成自己的用户名。&lt;/li&gt;
