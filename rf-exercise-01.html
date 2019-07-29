@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Aman" />
+    <meta name="robots" content="index, follow"/>
+	<meta name="baidu-site-verification" content="maDdvat0eq" />
+
+    <meta property="og:title" content="Robot Framework练习之一——自动化Redmine操作"/>
+    <meta property="og:url" content="https://jlhxxxx.github.io/rf-exercise-01.html"/>
+    <meta property="og:site_name" content="AMAN's BLOG"/>
+    <meta property="og:type" content="article"/>
+
+    <link rel="canonical" href="https://jlhxxxx.github.io/rf-exercise-01.html" />
+
+    <title>Robot Framework练习之一——自动化Redmine操作 | AMAN's BLOG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="https://jlhxxxx.github.io/theme/css/main.css" />
+    <link href="https://jlhxxxx.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="AMAN's BLOG Atom Feed" />
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">
+        stLight.options({
+            publisher: "",
+            doNotHash: false,
+            doNotCopy: false,
+            hashAddressBar: false
+        });
+    </script>
+</head>
+
+<body id="index">
+<a class="hidden-phone" href="https://github.com/jlhxxxx/jlhxxxx.github.io">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" />
+</a>
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <header id="banner" >
+                <h1>
+                    <a href="https://jlhxxxx.github.io/">AMAN's BLOG </a>
+                </h1>
+                <nav class="navbar">
+                    <div class="navbar-inner">
+                        <ul class="nav">
+                            <li ><a href="https://jlhxxxx.github.io/category/software.html">Software</a></li>
+                            <li ><a href="https://jlhxxxx.github.io/category/sql.html">SQL</a></li>
+                            <li class="active"><a href="https://jlhxxxx.github.io/category/test-tools.html">Test Tools</a></li>
+                        </ul>
+<script>
+  (function() {
+    var cx = '000342699563853547877:_ntl2s92dby';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<div id="google-custom-search" class="nav">
+    <gcse:search></gcse:search>
+</div>
+                    </div>
+                </nav>
+            </header><!-- /#banner -->
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <div class="row-fluid">
+<div class="span10 offset1">
+  <section>
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="https://jlhxxxx.github.io/rf-exercise-01.html" rel="bookmark"
+             title="Permalink to Robot Framework练习之一——自动化Redmine操作">Robot Framework练习之一——自动化Redmine操作</a></h1>
+      </header>
+      <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="https://jlhxxxx.github.io/category/test-tools.html">Test Tools</a>
+
+    on 2019-07-29
+
+        |
+        tags:         <a href="https://jlhxxxx.github.io/tag/robotframework.html">robotframework</a>
+        <a href="https://jlhxxxx.github.io/tag/automation.html">automation</a>
+
+
+
+    
+</footer><!-- /.post-info -->
+
+        <h2 id="_1">目标分析</h2>
+<p>既然是练习，那就从最基本的开始，实现登（登录）增删改功能。用例流程如下：</p>
+<ol>
+<li>登录</li>
+<li>新建issue</li>
+<li>修改issue（增加图片）</li>
+<li>删除issue</li>
+</ol>
+<p><strong>难点</strong>：</p>
+<ul>
+<li>token传递</li>
+<li>上传图片</li>
+</ul>
+<h2 id="_2">代码结构</h2>
+<p>一段完整的RF（Robot Framework简称）代码一般包含四部分（都为可选）：</p>
+<div class="highlight"><pre><span></span><span class="o">***</span> <span class="n">Settings</span> <span class="o">***</span>                                    <span class="c1"># 基本配置</span>
+<span class="n">Documentation</span>     <span class="n">The</span> <span class="n">documentation</span> <span class="n">of</span> <span class="n">this</span> <span class="n">test</span> <span class="n">suite</span><span class="o">.</span>     
+<span class="n">Suite</span> <span class="n">Setup</span>       <span class="n">keyword</span>                           
+<span class="n">Suite</span> <span class="n">Teardown</span>    <span class="n">keyword</span>                           
+<span class="n">Test</span> <span class="n">Setup</span>        <span class="n">keyword</span>                           
+<span class="n">Test</span> <span class="n">Teardown</span>     <span class="n">keyword</span>                           
+<span class="n">Library</span>           <span class="n">RequestsLibrary</span>                                   
+
+<span class="o">***</span> <span class="n">Variables</span> <span class="o">***</span>                                   <span class="c1"># 初始化一些变量</span>
+<span class="err">$</span><span class="p">{</span><span class="n">user</span><span class="p">}</span>           <span class="n">username</span>
+<span class="err">$</span><span class="p">{</span><span class="n">pw</span><span class="p">}</span>             <span class="mi">123456</span>
+
+<span class="o">***</span> <span class="n">Test</span> <span class="n">Cases</span> <span class="o">***</span>                                  <span class="c1"># 要执行的用例(注意缩进)</span>
+<span class="n">test</span> <span class="n">case1</span>
+    <span class="n">xxx</span>
+    <span class="o">...</span>
+
+<span class="n">test</span> <span class="n">case2</span>
+    <span class="n">xxx</span>
+    <span class="o">...</span>
+<span class="o">...</span>
+
+<span class="o">***</span> <span class="n">Keywords</span> <span class="o">***</span>                                    <span class="c1"># 自己定义的关键字</span>
+<span class="n">key</span> <span class="n">word1</span>
+    <span class="n">xxx</span>
+    <span class="o">...</span>
+<span class="n">key</span> <span class="n">word2</span>
+    <span class="n">xxx</span>
+    <span class="o">...</span>
+<span class="o">...</span>
+</pre></div>
+
+
+<h2 id="_3">用到的关键字及对应包</h2>
+<p><a href="http://robotframework.org/robotframework/latest/libraries/BuiltIn.html">BuiltIn</a></p>
+<ul>
+<li><a href="http://robotframework.org/robotframework/latest/libraries/BuiltIn.html#Create Dictionary">Create Dictionary</a></li>
+<li><a href="http://robotframework.org/robotframework/latest/libraries/BuiltIn.html#Evaluate">Evaluate</a></li>
+<li><a href="http://robotframework.org/robotframework/latest/libraries/BuiltIn.html#Run%20Keyword%20If">Run Keyword If</a></li>
+<li><a href="http://robotframework.org/robotframework/latest/libraries/BuiltIn.html#Set Variable">Set Variable</a></li>
+<li><a href="http://robotframework.org/robotframework/latest/libraries/BuiltIn.html#Should Contain">Should Contain</a></li>
+</ul>
+<p><a href="http://robotframework.org/robotframework/latest/libraries/String.html">String</a></p>
+<ul>
+<li><a href="http://robotframework.org/robotframework/latest/libraries/String.html#Get Regexp Matches">Get Regexp Matches</a></li>
+</ul>
+<p><a href="http://bulkan.github.io/robotframework-requests/#Post Request">RequestsLibrary</a></p>
+<ul>
+<li><a href="http://bulkan.github.io/robotframework-requests/#Create Session">Create Session</a></li>
+<li><a href="http://bulkan.github.io/robotframework-requests/#Get Request">Get Request</a></li>
+<li><a href="http://bulkan.github.io/robotframework-requests/#Post Request">Post Request</a></li>
+</ul>
+<h2 id="_4">具体实现</h2>
+<h3 id="_5">登录</h3>
+<p>首先用浏览器工具抓包，查看登录<code>POST</code>参数，大概是下面这样的：</p>
+<div class="highlight"><pre><span></span><span class="n">utf8</span><span class="p">:</span> <span class="err">✓</span>
+<span class="n">authenticity_token</span><span class="p">:</span> <span class="n">qM9e18uN</span><span class="o">+</span><span class="n">EHFabwx2vDJtY10cldrFwtBLbojTdhvii8WeDKHsrVNf</span><span class="o">+</span><span class="mi">4</span><span class="n">uMWBpskejW0Wty1gaP</span><span class="o">+</span><span class="n">GI81sRJkzudQ</span><span class="o">==</span>
+<span class="n">back_url</span><span class="p">:</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">xxx</span><span class="p">.</span><span class="n">redmine</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">redmine</span><span class="o">/</span>
+<span class="n">username</span><span class="p">:</span> <span class="n">username</span>
+<span class="n">password</span><span class="p">:</span> <span class="mi">123456</span>
+<span class="n">login</span><span class="p">:</span> <span class="err">登录</span> <span class="err">»</span>
+</pre></div>
+
+
+<p>其中<code>authenticity_token</code>就是我们要从上一个页面获取的。</p>
+<blockquote>
+<p>其实上一页面的请求地址是什么根本无关紧要，关键在于token传递的连续性，即在同一域名下，上一次请求生成的token传递到当前请求，并在当前请求生成一个新的token，可以用来传递到下一请求。token的连续性作为判断是否同一会话（session）的依据。</p>
+</blockquote>
+<p>查看上一页面html，前几行如下：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;zh&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Redmine<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;description&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;Redmine&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;keywords&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;issue,bug,tracker&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;csrf-param&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;authenticity_token&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;csrf-token&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;KJG1UYRS8rOMnlsXOzH41cZtxJkrt9cbO69z3iWrX8G1dRKiIlOOjm5HfQNJLX2StLo/4dS5Jn3Q5FSzX2MMNA==&quot;</span> <span class="p">/&gt;</span>
+...
+</pre></div>
+
+
+<p>考虑到数据不是json格式，所以决定使用万能的正则表达式，可以放到变量初始化里面：</p>
+<div class="highlight"><pre><span></span><span class="o">***</span> <span class="n">Variables</span> <span class="o">***</span>
+<span class="err">$</span><span class="p">{</span><span class="n">tokenReg</span><span class="p">}</span>       <span class="n">name</span><span class="o">=</span><span class="s2">&quot;csrf-token&quot;</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;(.*?)&quot;</span>
+</pre></div>
+
+
+<p>因为要实现会话控制，所以我们在具体请求之前，要先创建一个session，这里我们可以把headers一起封装：</p>
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="p">{</span><span class="n">headers</span><span class="p">}</span>    <span class="n">Create</span> <span class="n">Dictionary</span>    <span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="o">=</span><span class="n">value1</span>    <span class="n">Accept</span><span class="o">=</span><span class="n">value2</span>    <span class="o">...</span>
+<span class="n">Create</span> <span class="n">Session</span>    <span class="n">redmine</span>    <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">xxx</span><span class="o">.</span><span class="n">redmine</span><span class="o">.</span><span class="n">com</span>    <span class="n">headers</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">headers</span><span class="p">}</span>
+</pre></div>
+
+
+<blockquote>
+<p>注意：<code>${headers}</code>里不要封装<code>Content-Type</code>，可能会导致传参错误。</p>
+</blockquote>
+<p>现在，发送第一个请求，并获得token：</p>
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="p">}</span>    <span class="n">get</span> <span class="n">Request</span>    <span class="n">redmine</span>    <span class="o">/</span>
+<span class="c1"># 这里可以有2种方法，方法1返回值是list，包含所有匹配项：</span>
+<span class="err">$</span><span class="p">{</span><span class="n">tokenList</span><span class="p">}</span>    <span class="n">Get</span> <span class="n">Regexp</span> <span class="n">Matches</span>    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">tokenReg</span><span class="p">}</span>    <span class="mi">1</span>
+<span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="nb">set</span> <span class="n">variable</span>    <span class="err">$</span><span class="p">{</span><span class="n">tokenList</span><span class="p">}[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># 方法2：调用python re库方法，因为使用了group()方法，返回值直接是string：</span>
+<span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="n">evaluate</span>    <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;${tokenReg} &#39;</span><span class="p">,</span><span class="s1">&#39;&#39;&#39;${resp.text}&#39;&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>    <span class="n">re</span>
+</pre></div>
+
+
+<p>第二步，封装参数，执行登录请求：</p>
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>    <span class="n">Create</span> <span class="n">Dictionary</span>    <span class="n">utf8</span><span class="o">=</span><span class="err">✓</span>    <span class="n">authenticity_token</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="n">username</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">user</span><span class="p">}</span>    <span class="n">password</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">pw</span><span class="p">}</span>    <span class="n">login</span><span class="o">=</span><span class="err">登录</span> <span class="err">»</span>
+<span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="p">}</span>    <span class="n">Post</span> <span class="n">Request</span>    <span class="n">redmine</span>    <span class="o">/</span><span class="n">redmine</span><span class="o">/</span><span class="n">login</span>    <span class="n">params</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>
+</pre></div>
+
+
+<p>登录成功的响应页面会带上用户名，这里可以加个验证：</p>
+<div class="highlight"><pre><span></span><span class="n">Should</span> <span class="n">Contain</span>    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">user</span><span class="p">}</span>
+</pre></div>
+
+
+<p>整个登录操作就这样实现了。因为后续的所有操作都是建立在登录的基础上，所以当我们测试非登录功能时，可以将登录操作封装为关键字，在<code>Suite Setup</code>时执行此关键字。同理可以在<code>Suite Teardown</code>中执行登出。完整代码见文章最后。</p>
+<h3 id="issue">新建issue</h3>
+<p>同样先抓包，获取<code>POST</code>参数，可以看到这里仍然需要传递token，为了方便，将获取token封装为关键字：</p>
+<div class="highlight"><pre><span></span><span class="o">***</span> <span class="n">Keywords</span> <span class="o">***</span>
+<span class="n">get</span> <span class="n">token</span>
+    <span class="p">[</span><span class="n">Arguments</span><span class="p">]</span>    <span class="err">$</span><span class="p">{</span><span class="n">tokenReg</span><span class="p">}</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="p">}</span>    <span class="n">get</span> <span class="n">Request</span>    <span class="n">redmine</span>    <span class="o">/</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">tokenList</span><span class="p">}</span>    <span class="n">Get</span> <span class="n">Regexp</span> <span class="n">Matches</span>    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">tokenReg</span><span class="p">}</span>    <span class="mi">1</span>
+    <span class="p">[</span><span class="n">Return</span><span class="p">]</span>    <span class="err">$</span><span class="p">{</span><span class="n">tokenList</span><span class="p">}[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+
+<p>代码原理和登录一样，封装参数，执行请求。参数有点多，完整代码见文章最后。</p>
+<div class="highlight"><pre><span></span><span class="o">***</span> <span class="n">Test</span> <span class="n">Cases</span> <span class="o">***</span>
+<span class="n">add</span> <span class="n">issue</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="n">get</span> <span class="n">token</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>    <span class="n">Create</span> <span class="n">Dictionary</span>    <span class="n">authenticity_token</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="o">...</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="p">}</span>    <span class="n">Post</span> <span class="n">Request</span>    <span class="n">redmine</span>    <span class="o">/</span><span class="n">redmine</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">automatic</span><span class="o">/</span><span class="n">issues</span>    <span class="n">params</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>
+</pre></div>
+
+
+<p>参数中有中文或特殊字符不用另外处理，请求的时候会自动url转码的。</p>
+<h3 id="issue_1">修改issue（增加图片）</h3>
+<p>修改需要解决两个问题，一是动态传参问题，另一个是上传图片的问题。</p>
+<p>先讲第一个问题，首先在分析<code>POST</code>参数时候，发现比新增多了几个字段：<code>lock_version</code>和<code>last_journal_id</code>，这2个是可以从问题详情页面获取的。其中<code>lock_version</code>最重要，用于issue的版本控制，起始为0，每成功修改1次加1，这样可以确保当前issue的当前版本只能被1个人修改。<code>last_journal_id</code>是上一条操作记录的id，初始为空值。知道原理就好办了，先查看问题详情页面，写出对应的正则表达式：</p>
+<div class="highlight"><pre><span></span><span class="o">***</span> <span class="n">Variables</span> <span class="o">***</span>
+<span class="err">$</span><span class="p">{</span><span class="n">lock_versionReg</span><span class="p">}</span>    <span class="n">value</span><span class="o">=</span><span class="s2">&quot;(.*?)&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;issue</span><span class="se">\\</span><span class="s2">[lock_version</span><span class="se">\\</span><span class="s2">]&quot;</span>
+<span class="err">$</span><span class="p">{</span><span class="n">last_journal_idReg</span><span class="p">}</span>    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;last_journal_id&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;(.*?)&quot;</span>
+</pre></div>
+
+
+<blockquote>
+<p>注意这里<code>[]</code>要用2个<code>\\</code>转义，1个<code>\</code>是用来转义另一个<code>\</code>的。</p>
+</blockquote>
+<p>由于正则匹配不光token要用到，所以我又封装了另一个关键字<code>get match</code>：</p>
+<div class="highlight"><pre><span></span><span class="o">***</span> <span class="n">Keywords</span> <span class="o">***</span>
+<span class="n">get</span> <span class="n">match</span>
+    <span class="p">[</span><span class="n">Arguments</span><span class="p">]</span>    <span class="err">$</span><span class="p">{</span><span class="n">reg</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">text</span><span class="p">}</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">match</span><span class="p">}</span>    <span class="n">Get</span> <span class="n">Regexp</span> <span class="n">Matches</span>    <span class="err">$</span><span class="p">{</span><span class="n">text</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">reg</span><span class="p">}</span>    <span class="mi">1</span>
+    <span class="p">[</span><span class="n">Return</span><span class="p">]</span>    <span class="err">$</span><span class="p">{</span><span class="n">match</span><span class="p">}[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+
+<p>新建的issue还没有任何修改，<code>${last_journal_idReg}</code>是获取不到匹配的，所以这里要加个if判断：</p>
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="p">{</span><span class="n">lock_version</span><span class="p">}</span>    <span class="n">get</span> <span class="n">match</span>    <span class="err">$</span><span class="p">{</span><span class="n">lock_versionReg</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">}</span>
+<span class="err">$</span><span class="p">{</span><span class="n">last_journal_id</span><span class="p">}</span>    <span class="n">Run</span> <span class="n">Keyword</span> <span class="n">If</span>    <span class="s1">&#39;${lock_version}&#39;</span><span class="o">!=</span><span class="s1">&#39;0&#39;</span>    <span class="n">get</span> <span class="n">match</span>    <span class="err">$</span><span class="p">{</span><span class="n">last_journal_idReg</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">}</span>    <span class="n">ELSE</span>    <span class="nb">set</span> <span class="n">variable</span>    <span class="err">$</span><span class="p">{</span><span class="n">null</span><span class="p">}</span>
+</pre></div>
+
+
+<blockquote>
+<p><code>${null}</code>和<code>${None}</code>均表示空，注意大小写。</p>
+</blockquote>
+<p>第一个问题解决了，那么来看第二个问题。上传文件的思路是先将文件转换成二进制流，然后将二进制流作为<code>POST</code>参数上传。一开始我打算用<a href="http://robotframework.org/robotframework/latest/libraries/OperatingSystem.html">OperatingSystem</a>库里的<a href="http://robotframework.org/robotframework/latest/libraries/OperatingSystem.html#Get Binary File">Get Binary File</a>关键字（图片在用例同一目录下）：</p>
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="p">{</span><span class="n">file_data</span><span class="p">}</span>    <span class="n">Get</span> <span class="n">Binary</span> <span class="n">File</span>    <span class="err">$</span><span class="p">{</span><span class="n">CURDIR</span><span class="p">}</span><span class="err">$</span><span class="p">{</span><span class="o">/</span><span class="p">}</span><span class="n">pic</span><span class="o">.</span><span class="n">png</span>
+<span class="err">$</span><span class="p">{</span><span class="n">files</span><span class="p">}</span>    <span class="n">Create</span> <span class="n">Dictionary</span>    <span class="n">attachments</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="nb">file</span><span class="p">]</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">file_data</span><span class="p">}</span>
+</pre></div>
+
+
+<p>但是这样上传的图片是没有名称的，使用默认的<code>attachments[1][file]</code>，最关键的是不带后缀名。这个问题后面再想办法解决吧。现在换一种思路，使用python方法，完美实现：</p>
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="p">{</span><span class="n">file_data</span><span class="p">}</span>    <span class="n">evaluate</span>    <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./pic.png&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+<span class="err">$</span><span class="p">{</span><span class="n">files</span><span class="p">}</span>    <span class="n">Create</span> <span class="n">Dictionary</span>    <span class="n">attachments</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="nb">file</span><span class="p">]</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">file_data</span><span class="p">}</span>
+</pre></div>
+
+
+<p>好了，现在到了最关键的地方，<strong>如何传参</strong>？<code>${files}</code>是放到<code>${params}</code>里一起传，还是两个分开传？<code>${headers}</code>里不要加<code>Content-Type=multipart/form-data</code>？</p>
+<p><strong>TODO</strong>：Google有不少地方都都有说<code>${headers}</code>里不要写<code>Content-Type</code>，但是没有讲为什么，我一开始也在这里被坑了好久。然后传参的时候，各种组合都不行，但是最后还是试出来了。<code>${files}</code>和<code>${params}</code>要分开传，而且不能用<code>params=${params}</code>，要用<code>data=${params}</code>：</p>
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="p">}</span>    <span class="n">Post</span> <span class="n">Request</span>    <span class="n">redmine</span>    <span class="o">/</span><span class="n">redmine</span><span class="o">/</span><span class="n">issues</span><span class="o">/</span><span class="mi">16850</span>    <span class="n">data</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>    <span class="n">files</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">files</span><span class="p">}</span>
+</pre></div>
+
+
+<p><strong>可以参考</strong>：<a href="https://stackoverflow.com/questions/53462955/robotframework-request-how-to-make-a-post-request-with-content-multipart-form">Robotframework.request - How to make a POST request with content “multipart/form-data”</a></p>
+<h3 id="issue_2">删除issue</h3>
+<p>删除issue就没什么技术含量了，不过这里传参仍然要用<code>data=${params}</code>。</p>
+<h3 id="_6">完整代码</h3>
+<blockquote>
+<p>仅对用户名、密码，Redmine地址做了修改。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="o">***</span> <span class="n">Settings</span> <span class="o">***</span>
+<span class="n">Documentation</span>     <span class="n">an</span> <span class="n">example</span> <span class="n">of</span> <span class="n">redmine</span> <span class="n">exercise</span><span class="o">.</span>
+<span class="n">Suite</span> <span class="n">Setup</span>       <span class="n">setup</span> <span class="n">redmine</span>
+<span class="n">Suite</span> <span class="n">Teardown</span>    <span class="n">Delete</span> <span class="n">All</span> <span class="n">Sessions</span>
+<span class="n">Library</span>           <span class="n">RequestsLibrary</span>
+<span class="n">Library</span>           <span class="n">String</span>
+
+<span class="o">***</span> <span class="n">Variables</span> <span class="o">***</span>
+<span class="err">$</span><span class="p">{</span><span class="n">user</span><span class="p">}</span>           <span class="n">username</span>
+<span class="err">$</span><span class="p">{</span><span class="n">pw</span><span class="p">}</span>             <span class="mi">123456</span>
+<span class="err">$</span><span class="p">{</span><span class="n">tokenReg</span><span class="p">}</span>       <span class="n">name</span><span class="o">=</span><span class="s2">&quot;csrf-token&quot;</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;(.*?)&quot;</span>
+<span class="err">$</span><span class="p">{</span><span class="n">lock_versionReg</span><span class="p">}</span>    <span class="n">value</span><span class="o">=</span><span class="s2">&quot;(.*?)&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;issue</span><span class="se">\\</span><span class="s2">[lock_version</span><span class="se">\\</span><span class="s2">]&quot;</span>
+<span class="err">$</span><span class="p">{</span><span class="n">last_journal_idReg</span><span class="p">}</span>    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;last_journal_id&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;(.*?)&quot;</span>
+
+<span class="o">***</span> <span class="n">Test</span> <span class="n">Cases</span> <span class="o">***</span>
+<span class="n">add</span> <span class="n">issue</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="n">get</span> <span class="n">token</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>    <span class="n">Create</span> <span class="n">Dictionary</span>    <span class="n">utf8</span><span class="o">=</span><span class="err">✓</span>    <span class="n">authenticity_token</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="n">issue</span><span class="p">[</span><span class="n">is_private</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>    <span class="n">issue</span><span class="p">[</span><span class="n">tracker_id</span><span class="p">]</span><span class="o">=</span><span class="mi">4</span>    <span class="n">issue</span><span class="p">[</span><span class="n">subject</span><span class="p">]</span><span class="o">=</span><span class="n">robot</span>
+    <span class="o">...</span>    <span class="n">issue</span><span class="p">[</span><span class="n">status_id</span><span class="p">]</span><span class="o">=</span><span class="mi">7</span>    <span class="n">was_default_status</span><span class="o">=</span><span class="mi">7</span>    <span class="n">issue</span><span class="p">[</span><span class="n">priority_id</span><span class="p">]</span><span class="o">=</span><span class="mi">13</span>    <span class="n">issue</span><span class="p">[</span><span class="n">assigned_to_id</span><span class="p">]</span><span class="o">=</span><span class="mi">154</span>    <span class="n">issue</span><span class="p">[</span><span class="n">fixed_version_id</span><span class="p">]</span><span class="o">=</span><span class="mi">809</span>    <span class="n">issue</span><span class="p">[</span><span class="n">start_date</span><span class="p">]</span><span class="o">=</span><span class="mi">2019</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">27</span>
+    <span class="o">...</span>    <span class="n">issue</span><span class="p">[</span><span class="n">custom_field_values</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="err">致命的</span>    <span class="n">issue</span><span class="p">[</span><span class="n">custom_field_values</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">robot</span>    <span class="n">issue</span><span class="p">[</span><span class="n">custom_field_values</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="err">代码问题</span>    <span class="n">issue</span><span class="p">[</span><span class="n">custom_field_values</span><span class="p">][</span><span class="mi">14</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>    <span class="n">issue</span><span class="p">[</span><span class="n">custom_field_values</span><span class="p">][</span><span class="mi">15</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>    <span class="n">attachments</span><span class="p">[</span><span class="n">dummy</span><span class="p">][</span><span class="nb">file</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span>
+    <span class="o">...</span>    <span class="n">commit</span><span class="o">=</span><span class="err">创建</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="p">}</span>    <span class="n">Post</span> <span class="n">Request</span>    <span class="n">redmine</span>    <span class="o">/</span><span class="n">redmine</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">automatic</span><span class="o">/</span><span class="n">issues</span>    <span class="n">params</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>
+
+<span class="n">modify</span> <span class="n">issue</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="p">}</span>    <span class="n">get</span> <span class="n">Request</span>    <span class="n">redmine</span>    <span class="o">/</span><span class="n">redmine</span><span class="o">/</span><span class="n">issues</span><span class="o">/</span><span class="mi">16850</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="n">get</span> <span class="n">match</span>    <span class="err">$</span><span class="p">{</span><span class="n">tokenReg</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">}</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">lock_version</span><span class="p">}</span>    <span class="n">get</span> <span class="n">match</span>    <span class="err">$</span><span class="p">{</span><span class="n">lock_versionReg</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">}</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">last_journal_id</span><span class="p">}</span>    <span class="n">Run</span> <span class="n">Keyword</span> <span class="n">If</span>    <span class="s1">&#39;${lock_version}&#39;</span><span class="o">!=</span><span class="s1">&#39;0&#39;</span>    <span class="n">get</span> <span class="n">match</span>    <span class="err">$</span><span class="p">{</span><span class="n">last_journal_idReg</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">}</span>
+    <span class="o">...</span>    <span class="n">ELSE</span>    <span class="nb">set</span> <span class="n">variable</span>    <span class="err">$</span><span class="p">{</span><span class="n">null</span><span class="p">}</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>    <span class="n">Create</span> <span class="n">Dictionary</span>    <span class="n">utf8</span><span class="o">=</span><span class="err">✓</span>    <span class="n">_method</span><span class="o">=</span><span class="n">patch</span>    <span class="n">authenticity_token</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="n">issue</span><span class="p">[</span><span class="n">is_private</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>    <span class="n">issue</span><span class="p">[</span><span class="n">project_id</span><span class="p">]</span><span class="o">=</span><span class="mi">201</span> <span class="n">issue</span><span class="p">[</span><span class="n">tracker_id</span><span class="p">]</span><span class="o">=</span><span class="mi">4</span>
+    <span class="o">...</span>    <span class="n">issue</span><span class="p">[</span><span class="n">subject</span><span class="p">]</span><span class="o">=</span><span class="n">modify</span><span class="err">$</span><span class="p">{</span><span class="n">lock_version</span><span class="p">}</span>    <span class="n">issue</span><span class="p">[</span><span class="n">status_id</span><span class="p">]</span><span class="o">=</span><span class="mi">7</span>    <span class="n">was_default_status</span><span class="o">=</span><span class="mi">7</span>    <span class="n">issue</span><span class="p">[</span><span class="n">priority_id</span><span class="p">]</span><span class="o">=</span><span class="mi">13</span>    <span class="n">issue</span><span class="p">[</span><span class="n">assigned_to_id</span><span class="p">]</span><span class="o">=</span><span class="mi">154</span>    <span class="n">issue</span><span class="p">[</span><span class="n">fixed_version_id</span><span class="p">]</span><span class="o">=</span><span class="mi">809</span>
+    <span class="o">...</span>    <span class="n">issue</span><span class="p">[</span><span class="n">start_date</span><span class="p">]</span><span class="o">=</span><span class="mi">2019</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">27</span>    <span class="n">issue</span><span class="p">[</span><span class="n">custom_field_values</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="err">致命的</span>    <span class="n">issue</span><span class="p">[</span><span class="n">custom_field_values</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">robot</span>    <span class="n">issue</span><span class="p">[</span><span class="n">custom_field_values</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="err">代码问题</span>    <span class="n">issue</span><span class="p">[</span><span class="n">custom_field_values</span><span class="p">][</span><span class="mi">14</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>    <span class="n">issue</span><span class="p">[</span><span class="n">custom_field_values</span><span class="p">][</span><span class="mi">15</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+    <span class="o">...</span>    <span class="n">attachments</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">filename</span><span class="p">]</span><span class="o">=</span><span class="n">xxx</span><span class="o">.</span><span class="n">png</span>    <span class="n">issue</span><span class="p">[</span><span class="n">lock_version</span><span class="p">]</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">lock_version</span><span class="p">}</span>    <span class="n">last_journal_id</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">last_journal_id</span><span class="p">}</span>    <span class="n">commit</span><span class="o">=</span><span class="err">创建</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">file_data</span><span class="p">}</span>    <span class="n">evaluate</span>    <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./pic.png&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">files</span><span class="p">}</span>    <span class="n">Create</span> <span class="n">Dictionary</span>    <span class="n">attachments</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="nb">file</span><span class="p">]</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">file_data</span><span class="p">}</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="p">}</span>    <span class="n">Post</span> <span class="n">Request</span>    <span class="n">redmine</span>    <span class="o">/</span><span class="n">redmine</span><span class="o">/</span><span class="n">issues</span><span class="o">/</span><span class="mi">16850</span>    <span class="n">data</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>    <span class="n">files</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">files</span><span class="p">}</span>
+
+<span class="n">delete</span> <span class="n">issue</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="n">get</span> <span class="n">token</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>    <span class="n">Create</span> <span class="n">Dictionary</span>    <span class="n">_method</span><span class="o">=</span><span class="n">delete</span>    <span class="n">authenticity_token</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="p">}</span>    <span class="n">Post</span> <span class="n">Request</span>    <span class="n">redmine</span>    <span class="o">/</span><span class="n">redmine</span><span class="o">/</span><span class="n">issues</span><span class="o">/</span><span class="mi">16845</span>    <span class="n">data</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>
+
+<span class="o">***</span> <span class="n">Keywords</span> <span class="o">***</span>
+<span class="n">setup</span> <span class="n">redmine</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">headers</span><span class="p">}</span>    <span class="n">Create</span> <span class="n">Dictionary</span>    <span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="o">=</span><span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="n">Windows</span> <span class="n">NT</span> <span class="mf">10.0</span><span class="p">;</span> <span class="n">Win64</span><span class="p">;</span> <span class="n">x64</span><span class="p">)</span> <span class="n">AppleWebKit</span><span class="o">/</span><span class="mf">537.36</span> <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Chrome</span><span class="o">/</span><span class="mf">75.0</span><span class="o">.</span><span class="mf">3770.142</span> <span class="n">Safari</span><span class="o">/</span><span class="mf">537.36</span>    <span class="n">Accept</span><span class="o">=</span><span class="n">text</span><span class="o">/</span><span class="n">html</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xhtml</span><span class="o">+</span><span class="n">xml</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="n">image</span><span class="o">/</span><span class="n">webp</span><span class="p">,</span><span class="n">image</span><span class="o">/</span><span class="n">apng</span><span class="p">,</span><span class="o">*/*</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">signed</span><span class="o">-</span><span class="n">exchange</span><span class="p">;</span><span class="n">v</span><span class="o">=</span><span class="n">b3</span>    <span class="n">Accept</span><span class="o">-</span><span class="n">Language</span><span class="o">=</span><span class="n">zh</span><span class="o">-</span><span class="n">CN</span><span class="p">,</span><span class="n">zh</span><span class="o">-</span><span class="n">TW</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="n">zh</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">ja</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.7</span>
+    <span class="n">Create</span> <span class="n">Session</span>    <span class="n">redmine</span>    <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">xxx</span><span class="o">.</span><span class="n">redmine</span><span class="o">.</span><span class="n">com</span>    <span class="n">headers</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">headers</span><span class="p">}</span>
+    <span class="n">login</span> <span class="n">redmine</span>    <span class="err">$</span><span class="p">{</span><span class="n">user</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">pw</span><span class="p">}</span>
+
+<span class="n">login</span> <span class="n">redmine</span>
+    <span class="p">[</span><span class="n">Arguments</span><span class="p">]</span>    <span class="err">$</span><span class="p">{</span><span class="n">user</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">pw</span><span class="p">}</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="n">get</span> <span class="n">token</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>    <span class="n">Create</span> <span class="n">Dictionary</span>    <span class="n">utf8</span><span class="o">=</span><span class="err">✓</span>    <span class="n">authenticity_token</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="n">username</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">user</span><span class="p">}</span>    <span class="n">password</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">pw</span><span class="p">}</span>    <span class="n">login</span><span class="o">=</span><span class="err">登录</span> <span class="err">»</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="p">}</span>    <span class="n">Post</span> <span class="n">Request</span>    <span class="n">redmine</span>    <span class="o">/</span><span class="n">redmine</span><span class="o">/</span><span class="n">login</span>    <span class="n">params</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">params</span><span class="p">}</span>
+    <span class="n">Should</span> <span class="n">Contain</span>    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">user</span><span class="p">}</span>
+
+<span class="n">get</span> <span class="n">token</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="p">}</span>    <span class="n">get</span> <span class="n">Request</span>    <span class="n">redmine</span>    <span class="o">/</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>    <span class="n">get</span> <span class="n">match</span>    <span class="err">$</span><span class="p">{</span><span class="n">tokenReg</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">}</span>
+    <span class="p">[</span><span class="n">Return</span><span class="p">]</span>    <span class="err">$</span><span class="p">{</span><span class="n">token</span><span class="p">}</span>
+
+<span class="n">get</span> <span class="n">match</span>
+    <span class="p">[</span><span class="n">Arguments</span><span class="p">]</span>    <span class="err">$</span><span class="p">{</span><span class="n">reg</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">text</span><span class="p">}</span>
+    <span class="err">$</span><span class="p">{</span><span class="n">match</span><span class="p">}</span>    <span class="n">Get</span> <span class="n">Regexp</span> <span class="n">Matches</span>    <span class="err">$</span><span class="p">{</span><span class="n">text</span><span class="p">}</span>    <span class="err">$</span><span class="p">{</span><span class="n">reg</span><span class="p">}</span>    <span class="mi">1</span>
+    <span class="p">[</span><span class="n">Return</span><span class="p">]</span>    <span class="err">$</span><span class="p">{</span><span class="n">match</span><span class="p">}[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+
+<h2 id="_7">总结</h2>
+<p>Robot Framework是关键字驱动的自动化测试框架，上手真的很方便，不，是<strong>超方便</strong>！基本上找个入门教程再结合<a href="https://robotframework.org/">官方文档</a>（<strong>强烈推荐</strong>），几天时间就能写出基本功能的测试代码，不过一些细节地方还是需要深入理解一下的。对于Setup、Teardown和Keywords的灵活运用，可以大大提高代码效率。要想写出高质量的自动化代码，我觉得更重要的是测试思想，而不是用哪种工具。工具和工具的区别，其实是在效率上。</p>
+
+      </div><!-- /.entry-content -->
+      <div class="comments">
+        <h2>Comments</h2>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script>
+	var gitalk_owner = 'jlhxxxx';
+	
+	var gitalk = new Gitalk({
+	  clientID: 'a616e9a93853f37e454b',
+	  clientSecret: '38c3bbfaa4dd71957b8824ec071a705ea6fffdfe',
+	  repo: 'comments',
+	  owner: gitalk_owner,
+	  admin: [gitalk_owner],
+	  distractionFreeMode: false,  // Facebook-like distraction free mode
+	  createIssueManually: true
+	})
+
+	gitalk.render('gitalk-container')
+</script>
+                                  </div>
+
+    </article>
+  </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="site-footer">
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <address>
+                    <p>
+                        This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                    </p>
+                    <p>
+                        <a href="http://github.com/jsliang/pelican-fresh/">Fresh</a> is a responsive theme designed by <a href="http://jsliang.com/">jsliang</a> and <a href="https://github.com/jsliang/pelican-fresh/graphs/contributors">contributors</a>.
+                        Special thanks to <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a> and <a href="http://getbootstrap.com/">Twitter Bootstrap</a>.
+                    </p>
+                </address>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-117906599-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+</body>
+</html>

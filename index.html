@@ -79,6 +79,65 @@
                         <article>
                             <header>
                                 <h1 class="entry-title">
+                                    <a href="https://jlhxxxx.github.io/rf-exercise-01.html" rel="bookmark" title="Permalink to Robot Framework练习之一——自动化Redmine操作">
+                                       Robot Framework练习之一——自动化Redmine操作
+                                    </a>
+                                </h1>
+                            </header>
+                            <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="https://jlhxxxx.github.io/category/test-tools.html">Test Tools</a>
+
+    on 2019-07-29
+
+        |
+        tags:         <a href="https://jlhxxxx.github.io/tag/robotframework.html">robotframework</a>
+        <a href="https://jlhxxxx.github.io/tag/automation.html">automation</a>
+
+
+
+    
+</footer><!-- /.post-info -->                                <h2 id="_1">目标分析</h2>
+<p>既然是练习，那就从最基本的开始，实现登（登录）增删改功能。用例流程如下：</p>
+<ol>
+<li>登录</li>
+<li>新建issue</li>
+<li>修改issue（增加图片）</li>
+<li>删除issue</li>
+</ol>
+<p><strong>难点</strong>：</p>
+<ul>
+<li>token传递</li>
+<li>上传图片</li>
+</ul>
+<h2 id="_2">代码结构</h2>
+<p>一段完整的RF（Robot Framework简称）代码一般包含四部分（都为可选）：</p>
+<div class="highlight"><pre><span></span><span class="o">***</span> <span class="n">Settings</span> <span class="o">***</span>                                    <span class="c1"># 基本配置</span>
+<span class="n">Documentation</span>     <span class="n">The</span> <span class="n">documentation</span> <span class="n">of</span> <span class="n">this</span> <span class="n">test</span> <span class="n">suite</span><span class="o">.</span>     
+<span class="n">Suite</span> <span class="n">Setup</span>       <span class="n">keyword</span>                           
+<span class="n">Suite</span> <span class="n">Teardown</span>    <span class="n">keyword</span>                           
+<span class="n">Test</span> <span class="n">Setup</span>        <span class="n">keyword</span>                           
+<span class="n">Test</span> <span class="n">Teardown</span>     <span class="n">keyword</span>                           
+<span class="n">Library</span>           <span class="n">RequestsLibrary</span>                                   
+
+<span class="o">***</span> <span class="n">Variables</span> <span class="o">***</span>                                   <span class="c1"># 初始化一些变量</span>
+<span class="err">$</span><span class="p">{</span><span class="n">user</span><span class="p">}</span>           <span class="n">username</span>
+<span class="err">$</span><span class="p">{</span><span class="n">pw</span><span class="p">}</span>             <span class="mi">123456 …</span></pre></div>
+                                <p class="readmore">
+                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/rf-exercise-01.html">Read more...</a>
+                                </p>
+                            </div><!-- /.entry-content -->
+                            <hr/>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <header>
+                                <h1 class="entry-title">
                                     <a href="https://jlhxxxx.github.io/jmeter-doc-cn-18.html" rel="bookmark" title="Permalink to JMeter文档翻译之18-组件参考">
                                        JMeter文档翻译之18-组件参考
                                     </a>
@@ -536,55 +595,6 @@ rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --no
 <p>这里采用163的镜像，我们要下的是这几个包：<code>python-iniparse-xxx.noarch …</code></p>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/rhe-change-yum.html">Read more...</a>
-                                </p>
-                            </div><!-- /.entry-content -->
-                            <hr/>
-                        </article>
-                    </li>
-                    <li>
-                        <article>
-                            <header>
-                                <h1 class="entry-title">
-                                    <a href="https://jlhxxxx.github.io/weblogic-cluster.html" rel="bookmark" title="Permalink to Windows下WebLogic安装及集群配置">
-                                       Windows下WebLogic安装及集群配置
-                                    </a>
-                                </h1>
-                            </header>
-                            <div class="entry-content">
-<footer class="post-info">
-    <address class="vcard author">
-        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
-    </address>
-
-    in <a href="https://jlhxxxx.github.io/category/software.html">Software</a>
-
-    on 2018-05-22
-
-        |
-        tags:         <a href="https://jlhxxxx.github.io/tag/weblogic.html">WebLogic</a>
-        <a href="https://jlhxxxx.github.io/tag/cluster.html">Cluster</a>
-
-
-
-    
-</footer><!-- /.post-info -->                                <h2 id="_1">基本概念</h2>
-<p>在正式部署项目之前，还是先了解下基本概念吧。最基本要掌握域（Domain）、集群（Cluster）、服务器（Server）（区分管理服务器和受管理服务器）、计算机（Machine）、节点管理器（Node Manager）。</p>
-<p><strong>参考文章</strong>：</p>
-<ul>
-<li><a href="http://langgufu.iteye.com/blog/1700388">weblogic 域，管理服务器，受管服务器，集群和机器的基本知识</a></li>
-<li><a href="http://www.cnblogs.com/cocowool/archive/2012/04/01/2428861.html">WebLogic中的一些基本概念</a></li>
-</ul>
-<h2 id="_2">常用目录结构</h2>
-<p>了解WebLogic常用目录结构，将大大提高管理与维护的工作效率 。这里以WebLogic 11g为例。</p>
-<div class="highlight"><pre><span></span><span class="p">.</span>                                      <span class="o">#</span> <span class="err">主目录</span>
-<span class="err">│─</span> <span class="n">coherence_3</span><span class="p">.</span><span class="mi">7</span>                        <span class="o">#</span> <span class="n">coherence集群相关</span>
-<span class="err">│─</span> <span class="n">logs</span>                                 <span class="o">#</span> <span class="err">日志文件，包括安装和运行</span><span class="o">%</span><span class="n">WL_HOME</span><span class="o">%</span><span class="err">\</span><span class="n">common</span><span class="err">\</span><span class="n">bin</span><span class="err">\下程序的日志</span>
-<span class="err">│─</span> <span class="n">modules</span>                             <span class="o">#</span> <span class="err">模块和插件目录</span>
-<span class="err">│─</span> <span class="n">user_projects</span>                         <span class="o">#</span> <span class="err">用户工程目录</span>
-<span class="err">│</span>  <span class="err">└─</span> <span class="n">domains</span>                            <span class="o">#</span> <span class="err">域主目录</span>
-<span class="err">│</span>      <span class="err">└─</span> <span class="n">base_domain</span>                     <span class="o">#</span> <span class="n">DOMAIN_HOME</span><span class="err">，用户自建域主目录，默认名称为</span><span class="n">base_domain</span><span class="err">，以此为例 …</span></pre></div>
-                                <p class="readmore">
-                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/weblogic-cluster.html">Read more...</a>
                                 </p>
                             </div><!-- /.entry-content -->
                             <hr/>
