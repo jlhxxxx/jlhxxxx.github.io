@@ -79,6 +79,57 @@
                         <article>
                             <header>
                                 <h1 class="entry-title">
+                                    <a href="https://jlhxxxx.github.io/jenkins-sonar.html" rel="bookmark" title="Permalink to Jenkins +Sonar自动化代码扫描">
+                                       Jenkins +Sonar自动化代码扫描
+                                    </a>
+                                </h1>
+                            </header>
+                            <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
+    </address>
+
+    in <a href="https://jlhxxxx.github.io/category/test-tools.html">Test Tools</a>
+
+    on 2019-11-18
+
+        |
+        tags:         <a href="https://jlhxxxx.github.io/tag/jenkins.html">jenkins</a>
+        <a href="https://jlhxxxx.github.io/tag/sonar.html">sonar</a>
+
+
+
+    
+</footer><!-- /.post-info -->                                <h2 id="jenkins-sonar">Jenkins +Sonar自动化代码扫描</h2>
+<ol>
+<li>
+<p>安装插件<a href="http://redirect.sonarsource.com/plugins/jenkins.html">SonarQube Scanner for Jenkins</a></p>
+</li>
+<li>
+<p>Jenkins-&gt;系统管理-&gt;全局工具配置-&gt;SonarQube Scanner 安装，自动安装最新版本即可。</p>
+</li>
+<li>
+<p>工程配置-&gt;构建：Execute SonarQube Scanner</p>
+<p>JDK要1.8+，Analysis properties：</p>
+<p>```
+sonar.projectKey=chenyingyu-fzggfwwt
+sonar.projectName=Jenkins-fzggfwwt
+sonar.projectVersion=1.0.0
+sonar.sourceEncoding=UTF-8
+sonar.projectDescription=fzggfwwt
+sonar.links.homepage=http://10.10.1.103:81/svn …</p></li></ol>
+                                <p class="readmore">
+                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/jenkins-sonar.html">Read more...</a>
+                                </p>
+                            </div><!-- /.entry-content -->
+                            <hr/>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <header>
+                                <h1 class="entry-title">
                                     <a href="https://jlhxxxx.github.io/rf-exercise-01.html" rel="bookmark" title="Permalink to Robot Framework练习之一——自动化Redmine操作">
                                        Robot Framework练习之一——自动化Redmine操作
                                     </a>
@@ -547,62 +598,9 @@ oracle   <span class="m">22025</span>     <span class="m">1</span>  <span class=
                             <hr/>
                         </article>
                     </li>
-                    <li>
-                        <article>
-                            <header>
-                                <h1 class="entry-title">
-                                    <a href="https://jlhxxxx.github.io/rhe-change-yum.html" rel="bookmark" title="Permalink to Red Hat Enterprise更换CentOS Yum源">
-                                       Red Hat Enterprise更换CentOS Yum源
-                                    </a>
-                                </h1>
-                            </header>
-                            <div class="entry-content">
-<footer class="post-info">
-    <address class="vcard author">
-        by <a class="url fn" href="https://jlhxxxx.github.io/author/aman.html">Aman</a>
-    </address>
-
-    in <a href="https://jlhxxxx.github.io/category/software.html">Software</a>
-
-    on 2018-05-28
-
-        |
-        tags:         <a href="https://jlhxxxx.github.io/tag/linux.html">Linux</a>
-        <a href="https://jlhxxxx.github.io/tag/yum.html">yum</a>
-
-
-
-    
-</footer><!-- /.post-info -->                                <h2 id="red-hat-enterprisecentos">确定Red Hat Enterprise和CentOS对应版本</h2>
-<p>查看当前系统版本</p>
-<div class="highlight"><pre><span></span>cat /etc/issue     <span class="c1"># 查看系统版本</span>
-cat /proc/version  <span class="c1"># 查看内核版本</span>
-</pre></div>
-
-
-<ul>
-<li><a href="https://zh.wikipedia.org/zh-cn/CentOS">CentOS</a></li>
-<li><a href="https://www.linuxidc.com/Linux/2016-07/133000.htm">CentOS和RedHat发行版与Linux内核版本的对应关系</a></li>
-</ul>
-<h2 id="yum">备份和卸载本地yum源</h2>
-<div class="highlight"><pre><span></span>rpm -qa<span class="p">|</span>grep yum　　                                          <span class="c1"># 查看本地yum</span>
-mv /etc/yum.repos.d/your.repo  /etc/yum.repos.d/your.repo.bak   <span class="c1"># your替换成本地repo名称</span>
-rpm -qa<span class="p">|</span>grep yum<span class="p">|</span>xargs rpm -e --nodeps　　                    <span class="c1"># 不检查依赖性，卸载yum程序</span>
-</pre></div>
-
-
-<h2 id="yum_1">下载新的yum安装包</h2>
-<p>这里采用163的镜像，我们要下的是这几个包：<code>python-iniparse-xxx.noarch …</code></p>
-                                <p class="readmore">
-                                    <a class="btn btn-small btn-info" href="https://jlhxxxx.github.io/rhe-change-yum.html">Read more...</a>
-                                </p>
-                            </div><!-- /.entry-content -->
-                            <hr/>
-                        </article>
-                    </li>
                     </ol><!-- /#posts-list -->
 <p class="paginator">
-    Page 1 / 2
+    Page 1 / 3
         <a href="https://jlhxxxx.github.io/index2.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->

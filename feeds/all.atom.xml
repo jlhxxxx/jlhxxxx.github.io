@@ -1,5 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-07-29T00:00:00+08:00</updated><entry><title>Robot Framework练习之一——自动化Redmine操作</title><link href="https://jlhxxxx.github.io/rf-exercise-01.html" rel="alternate"></link><published>2019-07-29T00:00:00+08:00</published><updated>2019-07-29T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-07-29:/rf-exercise-01.html</id><summary type="html">&lt;h2 id="_1"&gt;目标分析&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AMAN's BLOG</title><link href="https://jlhxxxx.github.io/" rel="alternate"></link><link href="https://jlhxxxx.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jlhxxxx.github.io/</id><updated>2019-11-18T00:00:00+08:00</updated><entry><title>Jenkins +Sonar自动化代码扫描</title><link href="https://jlhxxxx.github.io/jenkins-sonar.html" rel="alternate"></link><published>2019-11-18T00:00:00+08:00</published><updated>2019-11-18T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-11-18:/jenkins-sonar.html</id><summary type="html">&lt;h2 id="jenkins-sonar"&gt;Jenkins +Sonar自动化代码扫描&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装插件&lt;a href="http://redirect.sonarsource.com/plugins/jenkins.html"&gt;SonarQube Scanner for Jenkins&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Jenkins-&amp;gt;系统管理-&amp;gt;全局工具配置-&amp;gt;SonarQube Scanner 安装，自动安装最新版本即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;工程配置-&amp;gt;构建：Execute SonarQube Scanner&lt;/p&gt;
+&lt;p&gt;JDK要1.8+，Analysis properties：&lt;/p&gt;
+&lt;p&gt;```
+sonar.projectKey=chenyingyu-fzggfwwt
+sonar.projectName=Jenkins-fzggfwwt
+sonar.projectVersion=1.0.0
+sonar.sourceEncoding=UTF-8
+sonar.projectDescription=fzggfwwt
+sonar.links.homepage=http://10.10.1.103:81/svn …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="jenkins-sonar"&gt;Jenkins +Sonar自动化代码扫描&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装插件&lt;a href="http://redirect.sonarsource.com/plugins/jenkins.html"&gt;SonarQube Scanner for Jenkins&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Jenkins-&amp;gt;系统管理-&amp;gt;全局工具配置-&amp;gt;SonarQube Scanner 安装，自动安装最新版本即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;工程配置-&amp;gt;构建：Execute SonarQube Scanner&lt;/p&gt;
+&lt;p&gt;JDK要1.8+，Analysis properties：&lt;/p&gt;
+&lt;p&gt;```
+sonar.projectKey=chenyingyu-fzggfwwt
+sonar.projectName=Jenkins-fzggfwwt
+sonar.projectVersion=1.0.0
+sonar.sourceEncoding=UTF-8
+sonar.projectDescription=fzggfwwt
+sonar.links.homepage=http://10.10.1.103:81/svn/.../trunk/fzggfwwt
+sonar.language=java&lt;/p&gt;
+&lt;p&gt;sonar.modules=fzggfwwt-auth,fzggfwwt-person
+fzggfwwt-auth.sonar.projectName=auth
+fzggfwwt-person.sonar.projectName=person&lt;/p&gt;
+&lt;p&gt;sonar.java.libraries=../lib/*.jar
+sonar.sources=src
+sonar.java.binaries=target/classes
+```&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Jenkins报错1：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ERROR: Failed to get Node.js version. No CSS files will be analyzed.
+java.io.IOException: Cannot run program "node": CreateProcess error=2, 系统找不到指定的文件。&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装NodeJS插件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Jenkins-&amp;gt;系统管理-&amp;gt;全局工具配置-&amp;gt;NodeJS 安装：自动安装建议选择稳定版（开发版可能无法下载）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;工程配置-&amp;gt;构建环境：勾选&lt;code&gt;Provide Node &amp;amp; npm bin/ folder to PATH&lt;/code&gt;，选择上一步安装的NodeJS。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Jenkins报错2：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ERROR: Error during SonarQube Scanner execution
+ERROR: Error when executing blame for file src/main/webapp/WEB-INF/weblogic.xml
+ERROR: Caused by: svn: E170001: Authentication required for '&amp;lt;http://10.10.1.103:81&amp;gt; svn repository'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;参考：&lt;a href="https://www.cnblogs.com/YatHo/p/7345077.html"&gt;sonar-scanner扫描代码出错 SonarQube svn: E170001&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Jenkins-&amp;gt;系统管理-&amp;gt;系统配置，svn选择1.8以上版本&lt;/li&gt;
+&lt;li&gt;参考教程，打开sonarqube的控制台，使用admin登录后 ，在配置-&amp;gt;SCM-&amp;gt;菜单中，将&lt;code&gt;Disabled the SCM Sensor&lt;/code&gt;设置为&lt;code&gt;true&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Jenkins报错3：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;错误: -source 1.5 中不支持 diamond 运算符
+[ERROR]   (请使用 -source 7 或更高版本以启用 diamond 运算符)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原因是Jenkins默认编译用的JDK是1.5版本的，若要对不同项目使用不同JDK，需要安装JDK Parameter插件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Jenkins报错4：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/43143792/sonarqube-scanner-report-upload-error-500"&gt;Sonarqube scanner report upload error 500&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Jenkins其他：&lt;/p&gt;
+&lt;p&gt;如果在创建项目时候，没有“创建一个Maven 项目”的选项&lt;/p&gt;
+&lt;p&gt;安装插件：Maven Integration&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="_1"&gt;参考文章&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.ibm.com/developerworks/cn/devops/1612_qusm_jenkins/index.html"&gt;使用 Jenkins 与 Sonar 集成对代码进行持续检测&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="jenkins"></category><category term="sonar"></category></entry><entry><title>Robot Framework练习之一——自动化Redmine操作</title><link href="https://jlhxxxx.github.io/rf-exercise-01.html" rel="alternate"></link><published>2019-07-29T00:00:00+08:00</published><updated>2019-07-29T00:00:00+08:00</updated><author><name>Aman</name></author><id>tag:jlhxxxx.github.io,2019-07-29:/rf-exercise-01.html</id><summary type="html">&lt;h2 id="_1"&gt;目标分析&lt;/h2&gt;
 &lt;p&gt;既然是练习，那就从最基本的开始，实现登（登录）增删改功能。用例流程如下：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;登录&lt;/li&gt;
