@@ -110,8 +110,7 @@
 <li>
 <p>工程配置-&gt;构建：Execute SonarQube Scanner</p>
 <p>JDK要1.8+，Analysis properties：</p>
-<div class="highlight"><pre><span></span><span class="o">```</span><span class="n">properties</span>
-<span class="n">sonar</span><span class="p">.</span><span class="n">projectKey</span><span class="o">=</span><span class="n">chenyingyu</span><span class="o">-</span><span class="n">fzggfwwt</span>
+<div class="highlight"><pre><span></span><span class="n">sonar</span><span class="p">.</span><span class="n">projectKey</span><span class="o">=</span><span class="n">chenyingyu</span><span class="o">-</span><span class="n">fzggfwwt</span>
 <span class="n">sonar</span><span class="p">.</span><span class="n">projectName</span><span class="o">=</span><span class="n">Jenkins</span><span class="o">-</span><span class="n">fzggfwwt</span>
 <span class="n">sonar</span><span class="p">.</span><span class="n">projectVersion</span><span class="o">=</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span>
 <span class="n">sonar</span><span class="p">.</span><span class="n">sourceEncoding</span><span class="o">=</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
@@ -125,16 +124,17 @@
 
 <span class="n">sonar</span><span class="p">.</span><span class="n">java</span><span class="p">.</span><span class="n">libraries</span><span class="o">=</span><span class="p">..</span><span class="o">/</span><span class="n">lib</span><span class="cm">/*.jar</span>
 <span class="cm">sonar.sources=src</span>
-<span class="cm">sonar.java.binaries=target/classes</span>
-<span class="cm">```</span>
 </pre></div>
 
 
 </li>
 <li>
 <p><strong>Jenkins报错1：</strong></p>
-<p><code>ERROR: Failed to get Node.js version. No CSS files will be analyzed.
-java.io.IOException: Cannot run program "node": CreateProcess error=2, 系统找不到指定的文件。</code></p>
+<div class="highlight"><pre><span></span><span class="n">ERROR</span><span class="o">:</span> <span class="n">Failed</span> <span class="n">to</span> <span class="kd">get</span> <span class="n">Node</span><span class="o">.</span><span class="na">js</span> <span class="n">version</span><span class="o">.</span> <span class="n">No</span> <span class="n">CSS</span> <span class="n">files</span> <span class="n">will</span> <span class="n">be</span> <span class="n">analyzed</span><span class="o">.</span>
+<span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOException</span><span class="o">:</span> <span class="n">Cannot</span> <span class="n">run</span> <span class="n">program</span> <span class="s2">&quot;node&quot;</span><span class="o">:</span> <span class="n">CreateProcess</span> <span class="n">error</span><span class="o">=</span><span class="mi">2</span><span class="o">,</span> <span class="err">系统找不到指定的文件。</span>
+</pre></div>
+
+
 <p><strong>解决</strong>：</p>
 <ol>
 <li>
@@ -148,9 +148,12 @@ java.io.IOException: Cannot run program "node": CreateProcess error=2, 系统找
 </li>
 <li>
 <p><strong>Jenkins报错2：</strong></p>
-<p><code>ERROR: Error during SonarQube Scanner execution
-ERROR: Error when executing blame for file src/main/webapp/WEB-INF/weblogic.xml
-ERROR: Caused by: svn: E170001: Authentication required for '&lt;http://10.10.1.103:81&gt; svn repository'</code></p>
+<div class="highlight"><pre><span></span><span class="nv">ERROR</span>: <span class="nv">Error</span> <span class="nv">during</span> <span class="nv">SonarQube</span> <span class="nv">Scanner</span> <span class="nv">execution</span>
+<span class="nv">ERROR</span>: <span class="nv">Error</span> <span class="nv">when</span> <span class="nv">executing</span> <span class="nv">blame</span> <span class="k">for</span> <span class="nv">file</span> <span class="nv">src</span><span class="o">/</span><span class="nv">main</span><span class="o">/</span><span class="nv">webapp</span><span class="o">/</span><span class="nv">WEB</span><span class="o">-</span><span class="nv">INF</span><span class="o">/</span><span class="nv">weblogic</span>.<span class="nv">xml</span>
+<span class="nv">ERROR</span>: <span class="nv">Caused</span> <span class="nv">by</span>: <span class="nv">svn</span>: <span class="nv">E170001</span>: <span class="nv">Authentication</span> <span class="nv">required</span> <span class="k">for</span> <span class="s1">&#39;</span><span class="s">&lt;http://10.10.1.103:81&gt; svn repository</span><span class="s1">&#39;</span>
+</pre></div>
+
+
 <p><strong>解决</strong>：</p>
 <p>参考：<a href="https://www.cnblogs.com/YatHo/p/7345077.html">sonar-scanner扫描代码出错 SonarQube svn: E170001</a></p>
 <ol>
@@ -160,8 +163,11 @@ ERROR: Caused by: svn: E170001: Authentication required for '&lt;http://10.10.1.
 </li>
 <li>
 <p><strong>Jenkins报错3：</strong></p>
-<p><code>错误: -source 1.5 中不支持 diamond 运算符
-[ERROR]   (请使用 -source 7 或更高版本以启用 diamond 运算符)</code></p>
+<div class="highlight"><pre><span></span><span class="nl">错误</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="n">source</span><span class="w"> </span><span class="mf">1.5</span><span class="w"> </span><span class="n">中不支持</span><span class="w"> </span><span class="n">diamond</span><span class="w"> </span><span class="n">运算符</span><span class="w"></span>
+<span class="o">[</span><span class="n">ERROR</span><span class="o">]</span><span class="w">   </span><span class="p">(</span><span class="n">请使用</span><span class="w"> </span><span class="o">-</span><span class="n">source</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="n">或更高版本以启用</span><span class="w"> </span><span class="n">diamond</span><span class="w"> </span><span class="n">运算符</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+
+
 <p><strong>解决</strong>：</p>
 <ul>
 <li>原因是Jenkins默认编译用的JDK是1.5版本的，若要对不同项目使用不同JDK，需要安装JDK Parameter插件。</li>

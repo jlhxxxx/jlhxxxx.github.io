@@ -10,13 +10,12 @@
 &lt;li&gt;
 &lt;p&gt;工程配置-&amp;gt;构建：Execute SonarQube Scanner&lt;/p&gt;
 &lt;p&gt;JDK要1.8+，Analysis properties：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;```&lt;/span&gt;&lt;span class="n"&gt;properties&lt;/span&gt;
-&lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;projectKey&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;chenyingyu&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fzggfwwt&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;projectKey&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;chenyingyu&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fzggfwwt&lt;/span&gt;
 &lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;projectName&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Jenkins&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fzggfwwt&lt;/span&gt;
 &lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;projectVersion&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
 &lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sourceEncoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;UTF&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;
 &lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;projectDescription&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;fzggfwwt&lt;/span&gt;
-&lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;links&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;10 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="jenkins-sonar"&gt;Jenkins +Sonar自动化代码扫描&lt;/h2&gt;
+&lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;links&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="jenkins-sonar"&gt;Jenkins +Sonar自动化代码扫描&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;安装插件&lt;a href="http://redirect.sonarsource.com/plugins/jenkins.html"&gt;SonarQube Scanner for Jenkins&lt;/a&gt;&lt;/p&gt;
@@ -27,8 +26,7 @@
 &lt;li&gt;
 &lt;p&gt;工程配置-&amp;gt;构建：Execute SonarQube Scanner&lt;/p&gt;
 &lt;p&gt;JDK要1.8+，Analysis properties：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;```&lt;/span&gt;&lt;span class="n"&gt;properties&lt;/span&gt;
-&lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;projectKey&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;chenyingyu&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fzggfwwt&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;projectKey&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;chenyingyu&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fzggfwwt&lt;/span&gt;
 &lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;projectName&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Jenkins&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fzggfwwt&lt;/span&gt;
 &lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;projectVersion&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
 &lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sourceEncoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;UTF&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;
@@ -42,16 +40,17 @@
 
 &lt;span class="n"&gt;sonar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;libraries&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;..&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="cm"&gt;/*.jar&lt;/span&gt;
 &lt;span class="cm"&gt;sonar.sources=src&lt;/span&gt;
-&lt;span class="cm"&gt;sonar.java.binaries=target/classes&lt;/span&gt;
-&lt;span class="cm"&gt;```&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Jenkins报错1：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ERROR: Failed to get Node.js version. No CSS files will be analyzed.
-java.io.IOException: Cannot run program "node": CreateProcess error=2, 系统找不到指定的文件。&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ERROR&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Failed&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="kd"&gt;get&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;js&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;No&lt;/span&gt; &lt;span class="n"&gt;CSS&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;will&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;analyzed&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;io&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;IOException&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Cannot&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt; &lt;span class="n"&gt;program&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;node&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CreateProcess&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="err"&gt;系统找不到指定的文件。&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;&lt;strong&gt;解决&lt;/strong&gt;：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -65,9 +64,12 @@ java.io.IOException: Cannot run program "node": CreateProcess error=2, 系统找
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Jenkins报错2：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ERROR: Error during SonarQube Scanner execution
-ERROR: Error when executing blame for file src/main/webapp/WEB-INF/weblogic.xml
-ERROR: Caused by: svn: E170001: Authentication required for '&amp;lt;http://10.10.1.103:81&amp;gt; svn repository'&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;ERROR&lt;/span&gt;: &lt;span class="nv"&gt;Error&lt;/span&gt; &lt;span class="nv"&gt;during&lt;/span&gt; &lt;span class="nv"&gt;SonarQube&lt;/span&gt; &lt;span class="nv"&gt;Scanner&lt;/span&gt; &lt;span class="nv"&gt;execution&lt;/span&gt;
+&lt;span class="nv"&gt;ERROR&lt;/span&gt;: &lt;span class="nv"&gt;Error&lt;/span&gt; &lt;span class="nv"&gt;when&lt;/span&gt; &lt;span class="nv"&gt;executing&lt;/span&gt; &lt;span class="nv"&gt;blame&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;file&lt;/span&gt; &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;main&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;webapp&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;WEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;INF&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;weblogic&lt;/span&gt;.&lt;span class="nv"&gt;xml&lt;/span&gt;
+&lt;span class="nv"&gt;ERROR&lt;/span&gt;: &lt;span class="nv"&gt;Caused&lt;/span&gt; &lt;span class="nv"&gt;by&lt;/span&gt;: &lt;span class="nv"&gt;svn&lt;/span&gt;: &lt;span class="nv"&gt;E170001&lt;/span&gt;: &lt;span class="nv"&gt;Authentication&lt;/span&gt; &lt;span class="nv"&gt;required&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;http://10.10.1.103:81&amp;gt; svn repository&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;&lt;strong&gt;解决&lt;/strong&gt;：&lt;/p&gt;
 &lt;p&gt;参考：&lt;a href="https://www.cnblogs.com/YatHo/p/7345077.html"&gt;sonar-scanner扫描代码出错 SonarQube svn: E170001&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
@@ -77,8 +79,11 @@ ERROR: Caused by: svn: E170001: Authentication required for '&amp;lt;http://10.1
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Jenkins报错3：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;错误: -source 1.5 中不支持 diamond 运算符
-[ERROR]   (请使用 -source 7 或更高版本以启用 diamond 运算符)&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nl"&gt;错误&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;1.5&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;中不支持&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;diamond&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;运算符&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ERROR&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;请使用&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;或更高版本以启用&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;diamond&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;运算符&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;&lt;strong&gt;解决&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;原因是Jenkins默认编译用的JDK是1.5版本的，若要对不同项目使用不同JDK，需要安装JDK Parameter插件。&lt;/li&gt;
