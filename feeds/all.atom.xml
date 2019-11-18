@@ -10,13 +10,13 @@
 &lt;li&gt;
 &lt;p&gt;工程配置-&amp;gt;构建：Execute SonarQube Scanner&lt;/p&gt;
 &lt;p&gt;JDK要1.8+，Analysis properties：&lt;/p&gt;
-&lt;p&gt;```
+&lt;p&gt;```properties
 sonar.projectKey=chenyingyu-fzggfwwt
 sonar.projectName=Jenkins-fzggfwwt
 sonar.projectVersion=1.0.0
 sonar.sourceEncoding=UTF-8
 sonar.projectDescription=fzggfwwt
-sonar.links.homepage=http://10.10.1.103:81/svn …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="jenkins-sonar"&gt;Jenkins +Sonar自动化代码扫描&lt;/h2&gt;
+sonar.links.homepage=http://10.10.1.103:81 …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="jenkins-sonar"&gt;Jenkins +Sonar自动化代码扫描&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;安装插件&lt;a href="http://redirect.sonarsource.com/plugins/jenkins.html"&gt;SonarQube Scanner for Jenkins&lt;/a&gt;&lt;/p&gt;
@@ -27,7 +27,7 @@ sonar.links.homepage=http://10.10.1.103:81/svn …&lt;/p&gt;&lt;/li&gt;&lt;/ol&g
 &lt;li&gt;
 &lt;p&gt;工程配置-&amp;gt;构建：Execute SonarQube Scanner&lt;/p&gt;
 &lt;p&gt;JDK要1.8+，Analysis properties：&lt;/p&gt;
-&lt;p&gt;```
+&lt;p&gt;```properties
 sonar.projectKey=chenyingyu-fzggfwwt
 sonar.projectName=Jenkins-fzggfwwt
 sonar.projectVersion=1.0.0
