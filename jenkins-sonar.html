@@ -110,21 +110,26 @@
 <li>
 <p>工程配置-&gt;构建：Execute SonarQube Scanner</p>
 <p>JDK要1.8+，Analysis properties：</p>
-<p>```properties
-sonar.projectKey=chenyingyu-fzggfwwt
-sonar.projectName=Jenkins-fzggfwwt
-sonar.projectVersion=1.0.0
-sonar.sourceEncoding=UTF-8
-sonar.projectDescription=fzggfwwt
-sonar.links.homepage=http://10.10.1.103:81/svn/.../trunk/fzggfwwt
-sonar.language=java</p>
-<p>sonar.modules=fzggfwwt-auth,fzggfwwt-person
-fzggfwwt-auth.sonar.projectName=auth
-fzggfwwt-person.sonar.projectName=person</p>
-<p>sonar.java.libraries=../lib/*.jar
-sonar.sources=src
-sonar.java.binaries=target/classes
-```</p>
+<div class="highlight"><pre><span></span><span class="o">```</span><span class="n">properties</span>
+<span class="n">sonar</span><span class="p">.</span><span class="n">projectKey</span><span class="o">=</span><span class="n">chenyingyu</span><span class="o">-</span><span class="n">fzggfwwt</span>
+<span class="n">sonar</span><span class="p">.</span><span class="n">projectName</span><span class="o">=</span><span class="n">Jenkins</span><span class="o">-</span><span class="n">fzggfwwt</span>
+<span class="n">sonar</span><span class="p">.</span><span class="n">projectVersion</span><span class="o">=</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span>
+<span class="n">sonar</span><span class="p">.</span><span class="n">sourceEncoding</span><span class="o">=</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
+<span class="n">sonar</span><span class="p">.</span><span class="n">projectDescription</span><span class="o">=</span><span class="n">fzggfwwt</span>
+<span class="n">sonar</span><span class="p">.</span><span class="n">links</span><span class="p">.</span><span class="n">homepage</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">103</span><span class="p">:</span><span class="mi">81</span><span class="o">/</span><span class="n">svn</span><span class="o">/</span><span class="p">...</span><span class="o">/</span><span class="n">trunk</span><span class="o">/</span><span class="n">fzggfwwt</span>
+<span class="n">sonar</span><span class="p">.</span><span class="k">language</span><span class="o">=</span><span class="n">java</span>
+
+<span class="n">sonar</span><span class="p">.</span><span class="n">modules</span><span class="o">=</span><span class="n">fzggfwwt</span><span class="o">-</span><span class="n">auth</span><span class="p">,</span><span class="n">fzggfwwt</span><span class="o">-</span><span class="n">person</span>
+<span class="n">fzggfwwt</span><span class="o">-</span><span class="n">auth</span><span class="p">.</span><span class="n">sonar</span><span class="p">.</span><span class="n">projectName</span><span class="o">=</span><span class="n">auth</span>
+<span class="n">fzggfwwt</span><span class="o">-</span><span class="n">person</span><span class="p">.</span><span class="n">sonar</span><span class="p">.</span><span class="n">projectName</span><span class="o">=</span><span class="n">person</span>
+
+<span class="n">sonar</span><span class="p">.</span><span class="n">java</span><span class="p">.</span><span class="n">libraries</span><span class="o">=</span><span class="p">..</span><span class="o">/</span><span class="n">lib</span><span class="cm">/*.jar</span>
+<span class="cm">sonar.sources=src</span>
+<span class="cm">sonar.java.binaries=target/classes</span>
+<span class="cm">```</span>
+</pre></div>
+
+
 </li>
 <li>
 <p><strong>Jenkins报错1：</strong></p>
